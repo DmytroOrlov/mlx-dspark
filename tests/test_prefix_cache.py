@@ -3,7 +3,11 @@ bookkeeping (cache holds all-but-last generated token), reuse-eligibility detect
 
 from __future__ import annotations
 
-from mlx_dspark.prefix_cache import PrefixCache, _lcp, target_cache_reusable
+import gc
+import weakref
+
+import mlx_dspark.prefix_cache as prefix_cache
+from mlx_dspark.prefix_cache import PrefixCache, _lcp, _Slot, target_cache_reusable
 
 
 class KVCache:  # name matters: target_cache_reusable whitelists exactly "KVCache"
@@ -187,6 +191,119 @@ def test_reset_invalidates():
     assert pc.info()["cached_tokens"] == 0
     _, _, reuse_len = pc.acquire([1, 2, 3])
     assert reuse_len == 0
+
+
+def test_unknown_checkpoint_identity_is_cold_start_only():
+    pc = PrefixCache(_mk_cache, compatibility=("same-model", "trim"),
+                     compatibility_known=False, min_reuse=1)
+    _populate_factory_cache(pc, list(range(20)))
+    pc.detach_model()
+
+    assert pc.rebind_model(_mk_cache, compatibility=("same-model", "trim"),
+                           compatibility_known=False) is False
+    assert pc.info()["slots"] == []
+
+
+def test_materialize_preserved_state_traverses_trim_and_checkpoint_trees(monkeypatch):
+    class Layer:
+        def __init__(self, state, meta_state):
+            self.state = state
+            self.meta_state = meta_state
+
+    class Ctx:
+        def __init__(self, k, v):
+            self.k = k
+            self.v = v
+
+    trim_state, trim_meta, ctx_k, ctx_v = object(), object(), object(), object()
+    snap_state, snap_meta = object(), object()
+    rung_state, rung_meta = object(), object()
+    pc = PrefixCache(_mk_cache, _mk_ctx)
+    pc._slots = [
+        _Slot([1], [Layer(trim_state, trim_meta)], [Ctx(ctx_k, ctx_v)], 0),
+        _Slot([1, 2], None, None, 1,
+              snapshot=([(snap_state, snap_meta)], None),
+              rungs={2: [(0, rung_state, rung_meta)]}),
+    ]
+    seen = []
+    monkeypatch.setattr(prefix_cache, "_eval_tree", lambda tree: seen.append(tree))
+
+    pc.materialize_preserved_state()
+
+    assert len(seen) == 1
+    assert len(seen[0]) == 4
+    trim_tree, ctx_tree, snapshot_tree, rungs_tree = seen[0]
+    assert trim_tree[0][0] is trim_state and trim_tree[0][1] is trim_meta
+    assert ctx_tree[0][0] is ctx_k and ctx_tree[0][1] is ctx_v
+    assert snapshot_tree[0][0][0] is snap_state
+    assert snapshot_tree[0][0][1] is snap_meta
+    assert rungs_tree[2][0][1] is rung_state
+    assert rungs_tree[2][0][2] is rung_meta
+
+
+class _FactoryTarget:
+    def __init__(self, label):
+        self.label = label
+        self.calls = 0
+
+    def make_cache(self):
+        self.calls += 1
+        return [KVCache(), KVCache()]
+
+
+class _FactoryDrafter:
+    def __init__(self, label):
+        self.label = label
+        self.calls = 0
+
+    def make_ctx_cache(self):
+        self.calls += 1
+        return [FakeCtx(), FakeCtx()]
+
+
+def _populate_factory_cache(pc, prompt):
+    cache, ctx, _ = pc.acquire(prompt)
+    for c in cache:
+        c.offset = len(prompt)
+    pc.store(cache, ctx, prompt, [999])
+
+
+def test_detach_drops_old_model_factories_and_rebinds_new_ones():
+    old_target = _FactoryTarget("old")
+    old_drafter = _FactoryDrafter("old")
+    pc = PrefixCache(old_target.make_cache, old_drafter.make_ctx_cache,
+                     min_reuse=1, compatibility=("model-a", "trim"))
+    prompt = list(range(20))
+    _populate_factory_cache(pc, prompt)
+
+    old_target_ref = weakref.ref(old_target)
+    old_drafter_ref = weakref.ref(old_drafter)
+    pc.detach_model()
+    old_target = old_drafter = None
+    gc.collect()
+    assert old_target_ref() is None and old_drafter_ref() is None
+
+    new_target = _FactoryTarget("new")
+    new_drafter = _FactoryDrafter("new")
+    assert pc.rebind_model(new_target.make_cache, new_drafter.make_ctx_cache,
+                           compatibility=("model-a", "trim")) is True
+    assert pc.acquire(prompt + [100])[2] == len(prompt)
+
+    # A cold request must allocate through the newly bound factories, never the old ones.
+    pc.acquire(list(range(100, 120)))
+    assert new_target.calls > 0 and new_drafter.calls > 0
+
+
+def test_incompatible_rebind_discards_preserved_state():
+    old_target = _FactoryTarget("old")
+    pc = PrefixCache(old_target.make_cache, compatibility=("model-a", "trim"), min_reuse=1)
+    _populate_factory_cache(pc, list(range(20)))
+    pc.detach_model()
+    new_target = _FactoryTarget("new")
+    assert pc.rebind_model(new_target.make_cache,
+                           compatibility=("model-b", "checkpoint")) is False
+    assert pc.info()["slots"] == []
+    assert pc.acquire(list(range(20)))[2] == 0
 
 
 def test_store_normalizes_caches_to_the_token_record():
