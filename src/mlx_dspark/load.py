@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import glob
+import hashlib
 import os
 
 import mlx.core as mx
 import mlx.nn as nn
 from huggingface_hub import snapshot_download
+from huggingface_hub.errors import LocalEntryNotFoundError
 
 from .config import DSparkConfig
 from .model import DSparkDrafter
@@ -484,10 +486,10 @@ def local_dir(repo_or_path: str | None) -> str | None:
        (exact), then ``<org>_<name>``, then the bare ``<name>``; MLX-loadable dirs only. The
        bare form is last because it is the ambiguous one.
 
-    The HF hub cache is deliberately NOT consulted here: ``snapshot_download`` is itself
-    hub-local-first (and honours ``HF_HOME`` / ``HF_HUB_CACHE``), and the preflight checks hub
-    completeness on its own terms (``local_files_only``). ``gguf:`` schemes are the converter's
-    business and return None."""
+    The HF hub cache is deliberately NOT consulted here: ``_resolve`` checks it explicitly
+    through ``snapshot_download(..., local_files_only=True)`` and the download preflight checks
+    completeness on its own terms. Both honour ``HF_HOME`` / ``HF_HUB_CACHE``. ``gguf:``
+    schemes are the converter's business and return None."""
     if not repo_or_path or repo_or_path.startswith("gguf:"):
         return None
     expanded = os.path.expanduser(repo_or_path)
@@ -524,12 +526,59 @@ def _resolve(repo_or_path: str) -> str:
         repo, filename = repo_or_path[len("gguf:"):].rsplit("/", 1)
         return ensure_converted(repo, filename)
     # Anything already on disk wins over a hub download (see local_dir for the locations
-    # and why they live in exactly one function). snapshot_download is hub-local-first, so a
-    # complete HF-cache copy never touches the network either.
+    # and why they live in exactly one function). Check the HF cache explicitly before the
+    # normal online path: snapshot_download's default may still resolve hub metadata even
+    # when a complete snapshot is already cached.
     local = local_dir(repo_or_path)
     if local is not None:
         return local
-    return snapshot_download(repo_or_path)
+    try:
+        return snapshot_download(repo_or_path, local_files_only=True)
+    except LocalEntryNotFoundError:
+        return snapshot_download(repo_or_path)
+
+
+_IDENTITY_NAMES = {
+    "config.json", "model_index.json", "tokenizer_config.json", "preprocessor_config.json",
+    "processor_config.json", "generation_config.json", "special_tokens_map.json",
+}
+_IDENTITY_SUFFIXES = (".safetensors", ".safetensors.index.json", ".bin", ".bin.index.json",
+                      ".npz", ".gguf", ".msgpack")
+
+
+def checkpoint_identity(repo_or_path: str, resolved_path: str | None = None):
+    """Return a cheap identity for the resolved checkpoint, or ``None`` if unverifiable.
+
+    This deliberately records filesystem metadata rather than reading weight contents.  The
+    real path distinguishes Hub snapshots; the manifest catches replacement of files behind a
+    stable local path.  ``None`` is not a usable compatibility value: callers must treat an
+    unverifiable checkpoint as cold-start-only.
+    """
+    try:
+        root = os.path.realpath(resolved_path or _resolve(repo_or_path))
+        if not os.path.isdir(root):
+            return None
+        files = []
+        has_weights = False
+        has_config = False
+        for dirpath, _dirs, names in os.walk(root):
+            for name in names:
+                rel = os.path.relpath(os.path.join(dirpath, name), root)
+                base = name.lower()
+                if base not in _IDENTITY_NAMES and not base.endswith(_IDENTITY_SUFFIXES):
+                    continue
+                has_weights = has_weights or base.endswith(_IDENTITY_SUFFIXES)
+                has_config = has_config or base == "config.json"
+                st = os.stat(os.path.join(dirpath, name), follow_symlinks=True)
+                files.append((rel, int(st.st_size), int(st.st_mtime_ns), int(st.st_ctime_ns),
+                              int(getattr(st, "st_dev", 0)), int(getattr(st, "st_ino", 0))))
+        if not files or not has_weights or not has_config:
+            return None
+        manifest = tuple(sorted(files))
+        digest = hashlib.sha256(repr((root, manifest)).encode()).hexdigest()
+        return (root, digest, manifest)
+    except (OSError, TypeError, ValueError):
+        return None
 
 
 def load_drafter(
@@ -637,6 +686,7 @@ def load_drafter(
                                                   and not p.startswith("log_snr_embed")))
 
     mx.eval(drafter.parameters())
+    drafter.checkpoint_identity = checkpoint_identity(repo_or_path, path)
     return drafter, config
 
 
@@ -744,6 +794,7 @@ def load_dflash(repo_or_path: str, *, quantize: bool = True, bits: int = 4, grou
                     and "_conv" not in p and "candidate_selector" not in p)
 
     mx.eval(drafter.parameters())
+    drafter.checkpoint_identity = checkpoint_identity(repo_or_path, path)
     return drafter, config
 
 
@@ -954,6 +1005,7 @@ def load_target(repo_or_path: str = DEFAULT_TARGET, *, require_tap: bool = False
             ) from e
         tokenizer = getattr(processor, "tokenizer", processor)
     target = Target(model, tokenizer, kv_bits=kv_bits, kv_group_size=kv_group_size)
+    target.checkpoint_identity = checkpoint_identity(repo_or_path, path)
     if require_tap:
         target.verify_tap()
     return target, tokenizer

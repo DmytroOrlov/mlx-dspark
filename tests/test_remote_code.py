@@ -44,3 +44,21 @@ def test_markers_are_found_and_refused(tmp_path, monkeypatch, name, obj, marker)
 def test_unreadable_config_is_not_a_marker(tmp_path):
     (tmp_path / "config.json").write_text("{not json")
     assert L.remote_code_markers(str(tmp_path)) == []
+
+
+def test_checkpoint_identity_changes_when_weights_are_replaced(tmp_path):
+    (tmp_path / "config.json").write_text("{}")
+    weights = tmp_path / "model.safetensors"
+    weights.write_bytes(b"weights-a")
+
+    first = L.checkpoint_identity(str(tmp_path))
+    assert first is not None
+
+    weights.write_bytes(b"weights-b-replaced")
+    second = L.checkpoint_identity(str(tmp_path))
+    assert second is not None and second != first
+
+    unverifiable = tmp_path / "not-a-checkpoint"
+    unverifiable.mkdir()
+    (unverifiable / "config.json").write_text("{}")
+    assert L.checkpoint_identity(str(unverifiable)) is None
