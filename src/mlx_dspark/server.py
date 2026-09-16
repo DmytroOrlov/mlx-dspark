@@ -68,6 +68,52 @@ from .tools import normalize_tool_messages, parse_tool_calls, schema_types
 
 MODES = ("dspark", "dflash", "lookup", "baseline")
 
+# Sentinel for EngineHolder.swap: "the caller supplied no override for this field".
+# Distinct from an EXPLICIT None, which the battery-pause reload passes for fields whose
+# real running value IS None/empty (drafter: none in use; kv_bits: full-precision KV) —
+# plain ``None == unspecified`` would silently revive the stale stored startup value.
+UNSET = object()
+
+# Routes that RUN inference (each admitted through the battery-pause gate; only these
+# count as active inference). count_tokens tokenizes only, and /metrics is a pure
+# diagnostics/control-plane read (answerable while paused) — neither is admitted, and
+# both keep working while a model drains. Diagnostic/model-free routes never touch the gate.
+_GENERATION_ROUTES = {
+    "/v1/chat/completions": "_chat", "/chat/completions": "_chat",
+    "/v1/completions": "_completions", "/completions": "_completions",
+    "/v1/messages": "_messages", "/messages": "_messages",
+    "/v1/responses": "_responses", "/responses": "_responses",
+    "/admin/race": "_race",
+}
+
+# Truthful, phase-specific wording for the battery pause's retryable 503s: the message
+# must match what is ACTUALLY happening (draining is not "unloaded"; reloading is not
+# "on battery" any more).
+_PAUSE_WORDING = {
+    "draining": "on battery power — new inference is paused while already-admitted "
+                "requests finish",
+    "unloading": "on battery power — the model is being unloaded to free memory",
+    "paused": "on battery power — the model is unloaded until AC power returns",
+    "reloading": "AC power restored — the model is reloading; try again shortly",
+}
+
+# The machine-readable battery-unavailable contract: these headers ride EVERY 503 the
+# battery-pause LIFECYCLE causes (and only those — ordinary no-model 503s, load
+# failures and server errors stay header-free, so their absence is itself the signal).
+# A client branches on the header values (never on the English message):
+#   X-MLX-Dspark-Unavailable-Reason: battery_pause
+#   X-MLX-Dspark-Power-State: draining | unloading | paused | reloading
+#   Retry-After: 5
+UNAVAILABLE_BATTERY_PAUSE = "battery_pause"
+
+
+def _pause_headers(state: str) -> dict:
+    """The 503 header set for a battery-lifecycle refusal, carrying the CURRENT
+    lifecycle phase."""
+    return {"X-MLX-Dspark-Unavailable-Reason": UNAVAILABLE_BATTERY_PAUSE,
+            "X-MLX-Dspark-Power-State": state,
+            "Retry-After": "5"}
+
 # Seconds between stream keep-alive frames (SSE comments on the OpenAI dialect, `ping`
 # events on the Anthropic one). They serve two jobs: keeping idle-timeout clients/proxies
 # from aborting through stretches with nothing on the wire (long prefill; the buffered
@@ -357,6 +403,7 @@ class Engine:
         cpu_split: dict | None = None,
         executor: ThreadPoolExecutor | None = None,
         depth_capper=None,
+        cap_pinned: bool = False,
     ):
         self.target = target
         self.tokenizer = tokenizer
@@ -375,6 +422,10 @@ class Engine:
         # Qwen3.8-27B-4bit — NOTES "Long-context decode").
         self._depth_capper = depth_capper
         self._last_cap = max_draft_tokens                  # effective cap of the last request
+        # True when the serve/swap request PINNED an integer cap (vs one this machine's
+        # measured curves derived): lets a battery-pause reload reproduce the effective
+        # configuration exactly (EngineHolder.reload_kwargs).
+        self.cap_pinned = cap_pinned
         self.sampling_defaults = dict(sampling_defaults or {})
         self.default_max_tokens = default_max_tokens
         self.max_tokens_cap = max_tokens_cap
@@ -452,7 +503,8 @@ class Engine:
         if not enabled:
             return None
         try:
-            checkpoint = not target_cache_reusable(self.target.make_cache())
+            cache_probe = self.target.make_cache()
+            checkpoint = not target_cache_reusable(cache_probe)
         except Exception:  # noqa: BLE001
             return None
         make_ctx = self.drafter.make_ctx_cache if self.mode == "dspark" else None
@@ -466,9 +518,26 @@ class Engine:
                 cap = int(cfg.sliding_window) - 1
             make_ctx = lambda: [DFlashCtxWindow(cap)]  # noqa: E731
             checkpoint = True
+        try:
+            ctx_probe = make_ctx() if make_ctx is not None else None
+            ctx_kinds = (None if ctx_probe is None else
+                         tuple(type(c).__name__ for c in ctx_probe))
+        except Exception:  # noqa: BLE001 — compatibility probing must not block a load
+            ctx_kinds = (type(self.drafter).__name__,) if self.drafter is not None else None
+        compatibility = (
+            "prefix-cache-v1",
+            self.target_repo,
+            self.mode,
+            self.drafter_repo,
+            int(getattr(self.target, "kv_bits", 0) or 0),
+            "checkpoint" if checkpoint else "trim",
+            tuple(type(c).__name__ for c in cache_probe),
+            ctx_kinds,
+        )
         return PrefixCache(self.target.make_cache, make_ctx,
                            l2_dir=l2_dir, max_ram_bytes=max(0, max_ram_mb) * 1024 * 1024,
-                           slots=self.prefix_cache_slots, checkpoint=checkpoint)
+                           slots=self.prefix_cache_slots, checkpoint=checkpoint,
+                           compatibility=compatibility)
 
     def _boundary_probes(self) -> list[tuple[list[int], int]]:
         """Per-chat-template measurement of the *stable prompt boundary* for checkpoint-mode
@@ -798,7 +867,8 @@ class Engine:
                   sdpa_split=sdpa_split_active,
                   cpu_split=split_cfg,
                   executor=executor,
-                  depth_capper=depth_capper)
+                  depth_capper=depth_capper,
+                  cap_pinned=user_pinned_cap)
         eng.warmup_enabled = warmup
         eng.load_notes = load_notes
         eng.machine = machine
@@ -1252,15 +1322,62 @@ class Engine:
         if self.memory_guard is not None:
             self.memory_guard.stop()
             self.memory_guard = None
-        self._executor.shutdown(wait=True)
+        if self._executor is not None:
+            self._executor.shutdown(wait=True)
+            self._executor = None
         if self.prefix is not None:
             self.prefix.reset()
             self.prefix = None
         self.target = None
         self.drafter = None
         self.cap_controller = None
+        self._depth_capper = None
         with contextlib.suppress(Exception):  # best-effort; a failed cache clear is not fatal
             mx.clear_cache()                 # return the just-freed buffers to the OS
+
+    def suspend(self):
+        """Release model weights while detaching, rather than resetting, prefix state.
+
+        This is only for the battery coordinator.  The detached PrefixCache retains
+        immutable/reusable snapshots but no bound method that can keep the old target or
+        drafter alive.  Normal close()/unload() remains destructive.
+        """
+        import mlx.core as mx
+
+        if self.memory_guard is not None:
+            self.memory_guard.stop()
+            self.memory_guard = None
+        if self._executor is not None:
+            self._executor.shutdown(wait=True)
+        preserved = self.prefix
+        if preserved is not None:
+            preserved.detach_model()
+        self.prefix = None
+        self.target = None
+        self.drafter = None
+        self.tokenizer = None
+        self.cap_controller = None
+        self._depth_capper = None
+        self._executor = None
+        with contextlib.suppress(Exception):
+            mx.clear_cache()
+        return preserved
+
+    def attach_preserved_prefix(self, preserved) -> bool:
+        """Rebind a detached battery cache to this engine's fresh factories."""
+        if preserved is None:
+            return False
+        if self.prefix is None:
+            preserved.reset()
+            return False
+        fresh = self.prefix
+        compatible = preserved.rebind_model(
+            fresh.make_cache, fresh.make_ctx, compatibility=fresh.compatibility)
+        if compatible:
+            self.prefix = preserved
+            if self.memory_guard is not None:
+                self.memory_guard.prefix = self.prefix
+        return compatible
 
     def race_arms_available(self) -> list[str]:
         """Which decode strategies can be raced with what is currently loaded.
@@ -1600,6 +1717,11 @@ class BatchEngine:
         normally; the sentinel is consumed at the next idle point."""
         self._q.put(_STOP)
 
+    def suspend(self):
+        """Stop batching, then delegate the battery-only weights release."""
+        self.close()
+        return self.engine.suspend()
+
     def __getattr__(self, name):                    # delegate model_id/mode/spec_info/created/…
         return getattr(self.engine, name)
 
@@ -1840,6 +1962,9 @@ class EngineHolder:
     def __init__(self, engine, load_kwargs: dict, max_batch: int = 1):
         self._engine = engine
         self._load_kwargs = dict(load_kwargs)     # the flags this server was started with
+        self._preserved_prefix = None             # detached only by battery suspend
+        self._last_cache_restored = False
+        self._last_cache_handoff = None           # "restored" | "discarded"
         self._max_batch = max_batch
         self._swap_lock = threading.Lock()
         self._loading = False
@@ -1885,6 +2010,9 @@ class EngineHolder:
         ``/admin/load`` brings a model back on the same port. Unloading twice is a no-op.
         """
         with self._swap_lock:
+            if self._preserved_prefix is not None:
+                self._preserved_prefix.reset()
+                self._preserved_prefix = None
             old = self._engine
             self._engine = None
             self._load_error = None
@@ -1895,30 +2023,69 @@ class EngineHolder:
                     inner.close()
             return self.status()
 
-    def swap(self, *, model: str, mode: str | None = None,
-             max_draft: int | str | None = None,
+    def suspend(self) -> dict:
+        """Battery-only weights release that keeps a detached prefix cache."""
+        with self._swap_lock:
+            old = self._engine
+            if old is None:
+                self._preserved_prefix = None
+                self._last_cache_restored = False
+                self._last_cache_handoff = None
+                return self.status()
+            preserved = old.suspend()
+            self._engine = None
+            self._preserved_prefix = preserved
+            self._last_cache_restored = False
+            self._last_cache_handoff = None
+            self._load_error = None
+            return self.status()
+
+    def swap(self, *, model: str | None, mode: str | None = None,
+             drafter=UNSET,
+             max_draft=UNSET,
              lookup_drafts: bool | None = None,
              confidence_threshold: float | None = None,
              context_window: int | None = None,
              small_m: bool | None = None,
              sdpa_split: bool | None = None,
              cpu_split: float | None = None,
-             kv_bits: int | None = None,
+             kv_bits=UNSET,
              warmup: bool | None = None,
              memory_guard: bool | None = None,
              enable_thinking: bool | None = None,
-             reasoning_effort: str | None = None) -> dict:
+             reasoning_effort: str | None = None,
+             preserved_prefix=UNSET) -> dict:
         """Release the current model and load ``model`` in its place. Returns the new status.
+
+        ``model=None`` is the battery-pause path only: load the STORED configuration
+        verbatim (the HTTP /admin/load handler validates a model string first). The
+        per-request overrides ride exactly as an ``/admin/load`` override would.
+
+        ``drafter`` / ``max_draft`` / ``kv_bits`` default to :data:`UNSET` ("no
+        override"), NOT to ``None``: the battery-pause reload may legitimately carry an
+        explicit ``None`` for these (no drafter in use / full-precision KV / re-derived
+        cap), and that must REPLACE the stored startup value rather than be mistaken for
+        an omission. The HTTP handler keeps the old public semantics by mapping omitted
+        (``None``) request fields to ``UNSET``.
 
         Serialized by ``_swap_lock`` so two concurrent loads can't race. Raises ``ValueError``
         with the reason if the new model can't be loaded — the caller turns that into a 4xx/5xx.
         """
         with self._swap_lock:
+            if preserved_prefix is UNSET:
+                # Any ordinary administrative/model replacement is destructive with
+                # respect to a cache left by a prior battery pause.
+                if self._preserved_prefix is not None:
+                    self._preserved_prefix.reset()
+                preserved_prefix = None
+                self._preserved_prefix = None
+            self._last_cache_restored = False
+            self._last_cache_handoff = None
             # A local path can be vetted for model-supplied Python BEFORE the running model
             # is released (issue #26): a refused swap must not leave the server model-less.
             # Hub repos are checked after download, inside load_target, like everything else.
             local = os.path.expanduser(str(model))
-            if os.path.isdir(local):
+            if model is not None and os.path.isdir(local):
                 from .load import refuse_remote_code
 
                 refuse_remote_code(local, str(model))     # ValueError -> 400, engine untouched
@@ -1954,10 +2121,21 @@ class EngineHolder:
                 if reasoning_effort is not None:
                     self._load_kwargs["reasoning_effort"] = reasoning_effort
                 kwargs = dict(self._load_kwargs)
-                kwargs["model"] = model
+                if model is not None:
+                    # None = the battery reload of a startup-paused serve: keep the
+                    # STORED startup model (never overwrite it with None).
+                    kwargs["model"] = model
+                if drafter is not UNSET:
+                    # The drafter rides the swap EXPLICITLY (the battery-pause reload
+                    # passes the running pair's drafter here so a pause cycle can never
+                    # silently fall back to the server's startup --drafter — or to an
+                    # auto-resolve that fails for unregistered targets). An explicit
+                    # ``None`` means the RUNNING pair has NO drafter: it must clear the
+                    # stored one, not resurrect it.
+                    kwargs["drafter"] = drafter
                 if mode is not None:
                     kwargs["mode"] = mode
-                if max_draft is not None:
+                if max_draft is not UNSET:
                     kwargs["max_draft_tokens"] = max_draft
                 if lookup_drafts is not None:
                     kwargs["lookup_drafts"] = lookup_drafts
@@ -1969,8 +2147,10 @@ class EngineHolder:
                     kwargs["sdpa_split"] = sdpa_split
                 if cpu_split is not None:
                     kwargs["cpu_split"] = cpu_split       # 0 -> off, float -> forced fraction
-                if kv_bits is not None:
-                    kwargs["kv_bits"] = kv_bits or None    # 0 -> full precision
+                if kv_bits is not UNSET:
+                    # 0 (or an explicit None from the battery reload of a BF16 pair) ->
+                    # full precision: it must REPLACE a stale KV4/KV8 startup setting.
+                    kwargs["kv_bits"] = kv_bits or None
                 if warmup is not None:
                     kwargs["warmup"] = warmup
                 if memory_guard is not None:
@@ -1980,8 +2160,32 @@ class EngineHolder:
                 # of showing a load bar that looks stuck.
                 kwargs["on_warmup"] = lambda: setattr(self, "_load_phase", "warming_up")
                 engine = Engine.load(**kwargs)
+                if preserved_prefix is not None:
+                    attach = getattr(engine, "attach_preserved_prefix", None)
+                    self._last_cache_restored = bool(
+                        attach is not None and attach(preserved_prefix))
+                    if not self._last_cache_restored:
+                        # A fake/library engine, a disabled cache, or a compatibility
+                        # mismatch must all continue with a valid cold cache.
+                        preserved_prefix.reset()
+                    self._last_cache_handoff = (
+                        "restored" if self._last_cache_restored else "discarded")
                 engine = maybe_batch_engine(engine, self._max_batch)
                 self._engine = engine
+                self._preserved_prefix = None
+                # A successful runtime load becomes the source of truth for the
+                # machine policy knobs that battery reload must reproduce. Keep
+                # explicit overrides (including cpu_split=0); failed swaps never
+                # reach this point and therefore cannot replace the last-known-good
+                # configuration.
+                self._load_kwargs["small_m"] = getattr(
+                    engine, "small_m", small_m if small_m is not None else
+                    self._load_kwargs.get("small_m"))
+                self._load_kwargs["sdpa_split"] = getattr(
+                    engine, "sdpa_split", sdpa_split if sdpa_split is not None else
+                    self._load_kwargs.get("sdpa_split"))
+                if cpu_split is not None:
+                    self._load_kwargs["cpu_split"] = cpu_split
             except Exception as e:
                 self._load_error = str(e)
                 raise
@@ -1991,6 +2195,566 @@ class EngineHolder:
             # After the finally, so the returned status reflects the settled state (ready=True),
             # not the mid-load snapshot.
             return self.status()
+
+    def reload_kwargs(self) -> dict:
+        """The kwargs that would reproduce the CURRENT engine's effective configuration.
+
+        Used by the battery-pause coordinator (``serve --pause-on-battery``) to reload the
+        exact model that was running when the Mac switched to battery — not merely the
+        server's startup flags, which a mid-session ``/admin/load`` may have moved past.
+        Derived from the loaded engine itself: resolved target/drafter/mode, pinned vs
+        derived draft cap, per-pair knobs, KV quant, and the sticky template defaults.
+        Fields the swap path already keeps sticky (context_window, small_m/sdpa_split/
+        cpu_split, wired_limit) stay whatever ``_load_kwargs`` holds — those are
+        server-machine policies, not per-pair ones. Unload-safe: read what is needed
+        BEFORE the coordinator releases the engine.
+
+        The returned dict's ``drafter``/``kv_bits``/``max_draft_tokens``/``warmup``/
+        ``memory_guard`` keys are ALWAYS present when an engine is loaded — an explicit
+        ``None`` there is a VALUE ("no drafter", "full-precision KV", "re-derive the
+        cap"), not an omission; :meth:`reload` rides them through :meth:`swap` with
+        :data:`UNSET`-vs-None semantics so a stale startup setting can never survive."""
+        kw = dict(self._load_kwargs)
+        eng = self._engine
+        if eng is None:
+            return kw                       # nothing loaded: reload the startup config
+        kw["model"] = eng.target_repo
+        kw["drafter"] = getattr(eng, "drafter_repo", None)
+        kw["mode"] = eng.mode
+        kw["lookup_drafts"] = getattr(eng, "lookup_drafts", None)
+        kw["confidence_threshold"] = float(getattr(eng, "confidence_threshold", 0.0) or 0.0)
+        kv_bits = getattr(getattr(eng, "target", None), "kv_bits", None)
+        kw["kv_bits"] = int(kv_bits) if kv_bits else None
+        if getattr(eng, "cap_controller", None) is not None:
+            kw["max_draft_tokens"] = "auto"          # controller drives; re-calibrate per swap
+        elif getattr(eng, "cap_pinned", False):
+            kw["max_draft_tokens"] = eng.max_draft_tokens    # the user's pinned value
+        else:
+            kw["max_draft_tokens"] = None            # machine-derived: re-derive (cached)
+        td = getattr(eng, "template_defaults", None) or {}
+        kw["enable_thinking"] = False if td.get("enable_thinking") is False else None
+        kw["reasoning_effort"] = td.get("reasoning_effort")
+        # load-time behaviors a per-swap /admin/load override can change (not sticky in
+        # _load_kwargs): captured so the reload reproduces them
+        kw["warmup"] = bool(getattr(eng, "warmup_enabled", False))
+        kw["memory_guard"] = getattr(eng, "memory_guard", None) is not None
+        return kw
+
+    def reload(self, spec: dict | None = None) -> dict:
+        """Bring back the configuration ``spec`` (captured at the battery boundary by
+        :meth:`reload_kwargs`) — or, with no spec, the server's own startup
+        configuration (a serve launched battery-paused, model-less, loads its intended
+        model on the first AC event). This IS the battery-pause reload path: it runs
+        through :meth:`swap`, so the release-then-load ordering, warmup, memory-guard
+        restart and sticky-override semantics are exactly an /admin/load's, never a
+        second divergent loader."""
+        spec = dict(spec or {})
+        return self.swap(
+            model=spec.get("model"),
+            drafter=spec.get("drafter", UNSET),
+            mode=spec.get("mode"),
+            max_draft=spec.get("max_draft_tokens", UNSET),
+            lookup_drafts=spec.get("lookup_drafts"),
+            confidence_threshold=spec.get("confidence_threshold"),
+            kv_bits=spec.get("kv_bits", UNSET),
+            warmup=spec.get("warmup"),
+            memory_guard=spec.get("memory_guard"),
+            enable_thinking=spec.get("enable_thinking"),
+            reasoning_effort=spec.get("reasoning_effort"),
+            preserved_prefix=self._preserved_prefix)
+
+
+# --------------------------------------------------------------------------- battery pause
+
+
+class BatteryPause:
+    """The battery-power pause coordinator behind ``serve --pause-on-battery``.
+
+    Watches the power source (:mod:`~mlx_dspark.power`); when the Mac switches to
+    battery it closes inference admission, lets already-admitted requests finish, then
+    suspends the model through the holder's battery-only lifecycle
+    (:meth:`EngineHolder.suspend`), freeing the weights + live KV while preserving
+    reusable prefix state. The HTTP server stays up
+    (diagnostics answer; generation routes 503 with a clear battery reason). When AC
+    power returns it reloads the same effective configuration via
+    :meth:`EngineHolder.swap` — the existing hot-swap path, so warmup, memory-guard and
+    sticky per-pair overrides behave exactly as an ``/admin/load`` would — and only
+    then reopens admission.
+
+    Deliberate design points:
+
+    - **The power callback never touches MLX.** It only flips observed state under one
+      lock and wakes a single worker thread; the suspend/reload run there, serialized
+      exactly like the holder's other lifecycle work.
+    - **Desired-state reconciliation, not event handling.** Every completion point
+      (unload finished, reload finished, last admitted request released) re-reads the
+      observed power source and moves to where the power wants the server to be, which
+      makes every race (AC during unload, battery during reload, duplicate
+      notifications) resolve deterministically.
+    - **The admission boundary is atomic.** :meth:`admit` checks the state and counts
+      the request under the same lock the transition observes — a request is either
+      admitted before the battery edge (it finishes, then drains) or rejected after it
+      (503, never queued).
+
+    States: ``ready`` -> ``draining`` -> ``unloading`` -> ``paused`` -> ``reloading`` ->
+    ``ready`` (or back to ``paused`` if the reload failed / battery returned mid-reload).
+    """
+
+    def __init__(self, holder, *, initial: str | None = None, load_on_ac: bool = True,
+                 log=None):
+        """``initial`` is the startup power source (from the synchronous probe in
+        :meth:`~mlx_dspark.power.PowerMonitor.start`'s caller): ``"battery"`` starts the
+        coordinator already PAUSED and model-less, so a serve launched on battery never
+        loads or admits anything until AC returns. ``load_on_ac`` is False for a
+        ``--no-model`` start, whose intent is to stay model-less until a manual load."""
+        self._holder = holder
+        self._log = log or (lambda msg: print(f"[serve] {msg}", file=sys.stderr,
+                                              flush=True))
+        self._lock = threading.Lock()
+        self._cond = threading.Condition(self._lock)   # worker wakeups share the lock
+        self._state = "paused" if initial == "battery" else "ready"
+        self._source = initial                         # "ac" | "battery" | None (unknown)
+        self._active = 0                               # admitted, unfinished inference
+        self._action = None        # pending worker work: "suspend" | "reload"
+        self._busy = False          # the worker is inside an action right now
+        self._admin_loads = 0       # admitted /admin/load operations outside this lock
+        self._stopping = False
+        self._reload_kwargs: dict | None = None   # captured at the battery boundary
+        # Was a model running when the battery boundary hit (True at startup-with-load
+        # intent)? Drives the AC-side reload: False -> reopen model-less, the user's
+        # manual /admin/unload is respected rather than resurrecting a model.
+        self._had_model = load_on_ac
+        self._error: str | None = None   # unload/reload failure, exposed via /health
+        # /metrics counters — mutated ONLY under _lock, in small slices (never around
+        # a holder call). Label space is bounded by the fixed state set.
+        self._rejected = 0                 # inference refusals at the admission gate
+        self._transitions_total = 0        # actual lifecycle STATE changes
+        self._transitions: dict = {}       # "from->to" -> count
+        self._unload_stats = {"attempts": 0, "successes": 0, "failures": 0,
+                              "last_seconds": None}
+        self._reload_stats = {"attempts": 0, "successes": 0, "failures": 0,
+                              "last_seconds": None}
+        self._thread: threading.Thread | None = None
+
+    # ------------------------------------------------------------------ lifecycle
+
+    def start(self) -> BatteryPause:
+        if self._thread is None:
+            self._thread = threading.Thread(target=self._worker, name="battery-pause",
+                                            daemon=True)
+            self._thread.start()
+        return self
+
+    def stop(self) -> None:
+        """Ask the lifecycle worker to finish and retire. Idempotent.
+
+        ``_stopping`` is final: the worker checks it under the lock BEFORE claiming
+        any further action, so no new lifecycle action starts after stop() — an
+        action already in flight (a real unload/reload takes minutes) finishes
+        coherently. The bounded join keeps server shutdown from hanging behind a
+        20 GB load; but a join that TIMES OUT must not erase the only reference to
+        a still-running worker — stop() keeps the thread truthfully until it is
+        provably gone (it is a daemon, so process exit is never blocked by it)."""
+        with self._lock:
+            self._stopping = True
+            self._cond.notify_all()
+        thread = self._thread
+        if thread is None:
+            return
+        thread.join(timeout=2.0)
+        if thread.is_alive():
+            self._log("power: battery-pause worker still finishing an in-flight model "
+                      "action — not reporting it stopped (daemon; shutdown proceeds)")
+            return
+        self._thread = None
+
+    @property
+    def state(self) -> str:
+        with self._lock:
+            return self._state
+
+    def health(self) -> dict:
+        """The ``/health.power`` block (added only when the feature is enabled).
+
+        ``reason`` is the stable machine-readable marker: ``"battery_pause"`` exactly
+        while the pause owns/closes inference admission (any non-ready phase), ``null``
+        while admission is open — a client polls ``admission_open`` to know when the
+        local model is usable again; it never parses the 503 message."""
+        with self._lock:
+            return {"enabled": True, "source": self._source, "state": self._state,
+                    "admission_open": self._state == "ready",
+                    "reason": None if self._state == "ready" else UNAVAILABLE_BATTERY_PAUSE,
+                    "model_loaded": self._holder.current is not None,
+                    "active_requests": self._active, "error": self._error}
+
+    def metrics(self) -> dict:
+        """The ``power`` block of /metrics: the :meth:`health` state gauges plus the
+        monotonic lifecycle counters. An ``attempts`` counter increments when the
+        worker ACTUALLY begins the holder call (not when the action was queued);
+        durations measure the real holder operation (``time.monotonic()``, recorded
+        on failure too)."""
+        with self._lock:
+            return {
+                "enabled": True,
+                "source": self._source,                    # ac | battery | null
+                "state": self._state,                      # the lifecycle gauge
+                "admission_open": self._state == "ready",
+                "active_requests": self._active,
+                "model_loaded": self._holder.current is not None,
+                "rejected_inference_total": self._rejected,
+                "lifecycle_transitions_total": self._transitions_total,
+                "transitions": dict(self._transitions),    # "from->to" -> count
+                "unload_attempts_total": self._unload_stats["attempts"],
+                "unload_successes_total": self._unload_stats["successes"],
+                "unload_failures_total": self._unload_stats["failures"],
+                "last_unload_seconds": self._unload_stats["last_seconds"],
+                "reload_attempts_total": self._reload_stats["attempts"],
+                "reload_successes_total": self._reload_stats["successes"],
+                "reload_failures_total": self._reload_stats["failures"],
+                "last_reload_seconds": self._reload_stats["last_seconds"],
+            }
+
+    # ------------------------------------------------------------------ admission
+
+    def begin_admin_load(self) -> bool:
+        """Reserve an administrative load at the same boundary as power changes.
+
+        The reservation is deliberately tiny: the holder swap still runs outside this
+        lock. A battery transition that arrives while the swap is in flight defers its
+        unload until :meth:`finish_admin_load` observes the resulting resident model.
+        """
+        with self._lock:
+            if self._state != "ready":
+                return False
+            self._admin_loads += 1
+            return True
+
+    def finish_admin_load(self, success: bool) -> None:
+        """Reconcile an admin load after its long holder operation completes."""
+        with self._lock:
+            self._admin_loads = max(0, self._admin_loads - 1)
+            if self._admin_loads:
+                return
+            if self._source == "battery":
+                current = self._holder.current
+                if current is not None:
+                    # Capture the model that actually became resident, before the
+                    # deferred battery unload releases it.
+                    self._reload_kwargs = self._holder.reload_kwargs()
+                    self._had_model = True
+                    self._error = None if success else self._error
+                    if self._active:
+                        # Already-admitted generation still owns the drain. The
+                        # newly resident admin model is unloaded only after the
+                        # request count reaches zero.
+                        if self._state != "draining":
+                            self._set_state("draining")
+                        return
+                    if self._state != "unloading":
+                        self._set_state("unloading")
+                    if not self._busy and self._action != "suspend":
+                        self._schedule("suspend")
+                else:
+                    self._had_model = False
+                    if self._state != "paused":
+                        self._set_state("paused")
+                return
+            if self._state == "draining":
+                self._set_state("ready")
+                self._error = None
+
+    def admit(self) -> bool:
+        """The inference admission gate: True (and counted) only while ``ready``.
+
+        Atomic against :meth:`on_power_source`: either the request is admitted before
+        the battery boundary or it is refused — it can never slip into the queue
+        behind a drain."""
+        with self._lock:
+            if self._state != "ready":
+                self._rejected += 1        # counted exactly once, right here at the gate
+                return False
+            self._active += 1
+            return True
+
+    def release(self):
+        """An admitted request finished. Drives the drain: reaching zero while on
+        battery is what schedules the unload (and wakes the worker — the drain is
+        request-driven, so no power event will ever wake the worker for it)."""
+        with self._lock:
+            if self._active <= 0:
+                # Unbalanced release would hide a double-release bug; say so loudly.
+                self._log("power: internal — release() without a matching admitted "
+                          "request (active count already 0)")
+                return
+            self._active -= 1
+            if self._state == "draining" and self._active == 0:
+                self._begin_unload()
+
+    # ------------------------------------------------------------------ power events
+
+    def on_power_source(self, source: str) -> None:
+        """One power-source observation (from :class:`~mlx_dspark.power.PowerMonitor`).
+
+        Idempotent by construction: a repeated same-state report changes nothing. Runs
+        on the monitor thread — state flips only, lifecycle work is delegated to the
+        worker thread."""
+        with self._lock:
+            if source == self._source:
+                return                     # duplicate / periodic same-state snapshot
+            self._source = source
+            if source == "battery":
+                if self._state == "ready":
+                    self._begin_pause()
+                # battery during "unloading"/"reloading": no action here — the action's
+                # completion point re-reads the source and reconciles (unload ends into
+                # paused; reload ends back into a pause).
+            else:                              # "ac" (UPS counts as external power)
+                if self._state == "draining":
+                    # AC back before the drain needed an unload: cancel the pause, keep
+                    # the loaded model, reopen admission. The still-running admitted
+                    # requests simply finish normally.
+                    self._set_state("ready")
+                    self._error = None           # a stale lifecycle error is moot now
+                    self._log("power: battery -> AC — admission reopened without an "
+                              "unload (the drain did not need one)")
+                elif self._state == "unloading":
+                    if self._busy:
+                        pass                   # unload in flight; its completion decides
+                    elif self._holder.current is not None:
+                        # AC back before the pending unload even began: cancel it —
+                        # the model never has to leave, no reload needed either. The
+                        # cancel MUST clear the queued action under the SAME lock that
+                        # guards the worker's claim (_worker takes the action and sets
+                        # _busy atomically under it); leaving `_action == "suspend"`
+                        # behind would let the idle worker evict the model right AFTER
+                        # admission reopened.
+                        self._action = None      # retract the queued unload
+                        self._set_state("ready")
+                        self._error = None       # the model is being served again
+                        self._log("power: battery -> AC — pending unload cancelled, "
+                                  "admission reopened")
+                    else:
+                        # The model already left (suspend ran, possibly failing after
+                        # the release): re-establish it through the swap path.
+                        self._set_state("reloading")
+                        self._schedule("reload")
+                        self._log("power: battery -> AC — reloading model")
+                elif self._state == "paused":
+                    if self._holder.current is not None:
+                        # Defensive: a model appeared outside the coordinator (future
+                        # admin path). Serve it rather than clobbering it with a reload.
+                        self._set_state("ready")
+                        self._error = None
+                        self._log("power: battery -> AC — admission reopened (model "
+                                  "already loaded)")
+                    else:
+                        self._set_state("reloading")
+                        self._schedule("reload")
+                        self._log("power: battery -> AC — reloading model")
+                # "reloading"/"ready": the load finishes into ready.
+
+    # ------------------------------------------------------------------ transitions
+
+    def _set_state(self, new: str) -> None:
+        """The single funnel for lifecycle state changes (lock held). Counting HERE —
+        only on an actual change — is what keeps duplicate power notifications and
+        no-op reconciliations from inflating the transition counter; the
+        constructor's initial state is not a transition."""
+        if new == self._state:
+            return
+        edge = f"{self._state}->{new}"
+        self._transitions[edge] = self._transitions.get(edge, 0) + 1
+        self._transitions_total += 1
+        self._state = new
+
+    def _begin_pause(self) -> None:
+        """``ready`` -> ``draining`` (requests in flight) or straight to the unload.
+        Lock held. Captures the reload configuration NOW, while the engine is resident:
+        the AC-side reload must reproduce exactly what was running."""
+        self._reload_kwargs = self._holder.reload_kwargs()
+        self._had_model = self._holder.current is not None
+        if self._admin_loads:
+            # The admin swap owns the holder lock for its long operation. Keep
+            # admission closed and defer the unload until that operation reports
+            # its final resident model through finish_admin_load().
+            self._set_state("draining")
+            self._log("power: AC -> battery — waiting for an admitted admin load "
+                      "to finish before unloading")
+            return
+        if self._active > 0:
+            self._set_state("draining")
+            self._log(f"power: AC -> battery — inference admission paused; waiting for "
+                      f"{self._active} admitted request(s) to finish")
+            return
+        self._set_state("unloading")
+        self._log("power: AC -> battery — inference admission paused; no requests "
+                  "running, suspending model weights (prefix cache preserved)")
+        self._schedule("suspend")
+
+    def _begin_unload(self) -> None:
+        """``draining`` -> ``unloading`` once the last admitted request finished.
+        Lock held."""
+        if self._admin_loads:
+            return
+        self._set_state("unloading")
+        self._log("power: last admitted request finished — suspending model weights "
+                  "(prefix cache preserved)")
+        self._schedule("suspend")
+
+    def _schedule(self, action: str) -> None:
+        """Queue a lifecycle action and wake the worker. Lock held. The Condition and
+        the action live under the same lock the worker waits under, so a notification
+        can never be lost (the worker's predicate re-check is atomic with the wait)."""
+        self._action = action
+        self._cond.notify_all()
+
+    def _step(self) -> None:
+        """Run one pending lifecycle action, synchronously (sets/clears ``_busy`` the
+        way the worker does, so power events during a test-driven action race the same
+        way they race the real one)."""
+        with self._lock:
+            action, self._action, self._busy = self._action, None, True
+        if action is None:
+            with self._lock:
+                self._busy = False
+            return
+        try:
+            if action == "suspend":
+                self._do_suspend()
+            elif action == "reload":
+                self._do_reload()
+        finally:
+            with self._lock:
+                self._busy = False
+
+    def _worker(self) -> None:
+        # A reconciliation loop, not a one-shot dispatcher: it waits on the shared
+        # Condition until an action is pending, runs it OUTSIDE the lock, and loops —
+        # actions scheduled while an action runs are picked up on the next pass. No
+        # notification can be lost: schedule() notifies under the lock the waiter holds.
+        while True:
+            with self._lock:
+                while self._action is None and not self._stopping:
+                    self._cond.wait()
+                if self._stopping:
+                    return
+                action, self._action, self._busy = self._action, None, True
+            try:
+                if action == "suspend":
+                    self._do_suspend()
+                elif action == "reload":
+                    self._do_reload()
+            finally:
+                with self._lock:
+                    self._busy = False
+
+    def _do_suspend(self) -> None:
+        # Battery pause uses the holder's explicit suspend path: it waits for the
+        # generation executor, detaches model-bound prefix factories, drops
+        # target/drafter and returns freed Metal buffers via mx.clear_cache(), while
+        # retaining reusable prefix state for the AC reload.
+        # Metrics: the ATTEMPT is the real holder call beginning (not the queued
+        # action), and the duration covers exactly that call — recorded on failure
+        # too. The lock is never held across the suspend itself.
+        started = time.monotonic()
+        with self._lock:
+            self._unload_stats["attempts"] += 1
+        try:
+            self._holder.suspend()
+        except Exception as e:  # noqa: BLE001 — a failed close must not wedge the pause
+            with self._lock:
+                self._unload_stats["failures"] += 1
+                self._unload_stats["last_seconds"] = round(time.monotonic() - started, 3)
+                self._error = f"suspend failed: {type(e).__name__}: {e}"
+            self._log(f"power: {self._error} — admission stays closed")
+        else:
+            with self._lock:
+                self._unload_stats["successes"] += 1
+                self._unload_stats["last_seconds"] = round(time.monotonic() - started, 3)
+        with self._lock:
+            if self._source == "ac":
+                # Race: AC returned while the unload was running. Recover through the
+                # safest normal path — the reload's own release-then-load closes
+                # whatever is still resident before loading.
+                self._set_state("reloading")
+                self._schedule("reload")
+                self._log("power: battery -> AC during unload — reloading model")
+            elif self._holder.current is not None:
+                # The release did not complete: never claim the memory was freed. Stay
+                # in "unloading" with the error exposed; admission stays closed and AC
+                # recovers through the swap path above.
+                self._log("power: model still resident after a failed unload — "
+                          "admission stays closed until AC power returns")
+            else:
+                self._set_state("paused")
+                if self._error:
+                    # References are gone (so "paused / no model" is truthful), but the
+                    # cleanup RAISED: never claim the memory was freed — say what
+                    # actually happened and keep the error exposed via /health.
+                    self._log("power: model references released on battery, but suspend "
+                              "reported an error (see /health.power.error) — admission "
+                              "closed until AC power returns")
+                else:
+                    self._log("power: model weights suspended (prefix cache preserved) — "
+                              "server stays up, "
+                              "admission closed until AC power returns")
+
+    def _do_reload(self) -> None:
+        if not self._had_model:
+            # Nothing was loaded when battery hit (a manual /admin/unload, or a
+            # --no-model start): respect that — reopen model-less instead of
+            # resurrecting a model nobody asked for. Unless BATTERY is back again
+            # by now: then the settled state must match the latest observed source
+            # (paused, model-less — the next AC re-runs this trivial branch). No
+            # holder call runs here, so no lifecycle metrics either.
+            with self._lock:
+                self._error = None
+                if self._source == "battery":
+                    self._set_state("paused")
+                    self._log("power: battery returned during the model-less reload "
+                              "— staying paused with nothing to unload")
+                    return
+                self._set_state("ready")
+            self._log("power: battery -> AC — nothing was loaded before the "
+                      "transition; admission reopened (model-less)")
+            return
+        # Restore the configuration captured at the battery boundary (or, for a
+        # serve launched battery-paused, the startup spec — the first real load;
+        # `_reload_kwargs` is None there and reload() falls back to the stored
+        # startup configuration). Metrics mirror the unload: the ATTEMPT is the real
+        # holder.reload() beginning; the duration covers that call, failure included.
+        started = time.monotonic()
+        with self._lock:
+            self._reload_stats["attempts"] += 1
+        try:
+            self._holder.reload(spec=self._reload_kwargs)
+        except Exception as e:  # noqa: BLE001 — a failed reload leaves the server up
+            with self._lock:
+                self._reload_stats["failures"] += 1
+                self._reload_stats["last_seconds"] = round(time.monotonic() - started, 3)
+                self._set_state("paused")
+                self._error = f"reload failed: {type(e).__name__}: {e}"
+            self._log(f"power: reload failed ({type(e).__name__}: {e}) — admission "
+                      f"stays closed; a future power transition or /admin/load (once "
+                      f"AC) can recover")
+            return
+        with self._lock:
+            self._reload_stats["successes"] += 1
+            self._reload_stats["last_seconds"] = round(time.monotonic() - started, 3)
+            self._error = None
+            if self._source == "battery":
+                # Race: battery returned while the reload was running. The reload's
+                # close-then-load is now spent — pause again from the fresh engine.
+                self._begin_pause()
+            else:
+                self._set_state("ready")
+                self._log("power: model reloaded and warm — inference admission resumed")
+                handoff = getattr(self._holder, "_last_cache_handoff", None)
+                if handoff == "restored":
+                    self._log("power: battery resume — prefix cache restored")
+                elif handoff == "discarded":
+                    self._log("power: battery resume — preserved prefix cache discarded "
+                              "(incompatible or unavailable)")
 
 
 # --------------------------------------------------------------------------- request parsing
@@ -2066,9 +2830,12 @@ def _clamp_tokens(v, default: int = 2048, cap: int = 32768) -> int:
 # --------------------------------------------------------------------------- HTTP handler
 
 
-def make_handler(engine: Engine, api_key: str | None):
+def make_handler(engine: Engine, api_key: str | None, pause: BatteryPause | None = None):
     """Build a request-handler class bound to this engine (needed since BaseHTTPRequestHandler
-    is instantiated per-connection by the server and can't take extra constructor args)."""
+    is instantiated per-connection by the server and can't take extra constructor args).
+
+    ``pause`` is the battery-pause coordinator (``serve --pause-on-battery``): when set,
+    generation routes pass its admission gate and /health carries the power state."""
 
     class Handler(BaseHTTPRequestHandler):
         protocol_version = "HTTP/1.1"
@@ -2091,19 +2858,25 @@ def make_handler(engine: Engine, api_key: str | None):
             self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type")
             self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 
-        def _send_json(self, status: int, obj: dict):
+        def _send_json(self, status: int, obj: dict, headers: dict | None = None):
             body = json.dumps(obj).encode("utf-8")
             self.send_response(status)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Connection", "close")
             self._cors()
+            for k, v in (headers or {}).items():
+                self.send_header(k, v)
             self.end_headers()
             self.wfile.write(body)
 
-        def _send_error(self, status: int, message: str, etype: str = "invalid_request_error"):
+        def _send_error(self, status: int, message: str, etype: str = "invalid_request_error",
+                        headers: dict | None = None, code=None):
+            # `code` defaults to the status int; the battery pause passes the stable
+            # string "battery_pause" (convenience — the HEADERS are the contract).
             self._send_json(status, {"error": {"message": message, "type": etype,
-                                               "code": status}})
+                                               "code": status if code is None else code}},
+                            headers=headers)
 
         def _sse_start(self):
             self.send_response(200)
@@ -2157,10 +2930,39 @@ def make_handler(engine: Engine, api_key: str | None):
             self._cors()
             self.end_headers()
 
-        def _require_ready(self) -> bool:
+        def _paused_error(self, anthropic: bool = False):
+            """The 503 generation routes answer while serving is battery-paused — the
+            clear retryable battery signal, truthful for the CURRENT phase (draining /
+            unloading / paused / reloading), never disguised as a load failure. Each
+            dialect keeps its own error envelope; the stable machine-readable contract
+            is the header set (_pause_headers), so no client must parse the message."""
+            state = pause.state if pause is not None else "paused"
+            reason = _PAUSE_WORDING.get(state, "on battery power")
+            message = f"serving is paused: this Mac is {reason} (serve --pause-on-battery)."
+            headers = _pause_headers(state)
+            if anthropic:
+                return self._send_json(503, A.error_body(message, "overloaded_error"),
+                                       headers=headers)
+            return self._send_error(503, message, "service_unavailable", headers=headers,
+                                    code=UNAVAILABLE_BATTERY_PAUSE)
+
+        def _require_ready(self, anthropic: bool = False) -> bool:
             """503 while a model swap is in flight, or while no model is loaded at all
             (``--no-model`` start, ``/admin/unload``). Everything but /health, the admin
-            status/inventory routes and /doctor needs a loaded model, so they gate on this."""
+            status/inventory routes and /doctor needs a loaded model, so they gate on this.
+
+            With ``--pause-on-battery``: generation is admitted (or refused) at the
+            coordinator's atomic gate in ``do_POST`` — this check only keeps the
+            model-BOUND reads honest. While the model is merely DRAINING (still loaded,
+            finishing admitted requests) these reads keep working; once it is actually
+            unavailable (unloaded, or reloading with nothing resident) they get the
+            truthful battery wording rather than a misleading "no model is loaded —
+            load one with POST /admin/load"."""
+            if pause is not None and pause.state in ("paused", "unloading"):
+                return self._paused_error(anthropic) or False
+            if (pause is not None and pause.state == "reloading"
+                    and isinstance(engine, EngineHolder) and not engine.ready):
+                return self._paused_error(anthropic) or False
             if isinstance(engine, EngineHolder) and not engine.ready:
                 self._send_error(
                     503,
@@ -2184,8 +2986,14 @@ def make_handler(engine: Engine, api_key: str | None):
                 # the first and offer a model picker on the second.
                 if isinstance(engine, EngineHolder) and not engine.ready:
                     status = engine.status()
+                    # --pause-on-battery: an unloaded battery pause is a distinct,
+                    # healthy state — NOT a failed load ("no_model") and not "loading"
+                    # (nothing is loading until AC returns and the reload starts).
+                    paused = (pause is not None and not status["loading"]
+                              and pause.state in ("paused", "unloading"))
                     return self._send_json(200, {
-                        "status": "loading" if status["loading"] else "no_model",
+                        "status": "loading" if status["loading"]
+                        else "paused" if paused else "no_model",
                         "model": status["model"], "loading": status["loading"],
                         # which stage of the load this is: "loading" (weights) or
                         # "warming_up" (the throwaway warmup generation after the weights
@@ -2197,12 +3005,15 @@ def make_handler(engine: Engine, api_key: str | None):
                         "download": status.get("download"),
                         # memory-pressure etc. — the OS-level warnings apply with no model too
                         "warnings": system_warnings(system_memory()),
-                        "error": status["error"]})
+                        "error": status["error"],
+                        # power-aware state (present only with --pause-on-battery): source,
+                        # lifecycle phase, admission, active requests, reload error
+                        "power": pause.health() if pause is not None else None})
                 # max_draft as a string ("auto" or the pinned/derived cap) so a client can
                 # show the configured knob, not just infer it from round telemetry.
                 max_draft = ("auto" if getattr(engine, "cap_controller", None) is not None
                              else str(getattr(engine, "max_draft_tokens", None) or "auto"))
-                return self._send_json(200, {
+                payload = {
                     "status": "ok", "model": engine.model_id, "mode": engine.mode,
                     "target": engine.target_repo, "drafter": engine.drafter_repo,
                     "max_draft": max_draft,
@@ -2267,7 +3078,13 @@ def make_handler(engine: Engine, api_key: str | None):
                         "enable_thinking") is False else "on"),
                     "reasoning_effort": getattr(engine, "template_defaults", {}).get(
                         "reasoning_effort"),
-                })
+                }
+                if pause is not None:
+                    # --pause-on-battery telemetry. While DRAINING the status above stays
+                    # "ok" (the model is still loaded and answering) — admission_open is
+                    # what a client should honor before sending the next request.
+                    payload["power"] = pause.health()
+                return self._send_json(200, payload)
             if route == "/admin/status":
                 if isinstance(engine, EngineHolder):
                     return self._send_json(200, engine.status())
@@ -2307,14 +3124,27 @@ def make_handler(engine: Engine, api_key: str | None):
                 if (isinstance(engine, EngineHolder) and not engine.ready) or report is None:
                     return self._send_json(200, _machine_basics())
                 return self._send_json(200, report())
-            if not self._require_ready():
-                return
-            if route in ("/v1/models", "/models"):
-                return self._send_json(200, self._models_payload())
             if route == "/metrics":
+                # Diagnostics/control-plane route. The model-less 200 is a BATTERY-PAUSE
+                # escape hatch only: while the pause owns the unavailable lifecycle
+                # (unloading / paused / reloading) the telemetry that explains the pause
+                # must stay readable — that is exactly when it matters most. Every other
+                # model-less state (feature disabled, --no-model, an ordinary load in
+                # flight, a manual unload while READY, draining-with-a-lost-model) keeps
+                # the historical behavior: _require_ready's 503. Draining with its still
+                # resident ready model takes the normal loaded path anyway. The
+                # model-derived sections (engine metrics, verdict, memory_guard) are
+                # present only while an engine is; "model_loaded" says which shape this
+                # is. Reading /metrics never touches the admission gate.
                 from .diagnostics import memory_info
 
-                payload = engine.metrics()
+                loaded = not isinstance(engine, EngineHolder) or engine.ready
+                if not loaded:
+                    battery_owned = (pause is not None and pause.state in
+                                     ("unloading", "paused", "reloading"))
+                    if not battery_owned and not self._require_ready():
+                        return
+                payload = engine.metrics() if loaded else {"model": None, "requests": 0}
                 # Allocator state rides along so a client can show what the loaded model
                 # actually holds resident — added handler-side so every engine (incl.
                 # BatchEngine) reports it without owning the concern.
@@ -2322,10 +3152,21 @@ def make_handler(engine: Engine, api_key: str | None):
                 # What the OS sees (pressure, swap, free %) — the "mysteriously half speed"
                 # diagnostics; a few sysctls, so a client can poll it with the allocator.
                 payload["system"] = system_memory()
-                payload["verdict"] = getattr(engine, "last_verdict", None)
-                guard = getattr(engine, "memory_guard", None)
-                payload["memory_guard"] = guard.info() if guard is not None else {"enabled": False}
+                payload["model_loaded"] = bool(loaded)
+                if loaded:
+                    payload["verdict"] = getattr(engine, "last_verdict", None)
+                    guard = getattr(engine, "memory_guard", None)
+                    payload["memory_guard"] = (guard.info() if guard is not None
+                                               else {"enabled": False})
+                if pause is not None:
+                    # --pause-on-battery telemetry: state gauges + monotonic lifecycle
+                    # counters (bounded label space — the fixed state set, nothing else)
+                    payload["power"] = pause.metrics()
                 return self._send_json(200, payload)
+            if not self._require_ready():
+                return
+            if route in ("/v1/models", "/models"):
+                return self._send_json(200, self._models_payload())
             if route == "/calibration":
                 return self._send_json(200, engine.calibration())
             if route == "/admin/integrations":
@@ -2441,23 +3282,42 @@ def make_handler(engine: Engine, api_key: str | None):
                                        or effort.lower() not in REASONING_EFFORTS):
                 return self._send_error(400, "'reasoning_effort' must be one of "
                                              f"{', '.join(REASONING_EFFORTS)}")
+            admin_load_started = False
+            if pause is not None:
+                if not pause.begin_admin_load():
+                    state = pause.state
+                    return self._send_error(
+                        503, f"the battery pause is active ({state}): model loading is "
+                        f"refused until AC power returns", "service_unavailable",
+                        headers=_pause_headers(state), code=UNAVAILABLE_BATTERY_PAUSE)
+                admin_load_started = True
+            succeeded = False
             try:
-                status = engine.swap(model=model, mode=mode, max_draft=max_draft,
+                # ``None`` from a JSON body means OMITTED (keep the stored setting);
+                # UNSET is the lifecycle's way to say the same. Explicit fields keep
+                # their public semantics — the API contract is unchanged.
+                status = engine.swap(model=model, mode=mode,
+                                     max_draft=max_draft if max_draft is not None
+                                     else UNSET,
                                      lookup_drafts=lookup_drafts,
                                      confidence_threshold=confidence,
                                      context_window=context_window,
                                      small_m=small_m, sdpa_split=sdpa_split, cpu_split=cpu_split,
-                                     kv_bits=kv_bits,
+                                     kv_bits=kv_bits if kv_bits is not None else UNSET,
                                      warmup=warmup, memory_guard=memory_guard,
                                      enable_thinking=enable_thinking,
                                      reasoning_effort=effort.lower() if effort else None)
+                succeeded = True
+                return self._send_json(200, status)
             except ValueError as e:                 # unknown model / unresolvable drafter
                 return self._send_error(400, str(e))
             except Exception as e:  # noqa: BLE001 — load failed; report, server stays up
                 traceback.print_exc()
                 return self._send_error(500, f"could not load {model!r}: "
                                              f"{type(e).__name__}: {e}", "api_error")
-            return self._send_json(200, status)
+            finally:
+                if admin_load_started:
+                    pause.finish_admin_load(succeeded)
 
         def _race(self, req: dict):
             """Same prompt, several decode strategies, streamed as SSE.
@@ -2624,6 +3484,27 @@ def make_handler(engine: Engine, api_key: str | None):
                     return self._send_json(401, A.error_body("invalid api key",
                                                              "authentication_error"))
                 return self._send_error(401, "invalid api key", "authentication_error")
+            # --pause-on-battery admission boundary, BEFORE the body is even read: a
+            # battery-rejected request neither uploads its body nor queues. The reply
+            # carries Connection: close (see _send_json), so skipping the unread body
+            # is protocol-clean. ONLY generation routes count; count_tokens (pure
+            # tokenization), /admin/* and the diagnostics never touch the gate.
+            gen = _GENERATION_ROUTES.get(route)
+            admitted = False
+            if gen is not None and pause is not None:
+                if not pause.admit():
+                    return self._paused_error(anthropic)
+                admitted = True
+            try:
+                return self._do_post_body(route, anthropic, gen)
+            finally:
+                if admitted:
+                    # Released exactly once — clean finish, client disconnect (the
+                    # BrokenPipeError handler below runs AFTER this finally), or an
+                    # exception that became a 500.
+                    pause.release()
+
+        def _do_post_body(self, route, anthropic, gen):
             length = int(self.headers.get("Content-Length", 0) or 0)
             raw = self.rfile.read(length) if length else b""
             try:
@@ -2654,20 +3535,15 @@ def make_handler(engine: Engine, api_key: str | None):
                         return self._send_error(
                             501, "this server was not started with hot-swap support")
                     return self._send_json(200, engine.unload())
-                if not self._require_ready():
+                if not self._require_ready(anthropic):
                     return
-                if route in ("/v1/chat/completions", "/chat/completions"):
-                    return self._chat(req)
-                if route in ("/v1/completions", "/completions"):
-                    return self._completions(req)
-                if route in ("/v1/messages", "/messages"):
-                    return self._messages(req)
+                # `gen` (admitted before the body read, above) selects the handler;
+                # count_tokens is tokenization-only — it keeps working without admission
+                # while a model is draining, and 503s honestly once the model is gone.
+                if gen is not None:
+                    return getattr(self, gen)(req)
                 if route in ("/v1/messages/count_tokens", "/messages/count_tokens"):
                     return self._count_tokens(req)
-                if route in ("/v1/responses", "/responses"):
-                    return self._responses(req)
-                if route == "/admin/race":
-                    return self._race(req)
             except (BrokenPipeError, ConnectionResetError):
                 # Client hung up mid-stream; nothing more to do — but say so. Swallowing it
                 # silently left no server-side record at all, which made a stalled client
@@ -3280,10 +4156,10 @@ def make_handler(engine: Engine, api_key: str | None):
 
 
 def run_server(engine, *, host: str = "127.0.0.1", port: int = 8080,
-               api_key: str | None = None) -> None:
+               api_key: str | None = None, pause: BatteryPause | None = None) -> None:
     # ``engine`` may be an Engine, a BatchEngine, or an EngineHolder (hot-swap). All three
     # delegate the attributes the banner and handler read, so this is uniform.
-    handler = make_handler(engine, api_key)
+    handler = make_handler(engine, api_key, pause=pause)
     httpd = ThreadingHTTPServer((host, port), handler)
     httpd.daemon_threads = True
     base = f"http://{host}:{port}"
@@ -3330,6 +4206,10 @@ def run_server(engine, *, host: str = "127.0.0.1", port: int = 8080,
     print(f"  claude code : ANTHROPIC_BASE_URL={base}   (or run `mlx-dspark claude`)")
     if api_key:
         print("  auth   : Bearer <api-key> required")
+    if pause is not None:
+        src = pause.health()["source"]
+        print(f"  pause-on-battery: on   (power: {src or 'unknown'}) — switching to "
+              f"battery pauses inference and unloads the model until AC returns")
     print("=" * 64)
     if loaded:
         print(f"  curl {base}/v1/chat/completions -H 'Content-Type: application/json' \\")

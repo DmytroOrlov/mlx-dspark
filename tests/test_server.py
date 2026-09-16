@@ -1423,3 +1423,564 @@ def test_get_routes_require_the_key_except_health():
         assert json.loads(urllib.request.urlopen(req).read())["object"] == "list"
     finally:
         httpd.shutdown()
+
+
+# --- battery pause (serve --pause-on-battery) ----------------------------------------------
+
+
+def _paused_fixture(state="ready", start_worker=True):
+    """A holder-based server with a BatteryPause coordinator attached (the
+    --pause-on-battery wiring). The coordinator's REAL worker is started (tests wait
+    on state, they do not nudge _step). Returns (holder, pause, base, httpd)."""
+    holder = S.EngineHolder(_CloseableEngine(), load_kwargs={})
+    pause = S.BatteryPause(holder, log=lambda msg: None)
+    if start_worker:
+        pause.start()
+    if state == "paused":
+        pause.on_power_source("battery")            # -> the real worker unloads
+        deadline = time.time() + 2.0
+        while pause.state != "paused" and time.time() < deadline:
+            time.sleep(0.005)
+        assert pause.state == "paused"
+    elif state == "draining":
+        pause.admit()                     # a request in flight holds the drain open
+        pause.on_power_source("battery")
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0),
+                                S.make_handler(holder, api_key=None, pause=pause))
+    port = httpd.server_address[1]
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return holder, pause, f"http://127.0.0.1:{port}", httpd
+
+
+def test_pause_enabled_serving_normally_on_ac():
+    """AC at startup: everything behaves exactly like a normal server, plus the
+    power telemetry block."""
+    _holder, _pause, base, httpd = _paused_fixture()
+    try:
+        h = _get(base, "/health")
+        assert h["status"] == "ok"
+        assert h["power"] == {"enabled": True, "source": None, "state": "ready",
+                              "admission_open": True, "reason": None,
+                              "model_loaded": True, "active_requests": 0,
+                              "error": None}
+        c = _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert c["object"] == "chat.completion"       # inference admitted and served
+        assert _get(base, "/health")["power"]["active_requests"] == 0
+    finally:
+        httpd.shutdown()
+
+
+def test_battery_unloaded_health_and_generation_503():
+    """Unloaded battery pause: /health says 'paused' (not no_model, not a load
+    failure), generation routes 503 with the truthful battery reason + Retry-After,
+    the model-free inventory routes still answer — and /admin/load is REFUSED while
+    the battery policy is active (loading 20+ GB by hand would reintroduce exactly
+    the memory pressure the policy unloaded to avoid)."""
+    holder, _pause, base, httpd = _paused_fixture(state="paused")
+    try:
+        h = _get(base, "/health")
+        assert h["status"] == "paused" and h["loading"] is False
+        assert h["power"]["state"] == "paused" and h["power"]["admission_open"] is False
+        assert h["power"]["reason"] == "battery_pause"   # recovery poll: WHY it is closed
+        assert h["power"]["model_loaded"] is False
+        assert h["error"] is None                     # NOT a failed load
+
+        with pytest.raises(urllib.error.HTTPError) as e:      # OpenAI dialect
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503 and e.value.headers.get("Retry-After") == "5"
+        assert e.value.headers.get("X-MLX-Dspark-Unavailable-Reason") == "battery_pause"
+        assert e.value.headers.get("X-MLX-Dspark-Power-State") == "paused"
+        err = json.loads(e.value.read())["error"]
+        assert err["type"] == "service_unavailable"
+        assert err["code"] == "battery_pause"         # convenience; headers are the contract
+        assert "on battery power" in err["message"] and "unloaded" in err["message"]
+
+        with pytest.raises(urllib.error.HTTPError) as e:      # Anthropic dialect
+            _post(base, "/v1/messages", {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503
+        err = json.loads(e.value.read())["error"]     # Anthropic envelope shape
+        assert err["type"] == "overloaded_error" and "on battery power" in err["message"]
+
+        with pytest.raises(urllib.error.HTTPError) as e:      # Responses dialect
+            _post(base, "/v1/responses", {"input": "hi"})
+        assert e.value.code == 503
+        assert "on battery power" in json.loads(e.value.read())["error"]["message"]
+
+        with pytest.raises(urllib.error.HTTPError) as e:      # legacy completions alias
+            _post(base, "/v1/completions", {"prompt": "hi"})
+        assert e.value.code == 503
+
+        # diagnostics and control stay alive; the manual unload is a harmless no-op
+        assert "ok" in _get(base, "/doctor")
+        inv = _get(base, "/admin/models")
+        assert inv["loaded"] is None and isinstance(inv["models"], list)
+        assert _post(base, "/admin/unload", {})["ready"] is False   # no-op, no raise
+
+        # /admin/load is refused while the battery policy is active (explicit
+        # semantics: the pause owns the model lifecycle until AC returns)
+        with pytest.raises(urllib.error.HTTPError) as e:
+            _post(base, "/admin/load", {"model": "org/Whatever"})
+        assert e.value.code == 503
+        assert "battery pause is active" in json.loads(e.value.read())["error"]["message"]
+        assert holder.current is None                 # nothing was loaded
+    finally:
+        httpd.shutdown()
+
+
+def test_admin_load_finishing_after_battery_is_reconciled_and_unloaded():
+    """An AC-admitted admin swap may finish after the battery edge, but the
+    coordinator must observe its resident model and complete the battery unload."""
+    holder = S.EngineHolder(_CloseableEngine(), load_kwargs={})
+    pause = S.BatteryPause(holder, log=lambda msg: None)
+    swap_started = threading.Event()
+    release_swap = threading.Event()
+
+    def blocked_swap(**kwargs):
+        swap_started.set()
+        assert release_swap.wait(2.0)
+        holder._engine = _CloseableEngine()
+        return holder.status()
+
+    holder.swap = blocked_swap
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0),
+                                S.make_handler(holder, api_key=None, pause=pause))
+    base = f"http://127.0.0.1:{httpd.server_address[1]}"
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    result = {}
+    request = threading.Thread(
+        target=lambda: result.setdefault("body", _post(base, "/admin/load",
+                                                         {"model": "org/Runtime"})))
+    request.start()
+    try:
+        assert swap_started.wait(2.0)
+        pause.on_power_source("battery")
+        assert pause.state == "draining"
+        release_swap.set()
+        request.join(2.0)
+        assert not request.is_alive()
+        assert "body" in result
+        # finish_admin_load queues the deferred unload; execute that existing worker
+        # step deterministically rather than relying on timing.
+        assert pause.state == "unloading"
+        pause._step()
+        health = pause.health()
+        assert health["source"] == "battery"
+        assert health["state"] == "paused"
+        assert health["admission_open"] is False
+        assert health["model_loaded"] is False
+        assert pause._action is None
+    finally:
+        release_swap.set()
+        request.join(2.0)
+        httpd.shutdown()
+
+
+def test_truthful_503_wording_per_phase():
+    """The 503 text reflects the CURRENT lifecycle phase, never a blanket claim that
+    the model was already unloaded."""
+    _holder, pause, base, httpd = _paused_fixture(state="draining")
+    try:
+        with pytest.raises(urllib.error.HTTPError) as e:      # draining
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        msg = json.loads(e.value.read())["error"]["message"]
+        assert "already-admitted requests finish" in msg and "unloaded" not in msg
+
+        pause.release()                               # the admitted request finishes
+        deadline = time.time() + 2.0
+        while pause.state != "paused" and time.time() < deadline:   # worker drains+unloads
+            time.sleep(0.005)
+        with pytest.raises(urllib.error.HTTPError) as e:            # paused (unloaded)
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        msg = json.loads(e.value.read())["error"]["message"]
+        assert "the model is unloaded until AC power returns" in msg
+
+        pause.on_power_source("ac")                   # reloading: admission still closed
+        deadline = time.time() + 2.0
+        while pause.state != "reloading" and time.time() < deadline:
+            time.sleep(0.005)
+        with pytest.raises(urllib.error.HTTPError) as e:
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        msg = json.loads(e.value.read())["error"]["message"]
+        assert "reloading" in msg
+    finally:
+        httpd.shutdown()
+
+
+def test_streaming_admitted_request_finishes_and_the_real_worker_unloads():
+    """The full race over HTTP against the REAL coordinator worker: request admitted,
+    battery lands MID-STREAM, the stream completes normally; a request arriving after
+    the transition gets 503; when the admitted one finishes, the worker — without any
+    test nudging — drains and unloads through the holder."""
+    holder = S.EngineHolder(_SlowStreamEngine(pieces=12, delay=0.04), load_kwargs={})
+    pause = S.BatteryPause(holder, log=lambda msg: None).start()
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0),
+                                S.make_handler(holder, api_key=None, pause=pause))
+    port = httpd.server_address[1]
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{port}"
+    try:
+        result = {}
+        t = threading.Thread(target=lambda: result.update(
+            sse=_post(base, "/v1/chat/completions",
+                      {"messages": [{"role": "user", "content": "hi"}], "stream": True},
+                      stream=True)))
+        t.start()
+        # the request is ADMITTED (generation in flight) before the battery event
+        deadline = time.time() + 3.0
+        while pause.health()["active_requests"] == 0 and time.time() < deadline:
+            time.sleep(0.005)
+        assert pause.health()["active_requests"] == 1
+        pause.on_power_source("battery")             # battery DURING the stream
+        assert pause.state == "draining"
+
+        with pytest.raises(urllib.error.HTTPError) as e:    # new request: refused
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "new"}]})
+        assert e.value.code == 503
+        assert "battery" in json.loads(e.value.read())["error"]["message"]
+
+        t.join(5.0)                                  # the admitted one still completes
+        assert "data: [DONE]" in result["sse"]
+        # NO test-side step: the real worker drains (active -> 0) and unloads
+        deadline = time.time() + 5.0
+        while pause.state != "paused" and time.time() < deadline:
+            time.sleep(0.01)
+        assert holder.current is None and pause.state == "paused"
+        h = _get(base, "/health")
+        assert h["status"] == "paused" and h["power"]["source"] == "battery"
+    finally:
+        pause.stop()
+        httpd.shutdown()
+
+
+def test_ac_reload_reopens_admission_over_http(monkeypatch):
+    """AC back: the reload runs through the holder swap path and admission reopens
+    only once the engine is ready again."""
+    import mlx_dspark.server as srv
+
+    _holder, pause, base, httpd = _paused_fixture(state="paused")
+    try:
+        captured = {}
+
+        def fake_load(**kw):
+            captured.update(kw)
+            return _CloseableEngine()
+
+        monkeypatch.setattr(srv.Engine, "load", staticmethod(fake_load))
+        monkeypatch.setattr(srv, "maybe_batch_engine", lambda e, b: e)
+
+        with pytest.raises(urllib.error.HTTPError) as e:
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503                    # paused: refused
+
+        pause.on_power_source("ac")
+        deadline = time.time() + 5.0
+        while pause.state != "ready" and time.time() < deadline:   # the REAL worker
+            time.sleep(0.01)
+        assert pause.state == "ready"
+        assert captured["model"] == "org/Target"      # the SAME configuration reloads
+        c = _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert c["object"] == "chat.completion"       # admitted again
+    finally:
+        pause.stop()
+        httpd.shutdown()
+
+
+def test_without_the_feature_everything_is_unchanged(server):
+    """Disabled (the default): no power key on /health, no power block on /metrics,
+    no admission gate — the battery-pause feature adds nothing and changes nothing."""
+    _eng, base = server
+    h = _get(base, "/health")
+    assert "power" not in h
+    assert "power" not in _get(base, "/metrics")
+    c = _post(base, "/v1/chat/completions", {"messages": [{"role": "user", "content": "hi"}]})
+    assert c["object"] == "chat.completion"
+
+
+def test_model_bound_reads_still_answer_while_draining():
+    """Only INFERENCE is paused by the battery transition. While the model is still
+    loaded (draining, admitted requests finishing), the model-bound diagnostic reads
+    keep working; the 503 battery wording is reserved for when the model is really
+    unavailable (paused/unloaded) — except /metrics itself, the diagnostic/control
+    plane, which stays readable precisely so the pause's telemetry survives the model
+    leaving."""
+    _holder, pause, base, httpd = _paused_fixture(state="draining")
+    try:
+        h = _get(base, "/health")
+        assert h["status"] == "ok"                    # model loaded, serving stragglers
+        assert h["power"]["state"] == "draining" and h["power"]["admission_open"] is False
+        assert _get(base, "/metrics")["model"] == "FakeModel"     # reads not blocked
+        assert _get(base, "/v1/models")["data"][0]["id"] == "FakeModel"
+        assert _post(base, "/v1/messages/count_tokens",
+                     {"messages": [{"role": "user", "content": "hi"}]})["input_tokens"] > 0
+
+        with pytest.raises(urllib.error.HTTPError) as e:          # inference is
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503
+        msg = json.loads(e.value.read())["error"]["message"]
+        assert "on battery" in msg and "already-admitted" in msg
+
+        pause.release()                               # the admitted request finishes
+        deadline = time.time() + 5.0
+        while pause.state != "paused" and time.time() < deadline:   # real worker drains
+            time.sleep(0.01)
+
+        # fully paused / model-less: /metrics answers 200 (NOT a battery 503) with the
+        # model-free sections intact and the pause's own telemetry visible
+        mt = _get(base, "/metrics")
+        assert mt["model_loaded"] is False and mt["model"] is None
+        assert mt["memory"] and mt["system"]          # allocator/OS state: model-free
+        pwr = mt["power"]
+        assert pwr["state"] == "paused" and pwr["admission_open"] is False
+        assert pwr["model_loaded"] is False
+        assert pwr["unload_attempts_total"] == 1 and pwr["unload_successes_total"] == 1
+        assert pwr["rejected_inference_total"] == 1   # the draining refusal above
+        with pytest.raises(urllib.error.HTTPError) as e:          # real inference is
+            _post(base, "/v1/chat/completions",                   # still battery-503
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503
+        assert e.value.headers.get("X-MLX-Dspark-Power-State") == "paused"
+        # and merely QUERYING /metrics never touches the admission gate
+        _get(base, "/metrics")
+        _get(base, "/metrics")
+        assert _get(base, "/metrics")["power"]["rejected_inference_total"] == 2
+    finally:
+        pause.stop()
+        httpd.shutdown()
+
+
+def test_health_power_block_coherent_when_the_model_is_manually_unloaded():
+    """/admin/unload under AC with the pause enabled: the coordinator stays 'ready'
+    (admission open) while the model is gone — the power block stays truthful about
+    that combination (generation still 503s, via the holder's own no-model wording)."""
+    holder, pause, base, httpd = _paused_fixture()
+    try:
+        assert _get(base, "/health")["power"]["model_loaded"] is True
+        _post(base, "/admin/unload", {})              # the manual unload under AC
+        h = _get(base, "/health")
+        assert h["power"]["state"] == "ready" and h["power"]["admission_open"] is True
+        assert h["power"]["model_loaded"] is False    # truthful: no model resident
+        with pytest.raises(urllib.error.HTTPError) as e:
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert e.value.code == 503
+        assert "no model is loaded" in json.loads(e.value.read())["error"]["message"]
+        # and a later battery cycle respects the manual unload (nothing reloaded on AC)
+        pause.on_power_source("battery")
+        deadline = time.time() + 2.0
+        while pause.state != "paused" and time.time() < deadline:
+            time.sleep(0.01)
+        assert pause.health()["model_loaded"] is False
+        pause.on_power_source("ac")
+        deadline = time.time() + 5.0
+        while pause.state != "ready" and time.time() < deadline:
+            time.sleep(0.01)
+        assert holder.current is None                 # NOT resurrected: the user's unload
+    finally:
+        pause.stop()
+        httpd.shutdown()
+
+
+def test_battery_pause_headers_track_the_lifecycle_phase():
+    """The stable machine-readable contract on a battery-lifecycle 503: the reason
+    header, the CURRENT phase in X-MLX-Dspark-Power-State, and Retry-After: 5 — for
+    draining, paused and reloading alike."""
+    _holder, pause, base, httpd = _paused_fixture(start_worker=False)  # phases by hand
+    try:
+        def refused(path, body):
+            with pytest.raises(urllib.error.HTTPError) as e:
+                _post(base, path, body)
+            return e.value
+
+        def assert_headers(err, state):
+            assert err.code == 503
+            assert err.headers.get("X-MLX-Dspark-Unavailable-Reason") == "battery_pause"
+            assert err.headers.get("X-MLX-Dspark-Power-State") == state
+            assert err.headers.get("Retry-After") == "5"
+
+        # draining: an admitted request holds the drain open, new inference refuses
+        assert pause.admit() is True
+        pause.on_power_source("battery")
+        assert pause.state == "draining"
+        assert_headers(refused("/v1/chat/completions",
+                               {"messages": [{"role": "user", "content": "hi"}]}),
+                       "draining")
+        assert_headers(refused("/admin/load", {"model": "org/Whatever"}), "draining")
+        assert pause.health()["reason"] == "battery_pause"
+
+        # paused: the drain ends, the (test-stepped) worker unloads
+        pause.release()
+        pause._step()
+        assert pause.state == "paused"
+        assert_headers(refused("/v1/chat/completions",
+                               {"messages": [{"role": "user", "content": "hi"}]}),
+                       "paused")
+
+        # reloading: AC back — the reload action is QUEUED, not run (worker never
+        # started), so the coordinator stays "reloading" across the reads below
+        pause.on_power_source("ac")
+        assert pause.state == "reloading"
+        err = refused("/v1/chat/completions", {"messages": [{"role": "user",
+                                                             "content": "hi"}]})
+        assert_headers(err, "reloading")
+        h = _get(base, "/health")                      # recovery poll: still closed
+        assert h["power"]["reason"] == "battery_pause" and \
+            h["power"]["admission_open"] is False
+        mt = _get(base, "/metrics")                     # battery-owned: metrics readable
+        assert mt["model_loaded"] is False and mt["power"]["state"] == "reloading"
+    finally:
+        httpd.shutdown()
+
+
+def test_battery_pause_contract_is_shared_across_dialects():
+    """Every battery-refused route (OpenAI chat/completions, Anthropic messages,
+    Responses, /admin/race — all behind the admission gate) carries the SAME header
+    contract while each keeps its own JSON error shape. /metrics is deliberately NOT
+    among the refused: it is the diagnostic/control-plane read (200 even while
+    paused), and it never touches the admission gate."""
+    _holder, pause, base, httpd = _paused_fixture(state="paused")
+    routes = [("/v1/chat/completions", {"messages": [{"role": "user", "content": "hi"}]}),
+              ("/chat/completions", {"messages": [{"role": "user", "content": "hi"}]}),
+              ("/v1/completions", {"prompt": "hi"}),
+              ("/v1/messages", {"messages": [{"role": "user", "content": "hi"}]}),
+              ("/v1/responses", {"input": "hi"}),
+              ("/admin/race", {})]
+    try:
+        bodies = {}
+        for path, body in routes:
+            with pytest.raises(urllib.error.HTTPError) as e:
+                _post(base, path, body)
+            err = e.value
+            assert err.code == 503 and \
+                err.headers.get("X-MLX-Dspark-Unavailable-Reason") == "battery_pause" and \
+                err.headers.get("X-MLX-Dspark-Power-State") == "paused" and \
+                err.headers.get("Retry-After") == "5"
+            bodies[path] = json.loads(err.read())
+        # OpenAI dialects: the service_unavailable envelope + the convenience code
+        oai = bodies["/v1/chat/completions"]["error"]
+        assert oai["type"] == "service_unavailable" and oai["code"] == "battery_pause"
+        # Anthropic keeps ITS envelope (no code key invented) — headers carry the contract
+        ant = bodies["/v1/messages"]["error"]
+        assert ant["type"] == "overloaded_error" and "code" not in ant
+        # the rejection counter covers generation routes only — the /metrics reads
+        # below answer 200 while paused and never touch the gate
+        mt = _get(base, "/metrics")
+        assert mt["power"]["state"] == "paused" and mt["model_loaded"] is False
+        assert mt["power"]["rejected_inference_total"] == len(routes)
+        _get(base, "/metrics")
+        assert pause.metrics()["rejected_inference_total"] == len(routes)
+    finally:
+        httpd.shutdown()
+
+
+def test_generic_503s_carry_no_battery_pause_headers(holder_server):
+    """The absence of the header set is itself the signal: an ordinary no-model 503
+    gets none of it — neither on a feature-disabled server, nor on a battery-pause
+    server whose AC-side state merely has no model loaded (manual /admin/unload)."""
+    holder, base = holder_server
+    holder._engine = None
+    with pytest.raises(urllib.error.HTTPError) as e:
+        _post(base, "/v1/chat/completions", {"messages": [{"role": "user",
+                                                           "content": "hi"}]})
+    err = e.value
+    assert err.code == 503 and "no model is loaded" in json.loads(err.read())["error"]["message"]
+    assert err.headers.get("X-MLX-Dspark-Unavailable-Reason") is None
+    assert err.headers.get("X-MLX-Dspark-Power-State") is None
+    assert err.headers.get("Retry-After") is None
+
+    _holder2, pause2, base2, httpd2 = _paused_fixture()     # ready on AC
+    try:
+        _post(base2, "/admin/unload", {})                   # model-less while READY: not
+        with pytest.raises(urllib.error.HTTPError) as e:    # a battery-lifecycle refusal
+            _post(base2, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        err = e.value
+        assert err.code == 503
+        assert err.headers.get("X-MLX-Dspark-Unavailable-Reason") is None
+        assert json.loads(err.read())["error"]["code"] == 503   # the plain status code
+        assert pause2.health()["reason"] is None            # health says the same thing
+    finally:
+        httpd2.shutdown()
+
+
+def test_metrics_carry_the_battery_pause_power_block():
+    """/metrics gains the state gauges + monotonic counters (bounded label space:
+    no ids, paths or text — the fixed lifecycle state set and plain integers), stays
+    readable through the whole pause, and polling it counts as nothing."""
+    _holder, pause, base, httpd = _paused_fixture(state="draining")
+    try:
+        power = _get(base, "/metrics")["power"]             # draining: model resident
+        assert power["enabled"] is True and power["state"] == "draining"
+        assert power["admission_open"] is False and power["model_loaded"] is True
+        assert power["active_requests"] == 1                # the held drain request
+        assert power["source"] == "battery"
+        assert power["rejected_inference_total"] == 0
+        for key in ("lifecycle_transitions_total", "transitions",
+                    "unload_attempts_total", "unload_successes_total",
+                    "unload_failures_total", "last_unload_seconds",
+                    "reload_attempts_total", "reload_successes_total",
+                    "reload_failures_total", "last_reload_seconds"):
+            assert key in power
+        with pytest.raises(urllib.error.HTTPError):         # refused while draining
+            _post(base, "/v1/chat/completions",
+                  {"messages": [{"role": "user", "content": "hi"}]})
+        assert _get(base, "/metrics")["power"]["rejected_inference_total"] == 1
+
+        # finish the admitted request the fixture holds open: the real worker drains
+        # and unloads — the pause's metrics must outlive the model
+        pause.release()
+        deadline = time.time() + 5.0
+        while pause.state != "paused" and time.time() < deadline:
+            time.sleep(0.01)
+        power = _get(base, "/metrics")["power"]             # 200 while model-less
+        assert power["state"] == "paused" and power["admission_open"] is False
+        assert power["model_loaded"] is False
+        assert power["unload_attempts_total"] == 1 and power["unload_successes_total"] == 1
+        assert power["last_unload_seconds"] is not None
+        assert power["rejected_inference_total"] == 1       # only the refusal above
+        _get(base, "/metrics")
+        _get(base, "/metrics")                              # polls count for nothing
+        assert _get(base, "/metrics")["power"]["rejected_inference_total"] == 1
+    finally:
+        pause.stop()
+        httpd.shutdown()
+
+
+def test_model_less_metrics_keeps_its_503_unless_the_battery_owns_the_lifecycle(holder_server):
+    """The model-less 200 on /metrics is a BatteryPause escape hatch, not a general
+    change of contract: with the feature DISABLED an EngineHolder without a model
+    keeps the historical /metrics 503 — and so does a battery-pause server whose
+    coordinator is READY while the model was manually unloaded (an ordinary no-model
+    state the pause does not own)."""
+    holder, base = holder_server                             # --pause-on-battery off
+    holder._engine = None
+    with pytest.raises(urllib.error.HTTPError) as e:
+        _get(base, "/metrics")
+    err = e.value
+    assert err.code == 503
+    assert "no model is loaded" in json.loads(err.read())["error"]["message"]
+    assert err.headers.get("X-MLX-Dspark-Unavailable-Reason") is None
+
+    _holder, pause, base, httpd = _paused_fixture()          # ready on AC, model loaded
+    try:
+        assert _get(base, "/metrics")["model_loaded"] is True
+        assert _get(base, "/metrics")["power"]["state"] == "ready"
+        _post(base, "/admin/unload", {})                     # manual unload under AC
+        with pytest.raises(urllib.error.HTTPError) as e:     # the ORDINARY no-model 503,
+            _get(base, "/metrics")                           # not the battery exception
+        err = e.value
+        assert err.code == 503
+        assert "no model is loaded" in json.loads(err.read())["error"]["message"]
+        assert err.headers.get("X-MLX-Dspark-Unavailable-Reason") is None
+        assert pause.health()["reason"] is None              # the pause owns nothing here
+    finally:
+        pause.stop()
+        httpd.shutdown()

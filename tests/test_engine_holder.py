@@ -1,8 +1,12 @@
 """EngineHolder delegation + swap bookkeeping — model-free (a fake engine stands in for the
 real one, since the swap's actual model load needs weights and is exercised on-device)."""
 
+import weakref
+
 import pytest
 
+from mlx_dspark import server as S
+from mlx_dspark.prefix_cache import PrefixCache
 from mlx_dspark.server import EngineHolder
 
 
@@ -316,3 +320,51 @@ class TestKvBitsOverride:
         captured.clear()
         h.swap(model="repo")
         assert captured["kv_bits"] == 8              # omitted -> server's startup setting
+
+
+class _Guard:
+    def __init__(self, prefix):
+        self.prefix = prefix
+
+
+def _handoff_engine(fresh, guard):
+    engine = object.__new__(S.Engine)
+    engine.prefix = fresh
+    engine.memory_guard = guard
+    return engine
+
+
+def test_compatible_prefix_handoff_retargets_memory_guard():
+    fresh = PrefixCache(list, compatibility=("model", "trim"))
+    fresh_ref = weakref.ref(fresh)
+    preserved = PrefixCache(list, compatibility=("model", "trim"))
+    engine = _handoff_engine(fresh, _Guard(fresh))
+
+    assert engine.attach_preserved_prefix(preserved) is True
+    assert engine.prefix is preserved
+    assert engine.memory_guard.prefix is preserved
+    fresh = None
+    assert fresh_ref() is None
+
+
+def test_incompatible_prefix_handoff_keeps_fresh_and_discards_preserved_state():
+    fresh = PrefixCache(list, compatibility=("new-model", "trim"))
+    preserved = PrefixCache(list, compatibility=("old-model", "trim"), min_reuse=1)
+    preserved.store([], None, [1], [2])
+    engine = _handoff_engine(fresh, _Guard(fresh))
+
+    assert engine.attach_preserved_prefix(preserved) is False
+    assert engine.prefix is fresh
+    assert engine.memory_guard.prefix is fresh
+    assert preserved.info()["slots"] == []
+
+
+def test_compatible_prefix_handoff_preserves_l2_spill_artifact(tmp_path):
+    fresh = PrefixCache(list, l2_dir=str(tmp_path), compatibility=("model", "trim"))
+    preserved = PrefixCache(list, l2_dir=str(tmp_path), compatibility=("model", "trim"))
+    spill = tmp_path / "target_cache_7.safetensors"
+    spill.write_bytes(b"preserved spill artifact")
+    engine = _handoff_engine(fresh, _Guard(fresh))
+
+    assert engine.attach_preserved_prefix(preserved) is True
+    assert spill.exists()

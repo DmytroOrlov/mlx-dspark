@@ -8,6 +8,7 @@ import os
 import mlx.core as mx
 import mlx.nn as nn
 from huggingface_hub import snapshot_download
+from huggingface_hub.errors import LocalEntryNotFoundError
 
 from .config import DSparkConfig
 from .model import DSparkDrafter
@@ -484,10 +485,10 @@ def local_dir(repo_or_path: str | None) -> str | None:
        (exact), then ``<org>_<name>``, then the bare ``<name>``; MLX-loadable dirs only. The
        bare form is last because it is the ambiguous one.
 
-    The HF hub cache is deliberately NOT consulted here: ``snapshot_download`` is itself
-    hub-local-first (and honours ``HF_HOME`` / ``HF_HUB_CACHE``), and the preflight checks hub
-    completeness on its own terms (``local_files_only``). ``gguf:`` schemes are the converter's
-    business and return None."""
+    The HF hub cache is deliberately NOT consulted here: ``_resolve`` checks it explicitly
+    through ``snapshot_download(..., local_files_only=True)`` and the download preflight checks
+    completeness on its own terms. Both honour ``HF_HOME`` / ``HF_HUB_CACHE``. ``gguf:``
+    schemes are the converter's business and return None."""
     if not repo_or_path or repo_or_path.startswith("gguf:"):
         return None
     expanded = os.path.expanduser(repo_or_path)
@@ -524,12 +525,16 @@ def _resolve(repo_or_path: str) -> str:
         repo, filename = repo_or_path[len("gguf:"):].rsplit("/", 1)
         return ensure_converted(repo, filename)
     # Anything already on disk wins over a hub download (see local_dir for the locations
-    # and why they live in exactly one function). snapshot_download is hub-local-first, so a
-    # complete HF-cache copy never touches the network either.
+    # and why they live in exactly one function). Check the HF cache explicitly before the
+    # normal online path: snapshot_download's default may still resolve hub metadata even
+    # when a complete snapshot is already cached.
     local = local_dir(repo_or_path)
     if local is not None:
         return local
-    return snapshot_download(repo_or_path)
+    try:
+        return snapshot_download(repo_or_path, local_files_only=True)
+    except LocalEntryNotFoundError:
+        return snapshot_download(repo_or_path)
 
 
 def load_drafter(

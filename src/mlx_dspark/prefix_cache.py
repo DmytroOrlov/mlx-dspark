@@ -255,9 +255,13 @@ class PrefixCache:
     def __init__(self, make_cache, make_ctx=None, *, min_reuse: int = 16,
                  l2_dir: str | None = None, max_ram_bytes: int = 0, slots: int = 2,
                  checkpoint: bool = False, max_rungs: int = 8, warn_keep_rungs: int = 2,
-                 min_slot_tokens: int = 1024):
+                 min_slot_tokens: int = 1024, compatibility=None):
         self.make_cache = make_cache          # () -> list[target layer cache]
         self.make_ctx = make_ctx              # () -> list[CtxCache] | None (None for baseline)
+        # The factories are model-bound callables.  Keep their compatibility descriptor
+        # separately from the reusable state so the latter can survive while the former
+        # is detached during a battery pause.
+        self.compatibility = compatibility
         self.min_reuse = max(1, min_reuse)
         self.checkpoint_mode = bool(checkpoint)   # see the module docstring; can latch on
         self.l2_dir = l2_dir
@@ -278,12 +282,44 @@ class PrefixCache:
             os.makedirs(l2_dir, exist_ok=True)
 
     # -- public API (engine calls these under its generation lock) --
+    def detach_model(self):
+        """Drop model-bound cache factories while retaining reusable prefix state.
+
+        A detached cache is intentionally unusable for generation until
+        :meth:`rebind_model` supplies factories from a newly loaded model.  In
+        particular, never leave a bound method from the suspended target/drafter in
+        this object: that would keep their weights resident.
+        """
+        # These are request-local staging values, not reusable cache state.
+        self._pending_rungs = {}
+        self._anchor = 0
+        self.make_cache = None
+        self.make_ctx = None
+        return self
+
+    def rebind_model(self, make_cache, make_ctx=None, *, compatibility=None) -> bool:
+        """Bind fresh model factories and report whether preserved state is compatible.
+
+        On a mismatch, the state is discarded but the new factories remain bound so the
+        caller can continue with a valid cold cache.  This deliberately does not compare
+        runtime model objects by identity.
+        """
+        compatible = self.compatibility == compatibility
+        self.make_cache = make_cache
+        self.make_ctx = make_ctx
+        if not compatible:
+            self.reset()
+        self.compatibility = compatibility
+        return compatible
+
     def acquire(self, prompt_ids: list[int]):
         """Return ``(cache, ctx, reuse_len)`` for this request — the best-matching slot's
         caches trimmed to the shared prefix, or fresh ones. A trim slot is checked out
         (removed) until ``store()`` re-validates it; checkpoint slots are never checked out
         (every restore is a copy). Also stages the anchor suggestion (:meth:`take_anchor`)
         and drops any rungs a failed previous generation left pending."""
+        if self.make_cache is None:
+            raise RuntimeError("PrefixCache is detached from model cache factories")
         self._pending_rungs = {}
         self._anchor = 0
         best, best_len, best_rung, best_lcp = None, 0, None, 0
@@ -407,6 +443,8 @@ class PrefixCache:
             self._evict(self._slots.pop())
 
     def store(self, cache, ctx, prompt_ids: list[int], token_ids: list[int]) -> None:
+        if self.make_cache is None:
+            raise RuntimeError("PrefixCache is detached from model cache factories")
         # the cache holds KV for the prompt + every generated token EXCEPT the last (that one is
         # the pending token, not yet fed through the target) — see the generate loops.
         if not _storable(cache):              # e.g. a RotatingKVCache wrapped mid-generation
