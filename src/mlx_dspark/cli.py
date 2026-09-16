@@ -20,6 +20,7 @@ Run ``mlx-dspark <cmd> -h`` for a command's flags.
 from __future__ import annotations
 
 import argparse
+import atexit
 import json
 import os
 import shutil
@@ -443,12 +444,35 @@ def cmd_serve(argv: list[str]) -> None:
                          "retained buffers to the OS, at the next round boundary — trading a "
                          "re-prefill for not swapping the model. On by default; /health reports "
                          "'memory_guard'; /admin/load takes a per-swap boolean.")
+    ap.add_argument("--pause-on-battery", action="store_true",
+                    help="macOS only: when the Mac switches from AC to battery power, stop "
+                         "admitting new inference requests (503 with a battery reason), let "
+                         "admitted ones finish, release target/drafter weights and allocator-"
+                         "retained memory while preserving reusable prefix state, and "
+                         "keep the server alive; when AC returns, reload the same "
+                         "configuration (with warmup) and reopen admission. /health reports "
+                         "the power/lifecycle state under 'power'.")
     ap.add_argument("--prefix-cache-dir", default=None,
                     help="directory for the L2 SSD spill tier (enables spilling the cache to disk)")
     ap.add_argument("--prefix-cache-max-ram-mb", type=int, default=0,
                     help="spill the prefix cache to --prefix-cache-dir once it exceeds this many MB "
                          "of RAM (0 = never spill; requires --prefix-cache-dir)")
     args = ap.parse_args(argv)
+    if args.pause_on_battery and sys.platform != "darwin":
+        ap.error("--pause-on-battery is macOS-only (it watches the Mac's power source)")
+    # The INITIAL power source is probed synchronously BEFORE any model load: a serve
+    # launched while already on battery must not load+warm a 16-20+ GB pair just to
+    # immediately unload it — it starts model-less and paused, and the first AC event
+    # performs the one real load (through the holder's normal swap path).
+    initial_power = None
+    if args.pause_on_battery:
+        from .power import current_power_source
+
+        initial_power = current_power_source()
+        if initial_power is None:
+            print("power: could not determine the initial power source (pmset "
+                  "unavailable?) — starting loaded, the battery pause will act on the "
+                  "first observed transition", file=sys.stderr, flush=True)
     if args.trust_remote_code:
         from . import load as _load
 
@@ -497,10 +521,17 @@ def cmd_serve(argv: list[str]) -> None:
         "kv_bits": args.kv_bits or None,
         "context_window": args.context_window,
     }
-    if args.no_model:
+    start_paused = bool(args.pause_on_battery and initial_power == "battery"
+                        and not args.no_model)
+    if args.no_model or start_paused:
         # Fast start with nothing resident: the first /admin/load brings a model up on the
-        # same port (the Mac app's instant-launch path).
+        # same port (the Mac app's instant-launch path) — and, with --pause-on-battery on
+        # a Mac that is already on battery, the first AC event does (the coordinator holds
+        # the intended load spec; loading now would allocate 16-20+ GB just to unload it).
         holder = EngineHolder(None, load_kwargs, max_batch=args.max_batch)
+        if start_paused:
+            print("power: on battery at startup — starting paused and model-less; the "
+                  "model loads automatically when AC power returns", flush=True)
     else:
         try:
             engine = Engine.load(**load_kwargs)
@@ -508,7 +539,35 @@ def cmd_serve(argv: list[str]) -> None:
             ap.error(str(e))
         holder = EngineHolder(maybe_batch_engine(engine, args.max_batch),
                               load_kwargs, max_batch=args.max_batch)
-    run_server(holder, host=args.host, port=args.port, api_key=args.api_key)
+    pause = monitor = None
+    if args.pause_on_battery:
+        from .power import PowerMonitor
+        from .server import BatteryPause
+
+        pause = BatteryPause(holder, initial=initial_power,
+                             load_on_ac=not args.no_model)
+        pause.start()
+        # PowerMonitor.start() re-probes synchronously (the coordinator already started
+        # paused from the same reading, so the duplicate event is a no-op) and then
+        # tails `pmset -g pslog` for transitions.
+        monitor = PowerMonitor(on_change=pause.on_power_source)
+        monitor.start()
+        # Additional safety net alongside the explicit finally below (e.g. an exception
+        # between here and run_server, or an unusual exit path).
+        atexit.register(monitor.stop)
+        atexit.register(pause.stop)
+    try:
+        run_server(holder, host=args.host, port=args.port, api_key=args.api_key,
+                   pause=pause)
+    finally:
+        # Lexical ownership first (deterministic), the atexit net second. The MONITOR
+        # stops before the coordinator: no power callback can land on a coordinator
+        # whose worker is already shutting down (a callback racing stop() is still
+        # safe — it only flips state under the lock — but the ordering is tidy).
+        if monitor is not None:
+            monitor.stop()
+        if pause is not None:
+            pause.stop()
 
 
 # --------------------------------------------------------------------------- claude code

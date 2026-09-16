@@ -68,6 +68,52 @@ from .tools import normalize_tool_messages, parse_tool_calls, schema_types
 
 MODES = ("dspark", "dflash", "lookup", "baseline")
 
+# Sentinel for EngineHolder.swap: "the caller supplied no override for this field".
+# Distinct from an EXPLICIT None, which the battery-pause reload passes for fields whose
+# real running value IS None/empty (drafter: none in use; kv_bits: full-precision KV) —
+# plain ``None == unspecified`` would silently revive the stale stored startup value.
+UNSET = object()
+
+# Routes that RUN inference (each admitted through the battery-pause gate; only these
+# count as active inference). count_tokens tokenizes only, and /metrics is a pure
+# diagnostics/control-plane read (answerable while paused) — neither is admitted, and
+# both keep working while a model drains. Diagnostic/model-free routes never touch the gate.
+_GENERATION_ROUTES = {
+    "/v1/chat/completions": "_chat", "/chat/completions": "_chat",
+    "/v1/completions": "_completions", "/completions": "_completions",
+    "/v1/messages": "_messages", "/messages": "_messages",
+    "/v1/responses": "_responses", "/responses": "_responses",
+    "/admin/race": "_race",
+}
+
+# Truthful, phase-specific wording for the battery pause's retryable 503s: the message
+# must match what is ACTUALLY happening (draining is not "unloaded"; reloading is not
+# "on battery" any more).
+_PAUSE_WORDING = {
+    "draining": "on battery power — new inference is paused while already-admitted "
+                "requests finish",
+    "unloading": "on battery power — the model is being unloaded to free memory",
+    "paused": "on battery power — the model is unloaded until AC power returns",
+    "reloading": "AC power restored — the model is reloading; try again shortly",
+}
+
+# The machine-readable battery-unavailable contract: these headers ride EVERY 503 the
+# battery-pause LIFECYCLE causes (and only those — ordinary no-model 503s, load
+# failures and server errors stay header-free, so their absence is itself the signal).
+# A client branches on the header values (never on the English message):
+#   X-MLX-Dspark-Unavailable-Reason: battery_pause
+#   X-MLX-Dspark-Power-State: draining | unloading | paused | reloading
+#   Retry-After: 5
+UNAVAILABLE_BATTERY_PAUSE = "battery_pause"
+
+
+def _pause_headers(state: str) -> dict:
+    """The 503 header set for a battery-lifecycle refusal, carrying the CURRENT
+    lifecycle phase."""
+    return {"X-MLX-Dspark-Unavailable-Reason": UNAVAILABLE_BATTERY_PAUSE,
+            "X-MLX-Dspark-Power-State": state,
+            "Retry-After": "5"}
+
 # Seconds between stream keep-alive frames (SSE comments on the OpenAI dialect, `ping`
 # events on the Anthropic one). They serve two jobs: keeping idle-timeout clients/proxies
 # from aborting through stretches with nothing on the wire (long prefill; the buffered
@@ -357,6 +403,7 @@ class Engine:
         cpu_split: dict | None = None,
         executor: ThreadPoolExecutor | None = None,
         depth_capper=None,
+        cap_pinned: bool = False,
     ):
         self.target = target
         self.tokenizer = tokenizer
@@ -375,6 +422,10 @@ class Engine:
         # Qwen3.8-27B-4bit — NOTES "Long-context decode").
         self._depth_capper = depth_capper
         self._last_cap = max_draft_tokens                  # effective cap of the last request
+        # True when the serve/swap request PINNED an integer cap (vs one this machine's
+        # measured curves derived): lets a battery-pause reload reproduce the effective
+        # configuration exactly (EngineHolder.reload_kwargs).
+        self.cap_pinned = cap_pinned
         self.sampling_defaults = dict(sampling_defaults or {})
         self.default_max_tokens = default_max_tokens
         self.max_tokens_cap = max_tokens_cap
@@ -452,7 +503,8 @@ class Engine:
         if not enabled:
             return None
         try:
-            checkpoint = not target_cache_reusable(self.target.make_cache())
+            cache_probe = self.target.make_cache()
+            checkpoint = not target_cache_reusable(cache_probe)
         except Exception:  # noqa: BLE001
             return None
         make_ctx = self.drafter.make_ctx_cache if self.mode == "dspark" else None
@@ -466,9 +518,33 @@ class Engine:
                 cap = int(cfg.sliding_window) - 1
             make_ctx = lambda: [DFlashCtxWindow(cap)]  # noqa: E731
             checkpoint = True
+        try:
+            ctx_probe = make_ctx() if make_ctx is not None else None
+            ctx_kinds = (None if ctx_probe is None else
+                         tuple(type(c).__name__ for c in ctx_probe))
+        except Exception:  # noqa: BLE001 — compatibility probing must not block a load
+            ctx_kinds = (type(self.drafter).__name__,) if self.drafter is not None else None
+        compatibility = (
+            "prefix-cache-v1",
+            self.target_repo,
+            self.mode,
+            self.drafter_repo,
+            getattr(self.target, "checkpoint_identity", None),
+            getattr(self.drafter, "checkpoint_identity", None) if self.drafter is not None else None,
+            int(getattr(self.target, "kv_bits", 0) or 0),
+            "checkpoint" if checkpoint else "trim",
+            tuple(type(c).__name__ for c in cache_probe),
+            ctx_kinds,
+        )
         return PrefixCache(self.target.make_cache, make_ctx,
                            l2_dir=l2_dir, max_ram_bytes=max(0, max_ram_mb) * 1024 * 1024,
-                           slots=self.prefix_cache_slots, checkpoint=checkpoint)
+                           slots=self.prefix_cache_slots, checkpoint=checkpoint,
+                           compatibility=compatibility,
+                           compatibility_known=(getattr(self.target, "checkpoint_identity", None)
+                                                is not None and
+                                                (self.drafter is None or
+                                                 getattr(self.drafter, "checkpoint_identity", None)
+                                                 is not None)))
 
     def _boundary_probes(self) -> list[tuple[list[int], int]]:
         """Per-chat-template measurement of the *stable prompt boundary* for checkpoint-mode
@@ -616,6 +692,7 @@ class Engine:
         warmup: bool = True,                     # run a throwaway generation on load to warm kernels
         on_warmup=None,                          # zero-arg callback fired right before the warmup pass
         memory_guard: bool = True,               # shed prefix cache + allocator cache under OS pressure
+        defer_memory_guard_start: bool = False,  # battery reload starts it after cache handoff
     ) -> Engine:
         if mode != "auto" and mode not in MODES:
             raise ValueError(f"mode must be one of {MODES} or 'auto', got {mode!r}")
@@ -798,10 +875,15 @@ class Engine:
                   sdpa_split=sdpa_split_active,
                   cpu_split=split_cfg,
                   executor=executor,
-                  depth_capper=depth_capper)
+                  depth_capper=depth_capper,
+                  cap_pinned=user_pinned_cap)
         eng.warmup_enabled = warmup
         eng.load_notes = load_notes
         eng.machine = machine
+        # Keep the user/probe input separately from the expanded runtime dict.  Battery
+        # replay needs the former (notably explicit ``0`` means disabled), while ordinary
+        # swaps must continue to omit this from the stored startup kwargs.
+        eng._cpu_split_requested = cpu_split
         if warmup:
             # Warm the Metal kernels + ramp the clock BEFORE we report ready, so the first
             # real request doesn't eat the ~2 s cold-start (which otherwise lands entirely in
@@ -820,7 +902,9 @@ class Engine:
 
             eng.memory_guard = MemoryGuard(prefix=eng.prefix, submit=eng._executor.submit,
                                            is_busy=lambda: eng._busy,
-                                           on_shed=eng._on_memory_shed).start()
+                                           on_shed=eng._on_memory_shed)
+            if not defer_memory_guard_start:
+                eng.start_memory_guard()
         return eng
 
     def _on_memory_shed(self, level: str) -> dict:
@@ -1252,15 +1336,100 @@ class Engine:
         if self.memory_guard is not None:
             self.memory_guard.stop()
             self.memory_guard = None
-        self._executor.shutdown(wait=True)
+        if self._executor is not None:
+            self._executor.shutdown(wait=True)
+            self._executor = None
         if self.prefix is not None:
             self.prefix.reset()
             self.prefix = None
         self.target = None
         self.drafter = None
         self.cap_controller = None
+        self._depth_capper = None
         with contextlib.suppress(Exception):  # best-effort; a failed cache clear is not fatal
             mx.clear_cache()                 # return the just-freed buffers to the OS
+
+    def _close_unpublished(self) -> None:
+        """Release a candidate that never became the holder's current engine.
+
+        The candidate must not destructively clear a preserved cache's shared spill
+        namespace.  Its own fresh cache is therefore dropped in memory only; normal
+        ``close()`` remains destructive for ordinary swaps and shutdown.
+        """
+        import mlx.core as mx
+
+        if self.memory_guard is not None:
+            self.memory_guard.stop()
+            self.memory_guard = None
+        if self._executor is not None:
+            self._executor.shutdown(wait=True)
+            self._executor = None
+        if self.prefix is not None:
+            self.prefix.discard_live_state()
+            self.prefix = None
+        self.target = None
+        self.drafter = None
+        self.tokenizer = None
+        self.cap_controller = None
+        self._depth_capper = None
+        with contextlib.suppress(Exception):
+            mx.clear_cache()
+
+    def suspend(self):
+        """Release model weights while detaching, rather than resetting, prefix state.
+
+        This is only for the battery coordinator.  The detached PrefixCache retains
+        immutable/reusable snapshots but no bound method that can keep the old target or
+        drafter alive.  Normal close()/unload() remains destructive.
+        """
+        import mlx.core as mx
+
+        if self.memory_guard is not None:
+            self.memory_guard.stop()
+            self.memory_guard = None
+        if self._executor is not None:
+            # This is deliberately submitted to the one generation executor.  For a
+            # BatchEngine its STOP marker is already ahead of this work, so the scheduler
+            # exits before the preserved arrays are evaluated.
+            if self.prefix is not None:
+                self._executor.submit(self.prefix.materialize_preserved_state).result()
+            self._executor.shutdown(wait=True)
+        preserved = self.prefix
+        if preserved is not None:
+            preserved.detach_model()
+        self.prefix = None
+        self.target = None
+        self.drafter = None
+        self.tokenizer = None
+        self.cap_controller = None
+        self._depth_capper = None
+        self._executor = None
+        with contextlib.suppress(Exception):
+            mx.clear_cache()
+        return preserved
+
+    def start_memory_guard(self):
+        """Start a deferred guard after a battery prefix handoff has settled."""
+        if self.memory_guard is not None:
+            self.memory_guard.start()
+        return self
+
+    def attach_preserved_prefix(self, preserved) -> bool:
+        """Rebind a detached battery cache to this engine's fresh factories."""
+        if preserved is None:
+            return False
+        if self.prefix is None:
+            preserved.reset()
+            return False
+        fresh = self.prefix
+        compatible = preserved.rebind_model(
+            fresh.make_cache, fresh.make_ctx, compatibility=fresh.compatibility,
+            compatibility_known=fresh.compatibility_known)
+        if compatible:
+            self.prefix = preserved
+            if self.memory_guard is not None:
+                self.memory_guard.prefix = self.prefix
+        return compatible
 
     def race_arms_available(self) -> list[str]:
         """Which decode strategies can be raced with what is currently loaded.
@@ -1600,6 +1769,11 @@ class BatchEngine:
         normally; the sentinel is consumed at the next idle point."""
         self._q.put(_STOP)
 
+    def suspend(self):
+        """Stop batching, then delegate the battery-only weights release."""
+        self.close()
+        return self.engine.suspend()
+
     def __getattr__(self, name):                    # delegate model_id/mode/spec_info/created/…
         return getattr(self.engine, name)
 
@@ -1819,13 +1993,711 @@ def maybe_batch_engine(engine: Engine, max_batch: int):
     return BatchEngine(engine, max_batch=max_batch)
 
 
+class _SuspendedState:
+    """Holder-owned, model-free state needed to replay a battery suspension."""
+
+    def __init__(self, resume_spec: dict, preserved_prefix=None):
+        self.resume_spec = dict(resume_spec)
+        self.preserved_prefix = preserved_prefix
+
+
+class _EngineLease:
+    """A stable reference to one concrete engine for one request or short read."""
+
+    def __init__(self, engine, kind: str, owner):
+        self.engine = engine
+        self.kind = kind
+        self.owner = owner
+        self.released = False
+
+    def release(self):
+        if not self.released:
+            self.released = True
+            self.owner._release_lease(self.kind)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        self.release()
+
+
+class _LifecycleRejected(RuntimeError):
+    """An explicit operation was rejected by a current lifecycle inhibition."""
+
+    def __init__(self, reason: str, phase: str):
+        super().__init__(reason)
+        self.reason = reason
+        self.phase = phase
+
+
+class _LifecycleController:
+    """Generic holder lifecycle authority.
+
+    The lock protects only lifecycle state and lease counts.  All model work, including
+    waiting for leases, is deliberately performed after releasing it.  The callbacks are
+    raw holder operations and never re-enter this controller.
+    """
+
+    def __init__(self, holder):
+        self._holder = holder
+        self._lock = threading.Lock()
+        self._cond = threading.Condition(self._lock)
+        self._phase = "ready"
+        self._source = None
+        self._inhibitions = {}
+        self._reason = None
+        self._generation = 0
+        self._reads = 0
+        self._generation_open = True
+        self._read_open = True
+        self._action = None
+        self._busy = False
+        self._explicit_op = None
+        self._claimed_revision = None
+        # Public model operations serialize their lifecycle finalization separately from
+        # the state lock. This keeps power observations and lease release cheap while
+        # preventing two admin operations from settling around one another.
+        self._explicit_lock = threading.Lock()
+        self._stopping = False
+        self._intent = holder._engine is not None
+        self._revision = 0
+        self._error = None
+        self._rejected_by_reason = {}
+        self._transitions_total = 0
+        self._transitions = {}
+        self._suspend_stats = {"attempts": 0, "successes": 0, "failures": 0,
+                               "last_seconds": None}
+        self._resume_stats = {"attempts": 0, "successes": 0, "failures": 0,
+                              "last_seconds": None}
+        self._thread = None
+        self._log = lambda _message: None
+        self._explicit_model_less = False
+
+    # ---- snapshots and setup -------------------------------------------------
+
+    def configure(self, initial: str | None, model_intent: bool, log=None):
+        with self._lock:
+            self._log = log if callable(log) else (lambda _message: None)
+            self._source = initial
+            self._intent = bool(model_intent)
+            self._explicit_model_less = False
+            self._generation_open = initial != "battery" and self._intent
+            self._read_open = initial != "battery"
+            self._phase = ("unloading" if initial == "battery" and self._holder._engine is not None
+                           else "paused" if initial == "battery" else "ready")
+            self._reason = UNAVAILABLE_BATTERY_PAUSE if initial == "battery" else None
+            if self._phase == "unloading":
+                self._action = "suspend"
+
+    def _emit(self, messages):
+        """Best-effort event emission, always called after releasing the state lock."""
+        for message in messages:
+            with contextlib.suppress(Exception):
+                self._log(message)
+
+    @property
+    def phase(self):
+        with self._lock:
+            return self._phase
+
+    def snapshot(self):
+        with self._lock:
+            return {"state": self._phase, "source": self._source,
+                    "admission_open": self._phase == "ready" and not self._inhibited(),
+                    "reason": self._reason, "active_requests": self._generation,
+                    "model_loaded": self._holder.current is not None,
+                    "error": self._error}
+
+    def metrics(self):
+        with self._lock:
+            return {
+                "enabled": True, "source": self._source, "state": self._phase,
+                "admission_open": self._phase == "ready" and not self._inhibited(),
+                "active_requests": self._generation,
+                "model_loaded": self._holder.current is not None,
+                "rejected_inference_total": self._rejected_by_reason.get(
+                    UNAVAILABLE_BATTERY_PAUSE, 0),
+                "lifecycle_transitions_total": self._transitions_total,
+                "transitions": dict(self._transitions),
+                "unload_attempts_total": self._suspend_stats["attempts"],
+                "unload_successes_total": self._suspend_stats["successes"],
+                "unload_failures_total": self._suspend_stats["failures"],
+                "last_unload_seconds": self._suspend_stats["last_seconds"],
+                "reload_attempts_total": self._resume_stats["attempts"],
+                "reload_successes_total": self._resume_stats["successes"],
+                "reload_failures_total": self._resume_stats["failures"],
+                "last_reload_seconds": self._resume_stats["last_seconds"],
+            }
+
+    def _set_phase(self, phase):
+        if phase == self._phase:
+            return
+        edge = f"{self._phase}->{phase}"
+        self._transitions[edge] = self._transitions.get(edge, 0) + 1
+        self._transitions_total += 1
+        self._phase = phase
+
+    def _inhibited(self):
+        return bool(self._inhibitions)
+
+    def _schedule(self, action):
+        self._action = action
+        self._cond.notify_all()
+
+    # ---- leases --------------------------------------------------------------
+
+    def acquire_generation(self):
+        with self._lock:
+            current = self._holder._engine
+            if (not self._generation_open or self._inhibited() or self._busy
+                    or self._phase != "ready" or current is None):
+                if self._reason is not None:
+                    self._rejected_by_reason[self._reason] = (
+                        self._rejected_by_reason.get(self._reason, 0) + 1)
+                return None
+            self._generation += 1
+            return _EngineLease(current, "generation", self)
+
+    def acquire_read(self):
+        with self._lock:
+            current = self._holder._engine
+            if not self._read_open or current is None or self._phase in ("paused", "reloading"):
+                return None
+            self._reads += 1
+            return _EngineLease(current, "read", self)
+
+    def _release_lease(self, kind):
+        messages = []
+        with self._lock:
+            attr = "_generation" if kind == "generation" else "_reads"
+            count = getattr(self, attr)
+            if count <= 0:
+                return
+            setattr(self, attr, count - 1)
+            if (kind == "generation" and count == 1 and self._phase == "draining"
+                    and not self._busy):
+                self._set_phase("unloading")
+                self._schedule("suspend")
+                if self._intent:
+                    messages.append("power: last admitted request finished — suspending model "
+                                    "weights (prefix cache preserved)")
+                else:
+                    messages.append("power: last admitted request finished — releasing model "
+                                    "weights after explicit unload intent")
+            self._cond.notify_all()
+        self._emit(messages)
+
+    def _wait_leases(self, *, reads=True):
+        with self._lock:
+            while self._generation or (reads and self._reads):
+                self._cond.wait()
+
+    # ---- power inhibition ----------------------------------------------------
+
+    def set_inhibited(self, source="battery", active=True, reason=UNAVAILABLE_BATTERY_PAUSE):
+        messages = []
+        with self._lock:
+            self._set_inhibited_locked(source, active, reason, messages)
+        self._emit(messages)
+
+    def observe_inhibition(self, *, observed_source, source="battery", active=True,
+                           reason=UNAVAILABLE_BATTERY_PAUSE):
+        """Publish an external power observation and its lifecycle effect atomically."""
+        messages = []
+        with self._lock:
+            self._source = observed_source
+            self._set_inhibited_locked(source, active, reason, messages)
+        self._emit(messages)
+
+    def _set_inhibited_locked(self, source, active, reason, messages):
+        if active:
+            self._inhibitions[source] = reason
+            self._reason = reason
+            self._generation_open = False
+            if (self._phase == "reloading" and self._action == "resume"
+                    and not self._busy):
+                self._action = None
+                self._read_open = False
+                self._set_phase("paused" if self._holder._engine is None else "unloading")
+                if self._holder._engine is not None:
+                    self._read_open = True
+                    self._schedule("suspend")
+                else:
+                    messages.append("power: battery returned before automatic reload "
+                                    "started — staying paused")
+                self._cond.notify_all()
+                return
+            if self._explicit_op is not None:
+                messages.append("power: AC -> battery — inference admission paused; "
+                                "waiting for the in-flight model operation to settle")
+            if self._phase == "ready" and self._holder._engine is not None:
+                self._holder._capture_suspended_state()
+                if self._generation:
+                    self._set_phase("draining")
+                    messages.append("power: AC -> battery — inference admission paused; "
+                                    f"waiting for {self._generation} admitted request(s) to finish")
+                else:
+                    self._set_phase("unloading")
+                    self._schedule("suspend")
+                    if self._intent:
+                        messages.append("power: AC -> battery — inference admission paused; no "
+                                        "requests running, suspending model weights (prefix cache "
+                                        "preserved)")
+                    else:
+                        messages.append("power: AC -> battery — inference admission paused; no "
+                                        "requests running, releasing model weights after "
+                                        "explicit unload intent")
+            elif self._phase == "ready":
+                self._set_phase("paused")
+            return
+        self._inhibitions.pop(source, None)
+        if self._inhibitions:
+            return
+        # Keep the battery reason during recovery; it clears only on a settled ready.
+        if self._phase == "draining":
+            self._action = None
+            self._generation_open = True
+            self._read_open = True
+            self._set_phase("ready")
+            self._error = None
+            self._reason = None
+            self._holder._discard_pending_suspend_snapshot()
+            messages.append("power: battery -> AC — admission reopened without an unload "
+                            "(the drain did not need one)")
+        elif self._phase == "unloading":
+            if self._explicit_op == "unload":
+                # An explicit unload owns this lifecycle boundary until its raw
+                # operation and finalizer have both settled.  AC must not reopen
+                # admission against the engine that operation is about to close.
+                pass
+            elif self._busy:
+                pass
+            elif self._holder._engine is not None:
+                self._action = None
+                self._generation_open = True
+                self._read_open = True
+                self._set_phase("ready")
+                self._error = None
+                self._reason = None
+                self._holder._discard_pending_suspend_snapshot()
+                messages.append("power: battery -> AC — pending unload cancelled, admission "
+                                "reopened")
+            elif self._intent:
+                self._set_phase("reloading")
+                self._schedule("resume")
+                messages.append("power: battery -> AC — reloading model")
+            else:
+                self._set_phase("ready")
+                self._generation_open = False
+                self._read_open = False
+                self._reason = None
+                if self._explicit_model_less:
+                    messages.append("power: battery -> AC — explicit unload preserved; "
+                                    "admission reopened model-less")
+                else:
+                    messages.append("power: battery -> AC — nothing was loaded before the "
+                                    "transition; admission reopened (model-less)")
+        elif self._phase == "paused":
+            if self._holder._engine is not None:
+                self._set_phase("ready")
+                self._generation_open = True
+                self._read_open = True
+                self._error = None
+                self._reason = None
+                messages.append("power: battery -> AC — admission reopened (model already "
+                                "loaded)")
+            elif self._intent:
+                self._set_phase("reloading")
+                self._schedule("resume")
+                messages.append("power: battery -> AC — reloading model")
+            else:
+                self._set_phase("ready")
+                self._generation_open = False
+                self._read_open = False
+                self._reason = None
+                if self._explicit_model_less:
+                    messages.append("power: battery -> AC — explicit unload preserved; "
+                                    "admission reopened model-less")
+                else:
+                    messages.append("power: battery -> AC — nothing was loaded before the "
+                                    "transition; admission reopened (model-less)")
+        self._cond.notify_all()
+
+    def set_source(self, source):
+        with self._lock:
+            self._source = source
+
+    # ---- explicit operations -------------------------------------------------
+
+    def explicit_swap(self, operation):
+        with self._explicit_lock:
+            with self._lock:
+                if self._inhibited():
+                    raise _LifecycleRejected(next(iter(self._inhibitions.values())),
+                                             self._phase)
+                starting_reason = self._reason
+                self._explicit_op = "swap"
+                self._intent = True
+                self._explicit_model_less = False
+                self._revision += 1
+                self._generation_open = False
+                self._read_open = False
+                # A queued automatic action has not acquired publication rights yet and
+                # can be discarded. A claimed action observes the revision below and
+                # returns stale without settling lifecycle state.
+                self._action = None
+                self._set_phase("reloading")
+                while self._busy:
+                    self._cond.wait()
+            self._wait_leases()
+            try:
+                result = operation()
+            except Exception as exc:
+                with self._lock:
+                    self._error = str(exc)
+                    if self._holder._engine is None:
+                        self._intent = False
+                        if self._inhibited():
+                            self._set_phase("paused")
+                        elif starting_reason is not None:
+                            # A failed explicit recovery remains unavailable even
+                            # after AC returns; this is distinct from a transient
+                            # battery edge seen by an ordinary explicit load.
+                            self._reason = self._reason or starting_reason
+                            self._set_phase("paused")
+                        else:
+                            self._set_phase("ready")
+                            self._reason = None
+                        self._generation_open = False
+                        self._read_open = False
+                    elif self._inhibited():
+                        self._generation_open = False
+                        self._read_open = True
+                        self._set_phase("unloading")
+                        self._schedule("suspend")
+                    elif not self._inhibited():
+                        self._set_phase("ready")
+                        self._generation_open = True
+                        self._read_open = True
+                        self._reason = None
+                    self._explicit_op = None
+                    self._cond.notify_all()
+                raise
+            with self._lock:
+                self._error = None
+                if self._inhibited():
+                    self._generation_open = False
+                    self._read_open = True
+                    if self._generation:
+                        self._set_phase("draining")
+                    else:
+                        self._set_phase("unloading")
+                        self._schedule("suspend")
+                else:
+                    self._generation_open = self._holder._engine is not None
+                    self._read_open = self._holder._engine is not None
+                    self._set_phase("ready")
+                    self._reason = None
+                self._explicit_op = None
+                self._cond.notify_all()
+            return result
+
+    def explicit_unload(self, operation):
+        with self._explicit_lock:
+            with self._lock:
+                self._explicit_op = "unload"
+                self._intent = False
+                self._explicit_model_less = True
+                self._revision += 1
+                self._generation_open = False
+                self._read_open = False
+                self._action = None
+                if self._phase != "ready" or self._holder._engine is not None:
+                    self._set_phase("unloading")
+                while self._busy:
+                    self._cond.wait()
+            self._wait_leases()
+            try:
+                result = operation()
+            except Exception as exc:
+                with self._lock:
+                    self._error = str(exc)
+                    self._generation_open = False
+                    if self._holder._engine is None:
+                        self._read_open = False
+                        self._set_phase("paused" if self._inhibited() else "ready")
+                        if not self._inhibited():
+                            self._reason = None
+                    elif self._inhibited():
+                        self._read_open = True
+                        self._set_phase("unloading")
+                        self._schedule("suspend")
+                    else:
+                        self._read_open = True
+                        self._set_phase("ready")
+                        self._reason = None
+                        self._generation_open = True
+                    self._explicit_op = None
+                    self._cond.notify_all()
+                raise
+            with self._lock:
+                self._error = None
+                self._generation_open = False
+                self._read_open = False
+                self._set_phase("paused" if self._inhibited() else "ready")
+                if not self._inhibited():
+                    self._reason = None
+                self._explicit_op = None
+                self._cond.notify_all()
+            return result
+
+    # ---- asynchronous reconciliation ---------------------------------------
+
+    def _claim(self):
+        with self._lock:
+            while self._action is None and not self._stopping:
+                self._cond.wait()
+            if self._stopping:
+                return None
+            action, self._action = self._action, None
+            self._busy = True
+            self._claimed_revision = self._revision
+            if action == "suspend":
+                self._generation_open = False
+                self._read_open = False
+            return action
+
+    def _finish(self):
+        with self._lock:
+            self._busy = False
+            self._claimed_revision = None
+            self._cond.notify_all()
+
+    def _do_suspend(self):
+        started = time.monotonic()
+        with self._lock:
+            revision = (self._claimed_revision
+                        if self._claimed_revision is not None else self._revision)
+            if revision != self._revision:
+                self._cond.notify_all()
+                return
+            destructive = not self._intent
+            self._suspend_stats["attempts"] += 1
+        self._wait_leases(reads=True)
+        error = None
+        error_type = None
+        error_message = None
+        try:
+            self._holder._suspend_now()
+            if destructive:
+                self._holder._discard_resumable_state()
+        except Exception as exc:  # noqa: BLE001
+            error = f"suspend failed: {type(exc).__name__}: {exc}"
+            error_type = type(exc).__name__
+            error_message = str(exc)
+        messages = []
+        with self._lock:
+            self._suspend_stats["last_seconds"] = round(time.monotonic() - started, 3)
+            if error:
+                self._suspend_stats["failures"] += 1
+            else:
+                self._suspend_stats["successes"] += 1
+            # An explicit operation that arrived while the raw suspend was in flight
+            # owns the lifecycle settlement. The automatic attempt still contributes
+            # statistics, but it must not publish a phase, error, or follow-up action.
+            if revision != self._revision:
+                self._cond.notify_all()
+            else:
+                if error:
+                    self._error = error
+                else:
+                    self._error = None if self._holder._engine is None else error
+                if error:
+                    messages.append(f"power: suspend failed ({error_type}: {error_message})")
+                    if self._inhibited():
+                        if self._holder._engine is not None:
+                            messages.append("power: model still resident after a failed unload — "
+                                            "admission stays closed until AC power returns")
+                        else:
+                            messages.append("power: model references released on battery, but "
+                                            "suspend reported an error (see /health.power.error) — "
+                                            "admission closed until AC power returns")
+                elif self._holder._engine is None:
+                    if destructive:
+                        messages.append("power: model weights released after explicit unload "
+                                        "intent — remaining model-less")
+                    elif self._inhibited():
+                        messages.append("power: model weights suspended (prefix cache preserved) "
+                                        "— server stays up, admission closed until AC power returns")
+                if not self._inhibited() and self._intent and self._holder._engine is None:
+                    self._set_phase("reloading")
+                    self._schedule("resume")
+                    messages.append("power: battery -> AC during unload — reloading model")
+                elif self._inhibited():
+                    self._set_phase("paused" if self._holder._engine is None else "unloading")
+                elif self._holder._engine is not None:
+                    self._set_phase("ready")
+                    self._generation_open = True
+                    self._read_open = True
+                    self._reason = None
+                elif not self._inhibited() and not self._intent:
+                    self._set_phase("ready")
+                    self._generation_open = False
+                    self._read_open = False
+                    self._reason = None
+                self._cond.notify_all()
+        self._emit(messages)
+
+    def _do_resume(self):
+        with self._lock:
+            revision = (self._claimed_revision
+                        if self._claimed_revision is not None else self._revision)
+            if revision != self._revision:
+                self._cond.notify_all()
+                return
+            if not self._intent:
+                return
+            if self._inhibited():
+                self._generation_open = False
+                self._read_open = False
+                if self._holder._engine is None:
+                    self._set_phase("paused")
+                else:
+                    self._read_open = True
+                    self._set_phase("unloading")
+                    self._schedule("suspend")
+                self._cond.notify_all()
+                return
+            self._resume_stats["attempts"] += 1
+        started = time.monotonic()
+        error = None
+        error_type = None
+        error_message = None
+        try:
+            self._holder._resume_now()
+        except Exception as exc:  # noqa: BLE001
+            error = f"reload failed: {type(exc).__name__}: {exc}"
+            error_type = type(exc).__name__
+            error_message = str(exc)
+        messages = []
+        with self._lock:
+            self._resume_stats["last_seconds"] = round(time.monotonic() - started, 3)
+            if error:
+                self._resume_stats["failures"] += 1
+            else:
+                self._resume_stats["successes"] += 1
+            # Explicit intent supersedes this automatic action. In particular, do not
+            # reopen reads or schedule a stale suspend after an explicit unload/load.
+            if revision != self._revision:
+                if (error is None and self._holder._engine is not None
+                        and self._explicit_op == "unload"):
+                    messages.append("power: automatic reload completed after explicit unload "
+                                    "intent; waiting for destructive unload")
+                self._cond.notify_all()
+            else:
+                if error:
+                    self._error = error
+                    self._set_phase("paused")
+                    self._generation_open = False
+                    self._read_open = False
+                    messages.append(f"power: reload failed ({error_type}: {error_message}) — "
+                                    "admission stays closed; a future power transition or "
+                                    "/admin/load (once AC) can recover")
+                elif not self._intent or self._inhibited():
+                    self._generation_open = False
+                    self._read_open = True
+                    self._set_phase("unloading")
+                    self._schedule("suspend")
+                    if self._inhibited() and self._holder._engine is not None:
+                        messages.append("power: battery returned during automatic reload — "
+                                        "loaded model will be suspended before inference "
+                                        "admission reopens")
+                else:
+                    self._error = None
+                    self._generation_open = True
+                    self._read_open = True
+                    self._set_phase("ready")
+                    self._reason = None
+                    messages.append("power: model reloaded and warm — inference admission "
+                                    "resumed")
+                    if self._holder._last_cache_handoff == "restored":
+                        messages.append("power: battery resume — prefix cache restored")
+                    elif self._holder._last_cache_handoff == "discarded":
+                        messages.append("power: battery resume — preserved prefix cache "
+                                        "discarded (incompatible or unavailable)")
+                self._cond.notify_all()
+        self._emit(messages)
+
+    def _worker(self):
+        while True:
+            action = self._claim()
+            if action is None:
+                return
+            try:
+                if action == "suspend":
+                    self._do_suspend()
+                elif action == "resume":
+                    self._do_resume()
+            finally:
+                self._finish()
+
+    def _step(self):
+        """Deterministic one-action hook used by model-free lifecycle tests."""
+        with self._lock:
+            if self._action is None or self._stopping:
+                return
+            action, self._action = self._action, None
+            self._busy = True
+            self._claimed_revision = self._revision
+            if action == "suspend":
+                self._generation_open = False
+                self._read_open = False
+        if action is None:
+            return
+        try:
+            if action == "suspend":
+                self._do_suspend()
+            elif action == "resume":
+                self._do_resume()
+        finally:
+            self._finish()
+
+    def start(self):
+        with self._lock:
+            if self._thread is None:
+                self._stopping = False
+                self._thread = threading.Thread(target=self._worker, name="engine-lifecycle",
+                                                daemon=True)
+                self._thread.start()
+
+    def stop(self, log=None):
+        with self._lock:
+            self._stopping = True
+            self._cond.notify_all()
+        thread = self._thread
+        if thread is None:
+            return
+        thread.join(timeout=2.0)
+        if thread.is_alive():
+            self._emit(["power: engine-lifecycle worker still finishing an in-flight model "
+                        "action — not reporting it stopped (daemon; shutdown proceeds)"])
+            return
+        with self._lock:
+            self._thread = None
+
+    def thread(self):
+        with self._lock:
+            return self._thread
+
+
 class EngineHolder:
     """A swappable reference to the live engine, so a model can be changed **without dropping
     the server** (``POST /admin/load``).
 
-    Everything the request handler does — ``holder.generate(...)``, ``holder.metrics()``,
-    ``holder.model_id`` — is delegated to the current engine via ``__getattr__``, so the 57
-    places the handler touches the engine need no changes: they just follow the swap.
+    Ordinary request-handler accesses delegate to the current engine via ``__getattr__``;
+    generation and short-read paths intentionally acquire leases that pin a concrete engine
+    across a lifecycle boundary.
 
     Swap policy is **release-then-load**, deliberately. Freeing the old model before loading the
     new one means peak memory is one model, not two — the difference between switching two 12 GB
@@ -1840,11 +2712,78 @@ class EngineHolder:
     def __init__(self, engine, load_kwargs: dict, max_batch: int = 1):
         self._engine = engine
         self._load_kwargs = dict(load_kwargs)     # the flags this server was started with
+        self._preserved_prefix = None             # detached only by battery suspend
+        self._last_cache_restored = False
+        self._last_cache_handoff = None           # "restored" | "discarded"
         self._max_batch = max_batch
         self._swap_lock = threading.Lock()
         self._loading = False
         self._load_phase: str | None = None       # "loading" | "warming_up" while _loading
         self._load_error: str | None = None
+        self._suspended: _SuspendedState | None = None
+        self._lifecycle = _LifecycleController(self)
+
+    def configure_lifecycle(self, *, initial: str | None, model_intent: bool, log=None):
+        """Set the startup lifecycle before the power monitor can publish events."""
+        self._lifecycle.configure(initial, model_intent, log=log)
+
+    def set_inhibited(self, *, source="battery", active=True,
+                      reason=UNAVAILABLE_BATTERY_PAUSE):
+        self._lifecycle.set_inhibited(source, active, reason)
+
+    def acquire_generation(self):
+        return self._lifecycle.acquire_generation()
+
+    def acquire_read(self):
+        return self._lifecycle.acquire_read()
+
+    def lifecycle_snapshot(self):
+        return self._lifecycle.snapshot()
+
+    def lifecycle_metrics(self):
+        return self._lifecycle.metrics()
+
+    def _capture_suspended_state(self):
+        if self._engine is not None and self._suspended is None:
+            self._suspended = _SuspendedState(self.reload_kwargs())
+
+    def _refresh_runtime_replay_after_suspend(self, old):
+        """Refresh only CPU-split state after the engine has become quiescent."""
+        if self._suspended is None:
+            return
+        if getattr(old, "cpu_split_suspended", None) is not None:
+            cpu_split = 0
+        else:
+            cpu_split = getattr(old, "_cpu_split_requested",
+                                getattr(old, "cpu_split", None))
+        self._suspended.resume_spec["cpu_split"] = cpu_split
+
+    def _discard_pending_suspend_snapshot(self):
+        """Drop a pre-suspend snapshot when AC cancels before teardown owns the model."""
+        if (self._suspended is not None
+                and self._suspended.preserved_prefix is None
+                and self._preserved_prefix is None):
+            self._suspended = None
+
+    def _resume_now(self):
+        spec = dict(self._suspended.resume_spec) if self._suspended is not None else {}
+        return self._swap_now(
+            model=spec.get("model"),
+            drafter=spec.get("drafter", UNSET),
+            mode=spec.get("mode"),
+            max_draft=spec.get("max_draft_tokens", UNSET),
+            lookup_drafts=spec.get("lookup_drafts"),
+            confidence_threshold=spec.get("confidence_threshold"),
+            small_m=spec.get("small_m", UNSET),
+            sdpa_split=spec.get("sdpa_split", UNSET),
+            cpu_split=spec.get("cpu_split", UNSET),
+            kv_bits=spec.get("kv_bits", UNSET),
+            warmup=spec.get("warmup"),
+            memory_guard=spec.get("memory_guard"),
+            enable_thinking=spec.get("enable_thinking"),
+            reasoning_effort=spec.get("reasoning_effort"),
+            preserved_prefix=(self._suspended.preserved_prefix
+                              if self._suspended is not None else None))
 
     def __getattr__(self, name):
         # Only reached for names not found on the holder itself. During a swap `_engine` is
@@ -1864,10 +2803,12 @@ class EngineHolder:
         return self._engine
 
     def status(self) -> dict:
-        out = {"ready": self.ready, "loading": self._loading,
-               "model": self._engine.model_id if self._engine is not None else None,
+        current = self._engine
+        loading = self._loading
+        out = {"ready": current is not None and not loading, "loading": loading,
+               "model": current.model_id if current is not None else None,
                "error": self._load_error}
-        if self._loading:
+        if loading:
             # Which stage: "loading" (fetching/loading weights) or "warming_up" (the
             # post-load warmup generation) — a client shows "Warming up…" for the latter.
             out["phase"] = self._load_phase or "loading"
@@ -1879,12 +2820,16 @@ class EngineHolder:
         return out
 
     def unload(self) -> dict:
+        return self._lifecycle.explicit_unload(self._unload_now)
+
+    def _unload_now(self) -> dict:
         """Release the loaded model without loading another — frees its memory.
 
         The server stays up: generation routes 503 (with a "no model" reason) and
         ``/admin/load`` brings a model back on the same port. Unloading twice is a no-op.
         """
         with self._swap_lock:
+            self._discard_resumable_state()
             old = self._engine
             self._engine = None
             self._load_error = None
@@ -1895,30 +2840,101 @@ class EngineHolder:
                     inner.close()
             return self.status()
 
-    def swap(self, *, model: str, mode: str | None = None,
-             max_draft: int | str | None = None,
+    def _discard_resumable_state(self):
+        """Destructively release every holder-owned preserved prefix exactly once."""
+        prefixes = []
+        for prefix in (self._preserved_prefix,
+                       self._suspended.preserved_prefix if self._suspended is not None else None):
+            if prefix is not None and all(prefix is not existing for existing in prefixes):
+                prefixes.append(prefix)
+        first_error = None
+        try:
+            for prefix in prefixes:
+                try:
+                    prefix.reset()
+                except Exception as exc:  # noqa: BLE001 - propagate after all cleanup
+                    if first_error is None:
+                        first_error = exc
+        finally:
+            self._preserved_prefix = None
+            self._suspended = None
+        if first_error is not None:
+            raise first_error
+
+    def _suspend_now(self) -> dict:
+        """Battery-only weights release that keeps a detached prefix cache."""
+        with self._swap_lock:
+            self._capture_suspended_state()
+            old = self._engine
+            if old is None:
+                self._preserved_prefix = None
+                self._last_cache_restored = False
+                self._last_cache_handoff = None
+                return self.status()
+            preserved = old.suspend()
+            self._refresh_runtime_replay_after_suspend(old)
+            self._engine = None
+            self._preserved_prefix = preserved
+            if self._suspended is None:
+                self._suspended = _SuspendedState(self.reload_kwargs())
+            self._suspended.preserved_prefix = preserved
+            self._last_cache_restored = False
+            self._last_cache_handoff = None
+            self._load_error = None
+            return self.status()
+
+    def swap(self, **kwargs) -> dict:
+        return self._lifecycle.explicit_swap(lambda: self._swap_now(**kwargs))
+
+    def _swap_now(self, *, model: str | None, mode: str | None = None,
+             drafter=UNSET,
+             max_draft=UNSET,
              lookup_drafts: bool | None = None,
              confidence_threshold: float | None = None,
              context_window: int | None = None,
-             small_m: bool | None = None,
-             sdpa_split: bool | None = None,
-             cpu_split: float | None = None,
-             kv_bits: int | None = None,
+             small_m=UNSET,
+             sdpa_split=UNSET,
+             cpu_split=UNSET,
+             kv_bits=UNSET,
              warmup: bool | None = None,
              memory_guard: bool | None = None,
              enable_thinking: bool | None = None,
-             reasoning_effort: str | None = None) -> dict:
+             reasoning_effort: str | None = None,
+             preserved_prefix=UNSET) -> dict:
         """Release the current model and load ``model`` in its place. Returns the new status.
+
+        ``model=None`` is the battery-pause path only: load the STORED configuration
+        verbatim (the HTTP /admin/load handler validates a model string first). The
+        per-request overrides ride exactly as an ``/admin/load`` override would.
+
+        ``drafter`` / ``max_draft`` / ``kv_bits`` default to :data:`UNSET` ("no
+        override"), NOT to ``None``: the battery-pause reload may legitimately carry an
+        explicit ``None`` for these (no drafter in use / full-precision KV / re-derived
+        cap), and that must REPLACE the stored startup value rather than be mistaken for
+        an omission. The HTTP handler keeps the old public semantics by mapping omitted
+        (``None``) request fields to ``UNSET``.
 
         Serialized by ``_swap_lock`` so two concurrent loads can't race. Raises ``ValueError``
         with the reason if the new model can't be loaded — the caller turns that into a 4xx/5xx.
         """
         with self._swap_lock:
+            resume_operation = preserved_prefix is not UNSET
+            if preserved_prefix is UNSET:
+                # Any ordinary administrative/model replacement is destructive with
+                # respect to a cache left by a prior battery pause.
+                if self._preserved_prefix is not None:
+                    self._preserved_prefix.reset()
+                preserved_prefix = None
+            self._preserved_prefix = None
+            if not resume_operation:
+                self._suspended = None
+            self._last_cache_restored = False
+            self._last_cache_handoff = None
             # A local path can be vetted for model-supplied Python BEFORE the running model
             # is released (issue #26): a refused swap must not leave the server model-less.
             # Hub repos are checked after download, inside load_target, like everything else.
             local = os.path.expanduser(str(model))
-            if os.path.isdir(local):
+            if model is not None and os.path.isdir(local):
                 from .load import refuse_remote_code
 
                 refuse_remote_code(local, str(model))     # ValueError -> 400, engine untouched
@@ -1927,6 +2943,9 @@ class EngineHolder:
             self._load_error = None
             old = self._engine
             self._engine = None                   # `ready` is False from here until success
+            candidate = None
+            owned_candidate = None
+            handoff_discarded = False
             try:
                 if old is not None:
                     old.close()                   # frees GPU memory before the new load
@@ -1954,23 +2973,36 @@ class EngineHolder:
                 if reasoning_effort is not None:
                     self._load_kwargs["reasoning_effort"] = reasoning_effort
                 kwargs = dict(self._load_kwargs)
-                kwargs["model"] = model
+                if model is not None:
+                    # None = the battery reload of a startup-paused serve: keep the
+                    # STORED startup model (never overwrite it with None).
+                    kwargs["model"] = model
+                if drafter is not UNSET:
+                    # The drafter rides the swap EXPLICITLY (the battery-pause reload
+                    # passes the running pair's drafter here so a pause cycle can never
+                    # silently fall back to the server's startup --drafter — or to an
+                    # auto-resolve that fails for unregistered targets). An explicit
+                    # ``None`` means the RUNNING pair has NO drafter: it must clear the
+                    # stored one, not resurrect it.
+                    kwargs["drafter"] = drafter
                 if mode is not None:
                     kwargs["mode"] = mode
-                if max_draft is not None:
+                if max_draft is not UNSET:
                     kwargs["max_draft_tokens"] = max_draft
                 if lookup_drafts is not None:
                     kwargs["lookup_drafts"] = lookup_drafts
                 if confidence_threshold is not None:
                     kwargs["confidence_threshold"] = confidence_threshold
-                if small_m is not None:
+                if small_m is not UNSET:
                     kwargs["small_m"] = small_m
-                if sdpa_split is not None:
+                if sdpa_split is not UNSET:
                     kwargs["sdpa_split"] = sdpa_split
-                if cpu_split is not None:
+                if cpu_split is not UNSET:
                     kwargs["cpu_split"] = cpu_split       # 0 -> off, float -> forced fraction
-                if kv_bits is not None:
-                    kwargs["kv_bits"] = kv_bits or None    # 0 -> full precision
+                if kv_bits is not UNSET:
+                    # 0 (or an explicit None from the battery reload of a BF16 pair) ->
+                    # full precision: it must REPLACE a stale KV4/KV8 startup setting.
+                    kwargs["kv_bits"] = kv_bits or None
                 if warmup is not None:
                     kwargs["warmup"] = warmup
                 if memory_guard is not None:
@@ -1979,11 +3011,84 @@ class EngineHolder:
                 # warmup generation starts, so a polling client can say "Warming up…" instead
                 # of showing a load bar that looks stuck.
                 kwargs["on_warmup"] = lambda: setattr(self, "_load_phase", "warming_up")
-                engine = Engine.load(**kwargs)
+                # A candidate carrying preserved state must not have a live guard until
+                # the fresh-vs-preserved cache decision is complete.
+                if preserved_prefix is not None:
+                    kwargs["defer_memory_guard_start"] = True
+                candidate = Engine.load(**kwargs)
+                engine = candidate
+                owned_candidate = candidate
+                if cpu_split is not UNSET:
+                    engine._cpu_split_requested = cpu_split
+                elif "cpu_split" in kwargs:
+                    engine._cpu_split_requested = kwargs["cpu_split"]
+                if preserved_prefix is not None:
+                    attach = getattr(engine, "attach_preserved_prefix", None)
+                    self._last_cache_restored = bool(
+                        attach is not None and attach(preserved_prefix))
+                    if not self._last_cache_restored:
+                        # A fake/library engine, a disabled cache, or a compatibility
+                        # mismatch must all continue with a valid cold cache.
+                        preserved_prefix.reset()
+                        handoff_discarded = True
+                    self._last_cache_handoff = (
+                        "restored" if self._last_cache_restored else "discarded")
                 engine = maybe_batch_engine(engine, self._max_batch)
+                owned_candidate = engine
+                if preserved_prefix is not None:
+                    starter = getattr(engine, "start_memory_guard", None)
+                    if starter is not None:
+                        starter()
                 self._engine = engine
+                self._preserved_prefix = None
+                self._suspended = None
             except Exception as e:
                 self._load_error = str(e)
+                # No failed candidate may retain the preserved cache's new factories.  Keep
+                # the detached state for retry when the handoff was compatible; an
+                # incompatible handoff intentionally discarded it.
+                if preserved_prefix is not None and not handoff_discarded:
+                    with contextlib.suppress(Exception):
+                        preserved_prefix.detach_model()
+                    self._preserved_prefix = preserved_prefix
+                elif handoff_discarded:
+                    self._preserved_prefix = None
+                    if self._suspended is not None:
+                        self._suspended.preserved_prefix = None
+                cleanup_target = owned_candidate or candidate
+                if cleanup_target is not None:
+                    inner = getattr(cleanup_target, "engine", None)
+                    # A compatible handoff makes the candidate and holder point at the
+                    # same preserved object.  Sever the candidate's ownership before
+                    # unpublished cleanup, or discard_live_state() would erase the
+                    # cache we just retained for the retry path.
+                    if preserved_prefix is not None and not handoff_discarded:
+                        candidate_engine = (
+                            inner if inner is not None and inner is not cleanup_target
+                            else cleanup_target)
+                        if getattr(candidate_engine, "prefix", None) is preserved_prefix:
+                            candidate_engine.prefix = None
+                    cleanup_name = ("_close_unpublished"
+                                    if preserved_prefix is not None and not handoff_discarded
+                                    else "close")
+                    try:
+                        if inner is not None and inner is not cleanup_target:
+                            with contextlib.suppress(Exception):
+                                cleanup_target.close()
+                            cleanup = getattr(inner, cleanup_name, None)
+                            if cleanup is not None:
+                                cleanup()
+                            else:
+                                inner.close()
+                        else:
+                            cleanup = getattr(cleanup_target, cleanup_name, None)
+                            if cleanup is not None:
+                                cleanup()
+                            else:
+                                cleanup_target.close()
+                    except Exception:  # noqa: BLE001 — preserve the publication failure
+                        # Preserve the original publication failure as the diagnostic.
+                        pass
                 raise
             finally:
                 self._loading = False
@@ -1991,6 +3096,141 @@ class EngineHolder:
             # After the finally, so the returned status reflects the settled state (ready=True),
             # not the mid-load snapshot.
             return self.status()
+
+    def reload_kwargs(self) -> dict:
+        """The kwargs that would reproduce the CURRENT engine's effective configuration.
+
+        Used by the holder lifecycle (``serve --pause-on-battery``) to reload the
+        exact model that was running when the Mac switched to battery — not merely the
+        server's startup flags, which a mid-session ``/admin/load`` may have moved past.
+        Derived from the loaded engine itself: resolved target/drafter/mode, pinned vs
+        derived draft cap, per-pair knobs, KV quant, and the sticky template defaults.
+        Fields the swap path already keeps sticky (context_window, small_m/sdpa_split/
+        cpu_split, wired_limit) stay whatever ``_load_kwargs`` holds — those are
+        server-machine policies, not per-pair ones. Unload-safe: read what is needed
+        BEFORE the lifecycle boundary releases the engine.
+
+        The returned dict's ``drafter``/``kv_bits``/``max_draft_tokens``/``warmup``/
+        ``memory_guard`` keys are ALWAYS present when an engine is loaded — an explicit
+        ``None`` there is a VALUE ("no drafter", "full-precision KV", "re-derive the
+        cap"), not an omission; :meth:`reload` rides them through :meth:`swap` with
+        :data:`UNSET`-vs-None semantics so a stale startup setting can never survive."""
+        kw = dict(self._load_kwargs)
+        eng = self._engine
+        if eng is None:
+            return kw                       # nothing loaded: reload the startup config
+        kw["model"] = eng.target_repo
+        kw["drafter"] = getattr(eng, "drafter_repo", None)
+        kw["mode"] = eng.mode
+        kw["lookup_drafts"] = getattr(eng, "lookup_drafts", None)
+        kw["confidence_threshold"] = float(getattr(eng, "confidence_threshold", 0.0) or 0.0)
+        kv_bits = getattr(getattr(eng, "target", None), "kv_bits", None)
+        kw["kv_bits"] = int(kv_bits) if kv_bits else None
+        if getattr(eng, "cap_controller", None) is not None:
+            kw["max_draft_tokens"] = "auto"          # controller drives; re-calibrate per swap
+        elif getattr(eng, "cap_pinned", False):
+            kw["max_draft_tokens"] = eng.max_draft_tokens    # the user's pinned value
+        else:
+            kw["max_draft_tokens"] = None            # machine-derived: re-derive (cached)
+        td = getattr(eng, "template_defaults", None) or {}
+        kw["enable_thinking"] = False if td.get("enable_thinking") is False else None
+        kw["reasoning_effort"] = td.get("reasoning_effort")
+        # These are probe-derived machine policies.  Capture the effective values here
+        # for battery replay, but do not write them back into ordinary startup kwargs:
+        # an omitted ordinary swap must still re-run the probe/default decision.
+        kw["small_m"] = getattr(eng, "small_m", None)
+        kw["sdpa_split"] = getattr(eng, "sdpa_split", None)
+        if getattr(eng, "cpu_split_suspended", None) is not None:
+            kw["cpu_split"] = 0
+        else:
+            kw["cpu_split"] = getattr(
+                eng, "_cpu_split_requested", getattr(eng, "cpu_split", None))
+        # load-time behaviors a per-swap /admin/load override can change (not sticky in
+        # _load_kwargs): captured so the reload reproduces them
+        kw["warmup"] = bool(getattr(eng, "warmup_enabled", False))
+        kw["memory_guard"] = getattr(eng, "memory_guard", None) is not None
+        return kw
+
+    def reload(self, spec: dict | None = None) -> dict:
+        """Bring back the configuration ``spec`` (captured at the battery boundary by
+        :meth:`reload_kwargs`) — or, with no spec, the server's own startup
+        configuration (a serve launched battery-paused, model-less, loads its intended
+        model on the first AC event). This IS the battery-pause reload path: it runs
+        through :meth:`swap`, so the release-then-load ordering, warmup, memory-guard
+        restart and sticky-override semantics are exactly an /admin/load's, never a
+        second divergent loader."""
+        spec = dict(spec or {})
+        return self.swap(
+            model=spec.get("model"),
+            drafter=spec.get("drafter", UNSET),
+            mode=spec.get("mode"),
+            max_draft=spec.get("max_draft_tokens", UNSET),
+            lookup_drafts=spec.get("lookup_drafts"),
+            confidence_threshold=spec.get("confidence_threshold"),
+            small_m=spec.get("small_m", UNSET),
+            sdpa_split=spec.get("sdpa_split", UNSET),
+            cpu_split=spec.get("cpu_split", UNSET),
+            kv_bits=spec.get("kv_bits", UNSET),
+            warmup=spec.get("warmup"),
+            memory_guard=spec.get("memory_guard"),
+            enable_thinking=spec.get("enable_thinking"),
+            reasoning_effort=spec.get("reasoning_effort"),
+            preserved_prefix=self._preserved_prefix)
+
+
+# --------------------------------------------------------------------------- battery pause
+
+
+# --------------------------------------------------------------------------- holder-owned battery facade
+
+
+class BatteryPause:
+    """Thin macOS power-policy adapter for :class:`EngineHolder`.
+
+    The holder owns lifecycle state, request leases, resumable state, and the worker.
+    This object only remembers the observed power source and translates it into the
+    holder's battery inhibition API for compatibility with the existing CLI wiring.
+    """
+
+    def __init__(self, holder, *, initial: str | None = None, load_on_ac: bool = True,
+                 log=None):
+        self._holder = holder
+        self._log = log or (lambda msg: print(f"[serve] {msg}", file=sys.stderr,
+                                              flush=True))
+        self._source = initial
+        holder.configure_lifecycle(initial=initial, model_intent=load_on_ac, log=self._log)
+        if initial == "battery":
+            holder.set_inhibited(source="battery", active=True,
+                                 reason=UNAVAILABLE_BATTERY_PAUSE)
+
+    def start(self):
+        self._holder._lifecycle.start()
+        return self
+
+    def stop(self):
+        self._holder._lifecycle.stop()
+
+    @property
+    def state(self):
+        return self._holder._lifecycle.phase
+
+    def on_power_source(self, source: str):
+        if source == self._source:
+            return
+        self._holder._lifecycle.observe_inhibition(
+            observed_source=source, source="battery", active=(source == "battery"),
+            reason=UNAVAILABLE_BATTERY_PAUSE)
+        self._source = source
+
+    def health(self):
+        snap = self._holder.lifecycle_snapshot()
+        return {"enabled": True, "source": snap["source"], "state": snap["state"],
+                "admission_open": snap["admission_open"],
+                "reason": snap["reason"], "model_loaded": snap["model_loaded"],
+                "active_requests": snap["active_requests"], "error": snap["error"]}
+
+    def metrics(self):
+        return self._holder.lifecycle_metrics()
 
 
 # --------------------------------------------------------------------------- request parsing
@@ -2066,9 +3306,12 @@ def _clamp_tokens(v, default: int = 2048, cap: int = 32768) -> int:
 # --------------------------------------------------------------------------- HTTP handler
 
 
-def make_handler(engine: Engine, api_key: str | None):
+def make_handler(engine: Engine, api_key: str | None, pause: BatteryPause | None = None):
     """Build a request-handler class bound to this engine (needed since BaseHTTPRequestHandler
-    is instantiated per-connection by the server and can't take extra constructor args)."""
+    is instantiated per-connection by the server and can't take extra constructor args).
+
+    ``pause`` is the battery-pause power adapter (``serve --pause-on-battery``): when set,
+    generation routes acquire holder-owned leases and /health carries the power state."""
 
     class Handler(BaseHTTPRequestHandler):
         protocol_version = "HTTP/1.1"
@@ -2079,6 +3322,33 @@ def make_handler(engine: Engine, api_key: str | None):
             # SSE frames are written from the request thread and, during long prefills, from
             # the keep-alive heartbeat timer — one lock keeps frames from interleaving.
             self._wlock = threading.Lock()
+            self._leased_engine = None
+
+        def _request_engine(self):
+            """Return the concrete engine pinned for this request, never the holder."""
+            return self._leased_engine if self._leased_engine is not None else engine
+
+        def _battery_pause_active(self):
+            """Whether the current unavailable lifecycle is actually battery-owned."""
+            if pause is None:
+                return False
+            return pause.health().get("reason") == UNAVAILABLE_BATTERY_PAUSE
+
+        def _with_read(self, fn, anthropic=False):
+            """Run a short model-bound control-plane read under a concrete-engine lease."""
+            lease = engine.acquire_read() if isinstance(engine, EngineHolder) else None
+            if isinstance(engine, EngineHolder) and lease is None:
+                return (self._paused_error(anthropic) if self._battery_pause_active()
+                        else self._send_error(503, "no model is loaded — load one with "
+                                               "POST /admin/load", "service_unavailable"))
+            try:
+                if lease is not None:
+                    self._leased_engine = lease.engine
+                return fn()
+            finally:
+                if lease is not None:
+                    self._leased_engine = None
+                    lease.release()
 
         # -- low-level replies --
         def _route(self) -> str:
@@ -2091,19 +3361,25 @@ def make_handler(engine: Engine, api_key: str | None):
             self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type")
             self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 
-        def _send_json(self, status: int, obj: dict):
+        def _send_json(self, status: int, obj: dict, headers: dict | None = None):
             body = json.dumps(obj).encode("utf-8")
             self.send_response(status)
             self.send_header("Content-Type", "application/json")
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Connection", "close")
             self._cors()
+            for k, v in (headers or {}).items():
+                self.send_header(k, v)
             self.end_headers()
             self.wfile.write(body)
 
-        def _send_error(self, status: int, message: str, etype: str = "invalid_request_error"):
+        def _send_error(self, status: int, message: str, etype: str = "invalid_request_error",
+                        headers: dict | None = None, code=None):
+            # `code` defaults to the status int; the battery pause passes the stable
+            # string "battery_pause" (convenience — the HEADERS are the contract).
             self._send_json(status, {"error": {"message": message, "type": etype,
-                                               "code": status}})
+                                               "code": status if code is None else code}},
+                            headers=headers)
 
         def _sse_start(self):
             self.send_response(200)
@@ -2157,10 +3433,50 @@ def make_handler(engine: Engine, api_key: str | None):
             self._cors()
             self.end_headers()
 
-        def _require_ready(self) -> bool:
+        def _paused_error(self, anthropic: bool = False):
+            """The 503 generation routes answer while serving is battery-paused — the
+            clear retryable battery signal, truthful for the CURRENT phase (draining /
+            unloading / paused / reloading), never disguised as a load failure. Each
+            dialect keeps its own error envelope; the stable machine-readable contract
+            is the header set (_pause_headers), so no client must parse the message."""
+            state = pause.state if pause is not None else "paused"
+            reason = _PAUSE_WORDING.get(state, "on battery power")
+            message = f"serving is paused: this Mac is {reason} (serve --pause-on-battery)."
+            headers = _pause_headers(state)
+            if anthropic:
+                return self._send_json(503, A.error_body(message, "overloaded_error"),
+                                       headers=headers)
+            return self._send_error(503, message, "service_unavailable", headers=headers,
+                                    code=UNAVAILABLE_BATTERY_PAUSE)
+
+        def _require_ready(self, anthropic: bool = False) -> bool:
             """503 while a model swap is in flight, or while no model is loaded at all
             (``--no-model`` start, ``/admin/unload``). Everything but /health, the admin
-            status/inventory routes and /doctor needs a loaded model, so they gate on this."""
+            status/inventory routes and /doctor needs a loaded model, so they gate on this.
+
+            With ``--pause-on-battery``: generation is admitted (or refused) at the
+            coordinator's atomic gate in ``do_POST`` — this check only keeps the
+            model-BOUND reads honest. While the model is merely DRAINING (still loaded,
+            finishing admitted requests) these reads keep working; once it is actually
+            unavailable (unloaded, or reloading with nothing resident) they get the
+            truthful battery wording rather than a misleading "no model is loaded —
+            load one with POST /admin/load"."""
+            battery_pause = self._battery_pause_active()
+            if battery_pause and pause.state in ("paused", "unloading"):
+                return self._paused_error(anthropic) or False
+            if (battery_pause and pause.state == "reloading"
+                    and isinstance(engine, EngineHolder) and not engine.ready):
+                return self._paused_error(anthropic) or False
+            if isinstance(engine, EngineHolder):
+                lifecycle_state = engine.lifecycle_snapshot()["state"]
+                if lifecycle_state in ("unloading", "reloading"):
+                    self._send_error(
+                        503,
+                        "a model is loading — try again in a moment"
+                        if lifecycle_state == "reloading" else
+                        "no model is loaded — load one with POST /admin/load",
+                        "service_unavailable")
+                    return False
             if isinstance(engine, EngineHolder) and not engine.ready:
                 self._send_error(
                     503,
@@ -2184,8 +3500,14 @@ def make_handler(engine: Engine, api_key: str | None):
                 # the first and offer a model picker on the second.
                 if isinstance(engine, EngineHolder) and not engine.ready:
                     status = engine.status()
+                    # --pause-on-battery: an unloaded battery pause is a distinct,
+                    # healthy state — NOT a failed load ("no_model") and not "loading"
+                    # (nothing is loading until AC returns and the reload starts).
+                    paused = (self._battery_pause_active() and not status["loading"]
+                              and pause.state in ("paused", "unloading"))
                     return self._send_json(200, {
-                        "status": "loading" if status["loading"] else "no_model",
+                        "status": "loading" if status["loading"]
+                        else "paused" if paused else "no_model",
                         "model": status["model"], "loading": status["loading"],
                         # which stage of the load this is: "loading" (weights) or
                         # "warming_up" (the throwaway warmup generation after the weights
@@ -2197,77 +3519,69 @@ def make_handler(engine: Engine, api_key: str | None):
                         "download": status.get("download"),
                         # memory-pressure etc. — the OS-level warnings apply with no model too
                         "warnings": system_warnings(system_memory()),
-                        "error": status["error"]})
-                # max_draft as a string ("auto" or the pinned/derived cap) so a client can
-                # show the configured knob, not just infer it from round telemetry.
-                max_draft = ("auto" if getattr(engine, "cap_controller", None) is not None
-                             else str(getattr(engine, "max_draft_tokens", None) or "auto"))
-                return self._send_json(200, {
-                    "status": "ok", "model": engine.model_id, "mode": engine.mode,
-                    "target": engine.target_repo, "drafter": engine.drafter_repo,
-                    "max_draft": max_draft,
-                    # resolved per pair at load (registry rows measured with lookup off carry
-                    # it) — reported so a client shows the actual configuration, like max_draft
-                    "lookup_drafts": bool(getattr(engine, "lookup_drafts", True)),
-                    # 0.0 = off; settable per swap via /admin/load so a client can serve a
-                    # pair at a measured cap+confidence bundle (e.g. Qwen3.8-27B-4bit's
-                    # best is cap 7 + 0.3)
-                    "confidence_threshold": float(
-                        getattr(engine, "confidence_threshold", 0.0)),
-                    # capability flag: /admin/race arms accept a per-arm "confidence".
-                    # A client must gate its conf-bundle arm on this — an engine without
-                    # it would silently DROP the field and the lane label would lie.
-                    "race_arm_confidence": True,
-                    # whether the small-M MMA verify kernel is live for this load (the
-                    # per-shape probe admitted shapes and it wasn't forced off) — pairs
-                    # with serve --no-small-m / the /admin/load "small_m" override so a
-                    # kernel-vs-stock A/B no longer needs a version downgrade (issue #14)
-                    "small_m": bool(getattr(engine, "small_m", False)),
-                    # whether the wide-verify SDPA split is live (a per-chip probe found
-                    # mlx's multi-row cliff and it wasn't forced off) — pairs with serve
-                    # --no-sdpa-split / the /admin/load "sdpa_split" override
-                    "sdpa_split": bool(getattr(engine, "sdpa_split", False)),
-                    # prefill CPU co-prefill: the calibrated {min_rows, fracs} in force, or
-                    # null when off — pairs with serve --cpu-split / the /admin/load
-                    # "cpu_split" override (0 = off) for a prefill A/B without a restart
-                    "cpu_split": getattr(engine, "cpu_split", None),
-                    # the config the memory guard suspended for this session (null unless
-                    # macOS reported pressure and co-prefill was on — issue #31)
-                    "cpu_split_suspended": getattr(engine, "cpu_split_suspended", None),
-                    # whether this load ran a warmup pass (throwaway generation to compile
-                    # kernels + ramp the clock so the first real request is warm). On by
-                    # default; serve --no-warmup / the /admin/load "warmup" override turn it off.
-                    "warmup": bool(getattr(engine, "warmup_enabled", False)),
-                    "context_window": getattr(engine, "context_window", None),
-                    # KV-cache quantization for the loaded target: 0 = full precision,
-                    # 4/8 = quantized. Always present (0 when off) so a client can gate its
-                    # picker on the key's presence — an engine without the /admin/load
-                    # "kv_bits" override (< 0.13.1) also lacks this key (issue #17).
-                    "kv_bits": int(getattr(getattr(engine, "target", None),
-                                           "kv_bits", 0) or 0),
-                    # {code, level, message, action} rows a client shows as a banner: live
-                    # macOS memory pressure + the engine's load-time notes (the context-
-                    # window RAM estimate used to reach only stderr). Empty when all is well.
-                    "warnings": _engine_warnings(engine),
-                    # the memory-pressure guard's state (enabled, current level, last shed) —
-                    # serve --no-memory-guard / the /admin/load "memory_guard" override
-                    "memory_guard": (engine.memory_guard.info()
-                                     if getattr(engine, "memory_guard", None) is not None
-                                     else {"enabled": False}),
-                    "max_output_tokens": engine.max_tokens_cap,
-                    # Whether the loaded template reads `reasoning_effort`, and the server's
-                    # default when one was configured — so a client only offers the control
-                    # for models where it does something.
-                    "supports_reasoning_effort": bool(
-                        getattr(engine, "supports_reasoning_effort", False)),
-                    # What requests that don't say get: "off" = serve --no-thinking (or the
-                    # /admin/load enable_thinking=false override), "on" = the model's own
-                    # default. Presence of the key = the override is available.
-                    "thinking_default": ("off" if getattr(engine, "template_defaults", {}).get(
-                        "enable_thinking") is False else "on"),
-                    "reasoning_effort": getattr(engine, "template_defaults", {}).get(
-                        "reasoning_effort"),
-                })
+                        "error": status["error"],
+                        # power-aware state (present only with --pause-on-battery): source,
+                        # lifecycle phase, admission, active requests, reload error
+                        "power": pause.health() if pause is not None else None})
+                health_lease = (engine.acquire_read()
+                                if isinstance(engine, EngineHolder) else None)
+                if isinstance(engine, EngineHolder) and health_lease is None:
+                    status = engine.status()
+                    battery_paused = (self._battery_pause_active() and not status["loading"]
+                                      and pause.state in ("paused", "unloading", "reloading"))
+                    return self._send_json(200, {
+                        "status": "loading" if status["loading"]
+                        else "paused" if battery_paused else "no_model",
+                        "model": status["model"], "loading": status["loading"],
+                        "phase": status.get("phase"),
+                        "download": status.get("download"),
+                        "warnings": system_warnings(system_memory()),
+                        "error": status["error"],
+                        "power": pause.health() if pause is not None else None})
+                try:
+                    if health_lease is not None:
+                        self._leased_engine = health_lease.engine
+                    eng = self._request_engine()
+                    # All model-derived values are captured from the concrete leased engine;
+                    # the lease is released before the response is written.
+                    max_draft = ("auto" if getattr(eng, "cap_controller", None) is not None
+                                 else str(getattr(eng, "max_draft_tokens", None) or "auto"))
+                    payload = {
+                        "status": "ok", "model": eng.model_id, "mode": eng.mode,
+                        "target": eng.target_repo, "drafter": eng.drafter_repo,
+                        "max_draft": max_draft,
+                        "lookup_drafts": bool(getattr(eng, "lookup_drafts", True)),
+                        "confidence_threshold": float(
+                            getattr(eng, "confidence_threshold", 0.0)),
+                        "race_arm_confidence": True,
+                        "small_m": bool(getattr(eng, "small_m", False)),
+                        "sdpa_split": bool(getattr(eng, "sdpa_split", False)),
+                        "cpu_split": getattr(eng, "cpu_split", None),
+                        "cpu_split_suspended": getattr(eng, "cpu_split_suspended", None),
+                        "warmup": bool(getattr(eng, "warmup_enabled", False)),
+                        "context_window": getattr(eng, "context_window", None),
+                        "kv_bits": int(getattr(getattr(eng, "target", None),
+                                               "kv_bits", 0) or 0),
+                        "warnings": _engine_warnings(eng),
+                        "memory_guard": (eng.memory_guard.info()
+                                         if getattr(eng, "memory_guard", None) is not None
+                                         else {"enabled": False}),
+                        "max_output_tokens": eng.max_tokens_cap,
+                        "supports_reasoning_effort": bool(
+                            getattr(eng, "supports_reasoning_effort", False)),
+                        "thinking_default": ("off" if getattr(
+                            eng, "template_defaults", {}).get("enable_thinking") is False
+                            else "on"),
+                        "reasoning_effort": getattr(eng, "template_defaults", {}).get(
+                            "reasoning_effort"),
+                    }
+                    if pause is not None:
+                        payload["power"] = pause.health()
+                finally:
+                    if health_lease is not None:
+                        self._leased_engine = None
+                        health_lease.release()
+                return self._send_json(200, payload)
             if route == "/admin/status":
                 if isinstance(engine, EngineHolder):
                     return self._send_json(200, engine.status())
@@ -2284,8 +3598,17 @@ def make_handler(engine: Engine, api_key: str | None):
                 from .load import extra_model_roots
 
                 installed = installed_models()
-                loaded = (engine.target_repo
-                          if not isinstance(engine, EngineHolder) or engine.ready else None)
+                if isinstance(engine, EngineHolder):
+                    inventory_lease = engine.acquire_read()
+                    if inventory_lease is None:
+                        loaded = None
+                    else:
+                        try:
+                            loaded = inventory_lease.engine.target_repo
+                        finally:
+                            inventory_lease.release()
+                else:
+                    loaded = engine.target_repo
                 from .diagnostics import bandwidth_info
 
                 return self._send_json(200, {"models": model_inventory(),
@@ -2303,31 +3626,75 @@ def make_handler(engine: Engine, api_key: str | None):
                 # Chip, measured bandwidth, OS memory view, the loaded model's footprint and
                 # its single-stream roofline. Answers model-less too (chip/bandwidth/memory
                 # only) so a picker can scale estimates before anything is loaded.
-                report = getattr(engine, "machine_report", None)
-                if (isinstance(engine, EngineHolder) and not engine.ready) or report is None:
-                    return self._send_json(200, _machine_basics())
-                return self._send_json(200, report())
+                eng = self._request_engine()
+                if isinstance(eng, EngineHolder):
+                    lease = eng.acquire_read()
+                    if lease is None:
+                        return self._send_json(200, _machine_basics())
+                    try:
+                        report = getattr(lease.engine, "machine_report", None)
+                        payload = report() if report is not None else _machine_basics()
+                    finally:
+                        lease.release()
+                    return self._send_json(200, payload)
+                report = getattr(eng, "machine_report", None)
+                return self._send_json(200, report() if report is not None
+                                       else _machine_basics())
+            if route == "/metrics":
+                # Diagnostics/control-plane route. The model-less 200 is a BATTERY-PAUSE
+                # escape hatch only: while the pause owns the unavailable lifecycle
+                # (unloading / paused / reloading) the telemetry that explains the pause
+                # must stay readable — that is exactly when it matters most. Every other
+                # model-less state (feature disabled, --no-model, an ordinary load in
+                # flight, a manual unload while READY, draining-with-a-lost-model) keeps
+                # the historical behavior: _require_ready's 503. Draining with its still
+                # resident ready model takes the normal loaded path anyway. The
+                # model-derived sections (engine metrics, verdict, memory_guard) are
+                # present only while an engine is; "model_loaded" says which shape this
+                # is. Reading /metrics never touches the admission gate.
+                from .diagnostics import memory_info
+
+                metrics_lease = (engine.acquire_read()
+                                 if isinstance(engine, EngineHolder) else None)
+                loaded = not isinstance(engine, EngineHolder) or metrics_lease is not None
+                battery_owned = (pause is not None and self._battery_pause_active()
+                                 and pause.state in ("unloading", "paused", "reloading"))
+                if not loaded and not battery_owned and not self._require_ready():
+                    return
+                try:
+                    if metrics_lease is not None:
+                        self._leased_engine = metrics_lease.engine
+                    eng = self._request_engine() if loaded else None
+                    payload = eng.metrics() if loaded else {"model": None, "requests": 0}
+                    # Allocator state rides along so a client can show what the loaded model
+                    # actually holds resident — added handler-side so every engine (incl.
+                    # BatchEngine) reports it without owning the concern.
+                    payload["memory"] = memory_info()
+                    # What the OS sees (pressure, swap, free %) — the "mysteriously half speed"
+                    # diagnostics; a few sysctls, so a client can poll it with the allocator.
+                    payload["system"] = system_memory()
+                    payload["model_loaded"] = bool(loaded)
+                    if loaded:
+                        payload["verdict"] = getattr(eng, "last_verdict", None)
+                        guard = getattr(eng, "memory_guard", None)
+                        payload["memory_guard"] = (guard.info() if guard is not None
+                                                   else {"enabled": False})
+                finally:
+                    if metrics_lease is not None:
+                        self._leased_engine = None
+                        metrics_lease.release()
+                if pause is not None:
+                    # --pause-on-battery telemetry: state gauges + monotonic lifecycle
+                    # counters (bounded label space — the fixed state set, nothing else)
+                    payload["power"] = pause.metrics()
+                return self._send_json(200, payload)
             if not self._require_ready():
                 return
             if route in ("/v1/models", "/models"):
-                return self._send_json(200, self._models_payload())
-            if route == "/metrics":
-                from .diagnostics import memory_info
-
-                payload = engine.metrics()
-                # Allocator state rides along so a client can show what the loaded model
-                # actually holds resident — added handler-side so every engine (incl.
-                # BatchEngine) reports it without owning the concern.
-                payload["memory"] = memory_info()
-                # What the OS sees (pressure, swap, free %) — the "mysteriously half speed"
-                # diagnostics; a few sysctls, so a client can poll it with the allocator.
-                payload["system"] = system_memory()
-                payload["verdict"] = getattr(engine, "last_verdict", None)
-                guard = getattr(engine, "memory_guard", None)
-                payload["memory_guard"] = guard.info() if guard is not None else {"enabled": False}
-                return self._send_json(200, payload)
+                return self._with_read(lambda: self._send_json(200, self._models_payload()))
             if route == "/calibration":
-                return self._send_json(200, engine.calibration())
+                return self._with_read(lambda: self._send_json(200,
+                                                               self._request_engine().calibration()))
             if route == "/admin/integrations":
                 from .integrations import integrations
 
@@ -2337,17 +3704,18 @@ def make_handler(engine: Engine, api_key: str | None):
                 host = self.headers.get("Host") or f"{self.server.server_address[0]}:" \
                     f"{self.server.server_address[1]}"
                 base = f"http://{host}"
-                return self._send_json(200, {
+                return self._with_read(lambda: self._send_json(200, {
                     "base_url": base,
-                    "model": engine.model_id,
-                    "integrations": integrations(base, engine.model_id, api_key),
-                })
+                    "model": self._request_engine().model_id,
+                    "integrations": integrations(base, self._request_engine().model_id, api_key),
+                }))
             if route == "/rounds":
                 # Recent rounds as one JSON blob — the pull-based sibling of /events, for
                 # clients that would rather poll than hold a stream open.
                 limit = self._query_int("limit", 128)
-                return self._send_json(200, {"rounds": engine.rounds.snapshot(limit),
-                                             "stats": engine.rounds.stats()})
+                return self._with_read(lambda: self._send_json(
+                    200, {"rounds": self._request_engine().rounds.snapshot(limit),
+                          "stats": self._request_engine().rounds.stats()}))
             if route == "/events":
                 return self._events_stream()
             return self._send_error(404, f"unknown route {self.path}", "not_found")
@@ -2442,22 +3810,34 @@ def make_handler(engine: Engine, api_key: str | None):
                 return self._send_error(400, "'reasoning_effort' must be one of "
                                              f"{', '.join(REASONING_EFFORTS)}")
             try:
-                status = engine.swap(model=model, mode=mode, max_draft=max_draft,
+                # ``None`` from a JSON body means OMITTED (keep the stored setting);
+                # UNSET is the lifecycle's way to say the same. Explicit fields keep
+                # their public semantics — the API contract is unchanged.
+                status = engine.swap(model=model, mode=mode,
+                                     max_draft=max_draft if max_draft is not None
+                                     else UNSET,
                                      lookup_drafts=lookup_drafts,
                                      confidence_threshold=confidence,
                                      context_window=context_window,
-                                     small_m=small_m, sdpa_split=sdpa_split, cpu_split=cpu_split,
-                                     kv_bits=kv_bits,
+                                     small_m=small_m if small_m is not None else UNSET,
+                                     sdpa_split=sdpa_split if sdpa_split is not None else UNSET,
+                                     cpu_split=cpu_split if cpu_split is not None else UNSET,
+                                     kv_bits=kv_bits if kv_bits is not None else UNSET,
                                      warmup=warmup, memory_guard=memory_guard,
                                      enable_thinking=enable_thinking,
                                      reasoning_effort=effort.lower() if effort else None)
+                return self._send_json(200, status)
+            except _LifecycleRejected as e:
+                return self._send_error(
+                    503, f"the battery pause is active ({e.phase}): model loading is "
+                    "refused until AC power returns", "service_unavailable",
+                    headers=_pause_headers(e.phase), code=UNAVAILABLE_BATTERY_PAUSE)
             except ValueError as e:                 # unknown model / unresolvable drafter
                 return self._send_error(400, str(e))
             except Exception as e:  # noqa: BLE001 — load failed; report, server stays up
                 traceback.print_exc()
                 return self._send_error(500, f"could not load {model!r}: "
                                              f"{type(e).__name__}: {e}", "api_error")
-            return self._send_json(200, status)
 
         def _race(self, req: dict):
             """Same prompt, several decode strategies, streamed as SSE.
@@ -2466,6 +3846,7 @@ def make_handler(engine: Engine, api_key: str | None):
             app asks you to take "lossless" on faith; this one runs both and compares the
             token ids.
             """
+            engine = self._request_engine()
             prompt = req.get("prompt")
             if not isinstance(prompt, str) or not prompt.strip():
                 return self._send_error(400, "race needs a non-empty 'prompt'")
@@ -2576,11 +3957,25 @@ def make_handler(engine: Engine, api_key: str | None):
             # model swap, during which the holder has no engine and every attribute access
             # raises. Holding the log object keeps subscribe/unsubscribe paired on the same
             # log no matter what the holder does meanwhile.
+            lease = engine.acquire_read() if isinstance(engine, EngineHolder) else None
+            if isinstance(engine, EngineHolder) and lease is None:
+                return self._paused_error() if self._battery_pause_active() else self._send_error(
+                    503, "no model is loaded (a model swap is in progress or failed)",
+                    "server_error")
             try:
-                log = engine.rounds
+                if lease is not None:
+                    self._leased_engine = lease.engine
+                log = self._request_engine().rounds
             except RuntimeError:
+                if lease is not None:
+                    self._leased_engine = None
+                    lease.release()
                 return self._send_error(503, "no model is loaded (a model swap is in "
-                                             "progress or failed)", "server_error")
+                                         "progress or failed)", "server_error")
+            finally:
+                if lease is not None:
+                    self._leased_engine = None
+                    lease.release()
             q = log.subscribe()
             try:
                 self._sse_start()
@@ -2602,9 +3997,10 @@ def make_handler(engine: Engine, api_key: str | None):
                         # then watching a dead object. End it so the client reconnects to
                         # the new engine's stream instead of going silent forever.
                         try:
-                            if engine.rounds is not log:
+                            if (isinstance(engine, EngineHolder)
+                                    and (engine.current is None or engine.current.rounds is not log)):
                                 break
-                        except RuntimeError:
+                        except (RuntimeError, AttributeError):
                             break                     # swap in progress — same conclusion
                         if idle >= 15.0:
                             self._sse(log.stats(), "stats")
@@ -2624,6 +4020,31 @@ def make_handler(engine: Engine, api_key: str | None):
                     return self._send_json(401, A.error_body("invalid api key",
                                                              "authentication_error"))
                 return self._send_error(401, "invalid api key", "authentication_error")
+            # --pause-on-battery admission boundary, BEFORE the body is even read: a
+            # battery-rejected request neither uploads its body nor queues. The reply
+            # carries Connection: close (see _send_json), so skipping the unread body
+            # is protocol-clean. ONLY generation routes count; count_tokens (pure
+            # tokenization), /admin/* and the diagnostics never touch the gate.
+            gen = _GENERATION_ROUTES.get(route)
+            lease = None
+            if gen is not None and isinstance(engine, EngineHolder):
+                lease = engine.acquire_generation()
+                if lease is None:
+                    snap = engine.lifecycle_snapshot()
+                    if snap["reason"] == UNAVAILABLE_BATTERY_PAUSE:
+                        return self._paused_error(anthropic)
+                    return self._send_error(
+                        503, "no model is loaded — load one with POST /admin/load",
+                        "service_unavailable")
+                self._leased_engine = lease.engine
+            try:
+                return self._do_post_body(route, anthropic, gen)
+            finally:
+                if lease is not None:
+                    self._leased_engine = None
+                    lease.release()
+
+        def _do_post_body(self, route, anthropic, gen):
             length = int(self.headers.get("Content-Length", 0) or 0)
             raw = self.rfile.read(length) if length else b""
             try:
@@ -2653,21 +4074,32 @@ def make_handler(engine: Engine, api_key: str | None):
                     if not isinstance(engine, EngineHolder):
                         return self._send_error(
                             501, "this server was not started with hot-swap support")
-                    return self._send_json(200, engine.unload())
-                if not self._require_ready():
+                    result = engine.unload()
+                    return self._send_json(200, result)
+                # Generation admission already pinned a concrete engine before the body
+                # was read. That lease, not the holder's current lifecycle phase, is the
+                # readiness authority for this request while an explicit swap waits.
+                if gen is not None:
+                    return getattr(self, gen)(req)
+                if not self._require_ready(anthropic):
                     return
-                if route in ("/v1/chat/completions", "/chat/completions"):
-                    return self._chat(req)
-                if route in ("/v1/completions", "/completions"):
-                    return self._completions(req)
-                if route in ("/v1/messages", "/messages"):
-                    return self._messages(req)
+                # count_tokens is tokenization-only — it keeps working without admission
+                # while a model is draining, and 503s honestly once the model is gone.
                 if route in ("/v1/messages/count_tokens", "/messages/count_tokens"):
-                    return self._count_tokens(req)
-                if route in ("/v1/responses", "/responses"):
-                    return self._responses(req)
-                if route == "/admin/race":
-                    return self._race(req)
+                    read_lease = engine.acquire_read() if isinstance(engine, EngineHolder) else None
+                    if isinstance(engine, EngineHolder) and read_lease is None:
+                        return (self._paused_error(anthropic)
+                                if self._battery_pause_active() else self._send_error(
+                            503, "no model is loaded — load one with POST /admin/load",
+                            "service_unavailable"))
+                    try:
+                        if read_lease is not None:
+                            self._leased_engine = read_lease.engine
+                        return self._count_tokens(req)
+                    finally:
+                        if read_lease is not None:
+                            self._leased_engine = None
+                            read_lease.release()
             except (BrokenPipeError, ConnectionResetError):
                 # Client hung up mid-stream; nothing more to do — but say so. Swallowing it
                 # silently left no server-side record at all, which made a stalled client
@@ -2690,6 +4122,7 @@ def make_handler(engine: Engine, api_key: str | None):
 
         # -- payloads --
         def _models_payload(self) -> dict:
+            engine = self._request_engine()
             return {
                 "object": "list",
                 "data": [{
@@ -2706,6 +4139,7 @@ def make_handler(engine: Engine, api_key: str | None):
             }
 
         def _chat(self, req: dict):
+            engine = self._request_engine()
             messages = req.get("messages")
             if not isinstance(messages, list) or not messages:
                 return self._send_error(400, "'messages' must be a non-empty list")
@@ -2735,6 +4169,7 @@ def make_handler(engine: Engine, api_key: str | None):
             self._run(req, prompt_ids, chat=True)
 
         def _completions(self, req: dict):
+            engine = self._request_engine()
             prompt = req.get("prompt")
             if isinstance(prompt, list):  # OpenAI allows a batch; we take the first
                 prompt = prompt[0] if prompt else ""
@@ -2746,6 +4181,7 @@ def make_handler(engine: Engine, api_key: str | None):
         # -- Anthropic Messages API (the dialect Claude Code speaks) --
         def _encode_anthropic(self, req: dict) -> list[int]:
             """Prompt ids for an Anthropic request. Raises ValueError for a bad body."""
+            engine = self._request_engine()
             messages = req.get("messages")
             if not isinstance(messages, list) or not messages:
                 raise ValueError("'messages': must be a non-empty array")
@@ -2786,6 +4222,7 @@ def make_handler(engine: Engine, api_key: str | None):
                     400, A.error_body(f"could not apply chat template: {e}"))
 
         def _messages(self, req: dict):
+            engine = self._request_engine()
             prompt_ids, err = self._anthropic_prompt(req)
             if prompt_ids is None:
                 return err
@@ -2823,6 +4260,7 @@ def make_handler(engine: Engine, api_key: str | None):
             """Whether the chat template left a ``<think>`` open at the end of the prompt, so
             the stream starts *inside* a thinking block (see anthropic_api). Decoding the last
             few ids is enough and costs nothing."""
+            engine = self._request_engine()
             try:
                 return A.prompt_opens_thinking(engine.tokenizer.decode(prompt_ids[-8:]))
             except Exception:  # noqa: BLE001 — a tokenizer that can't decode just opts out
@@ -2833,11 +4271,13 @@ def make_handler(engine: Engine, api_key: str | None):
             streaming path so the muse choice is made in one place: muse tags its channels with
             recipient headers (``to=self`` analysis, ``to=user`` answer); everything else uses
             ``<think>``-style pairs, self-opened or prefilled by the chat template."""
+            engine = self._request_engine()
             if engine.is_muse:
                 return A.MuseChannelParser()
             return A.ThinkingStreamSplitter(in_thinking=self._prompt_opens_thinking(prompt_ids))
 
         def _messages_stream(self, prompt_ids, params, model, want_thinking=True, schemas=None):
+            engine = self._request_engine()
             stream = A.MessageStream(model=model, input_tokens=len(prompt_ids),
                                      thinking=want_thinking, schemas=schemas,
                                      in_thinking=self._prompt_opens_thinking(prompt_ids),
@@ -2897,6 +4337,7 @@ def make_handler(engine: Engine, api_key: str | None):
 
         # -- OpenAI Responses API (the dialect Codex speaks once wire_api = "responses") --
         def _responses(self, req: dict):
+            engine = self._request_engine()
             input_ = req.get("input")
             if input_ is None:
                 return self._send_json(400, R.error_body("'input' is required"))
@@ -2954,6 +4395,7 @@ def make_handler(engine: Engine, api_key: str | None):
 
         def _responses_stream(self, prompt_ids, params, model, input_tokens, tools,
                               resp_id, created):
+            engine = self._request_engine()
             stream = R.ResponseStream(model=model, input_tokens=input_tokens, resp_id=resp_id,
                                       created=created)
             self._sse_start()
@@ -3022,6 +4464,7 @@ def make_handler(engine: Engine, api_key: str | None):
                 self._sse(payload, name)
 
         def _run(self, req: dict, prompt_ids: list[int], *, chat: bool):
+            engine = self._request_engine()
             # request value > model's generation_config recommendation > library default —
             # explicit client settings always win; the model defaults only fill absences.
             temperature, top_p, top_k = _sampling(req, engine.sampling_defaults)
@@ -3112,6 +4555,7 @@ def make_handler(engine: Engine, api_key: str | None):
             self._send_json(200, obj)
 
         def _run_stream(self, prompt_ids, params, model, cid, created, chat, req, want_tools):
+            engine = self._request_engine()
             self._sse_start()
             obj_type = "chat.completion.chunk" if chat else "text_completion"
 
@@ -3191,6 +4635,7 @@ def make_handler(engine: Engine, api_key: str | None):
             """One streaming generation: returns ``(GenResult, finish_reason)``. ``alive``
             raises StopStreaming once the keep-alive thread has seen the socket die
             (``gone`` is the same signal as a checkable flag)."""
+            engine = self._request_engine()
             if want_tools:
                 # Stream reasoning AND pre-tool-call answer text live; buffer only from the
                 # first native tool-call marker on (the _ToolGate composition the Anthropic
@@ -3279,50 +4724,103 @@ def make_handler(engine: Engine, api_key: str | None):
 # --------------------------------------------------------------------------- entrypoint
 
 
+def _server_banner_snapshot(engine):
+    """Capture detached display values for the startup banner."""
+    lease = None
+    concrete = engine
+    if isinstance(engine, EngineHolder):
+        lease = engine.acquire_read()
+        concrete = lease.engine if lease is not None else None
+    try:
+        if concrete is None:
+            return {
+                "loaded": False,
+                "mode": None,
+                "model_id": None,
+                "target_repo": None,
+                "drafter_repo": None,
+                "prefix_enabled": False,
+                "prefix_has_l2": False,
+                "memory_guard_enabled": False,
+                "small_m": False,
+                "sdpa_split": False,
+                "cpu_split": None,
+                "batching": False,
+                "max_batch": None,
+                "max_draft": None,
+                "sampling_defaults": {},
+            }
+
+        prefix = concrete.prefix
+        cpu_split = concrete.cpu_split
+        if cpu_split is not None:
+            cpu_split = {"min_rows": cpu_split["min_rows"],
+                         "fracs": dict(cpu_split["fracs"])}
+        cap_controller = concrete.cap_controller
+        return {
+            "loaded": True,
+            "mode": concrete.mode,
+            "model_id": concrete.model_id,
+            "target_repo": concrete.target_repo,
+            "drafter_repo": concrete.drafter_repo,
+            "prefix_enabled": prefix is not None,
+            "prefix_has_l2": bool(prefix is not None and prefix.l2_dir),
+            "memory_guard_enabled": getattr(concrete, "memory_guard", None) is not None,
+            "small_m": getattr(concrete, "small_m", False),
+            "sdpa_split": getattr(concrete, "sdpa_split", False),
+            "cpu_split": cpu_split,
+            "batching": isinstance(concrete, BatchEngine),
+            "max_batch": (concrete.max_batch if isinstance(concrete, BatchEngine) else None),
+            "max_draft": (cap_controller.cap if cap_controller is not None else None),
+            "sampling_defaults": dict(concrete.sampling_defaults or {}),
+        }
+    finally:
+        if lease is not None:
+            lease.release()
+
+
 def run_server(engine, *, host: str = "127.0.0.1", port: int = 8080,
-               api_key: str | None = None) -> None:
+               api_key: str | None = None, pause: BatteryPause | None = None) -> None:
     # ``engine`` may be an Engine, a BatchEngine, or an EngineHolder (hot-swap). All three
     # delegate the attributes the banner and handler read, so this is uniform.
-    handler = make_handler(engine, api_key)
+    handler = make_handler(engine, api_key, pause=pause)
     httpd = ThreadingHTTPServer((host, port), handler)
     httpd.daemon_threads = True
     base = f"http://{host}:{port}"
-    # A --no-model start hands over a model-less EngineHolder; the banner can't dereference
-    # engine attributes then (the holder raises a clear "no model" through __getattr__).
-    loaded = not isinstance(engine, EngineHolder) or engine.ready
+    banner = _server_banner_snapshot(engine)
+    loaded = banner["loaded"]
     print("=" * 64)
     if loaded:
-        print(f"  mlx-dspark server  ·  mode={engine.mode}  ·  model={engine.model_id}")
-        print(f"  target : {engine.target_repo}")
-        if engine.drafter_repo:
-            print(f"  drafter: {engine.drafter_repo}")
-        if engine.prefix is not None:
-            print(f"  prefix cache: on{'  (+SSD spill)' if engine.prefix.l2_dir else ''}")
+        print(f"  mlx-dspark server  ·  mode={banner['mode']}  ·  model={banner['model_id']}")
+        print(f"  target : {banner['target_repo']}")
+        if banner["drafter_repo"]:
+            print(f"  drafter: {banner['drafter_repo']}")
+        if banner["prefix_enabled"]:
+            print(f"  prefix cache: on{'  (+SSD spill)' if banner['prefix_has_l2'] else ''}")
         else:
             print("  prefix cache: off (not reusable for this mode/target)")
-        guard = getattr(engine, "memory_guard", None)
-        print(f"  memory guard: {'on (sheds caches under macOS memory pressure)' if guard else 'off'}")
+        print(f"  memory guard: {'on (sheds caches under macOS memory pressure)' if banner['memory_guard_enabled'] else 'off'}")
         # Stated up front so a serve session's kernel arm is on record (benchmark prints
         # the same); forced off via --no-small-m, per-swap via /admin/load {"small_m": ...}.
         print(f"  small-M verify kernel: "
-              f"{'on (probe-verified shapes)' if getattr(engine, 'small_m', False) else 'off'}")
+              f"{'on (probe-verified shapes)' if banner['small_m'] else 'off'}")
         print(f"  sdpa split (long-ctx verify): "
-              f"{'on (cliff measured)' if getattr(engine, 'sdpa_split', False) else 'off'}")
-        split = getattr(engine, "cpu_split", None)
+              f"{'on (cliff measured)' if banner['sdpa_split'] else 'off'}")
+        split = banner["cpu_split"]
         print("  prefill CPU co-prefill: " + (
             f"on from M={split['min_rows']} (CPU row fraction "
             + ", ".join(f"{k}:{v:.2f}" for k, v in sorted(split["fracs"].items(),
                                                           key=lambda kv: int(kv[0])))
             + ")" if split else "off"))
-        if isinstance(engine, BatchEngine):
-            print(f"  batching: micro-batch up to {engine.max_batch} concurrent "
-                  f"({engine.mode}; serial fallback for temp>0 dspark / lone requests)")
-        if engine.cap_controller is not None:
+        if banner["batching"]:
+            print(f"  batching: micro-batch up to {banner['max_batch']} concurrent "
+                 f"({banner['mode']}; serial fallback for temp>0 dspark / lone requests)")
+        if banner["max_draft"] is not None:
             print(f"  max-draft: auto (calibrated for this machine; starting cap "
-                  f"{engine.cap_controller.cap})")
-        if engine.sampling_defaults:
+                  f"{banner['max_draft']})")
+        if banner["sampling_defaults"]:
             print(f"  sampling defaults (model generation_config; requests override): "
-                  f"{engine.sampling_defaults}")
+                  f"{banner['sampling_defaults']}")
     else:
         print("  mlx-dspark server  ·  no model loaded")
         print(f"  load one:  curl {base}/admin/load -d '{{\"model\":\"<repo>\"}}'")
@@ -3330,10 +4828,14 @@ def run_server(engine, *, host: str = "127.0.0.1", port: int = 8080,
     print(f"  claude code : ANTHROPIC_BASE_URL={base}   (or run `mlx-dspark claude`)")
     if api_key:
         print("  auth   : Bearer <api-key> required")
+    if pause is not None:
+        src = pause.health()["source"]
+        print(f"  pause-on-battery: on   (power: {src or 'unknown'}) — switching to "
+              f"battery pauses inference and unloads the model until AC returns")
     print("=" * 64)
     if loaded:
         print(f"  curl {base}/v1/chat/completions -H 'Content-Type: application/json' \\")
-        print(f"    -d '{{\"model\":\"{engine.model_id}\",\"messages\":"
+        print(f"    -d '{{\"model\":\"{banner['model_id']}\",\"messages\":"
               "[{\"role\":\"user\",\"content\":\"Hi\"}],\"stream\":true}'")
         print("=" * 64, flush=True)
     else:

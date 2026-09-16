@@ -193,8 +193,57 @@ class TestLMStudioResolve:
 
         root, _ = self._lmstudio(tmp_path, mlx=False)
         monkeypatch.setattr(load, "LMSTUDIO_ROOTS", (root,))
-        monkeypatch.setattr(load, "snapshot_download", lambda repo: "HUB", raising=False)
+        monkeypatch.setattr(load, "snapshot_download", lambda repo, **kwargs: "HUB", raising=False)
         assert load._resolve("lmstudio-community/Qwen3-8B-MLX-8bit") == "HUB"
+
+
+def test_complete_hf_cache_wins_without_online_resolution(monkeypatch):
+    from mlx_dspark import load
+
+    monkeypatch.setattr(load, "local_dir", lambda repo: None)
+    calls = []
+
+    def cached_only(repo, **kwargs):
+        calls.append((repo, kwargs))
+        if kwargs.get("local_files_only") is True:
+            return "/cached/snapshot"
+        pytest.fail("complete local cache must not use online snapshot_download")
+
+    monkeypatch.setattr(load, "snapshot_download", cached_only)
+    assert load._resolve("org/model") == "/cached/snapshot"
+    assert calls == [("org/model", {"local_files_only": True})]
+
+
+def test_hf_cache_miss_falls_back_to_online_download(monkeypatch):
+    from huggingface_hub.errors import LocalEntryNotFoundError
+
+    from mlx_dspark import load
+
+    monkeypatch.setattr(load, "local_dir", lambda repo: None)
+    calls = []
+
+    def download(repo, **kwargs):
+        calls.append((repo, kwargs))
+        if kwargs.get("local_files_only") is True:
+            raise LocalEntryNotFoundError("not cached")
+        return "/downloaded/snapshot"
+
+    monkeypatch.setattr(load, "snapshot_download", download)
+    assert load._resolve("org/model") == "/downloaded/snapshot"
+    assert calls == [
+        ("org/model", {"local_files_only": True}),
+        ("org/model", {}),
+    ]
+
+
+def test_explicit_local_directory_still_precedes_hf_resolution(tmp_path, monkeypatch):
+    from mlx_dspark import load
+
+    model = tmp_path / "model"
+    model.mkdir()
+    monkeypatch.setattr(load, "snapshot_download",
+                        lambda *args, **kwargs: pytest.fail("should not download"))
+    assert load._resolve(str(model)) == str(model)
 
 
 def test_resolve_mode_auto_honors_row_best_mode_dflash():

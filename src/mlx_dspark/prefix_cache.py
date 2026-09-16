@@ -69,6 +69,7 @@ import contextlib
 import glob
 import json
 import os
+from collections.abc import Mapping
 
 import mlx.core as mx
 
@@ -164,8 +165,11 @@ def _eval_tree(v, out=None):
     def walk(x):
         if isinstance(x, mx.array):
             arrs.append(x)
-        elif isinstance(x, (list, tuple)):
+        elif isinstance(x, (list, tuple, set, frozenset)):
             for y in x:
+                walk(y)
+        elif isinstance(x, Mapping):
+            for y in x.values():
                 walk(y)
     walk(v)
     if arrs:
@@ -255,9 +259,15 @@ class PrefixCache:
     def __init__(self, make_cache, make_ctx=None, *, min_reuse: int = 16,
                  l2_dir: str | None = None, max_ram_bytes: int = 0, slots: int = 2,
                  checkpoint: bool = False, max_rungs: int = 8, warn_keep_rungs: int = 2,
-                 min_slot_tokens: int = 1024):
+                 min_slot_tokens: int = 1024, compatibility=None,
+                 compatibility_known: bool = True):
         self.make_cache = make_cache          # () -> list[target layer cache]
         self.make_ctx = make_ctx              # () -> list[CtxCache] | None (None for baseline)
+        # The factories are model-bound callables.  Keep their compatibility descriptor
+        # separately from the reusable state so the latter can survive while the former
+        # is detached during a battery pause.
+        self.compatibility = compatibility
+        self.compatibility_known = bool(compatibility_known)
         self.min_reuse = max(1, min_reuse)
         self.checkpoint_mode = bool(checkpoint)   # see the module docstring; can latch on
         self.l2_dir = l2_dir
@@ -278,12 +288,77 @@ class PrefixCache:
             os.makedirs(l2_dir, exist_ok=True)
 
     # -- public API (engine calls these under its generation lock) --
+    def detach_model(self):
+        """Drop model-bound cache factories while retaining reusable prefix state.
+
+        A detached cache is intentionally unusable for generation until
+        :meth:`rebind_model` supplies factories from a newly loaded model.  In
+        particular, never leave a bound method from the suspended target/drafter in
+        this object: that would keep their weights resident.
+        """
+        # These are request-local staging values, not reusable cache state.
+        self._pending_rungs = {}
+        self._anchor = 0
+        self.make_cache = None
+        self.make_ctx = None
+        return self
+
+    def rebind_model(self, make_cache, make_ctx=None, *, compatibility=None,
+                     compatibility_known: bool | None = None) -> bool:
+        """Bind fresh model factories and report whether preserved state is compatible.
+
+        On a mismatch, the state is discarded but the new factories remain bound so the
+        caller can continue with a valid cold cache.  This deliberately does not compare
+        runtime model objects by identity.
+        """
+        known = self.compatibility_known if compatibility_known is None else bool(compatibility_known)
+        compatible = self.compatibility_known and known and self.compatibility == compatibility
+        self.make_cache = make_cache
+        self.make_ctx = make_ctx
+        if not compatible:
+            self.reset()
+        self.compatibility = compatibility
+        self.compatibility_known = known
+        return compatible
+
+    def materialize_preserved_state(self):
+        """Evaluate every MLX array retained by reusable state before model detachment.
+
+        This runs on the generation executor.  In particular, ctx projections can be lazy
+        even when their Python owners have already been detached from the model factories.
+        Request-local pending rungs are intentionally excluded: ``detach_model`` discards
+        those staging values rather than preserving an in-flight request.
+        """
+        trees = []
+        for slot in self._slots:
+            if slot.snapshot is not None:
+                trees.extend((slot.snapshot, slot.rungs))
+            else:
+                if slot.cache is not None:
+                    trees.append([(getattr(c, "state", None), getattr(c, "meta_state", None))
+                                  for c in slot.cache])
+                if slot.ctx is not None:
+                    trees.append([(getattr(c, "k", None), getattr(c, "v", None))
+                                  for c in slot.ctx])
+        if trees:
+            _eval_tree(trees)
+        return self
+
+    def discard_live_state(self):
+        """Drop RAM-owned slots without deleting another cache's shared L2 spill files."""
+        self._slots = []
+        self._pending_rungs = {}
+        self._anchor = 0
+        return self
+
     def acquire(self, prompt_ids: list[int]):
         """Return ``(cache, ctx, reuse_len)`` for this request — the best-matching slot's
         caches trimmed to the shared prefix, or fresh ones. A trim slot is checked out
         (removed) until ``store()`` re-validates it; checkpoint slots are never checked out
         (every restore is a copy). Also stages the anchor suggestion (:meth:`take_anchor`)
         and drops any rungs a failed previous generation left pending."""
+        if self.make_cache is None:
+            raise RuntimeError("PrefixCache is detached from model cache factories")
         self._pending_rungs = {}
         self._anchor = 0
         best, best_len, best_rung, best_lcp = None, 0, None, 0
@@ -407,6 +482,8 @@ class PrefixCache:
             self._evict(self._slots.pop())
 
     def store(self, cache, ctx, prompt_ids: list[int], token_ids: list[int]) -> None:
+        if self.make_cache is None:
+            raise RuntimeError("PrefixCache is detached from model cache factories")
         # the cache holds KV for the prompt + every generated token EXCEPT the last (that one is
         # the pending token, not yet fed through the target) — see the generate loops.
         if not _storable(cache):              # e.g. a RotatingKVCache wrapped mid-generation
