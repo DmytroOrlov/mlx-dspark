@@ -1,0 +1,11 @@
+{
+  "run_id": "gate-a-chad-plain-a436bb1cf2-retry1",
+  "run_dir": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/runs/gate-a-chad-plain-a436bb1cf2-retry1",
+  "files": [
+    {
+      "path": "interrupted.json",
+      "size": 3116,
+      "sha256": "2e545a995cc25ba5ee3d45dec433aed85d1dd92edaf305ebd6649aa6c785930e"
+    }
+  ]
+}

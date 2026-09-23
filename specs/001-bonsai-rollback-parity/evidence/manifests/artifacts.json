@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "canonical_root": "specs/001-bonsai-rollback-parity/evidence",
+  "self_hash_note": "The manifest excludes itself because a file cannot embed its own final SHA-256.",
+  "artifacts": [
+    {
+      "original_path": "/private/tmp/bonsai_rollback_probe.py",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/raw/bonsai_rollback_probe.original.py",
+      "sha256": "058791b39a6c6f6509ed02d75cd212baeb8554250dab3bc26267e1f28bc2425d",
+      "size": 15391,
+      "associated_task_gate_run": "T004/Gate A-E",
+      "status": "partial",
+      "purpose": "Exact pre-migration source bytes of the diagnostic boundary probe"
+    },
+    {
+      "original_path": "/private/tmp/bonsai_rollback_probe.py",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_rollback_probe.py",
+      "sha256": "dd657c9bdf27a75711fb55ae0859af5d0f5ca4782a903fbfe723da3e6a987d68",
+      "size": 15400,
+      "associated_task_gate_run": "T004/Gate A-E",
+      "status": "partial",
+      "purpose": "Project-local boundary probe with output default moved to evidence/runs"
+    },
+    {
+      "original_path": "/private/tmp/__pycache__/bonsai_rollback_probe.cpython-314.pyc",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/raw/bonsai_rollback_probe.cpython-314.pyc",
+      "sha256": "fce86817dbc9e104947fb6efcb478391388d3d0e4ced90225ed7cb80a219184b",
+      "size": 23153,
+      "associated_task_gate_run": "T004",
+      "status": "completed",
+      "purpose": "Compiled bytecode emitted during probe syntax inspection before migration"
+    },
+    {
+      "original_path": "/private/tmp/chad-bonsai-policy-trace.jsonl",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/raw/chad-bonsai-policy-trace.jsonl",
+      "sha256": "d9f11b4b5225929d3dff38a4aa4214cc1beb164784f67677da1f64b839015c9d",
+      "size": 3013,
+      "associated_task_gate_run": "T004/Chad policy diagnostic",
+      "status": "completed",
+      "purpose": "Chad policy trace for the historical LRU input"
+    },
+    {
+      "original_path": "/private/tmp/mlx-bonsai-policy-trace.jsonl",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/raw/mlx-bonsai-policy-trace.jsonl",
+      "sha256": "c196fcfa02394bb8102efa57151c59df9d7f04171f98af96f3ae2db32e213ebb",
+      "size": 3056,
+      "associated_task_gate_run": "T004/mlx-dspark policy diagnostic",
+      "status": "completed",
+      "purpose": "mlx-dspark policy trace for the historical LRU input"
+    },
+    {
+      "original_path": "/private/tmp/bonsai-rollback-observations/chad.json",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runs/chad.json",
+      "sha256": "e0a4ef35cec0cf00860f7b14ef7dac427bedaa8c65c361dbb393112239f0caa6",
+      "size": 2239400,
+      "associated_task_gate_run": "T004/Chad default fastpath run",
+      "status": "completed",
+      "purpose": "First-three-round 16-token Chad diagnostic capture"
+    },
+    {
+      "original_path": "/private/tmp/bonsai-rollback-observations/mlx-dspark-aligned.json",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runs/mlx-dspark-aligned.json",
+      "sha256": "9c975a040fdd21a829a4249e4bc3069cd72fec6bf17e09c417afdd89e9ce38d7",
+      "size": 1773304,
+      "associated_task_gate_run": "T004/mlx-dspark diagnostic alignment run",
+      "status": "completed",
+      "purpose": "Corrected first-three-round 16-token aligned capture; earlier output at same path was overwritten"
+    },
+    {
+      "original_path": "/private/tmp/bonsai-rollback-observations/kv0/chad.json",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runs/kv0/chad.json",
+      "sha256": "7c5f3659b0ae792e928f5eba7ad614da41c218ba9c2ab39bcf1728ac0e4d6184",
+      "size": 1775750,
+      "associated_task_gate_run": "T004/Chad KV0 run",
+      "status": "completed",
+      "purpose": "First-three-round Chad explicit KV0 diagnostic capture"
+    },
+    {
+      "original_path": "/private/tmp/bonsai-rollback-observations/kv8/mlx-dspark-aligned.json",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runs/kv8/mlx-dspark-aligned.json",
+      "sha256": "b5815cef57a862d6c10a973fd7bd4460602afe926d3600cca9109808a71e01d2",
+      "size": 2237739,
+      "associated_task_gate_run": "T004/mlx-dspark KV8 run",
+      "status": "completed",
+      "purpose": "First-three-round mlx-dspark explicit KV8 diagnostic capture"
+    },
+    {
+      "original_path": "/private/tmp/bonsai-rollback-observations/no-fastpath-kv0/chad.json",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runs/no-fastpath-kv0/chad.json",
+      "sha256": "0582184ca53e0d7ed3dc37449f9826e08e6f64f1df6690cd7654098faaadc618",
+      "size": 1065225,
+      "associated_task_gate_run": "T004/Chad no-fastpath KV0 run",
+      "status": "completed",
+      "purpose": "First-three-round Chad no-fastpath KV0 diagnostic capture"
+    },
+    {
+      "original_path": "/private/tmp/bonsai_reference_probe.py",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_reference_probe.py",
+      "sha256": "e79f7ea62ceeef8e5a692b4888442bf721c63bd69f2d72bb09b0899bfe5f30bb",
+      "size": 328,
+      "associated_task_gate_run": "T005/same-width S=8 reference",
+      "status": "interrupted",
+      "purpose": "Interruption marker only; temporary source file was never created and no source bytes were available"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/controls.md",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/controls.md",
+      "sha256": "919296b383fe619569f1ba82dab75cec36b65e5a79cf81d6fa4b46ac3e5d9ddd",
+      "size": 3410,
+      "associated_task_gate_run": "T001",
+      "status": "completed",
+      "purpose": "Physical input, checkpoint, tokenizer, sidecar and prompt-token controls"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/runtime-profiles.md",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/runtime-profiles.md",
+      "sha256": "f527aba6f0d371d695daf7c599c373ad9ca898391dccb976937884081009db49",
+      "size": 2106,
+      "associated_task_gate_run": "T002",
+      "status": "completed",
+      "purpose": "Runtime versions and profile evidence"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/baseline.md",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/baseline.md",
+      "sha256": "b74e2fe630c976241a5c2aab2ce8fe15429923eeb339b5218dba8be9b005358a",
+      "size": 4642,
+      "associated_task_gate_run": "T003",
+      "status": "completed",
+      "purpose": "Source provenance, hypotheses and diagnostic-mode classification"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/tasks.md",
+      "project_path": "specs/001-bonsai-rollback-parity/tasks.md",
+      "sha256": "50bed4c727a8749b2183318e20d0e739dbe22aca06c06ca43852ea3c35ecb9d1",
+      "size": 40319,
+      "associated_task_gate_run": "T001-T003/T004/T017",
+      "status": "partial",
+      "purpose": "Checklist state and project-local investigation paths"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/tests/test_bonsai.py",
+      "project_path": "tests/test_bonsai.py",
+      "sha256": "53a33dd5901033455730400d3b03e0899226e19803ad84786511941c1306711e",
+      "size": 30150,
+      "associated_task_gate_run": "T017",
+      "status": "partial",
+      "purpose": "Generic width-8 accepted=0 and accepted=1 test work"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/plan.md",
+      "project_path": "specs/001-bonsai-rollback-parity/plan.md",
+      "sha256": "4e802debe91ae5099a1df04f82f04b9ad9815d7d54348fc1f31b06fa104e1105",
+      "size": 35744,
+      "associated_task_gate_run": "T004-T007",
+      "status": "completed",
+      "purpose": "Project-local diagnostic artifact path guidance"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/quickstart.md",
+      "project_path": "specs/001-bonsai-rollback-parity/quickstart.md",
+      "sha256": "a1380160bf105a1f3231491c36626f9596550b6d4d7972c032f3ead7c6324fed",
+      "size": 12350,
+      "associated_task_gate_run": "T004-T007",
+      "status": "completed",
+      "purpose": "Project-local example probe and output paths"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/.gitignore",
+      "project_path": ".gitignore",
+      "sha256": "a7f1b8fbc57211055261c294b9949e4a5a0dec7c6cf05423e5261d92750b3e92",
+      "size": 400,
+      "associated_task_gate_run": "migration cleanup",
+      "status": "completed",
+      "purpose": "Removed only unrelated ignore additions made during this run"
+    },
+    {
+      "original_path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/migration-report.md",
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/migration-report.md",
+      "sha256": "cf30dff9a1ad29c3859e7d6ae782ccb2be23de07af52e6771d74774d7f0b3227",
+      "size": 5145,
+      "associated_task_gate_run": "migration",
+      "status": "completed",
+      "purpose": "Artifact inventory, losses, partial status and exact resume point"
+    }
+  ]
+}

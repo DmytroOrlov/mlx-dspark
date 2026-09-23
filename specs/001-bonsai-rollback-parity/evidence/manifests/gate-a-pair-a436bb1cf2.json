@@ -1,0 +1,16 @@
+{
+  "label": "MATCHED-LIFECYCLE DIAGNOSTIC Gate-A control",
+  "status": "stopped_at_gate_a",
+  "artifacts": [
+    {
+      "path": "specs/001-bonsai-rollback-parity/evidence/runs/gate-a-pair-a436bb1cf2/diagnostic-result.json",
+      "sha256": "80746ce6b5d30dbd38455d913a9827a32193d040c0cf8ac42df309b05adafc63",
+      "size_bytes": 2226,
+      "purpose": "Post-run matched-lifecycle Gate-A diagnostic classification and stop condition"
+    }
+  ],
+  "source_run_manifests": [
+    "gate-a-chad-plain-a436bb1cf2-retry2.json",
+    "gate-a-mlx-plain-a436bb1cf2.json"
+  ]
+}

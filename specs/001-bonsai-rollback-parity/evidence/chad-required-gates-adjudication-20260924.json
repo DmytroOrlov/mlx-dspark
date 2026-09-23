@@ -1,0 +1,86 @@
+{
+  "runtime": "chad",
+  "run_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7",
+  "classification": "required_gate_physical_adjudication",
+  "overall": "PASS",
+  "b2": {
+    "result": "PASS",
+    "root_state_id": "957996d065dffea75684c18307619d6e161e0e572d5d414b2b3832b7b8e20b33",
+    "logical_position": 0,
+    "verify_ids": [
+      271,
+      71093,
+      12305,
+      198,
+      21924,
+      54572,
+      198,
+      1445
+    ],
+    "control_component_count": 754,
+    "stable_component_count": 754,
+    "nonzero_control_bounds": 0
+  },
+  "branches": [
+    {
+      "accepted_count": 0,
+      "keep": 1,
+      "branch_kind": "isolated_forced",
+      "c": {
+        "result": "PASS",
+        "exact_cache_state_equal": true,
+        "exact_accepted_fused_equal": true
+      },
+      "d": {
+        "result": "PASS",
+        "control_status": "STABLE",
+        "controlled_component_count": 130,
+        "top2_ids_repeatable": true,
+        "margin_repeatable": true,
+        "resulting_structure_exact": true,
+        "max_production_oracle_numeric_distance": 0.0
+      },
+      "e": {
+        "result": "PASS",
+        "source_proposal_exact": true,
+        "independent_source_proposal_exact": true,
+        "proposal_ids_equal": true,
+        "drafter_structure_equal": true,
+        "controls_exact_stable": true,
+        "controlled_numeric_component_count": 12,
+        "max_production_reference_numeric_distance": 0.0
+      }
+    },
+    {
+      "accepted_count": 1,
+      "keep": 2,
+      "branch_kind": "isolated_forced",
+      "c": {
+        "result": "PASS",
+        "exact_cache_state_equal": true,
+        "exact_accepted_fused_equal": true
+      },
+      "d": {
+        "result": "PASS",
+        "control_status": "STABLE",
+        "controlled_component_count": 130,
+        "top2_ids_repeatable": true,
+        "margin_repeatable": true,
+        "resulting_structure_exact": true,
+        "max_production_oracle_numeric_distance": 0.0
+      },
+      "e": {
+        "result": "PASS",
+        "source_proposal_exact": true,
+        "independent_source_proposal_exact": true,
+        "proposal_ids_equal": true,
+        "drafter_structure_equal": true,
+        "controls_exact_stable": true,
+        "controlled_numeric_component_count": 12,
+        "max_production_reference_numeric_distance": 0.0
+      }
+    }
+  ],
+  "production_patch_authorized": false,
+  "overall_investigation_status": "OPEN_PENDING_MLX_REQUIRED_GATE_ACQUISITION"
+}

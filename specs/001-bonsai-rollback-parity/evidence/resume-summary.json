@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-23",
+  "scope": "offline preparation only; no model/generation/benchmark/test/runtime edit/Git state mutation",
+  "target": {
+    "id": "nathansutton/Qwen3.8-27B-Ternary-Bonsai-2-DFlash2-MLX",
+    "snapshot": "234cc925d77cd94683e47b1493bd964917aaf43b",
+    "config_sha256": "20a7ccac3e519b5b5d7c4eaa6451352dd4188da44b4385ffa6cf87a4f2b8a94a",
+    "weights_sha256": "68541bf9c72747df90764338fa966105b34d94e4e8751dd5d3403d732eedddcf"
+  },
+  "sidecar": {
+    "path": "/Users/do/.cache/chad/dflash/015e795645c74b1a0eeef3b570031fb62e769bc5-q4g64",
+    "config_sha256": "6fd15051e629eba87121298bce299f92f1ef99c14e01e144825bbf0aaeaca86f",
+    "weights_sha256": "876c368b5abfdd5de52ab14fcd5d3cccb07f0059f3903c984e4f17dbcee8a552",
+    "modules": {"b4g64": 47, "b8g64": 2},
+    "block_size": 8,
+    "draft_width": 7,
+    "tap_ids": [5, 19, 33, 47, 61]
+  },
+  "tokenizer": {
+    "tokenizer_json_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config_sha256": "95c557768e6b88a7128befc7bfd3c7de50e5d51af9b8b33a9f4dee0e04f99679",
+    "regenerated_prompt_prefix_ids": [248045, 846, 198, 7734, 264, 5492, 21408, 12654, 436, 34810, 6297, 440, 6813, 321, 913, 29642, 13, 248046, 198, 248045, 74455, 198, 248068, 271, 248069, 271],
+    "prefix_token_count": 26,
+    "template": {"add_generation_prompt": true, "enable_thinking": false},
+    "sampling": {"mode": "greedy", "temperature": 0}
+  },
+  "saved_runs": [
+    {"path": "runs/chad.json", "runtime": "chad", "fastpath": true, "CHAD_NO_FASTPATH": null, "kv_bits": null, "target_kv": "QuantizedKVCache; exact bit count not serialized", "align_prefill": false, "accepted_R1_R2_R3": [0, 1, 1], "R3_draft": [10417, 12654, 29806, 18887, 29806, 271, 550]},
+    {"path": "runs/mlx-dspark-aligned.json", "runtime": "mlx-dspark", "kv_bits": null, "target_kv": "KVCache/plain", "align_prefill": true, "accepted_R1_R2_R3": [0, 1, 1], "R3_draft": [10417]},
+    {"path": "runs/kv0/chad.json", "runtime": "chad", "fastpath": true, "kv_bits": 0, "target_kv": "KVCache/plain", "align_prefill": false, "accepted_R1_R2_R3": [0, 1, 1], "R3_draft": [10417]},
+    {"path": "runs/kv8/mlx-dspark-aligned.json", "runtime": "mlx-dspark", "kv_bits": 8, "target_kv": "QuantizedKVCache", "align_prefill": true, "accepted_R1_R2_R3": [0, 1, 1], "R3_draft": [10417, 12654, 29806, 18887, 29806, 271, 550]},
+    {"path": "runs/no-fastpath-kv0/chad.json", "runtime": "chad", "fastpath": false, "CHAD_NO_FASTPATH": "1", "kv_bits": 0, "target_kv": "KVCache/plain", "align_prefill": false, "accepted_R1_R2_R3": [0, 1, 1], "R3_draft": [10417]}
+  ],
+  "verified_findings": [
+    "Saved policy traces match seed cost sequence [1.0,1.63,2.15,2.52,2.48,2.5,2.5,2.53]; R1 width 7/accepted 0; R2 width 7/accepted 1.",
+    "At R3 decision Chad trace margin is 0.25 and chosen width 7; mlx-dspark margin is 0.125 and chosen width 1.",
+    "Default Chad-versus-aligned mlx comparison is uncontrolled for KV: Chad cache is quantized and mlx cache plain; default Chad exact bit count was not serialized.",
+    "Chad kv0 and mlx kv8 records are a mixed precision/runtime comparison; no causal conclusion follows.",
+    "Normal Chad fastpath and fresh no-fastpath state were actually observed true and false respectively."
+  ],
+  "unresolved_controls": [
+    "Same-runtime independent S=8 verify reference with identical verify_ids and equivalent pre-verify state.",
+    "Fresh S=1 and accepted-prefix S=2 references and exact five-run component/tap bounds.",
+    "Matched precision controlled continuous Gate A capture and complete semantic/logical cache positions.",
+    "Exact default Chad quantized KV bit count; not present in saved run JSON.",
+    "Gate A-E outcomes, full immutable cache/tap observations, and causal localization."
+  ],
+  "t004_missing_fields": {
+    "ControlledRun": ["reference kind", "mlx_lm source hashes", "GDN callable identity/signature and complete call path", "complete sidecar config fingerprint", "fastpath install/branch identity", "true prefix state identity", "context row/absolute positions"],
+    "ProposalInputRecord": ["input-state equivalence classification", "context row count and absolute positions", "immutable ordering/assertion of pre-accept fields", "Gate A classification"],
+    "BoundarySnapshot": ["typed immutable complete snapshot", "full live KV ranges/lengths/absolute positions", "trimmable and semantic cache mapping", "named conv pre-window/result and recurrent mapping", "Chad GDN mask", "complete tap/accepted-row logical positions", "numeric-control samples/bounds"],
+    "GateResult": ["gate-specific evaluated findings and evidence IDs", "exact/numeric rules and bound rationale", "specific missing control and routing decision", "causal stop/allowed-next-layer classification"]
+  },
+  "probe_risks": ["Output name is only runtime plus optional aligned suffix; repeated same variant overwrites prior bytes.", "Corrected mlx-dspark-aligned capture already overwrote its earlier bytes."],
+  "t005_implementation_steps": [
+    "Create speculative and reference target branches from equivalent exact pre-verify logical prefix with independently allocated fresh caches.",
+    "Record matching semantic cache structure, logical lengths/offsets/absolute positions, recurrent/conv state, taps, and branch identity before verify.",
+    "Freeze anchor and seven drafts; assert exact verify_ids equals [anchor] plus the seven drafts; feed same eight IDs at S=8 to both branches.",
+    "Capture all verify logits/top-2/margins, fused tap rows, GDN inputs/flags and conv state, live KV and cache state before reconciliation; materialize immutable copies.",
+    "Never reconcile or reuse the reference cache; never derive reference from suspect reconciled state; prove mutable model/capture state is branch-local.",
+    "Reuse hash/array/cache/logit/GDN helpers only after extending them for full required live state and immutable branch-specific snapshots.",
+    "Keep Chad Engine/fastpath/GDN collector path separate from mlx-dspark load_target/verify/stash/rollback path; record runtime-specific dispatch and cache semantics."
+  ],
+  "minimum_next_runs": [
+    {"purpose": "Fresh continuous Gate A R1/R2/pre-R3 capture with explicit plain KV", "runtime": "chad", "kv_bits": 0, "fastpath": true, "align_prefill": false, "output": "evidence/runs/gate-a-continuous/chad-kv0-fastpath.json", "gate": "Matched-precision A and fresh continuous policy/margin/proposal inputs."},
+    {"purpose": "Matched fresh continuous Gate A capture", "runtime": "mlx-dspark", "kv_bits": 0, "fastpath": null, "align_prefill": true, "output": "evidence/runs/gate-a-continuous/mlx-kv0-aligned.json", "gate": "A equivalence and continuous trace under matched KV precision."},
+    {"purpose": "Same-runtime independent S=8 reference for exact verify IDs; capture alongside above branches if feasible", "runtime": "each separately", "kv_bits": 0, "fastpath": "same as runtime run", "align_prefill": "same as runtime run", "output": "evidence/runs/b2-reference/ unique runtime-specific files", "gate": "B1/B2 and S=8 tap/fused-row oracle for C."},
+    {"purpose": "After A/B1/B2, fresh S=1 and S=2 semantic paths and five predeclared controls per component/tap/row/metric", "runtime": "each separately", "kv_bits": 0, "fastpath": "same as runtime run", "align_prefill": "same as runtime run", "output": "evidence/runs/controls/{chad,mlx-dspark}/ unique files", "gate": "T006/T007/T011 and Gate C bounds."}
+  ],
+  "do_not_repeat": [
+    "Do not repeat standalone policy-trace-only R1/R2/pre-R3: both traces preserve the key observation.",
+    "Do not repeat one-off kv0 Chad, kv8 mlx-dspark, or no-fastpath kv0 Chad sensitivity captures.",
+    "Do not treat fixed7 rates/forward counts or historical margins as correctness proof or expected fresh results.",
+    "Do not treat historical cross-runtime numeric differences as causal or the previous aligned capture as a controlled KV match.",
+    "Do not revive disconfirmed grouped-convolution dtype, old CapController nesting, raw/converted generic sidecar, one-behind production/throughput, or threshold/prior/cost tuning hypotheses without direct new evidence."
+  ],
+  "known_losses": [
+    "Process-only loaded weights, lazy MLX graphs and full logits/tap/KV/recurrent/convolution arrays were lost; only selected hashes/shapes/samples remain.",
+    "Earlier bytes at /private/tmp/bonsai-rollback-observations/mlx-dspark-aligned.json were overwritten by corrected alignment run.",
+    "Temporary bonsai_reference_probe.py was never created; project copy is only an interruption marker with no recoverable implementation source."
+  ],
+  "resume_task": {
+    "first_unfinished": "T004",
+    "ordered_actions": ["Complete rollback probe schema and collision-safe output handling offline.", "Implement independent same-runtime same-width S=8 reference (T005) offline.", "Implement T006 S=1/S=2 paths then T007 five-run controls.", "First model load: fresh controlled Gate A continuous trace in both runtimes with explicit kv_bits=0 and independent S=8 branches where feasible.", "Proceed T008, T009, T010, T011, T012, T014, T015, T016 in dependency order; B3 optional."],
+    "first_model_load_after_offline_work": true,
+    "T004_complete": false,
+    "T005_complete": false
+  }
+}

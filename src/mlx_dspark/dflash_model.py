@@ -278,11 +278,23 @@ class CandidateSelector(nn.Module):
     bilinear + fp32 unary).
     """
 
-    def __init__(self, hidden_size: int, vocab_size: int, rank: int, top_k: int):
+    def __init__(
+        self,
+        hidden_size: int,
+        vocab_size: int,
+        rank: int,
+        top_k: int,
+        *,
+        codebook_embeddings: bool = False,
+    ):
         super().__init__()
         self.top_k = top_k
-        self.predecessor_codebook = mx.zeros((vocab_size, rank))
-        self.successor_codebook = mx.zeros((vocab_size, rank))
+        if codebook_embeddings:
+            self.predecessor_codebook = nn.Embedding(vocab_size, rank)
+            self.successor_codebook = nn.Embedding(vocab_size, rank)
+        else:
+            self.predecessor_codebook = mx.zeros((vocab_size, rank))
+            self.successor_codebook = mx.zeros((vocab_size, rank))
         self.hidden_projection = nn.Linear(hidden_size, rank, bias=False)
 
     def lattice(self, candidate_ids, unary_logits, hidden, anchor_id: int):
@@ -291,8 +303,17 @@ class CandidateSelector(nn.Module):
         h = self.hidden_projection(hidden)                                    # [g, r]
         anchor = mx.full((1, k), anchor_id, dtype=candidate_ids.dtype)
         pred_ids = mx.concatenate([anchor, candidate_ids[:-1]], axis=0)       # [g, K]
-        pre = self.predecessor_codebook[pred_ids] * h[:, None, :]             # [g, K, r]
-        suc = self.successor_codebook[candidate_ids]                          # [g, K, r]
+        # Raw upstream checkpoints keep codebooks as mx.array and use indexing.
+        # Chad sidecars quantize them, turning nn.Embedding into
+        # nn.QuantizedEmbedding. Both Embedding variants are nn.Module and must
+        # be CALLED; indexing a QuantizedEmbedding routes through Module.__getitem__
+        # and fails with KeyError.
+        if isinstance(self.predecessor_codebook, nn.Module):
+            pre = self.predecessor_codebook(pred_ids) * h[:, None, :]         # [g, K, r]
+            suc = self.successor_codebook(candidate_ids)                      # [g, K, r]
+        else:
+            pre = self.predecessor_codebook[pred_ids] * h[:, None, :]         # [g, K, r]
+            suc = self.successor_codebook[candidate_ids]                      # [g, K, r]
         bilinear = pre @ suc.transpose(0, 2, 1)                               # [g, Kpred, Kcand]
         return unary_logits[:, None, :].astype(mx.float32) + bilinear.astype(mx.float32)
 
@@ -358,7 +379,7 @@ class DFlashDecoderLayer(nn.Module):
 
 
 class DFlashDraftModel(nn.Module):
-    def __init__(self, config: DFlashConfig):
+    def __init__(self, config: DFlashConfig, *, selector_codebook_embeddings: bool = False):
         super().__init__()
         self.config = config
         if not self.config.layer_types:
@@ -372,8 +393,13 @@ class DFlashDraftModel(nn.Module):
             config.head_dim, config.rope_theta, config.max_position_embeddings, config.rope_scaling
         )
         self.candidate_selector = (
-            CandidateSelector(config.hidden_size, config.vocab_size,
-                              config.selector_rank, config.selector_top_k)
+            CandidateSelector(
+                config.hidden_size,
+                config.vocab_size,
+                config.selector_rank,
+                config.selector_top_k,
+                codebook_embeddings=selector_codebook_embeddings,
+            )
             if config.selector_rank else None
         )
         self.embed_tokens = None

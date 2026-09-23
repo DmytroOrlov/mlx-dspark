@@ -1,0 +1,493 @@
+{
+  "schema": "bonsai-t016-correctness-closure/v1",
+  "date": "2026-09-24",
+  "phase": "correctness",
+  "status": "CLOSED",
+  "t016": {
+    "outcome": "RESOLVED_NO_CHANGE",
+    "production_patch_authorized": false,
+    "reason": "Both Chad and mlx-dspark pass the same physical isolated B2/C/D/E contracts for accepted_count=0/keep=1 and accepted_count=1/keep=2. No target rollback, next-target-state, or drafter/context defect is supported by the controlled evidence."
+  },
+  "cross_runtime": {
+    "canonical_output_first16_equal": true,
+    "canonical_output_first16": [
+      2,
+      23288,
+      27325,
+      10417,
+      436,
+      34810,
+      18887,
+      303,
+      12654,
+      271,
+      36948,
+      369,
+      264,
+      4434,
+      11,
+      5492
+    ],
+    "note": "Natural acceptance histories may differ between runtimes. The isolated forced branches establish that both runtimes correctly handle the same keep=1 and keep=2 state transitions."
+  },
+  "runtimes": {
+    "chad": {
+      "runtime": "chad",
+      "run_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7",
+      "run_json": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/runs/required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7/run.json",
+      "run_json_sha256": "13908e890c559d3a9e9dcac68f91d6581f95b0ad86bda6b9641309c0f6052189",
+      "output_ids_first16": [
+        2,
+        23288,
+        27325,
+        10417,
+        436,
+        34810,
+        18887,
+        303,
+        12654,
+        271,
+        36948,
+        369,
+        264,
+        4434,
+        11,
+        5492
+      ],
+      "natural_rounds": [
+        {
+          "round_index": 1,
+          "generated_before": 0,
+          "accepted_count": 0,
+          "draft_width": 7,
+          "verify_ids": [
+            271,
+            71093,
+            12305,
+            198,
+            21924,
+            54572,
+            198,
+            1445
+          ]
+        },
+        {
+          "round_index": 2,
+          "generated_before": 1,
+          "accepted_count": 1,
+          "draft_width": 7,
+          "verify_ids": [
+            2,
+            23288,
+            21408,
+            6297,
+            7873,
+            303,
+            12654,
+            29806
+          ]
+        },
+        {
+          "round_index": 3,
+          "generated_before": 3,
+          "accepted_count": 1,
+          "draft_width": 1,
+          "verify_ids": [
+            27325,
+            10417
+          ]
+        }
+      ],
+      "b2": {
+        "result": "PASS",
+        "root_state_id": "957996d065dffea75684c18307619d6e161e0e572d5d414b2b3832b7b8e20b33",
+        "root_observation_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7:chad:r1:s8_frozen:frozen_pre_verify",
+        "logical_position": 0,
+        "verify_ids": [
+          271,
+          71093,
+          12305,
+          198,
+          21924,
+          54572,
+          198,
+          1445
+        ],
+        "control_set_id": "fa9a0a305c7429c5df8a97b42e613d5acdf70b37f36665e76c44c81a41c8353e",
+        "controlled_component_count": 754,
+        "stable_component_count": 754,
+        "nonzero_bound_count": 0
+      },
+      "branches": [
+        {
+          "accepted_count": 0,
+          "keep": 1,
+          "c": {
+            "result": "PASS",
+            "checks": {
+              "accepted_prefix_exact": true,
+              "exact_cache_state_equal": true,
+              "exact_structure_equal": true,
+              "exact_accepted_fused_equal": true
+            }
+          },
+          "d": {
+            "result": "PASS",
+            "checks": {
+              "numeric_status_pass": true,
+              "resulting_structure_exact": true,
+              "top2_ids_exact": true,
+              "control_status_stable": true,
+              "top2_ids_repeatable": true,
+              "margin_repeatable": true
+            },
+            "controlled_component_count": 130,
+            "max_production_oracle_numeric_distance": 0.0,
+            "s1_reference_pointer": {
+              "cache_state_id": "957996d065dffea75684c18307619d6e161e0e572d5d414b2b3832b7b8e20b33",
+              "keep": 1,
+              "observation_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7:chad:r1:s1_keep1_reference:pre_verify"
+            }
+          },
+          "e": {
+            "result": "PASS",
+            "checks": {
+              "source_proposal_exact": true,
+              "independent_source_proposal_exact": true,
+              "equivalent_logical_proposal_point": true,
+              "numeric_status_pass": true,
+              "proposal_ids_equal": true,
+              "drafter_structure_equal": true,
+              "controls_exact_stable": true
+            },
+            "controlled_numeric_component_count": 12,
+            "max_production_reference_numeric_distance": 0.0,
+            "production_next_proposal_ids": [
+              23288,
+              21408,
+              6297,
+              7873,
+              303,
+              12654,
+              29806
+            ],
+            "independent_next_proposal_ids": [
+              23288,
+              21408,
+              6297,
+              7873,
+              303,
+              12654,
+              29806
+            ]
+          }
+        },
+        {
+          "accepted_count": 1,
+          "keep": 2,
+          "c": {
+            "result": "PASS",
+            "checks": {
+              "accepted_prefix_exact": true,
+              "exact_cache_state_equal": true,
+              "exact_structure_equal": true,
+              "exact_accepted_fused_equal": true
+            }
+          },
+          "d": {
+            "result": "PASS",
+            "checks": {
+              "numeric_status_pass": true,
+              "resulting_structure_exact": true,
+              "top2_ids_exact": true,
+              "control_status_stable": true,
+              "top2_ids_repeatable": true,
+              "margin_repeatable": true
+            },
+            "controlled_component_count": 130,
+            "max_production_oracle_numeric_distance": 0.0,
+            "s1_reference_pointer": {
+              "cache_state_id": "957996d065dffea75684c18307619d6e161e0e572d5d414b2b3832b7b8e20b33",
+              "keep": 2,
+              "observation_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7:chad:r1:s1_keep2_reference:pre_verify"
+            }
+          },
+          "e": {
+            "result": "PASS",
+            "checks": {
+              "source_proposal_exact": true,
+              "independent_source_proposal_exact": true,
+              "equivalent_logical_proposal_point": true,
+              "numeric_status_pass": true,
+              "proposal_ids_equal": true,
+              "drafter_structure_equal": true,
+              "controls_exact_stable": true
+            },
+            "controlled_numeric_component_count": 12,
+            "max_production_reference_numeric_distance": 0.0,
+            "production_next_proposal_ids": [
+              198,
+              12237,
+              198,
+              20409,
+              548,
+              364,
+              29174
+            ],
+            "independent_next_proposal_ids": [
+              198,
+              12237,
+              198,
+              20409,
+              548,
+              364,
+              29174
+            ]
+          }
+        }
+      ],
+      "gate_results": {
+        "B2": "PASS",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "PASS"
+      }
+    },
+    "mlx-dspark": {
+      "runtime": "mlx-dspark",
+      "run_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0",
+      "run_json": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/runs/required-gates-mlx-prod-kv0-20260923T231814Z-246758b0/run.json",
+      "run_json_sha256": "11d83a6d93c9d26e05eaa3ef4c0a46877264a9f99ea7b2ba1c768a71e07298d9",
+      "output_ids_first16": [
+        2,
+        23288,
+        27325,
+        10417,
+        436,
+        34810,
+        18887,
+        303,
+        12654,
+        271,
+        36948,
+        369,
+        264,
+        4434,
+        11,
+        5492
+      ],
+      "natural_rounds": [
+        {
+          "round_index": 1,
+          "generated_before": 0,
+          "accepted_count": 1,
+          "draft_width": 7,
+          "verify_ids": [
+            2,
+            23288,
+            21408,
+            6297,
+            7873,
+            440,
+            3856,
+            19537
+          ]
+        },
+        {
+          "round_index": 2,
+          "generated_before": 2,
+          "accepted_count": 1,
+          "draft_width": 7,
+          "verify_ids": [
+            27325,
+            10417,
+            12654,
+            29806,
+            18887,
+            29806,
+            271,
+            550
+          ]
+        },
+        {
+          "round_index": 3,
+          "generated_before": 4,
+          "accepted_count": 5,
+          "draft_width": 7,
+          "verify_ids": [
+            436,
+            34810,
+            18887,
+            303,
+            12654,
+            271,
+            71093,
+            12305
+          ]
+        }
+      ],
+      "b2": {
+        "result": "PASS",
+        "root_state_id": "ae07314fc51bf71ca70d194dcbce97c179e188d2aa690b07d01c0d34b88af6c5",
+        "root_observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r1:s8_frozen:frozen_pre_verify",
+        "logical_position": 0,
+        "verify_ids": [
+          2,
+          23288,
+          21408,
+          6297,
+          7873,
+          440,
+          3856,
+          19537
+        ],
+        "control_set_id": "381c5ab0043a53077911a7a79b93708b7ebdd05afde54a9c9973d3b4cf899ec5",
+        "controlled_component_count": 754,
+        "stable_component_count": 754,
+        "nonzero_bound_count": 0
+      },
+      "branches": [
+        {
+          "accepted_count": 0,
+          "keep": 1,
+          "c": {
+            "result": "PASS",
+            "checks": {
+              "accepted_prefix_exact": true,
+              "exact_cache_state_equal": true,
+              "exact_structure_equal": true,
+              "exact_accepted_fused_equal": true
+            }
+          },
+          "d": {
+            "result": "PASS",
+            "checks": {
+              "numeric_status_pass": true,
+              "resulting_structure_exact": true,
+              "top2_ids_exact": true,
+              "control_status_stable": true,
+              "top2_ids_repeatable": true,
+              "margin_repeatable": true
+            },
+            "controlled_component_count": 130,
+            "max_production_oracle_numeric_distance": 0.0,
+            "s1_reference_pointer": {
+              "cache_state_id": "ae07314fc51bf71ca70d194dcbce97c179e188d2aa690b07d01c0d34b88af6c5",
+              "keep": 1,
+              "observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r1:s1_keep1_reference:pre_verify"
+            }
+          },
+          "e": {
+            "result": "PASS",
+            "checks": {
+              "source_proposal_exact": true,
+              "independent_source_proposal_exact": true,
+              "equivalent_logical_proposal_point": true,
+              "numeric_status_pass": true,
+              "proposal_ids_equal": true,
+              "drafter_structure_equal": true,
+              "controls_exact_stable": true
+            },
+            "controlled_numeric_component_count": 12,
+            "max_production_reference_numeric_distance": 0.0,
+            "production_next_proposal_ids": [
+              12,
+              34186,
+              436,
+              34810,
+              18887,
+              29806,
+              271
+            ],
+            "independent_next_proposal_ids": [
+              12,
+              34186,
+              436,
+              34810,
+              18887,
+              29806,
+              271
+            ]
+          }
+        },
+        {
+          "accepted_count": 1,
+          "keep": 2,
+          "c": {
+            "result": "PASS",
+            "checks": {
+              "accepted_prefix_exact": true,
+              "exact_cache_state_equal": true,
+              "exact_structure_equal": true,
+              "exact_accepted_fused_equal": true
+            }
+          },
+          "d": {
+            "result": "PASS",
+            "checks": {
+              "numeric_status_pass": true,
+              "resulting_structure_exact": true,
+              "top2_ids_exact": true,
+              "control_status_stable": true,
+              "top2_ids_repeatable": true,
+              "margin_repeatable": true
+            },
+            "controlled_component_count": 130,
+            "max_production_oracle_numeric_distance": 0.0,
+            "s1_reference_pointer": {
+              "cache_state_id": "ae07314fc51bf71ca70d194dcbce97c179e188d2aa690b07d01c0d34b88af6c5",
+              "keep": 2,
+              "observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r1:s1_keep2_reference:pre_verify"
+            }
+          },
+          "e": {
+            "result": "PASS",
+            "checks": {
+              "source_proposal_exact": true,
+              "independent_source_proposal_exact": true,
+              "equivalent_logical_proposal_point": true,
+              "numeric_status_pass": true,
+              "proposal_ids_equal": true,
+              "drafter_structure_equal": true,
+              "controls_exact_stable": true
+            },
+            "controlled_numeric_component_count": 12,
+            "max_production_reference_numeric_distance": 0.0,
+            "production_next_proposal_ids": [
+              10417,
+              12654,
+              29806,
+              18887,
+              29806,
+              271,
+              550
+            ],
+            "independent_next_proposal_ids": [
+              10417,
+              12654,
+              29806,
+              18887,
+              29806,
+              271,
+              550
+            ]
+          }
+        }
+      ],
+      "gate_results": {
+        "B2": "PASS",
+        "C": "PASS",
+        "D": "PASS",
+        "E": "PASS"
+      }
+    }
+  },
+  "supersession": {
+    "legacy_gate_results_note": "Any earlier run.json gate_results fields that stop before C/D/E are historical and are superseded for B2/C/D/E adjudication by the later required_gate_acquisition physical evidence recorded here."
+  },
+  "next_phase": {
+    "name": "performance_operating_point",
+    "correctness_rerun_required_before_start": false,
+    "initial_question": "Explain the adaptive throughput gap by controlled KV-precision, margin, width-policy, lifecycle, acceptance, target-forward, and decode-throughput measurements."
+  }
+}

@@ -1,0 +1,126 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+  dflash sidecar skeleton: 47 modules at b4g64
+  dflash sidecar skeleton: 2 modules at b8g64
+{
+  "path": "/Users/do/git/mlx-dspark/specs/001-bonsai-rollback-parity/evidence/runs/required-gates-mlx-prod-kv0-20260923T231814Z-246758b0/run.json",
+  "prompt_ids": [
+    248045,
+    846,
+    198,
+    7734,
+    264,
+    5492,
+    21408,
+    12654,
+    436,
+    34810,
+    6297,
+    440,
+    6813,
+    321,
+    913,
+    29642,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "rounds": [
+    {
+      "observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r1",
+      "anchor_or_pending_id": 2,
+      "draft_ids": [
+        23288,
+        21408,
+        6297,
+        7873,
+        440,
+        3856,
+        19537
+      ],
+      "verify_ids": [
+        2,
+        23288,
+        21408,
+        6297,
+        7873,
+        440,
+        3856,
+        19537
+      ],
+      "accepted_count": 1
+    },
+    {
+      "observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r2",
+      "anchor_or_pending_id": 27325,
+      "draft_ids": [
+        10417,
+        12654,
+        29806,
+        18887,
+        29806,
+        271,
+        550
+      ],
+      "verify_ids": [
+        27325,
+        10417,
+        12654,
+        29806,
+        18887,
+        29806,
+        271,
+        550
+      ],
+      "accepted_count": 1
+    },
+    {
+      "observation_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0:mlx:r3",
+      "anchor_or_pending_id": 436,
+      "draft_ids": [
+        34810,
+        18887,
+        303,
+        12654,
+        271,
+        71093,
+        12305
+      ],
+      "verify_ids": [
+        436,
+        34810,
+        18887,
+        303,
+        12654,
+        271,
+        71093,
+        12305
+      ],
+      "accepted_count": 5
+    }
+  ],
+  "output_ids": [
+    2,
+    23288,
+    27325,
+    10417,
+    436,
+    34810,
+    18887,
+    303,
+    12654,
+    271,
+    36948,
+    369,
+    264,
+    4434,
+    11,
+    5492
+  ]
+}

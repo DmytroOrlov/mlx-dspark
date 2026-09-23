@@ -1,0 +1,51 @@
+{
+  "purpose": "Compact archive of historical raw evidence before optional pruning",
+  "deletes_performed": false,
+  "files": [
+    {
+      "path": "manifests/gate-a-chad-plain-a436bb1cf2-retry2.json",
+      "size_bytes": 825140,
+      "sha256": "1a36a5a4f67b24d29a02494465f174c43eee16efcafadc2b5065fe9b9b989c93"
+    },
+    {
+      "path": "manifests/gate-a-mlx-plain-a436bb1cf2.json",
+      "size_bytes": 691684,
+      "sha256": "1c9e1f184c0064617ff9679b40e620a5af7fccea28c82ac4c51a838f3ab45c3f"
+    },
+    {
+      "path": "manifests/t005-r1-mlx-kv0-aligned-20260923-c791.json",
+      "size_bytes": 596085,
+      "sha256": "f3694f39ee3c4450a2d89cfda89252341a2e58bfc9b9c18fd17ec9bce0e275e9"
+    },
+    {
+      "path": "manifests/t008-r1-chad-kv0-fastpath-20260923T190924Z-3aeb5303.json",
+      "size_bytes": 729553,
+      "sha256": "d559b5dbaccba7436feaa646000d506a83d478fcfa87f5fe1751d2c36c5d84d6"
+    },
+    {
+      "path": "manifests/t010-t015-mlx-prod-kv0-controls-20260923T193943Z-6a657aa4.json",
+      "size_bytes": 443033,
+      "sha256": "f40a4773d632bc09e01115f5aa12b2086e406a61fc39cd47b8a30aecdb1399d2"
+    },
+    {
+      "path": "manifests/t010-t015-mlx-prod-kv0-controls-20260923T194624Z-5fab57a3.json",
+      "size_bytes": 717870,
+      "sha256": "8b35dd5d47836220bca0ba12355843989032861cd7ff074e17d59d802044fc57"
+    },
+    {
+      "path": "meta/cleanup-plan.json",
+      "size_bytes": 2411,
+      "sha256": "a99cde704160cf7748efca17e0d482f5bc6bff13ad7caffaa247872340b8d2e6"
+    },
+    {
+      "path": "meta/diff-check.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "meta/git-status.txt",
+      "size_bytes": 4811549,
+      "sha256": "dbda479b1bd638c236459557a11e0751587dd30d431e1315ca3ee5c057128ed6"
+    }
+  ]
+}

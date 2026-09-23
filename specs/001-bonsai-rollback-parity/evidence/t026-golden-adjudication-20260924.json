@@ -1,0 +1,18 @@
+{
+  "schema": "bonsai-t026-offline-adjudication/v1",
+  "date": "2026-09-24",
+  "method": "Read existing physical result JSON files only; no weights, inference, or reruns.",
+  "status": "COMPLETE_ACQUISITION_AND_ADJUDICATION",
+  "runs": {
+    "chad-adaptive": {"file": "t026-results/chad-adaptive.json", "physical": true, "generated_tokens": 512, "decode_tok_s": 34.00889498929792, "target_forwards": 161, "output_sha256": "5ce8e51a64349b4848e5e3ff251378deb21f15b0a825ef3e5bbc69e1467b5db9"},
+    "chad-fixed7": {"file": "t026-results/chad-fixed7.json", "physical": true, "generated_tokens": 512, "decode_tok_s": 35.8366618099763, "target_forwards": 145, "output_sha256": "545f5070a2c59bc491377eaf6bbd240b80c3b941658d96d1571dab959b6e41cc"},
+    "mlx-adaptive": {"file": "t026-results/mlx-adaptive.json", "physical": true, "generated_tokens": 516, "decode_tok_s": 33.583930145651806, "target_forwards": 180, "reported_round_records": 179, "output_sha256": "1be5f7f7560fb8c1749b7ba643fc311c75a1cfefbc0a2671046d76d460ec6b28"},
+    "mlx-fixed7": {"file": "t026-results/mlx-fixed7.json", "physical": true, "generated_tokens": 514, "decode_tok_s": 34.01390935778407, "target_forwards": 146, "reported_round_records": 145, "output_sha256": "5fe632ee572651fbbe1b0713cb021033aa4771d4433161b42391a13c0f7417ec"}
+  },
+  "golden_pair": {
+    "adaptive": {"chad_budget": 512, "mlx_generated": 516, "budget_overshoot_tokens": 4, "first_generated_token_divergence_index_zero_based": 164, "same_output": false},
+    "fixed7_control": {"chad_budget": 512, "mlx_generated": 514, "budget_overshoot_tokens": 2, "first_generated_token_divergence_index_zero_based": 162, "same_output": false}
+  },
+  "interpretation": "T026 is complete as physical acquisition and bookkeeping. It does not establish cross-runtime output parity: outputs diverge at the recorded token positions. Preserve mlx-dspark max_tokens overshoot as an observed issue; do not truncate or normalize the evidence. T027 remains a separate plain-KV product A/B and must not rerun T026.",
+  "adjudication_bug": "The earlier offline adjudicator looked for target.path; the durable result schema stores target.physical_path. Adjudicate against physical_path in these four existing files."
+}

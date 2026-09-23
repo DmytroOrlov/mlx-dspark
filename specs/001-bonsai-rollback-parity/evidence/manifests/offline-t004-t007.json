@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-23",
+  "supersedes_current_probe_hash_in": "artifacts.json",
+  "model_runs": 0,
+  "controls_measured": 0,
+  "artifacts": [
+    {
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_rollback_probe.py",
+      "sha256": "2a1acc6fa2970c6c8a9383b9fa19bc7fb28d540a269d640851080e26ee0269f2",
+      "size": 54645,
+      "associated_tasks": "T004-T006",
+      "status": "offline_prepared_unmeasured",
+      "purpose": "offline instrumentation and fresh reference branches"
+    },
+    {
+      "project_path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_probe_support.py",
+      "sha256": "229520b9392f48cf14aeddb7d6aa502767f16fa498118469a9c761fa9e71c458",
+      "size": 18651,
+      "associated_tasks": "T004-T007",
+      "status": "offline_prepared_unmeasured",
+      "purpose": "immutable array store, independent cache clone, Gate A classifier and five-pair controls"
+    }
+  ]
+}
