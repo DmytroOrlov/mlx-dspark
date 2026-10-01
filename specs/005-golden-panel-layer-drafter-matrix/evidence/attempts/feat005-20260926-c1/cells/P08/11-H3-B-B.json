@@ -1,0 +1,1817 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "11-H3-B-B",
+    "comparison": null,
+    "drafter": "B-B",
+    "order": 11,
+    "prompt_id": "P08",
+    "repeat": false,
+    "target": "H3"
+  },
+  "attempt_id": "feat005-20260926-c1",
+  "configuration": {
+    "bonsai_owned_block_count": 8,
+    "drafter": "B-B",
+    "drafter_identity": {
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+    },
+    "target": "H3",
+    "target_identity": {
+      "blocks": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "donor": {
+        "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+        "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+      },
+      "embedding": "Qwen",
+      "final_norm": "Qwen",
+      "kind": "Qwen_shell_composition",
+      "lm_head": "Qwen",
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 77977,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.6246246246246246,
+    "active_baseline_bytes": 15645029394,
+    "active_baseline_gib": 14.57056905515492,
+    "cap_distribution": {
+      "2": 4,
+      "7": 94
+    },
+    "decode_duration_seconds": 11.589252948760986,
+    "generated_tokens": 515,
+    "generated_tokens_per_target_forward": 5.202020202020202,
+    "mean_accepted_draft_tokens": 4.244897959183674,
+    "output_integrity_mode": "text_only",
+    "output_sha256": "0b96ad52a9b3abcbbf9101590ab2c52cfae848fe947b45fbecbff625e79275ff",
+    "output_text": "```python\n\"\"\"\nA production-quality implementation of a stack data structure.\n\nThis module provides a generic Stack class with push, pop, peek, and is_empty methods.\nThe implementation uses a list as the underlying storage, which provides O(1)\namortized time complexity for push and pop operations.\n\nType hints are used throughout for clarity and to enable static analysis.\n\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing (\n    Generic,\n    TypeVar,\n)\n\nT = TypeVar(\"T\")\n\n\nclass Stack(Generic[T]):\n    \"\"\"\n    A generic stack data structure.\n\n    The stack is a LIFO (Last In, First Out) data structure.\n    Elements are added and removed from the top of the stack.\n\n    Type Parameters:\n        T: The type of elements in the stack.\n\n    Example:\n        >>> stack = Stack[int]()\n        >>> stack.push(1)\n        >>> stack.push(2)\n        >>> stack.peek()\n        2\n        >>> stack.pop()\n        2\n        >>> stack.pop()\n        1\n        >>> stack.is_empty()\n        True\n    \"\"\"\n\n    def __init__(self) -> None:\n        \"\"\"Initialize an empty stack.\"\"\"\n        self._items: list[T] = []\n\n    def push(self, item: T) -> None:\n        \"\"\"\n        Push an item onto the top of the stack.\n\n        Args:\n            item: The item to push onto the stack.\n\n        Time Complexity: O(1) amortized\n        \"\"\"\n        self._items.append(item)\n\n    def pop(self) -> T:\n        \"\"\"\n        Remove and return the item at the top of the stack.\n\n        Returns:\n            The item at the top of the stack.\n\n        Raises:\n            IndexError: If the stack is empty.\n\n        Time Complexity: O(1)\n        \"\"\"\n        if not self._items:\n            raise IndexError(\"pop from an empty stack\")\n        return self._items.pop()\n\n    def peek(self) -> T:\n        \"\"\"\n        Return the item at the top of the stack without removing it.\n\n        Returns:\n            The item at the top of the stack.\n\n        Raises:\n            IndexError: If the stack is empty.\n\n        Time Complexity: O(1)\n        \"\"\"\n        if not self._items:\n",
+    "output_tokens": null,
+    "output_tokens_sha256": null,
+    "peak_increment_bytes": 582892428,
+    "peak_increment_gib": 0.5428608767688274,
+    "peak_runtime_bytes": 16227921822,
+    "peak_runtime_gib": 15.113429931923747,
+    "request_duration_seconds": 12.256587124895304,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 757.02,
+        "req": "868002ff",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1856.7
+      },
+      {
+        "accepted": 1,
+        "cap": 2,
+        "committed": 2,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 86.52,
+        "req": "868002ff",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1943.2
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 88.28,
+        "req": "868002ff",
+        "seq": 3,
+        "source": "drafter",
+        "t": 2031.5
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 86.55,
+        "req": "868002ff",
+        "seq": 4,
+        "source": "drafter",
+        "t": 2118.1
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 117.27,
+        "req": "868002ff",
+        "seq": 5,
+        "source": "drafter",
+        "t": 2235.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 119.08,
+        "req": "868002ff",
+        "seq": 6,
+        "source": "drafter",
+        "t": 2354.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 118.71,
+        "req": "868002ff",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2473.1
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 119.22,
+        "req": "868002ff",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2592.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 120.06,
+        "req": "868002ff",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2712.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 119.08,
+        "req": "868002ff",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2831.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 117.78,
+        "req": "868002ff",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2949.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 119.95,
+        "req": "868002ff",
+        "seq": 12,
+        "source": "drafter",
+        "t": 3069.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 118.41,
+        "req": "868002ff",
+        "seq": 13,
+        "source": "drafter",
+        "t": 3187.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 118.28,
+        "req": "868002ff",
+        "seq": 14,
+        "source": "drafter",
+        "t": 3305.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 119.62,
+        "req": "868002ff",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3425.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 118.83,
+        "req": "868002ff",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3544.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 118.6,
+        "req": "868002ff",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3663.0
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 120.24,
+        "req": "868002ff",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3783.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 119.56,
+        "req": "868002ff",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3902.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 119.58,
+        "req": "868002ff",
+        "seq": 20,
+        "source": "drafter",
+        "t": 4022.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 119.64,
+        "req": "868002ff",
+        "seq": 21,
+        "source": "drafter",
+        "t": 4142.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 123.41,
+        "req": "868002ff",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4265.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 119.69,
+        "req": "868002ff",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4385.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 119.48,
+        "req": "868002ff",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4504.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 119.29,
+        "req": "868002ff",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4623.9
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 120.13,
+        "req": "868002ff",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4744.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 120.48,
+        "req": "868002ff",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4864.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 119.58,
+        "req": "868002ff",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4984.1
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 119.35,
+        "req": "868002ff",
+        "seq": 29,
+        "source": "drafter",
+        "t": 5103.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 119.3,
+        "req": "868002ff",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5222.7
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 118.24,
+        "req": "868002ff",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5341.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 119.53,
+        "req": "868002ff",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5460.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 118.02,
+        "req": "868002ff",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5578.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 119.28,
+        "req": "868002ff",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5697.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 118.75,
+        "req": "868002ff",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5816.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 120.05,
+        "req": "868002ff",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5936.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 119.32,
+        "req": "868002ff",
+        "seq": 37,
+        "source": "drafter",
+        "t": 6055.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 119.27,
+        "req": "868002ff",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6175.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 118.87,
+        "req": "868002ff",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6294.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 119.53,
+        "req": "868002ff",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6413.6
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 119.57,
+        "req": "868002ff",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6533.2
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 119.75,
+        "req": "868002ff",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6652.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 120.31,
+        "req": "868002ff",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6773.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 120.34,
+        "req": "868002ff",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6893.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 119.48,
+        "req": "868002ff",
+        "seq": 45,
+        "source": "drafter",
+        "t": 7013.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 119.8,
+        "req": "868002ff",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7132.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 118.3,
+        "req": "868002ff",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7251.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 119.75,
+        "req": "868002ff",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7370.9
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 120.05,
+        "req": "868002ff",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7490.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 120.51,
+        "req": "868002ff",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7611.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 118.03,
+        "req": "868002ff",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7729.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 118.46,
+        "req": "868002ff",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7848.0
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 119.59,
+        "req": "868002ff",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7967.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 119.75,
+        "req": "868002ff",
+        "seq": 54,
+        "source": "drafter",
+        "t": 8087.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 118.52,
+        "req": "868002ff",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8205.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 118.28,
+        "req": "868002ff",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8324.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 120.08,
+        "req": "868002ff",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8444.2
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 119.11,
+        "req": "868002ff",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8563.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 121.12,
+        "req": "868002ff",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8684.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 120.63,
+        "req": "868002ff",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8805.0
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 118.61,
+        "req": "868002ff",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8923.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 121.06,
+        "req": "868002ff",
+        "seq": 62,
+        "source": "drafter",
+        "t": 9044.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 120.58,
+        "req": "868002ff",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9165.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 118.84,
+        "req": "868002ff",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9284.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 118.71,
+        "req": "868002ff",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9402.8
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 120.16,
+        "req": "868002ff",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9523.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 121.01,
+        "req": "868002ff",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9644.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 120.53,
+        "req": "868002ff",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9764.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 119.05,
+        "req": "868002ff",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9883.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 119.11,
+        "req": "868002ff",
+        "seq": 70,
+        "source": "drafter",
+        "t": 10002.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 119.08,
+        "req": "868002ff",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10121.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 119.04,
+        "req": "868002ff",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10240.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 118.95,
+        "req": "868002ff",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10359.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 118.68,
+        "req": "868002ff",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10478.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 119.27,
+        "req": "868002ff",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10597.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 119.06,
+        "req": "868002ff",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10716.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 119.15,
+        "req": "868002ff",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10835.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 121.52,
+        "req": "868002ff",
+        "seq": 78,
+        "source": "drafter",
+        "t": 10957.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 119.63,
+        "req": "868002ff",
+        "seq": 79,
+        "source": "drafter",
+        "t": 11077.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 120.67,
+        "req": "868002ff",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11197.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 119.43,
+        "req": "868002ff",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11317.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 119.09,
+        "req": "868002ff",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11436.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 119.3,
+        "req": "868002ff",
+        "seq": 83,
+        "source": "drafter",
+        "t": 11555.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 119.88,
+        "req": "868002ff",
+        "seq": 84,
+        "source": "drafter",
+        "t": 11675.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 119.46,
+        "req": "868002ff",
+        "seq": 85,
+        "source": "drafter",
+        "t": 11794.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 120.74,
+        "req": "868002ff",
+        "seq": 86,
+        "source": "drafter",
+        "t": 11915.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 86,
+        "mode": "dflash",
+        "ms": 121.18,
+        "req": "868002ff",
+        "seq": 87,
+        "source": "drafter",
+        "t": 12036.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 87,
+        "mode": "dflash",
+        "ms": 119.86,
+        "req": "868002ff",
+        "seq": 88,
+        "source": "drafter",
+        "t": 12156.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 88,
+        "mode": "dflash",
+        "ms": 119.81,
+        "req": "868002ff",
+        "seq": 89,
+        "source": "drafter",
+        "t": 12276.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 89,
+        "mode": "dflash",
+        "ms": 119.88,
+        "req": "868002ff",
+        "seq": 90,
+        "source": "drafter",
+        "t": 12396.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 90,
+        "mode": "dflash",
+        "ms": 119.6,
+        "req": "868002ff",
+        "seq": 91,
+        "source": "drafter",
+        "t": 12516.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 91,
+        "mode": "dflash",
+        "ms": 119.34,
+        "req": "868002ff",
+        "seq": 92,
+        "source": "drafter",
+        "t": 12635.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 92,
+        "mode": "dflash",
+        "ms": 120.95,
+        "req": "868002ff",
+        "seq": 93,
+        "source": "drafter",
+        "t": 12756.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 93,
+        "mode": "dflash",
+        "ms": 119.72,
+        "req": "868002ff",
+        "seq": 94,
+        "source": "drafter",
+        "t": 12876.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 94,
+        "mode": "dflash",
+        "ms": 119.53,
+        "req": "868002ff",
+        "seq": 95,
+        "source": "drafter",
+        "t": 12995.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 95,
+        "mode": "dflash",
+        "ms": 120.02,
+        "req": "868002ff",
+        "seq": 96,
+        "source": "drafter",
+        "t": 13115.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 96,
+        "mode": "dflash",
+        "ms": 119.94,
+        "req": "868002ff",
+        "seq": 97,
+        "source": "drafter",
+        "t": 13235.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 97,
+        "mode": "dflash",
+        "ms": 119.88,
+        "req": "868002ff",
+        "seq": 98,
+        "source": "drafter",
+        "t": 13355.4
+      }
+    ],
+    "rounds": 98,
+    "speculative_decode_tok_s": 44.43772193746612,
+    "stop_reason": null,
+    "target_forwards": 99,
+    "width_distribution": {
+      "2": 4,
+      "7": 94
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_captured": 2361358562366375,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_captured": 2361370818965625,
+    "request_ended": 2361370818953541,
+    "request_started": 2361358562366875,
+    "reset_called": true,
+    "reset_completed": 2361358562362958
+  },
+  "preflight": {
+    "identity": "feat005-20260926-c1:PASS",
+    "path": "preflight.json",
+    "sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      5492,
+      21408,
+      12654,
+      7873,
+      314,
+      264,
+      5436,
+      440,
+      4336,
+      11,
+      2341,
+      11,
+      31516,
+      11,
+      321,
+      369,
+      14683,
+      5245,
+      13,
+      28763,
+      913,
+      29642,
+      321,
+      6813,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "6727da7ae4dfca2c7280acb52e7892ec2fa552e63b5137bfc589ecc02111e73f",
+    "input_token_count": 39,
+    "label": "Stack",
+    "prompt_id": "P08",
+    "rendered_prompt": "<|im_start|>user\nWrite a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests.",
+    "text_sha256": "98c2636a73988b0184d53d1bdf0e712d2fe3f478f3b384090acde5f1e662b620"
+  },
+  "provenance": {
+    "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 21.90324275009334,
+    "process_started_utc": "2026-09-26T10:15:28Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+    "target_revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.988,
+      "predicted_rates": {
+        "1": 21.0,
+        "2": 29.7,
+        "3": 32.8,
+        "4": 35.0,
+        "5": 42.2,
+        "6": 49.4,
+        "7": 56.6
+      },
+      "rounds": 98
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

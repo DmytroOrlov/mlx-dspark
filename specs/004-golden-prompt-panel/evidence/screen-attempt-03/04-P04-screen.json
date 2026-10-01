@@ -1,0 +1,976 @@
+{
+  "drafter": {
+    "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+    "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "new child process and Engine; no prior measured request state",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 69804,
+    "prefix_hits_before_request": 0,
+    "rounds_before_request": 0
+  },
+  "input_ids": [
+    248045,
+    846,
+    198,
+    7734,
+    264,
+    12654,
+    709,
+    421,
+    25822,
+    7620,
+    2624,
+    383,
+    264,
+    10300,
+    1103,
+    13,
+    28763,
+    913,
+    29642,
+    321,
+    10033,
+    1141,
+    854,
+    22373,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "input_sha256": "6ca5241ee61aeea6ac7e0663b41f0189a9ee687d3c8334e392f13ddd720347df",
+  "input_token_count": 34,
+  "machine": {
+    "hostname": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "measurements": {
+    "acceptance": 0.7642276422764228,
+    "active_baseline_bytes": 16496123666,
+    "cap_distribution": {
+      "2": 4,
+      "7": 34
+    },
+    "decode_duration_seconds": 4.629506826400757,
+    "generated_per_forward": 5.794871794871795,
+    "generated_tokens": 226,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "mean_accepted": 4.947368421052632,
+    "natural_completion_before_410": true,
+    "output_text": "```python\ndef binary_search(sorted_list: list[int], target: int) -> int:\n    \"\"\"\n    Perform binary search on a sorted list of integers.\n    \n    Args:\n        sorted_list: A list of integers sorted in ascending order.\n        target: The integer value to search for.\n        \n    Returns:\n        The index of the target in the list if found, otherwise -1.\n        \n    Time Complexity: O(log n), where n is the length of the list.\n    Space Complexity: O(1) for the iterative implementation.\n    \"\"\"\n    left: int = 0\n    right: int = len(sorted_list) - 1\n    \n    while left <= right:\n        mid: int = left + (right - left) // 2\n        mid_value: int = sorted_list[mid]\n        \n        if mid_value == target:\n            return mid\n        elif mid_value < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    \n    return -1\n```",
+    "output_text_sha256": "a63e488f00e4135c58d689bc858a622a016457d5a05c4fdbe6f21cff57e7a55d",
+    "output_tokens_sha256": null,
+    "peak_bytes": 17054715822,
+    "peak_gib": 15.883441848680377,
+    "request_duration_seconds": 5.271992375142872,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 735.82,
+        "req": "f8b52b33",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1300.8
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 90.57,
+        "req": "f8b52b33",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1391.3
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 90.32,
+        "req": "f8b52b33",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1481.6
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 88.05,
+        "req": "f8b52b33",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1569.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 121.7,
+        "req": "f8b52b33",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1691.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 125.54,
+        "req": "f8b52b33",
+        "seq": 6,
+        "source": "drafter",
+        "t": 1816.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 125.4,
+        "req": "f8b52b33",
+        "seq": 7,
+        "source": "drafter",
+        "t": 1942.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 125.82,
+        "req": "f8b52b33",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2068.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 125.48,
+        "req": "f8b52b33",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2193.6
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 125.22,
+        "req": "f8b52b33",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2318.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 127.86,
+        "req": "f8b52b33",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2446.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 124.41,
+        "req": "f8b52b33",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2571.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 122.51,
+        "req": "f8b52b33",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2693.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 127.0,
+        "req": "f8b52b33",
+        "seq": 14,
+        "source": "drafter",
+        "t": 2820.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 126.46,
+        "req": "f8b52b33",
+        "seq": 15,
+        "source": "drafter",
+        "t": 2947.1
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 127.22,
+        "req": "f8b52b33",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3074.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 127.98,
+        "req": "f8b52b33",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3202.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 126.6,
+        "req": "f8b52b33",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3328.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 125.63,
+        "req": "f8b52b33",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3454.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 122.96,
+        "req": "f8b52b33",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3577.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 124.03,
+        "req": "f8b52b33",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3701.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 127.18,
+        "req": "f8b52b33",
+        "seq": 22,
+        "source": "drafter",
+        "t": 3828.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 126.57,
+        "req": "f8b52b33",
+        "seq": 23,
+        "source": "drafter",
+        "t": 3955.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 125.35,
+        "req": "f8b52b33",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4080.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 125.75,
+        "req": "f8b52b33",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4206.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 125.13,
+        "req": "f8b52b33",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4331.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 125.59,
+        "req": "f8b52b33",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4457.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 124.47,
+        "req": "f8b52b33",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4581.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 124.8,
+        "req": "f8b52b33",
+        "seq": 29,
+        "source": "drafter",
+        "t": 4706.3
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 125.66,
+        "req": "f8b52b33",
+        "seq": 30,
+        "source": "drafter",
+        "t": 4832.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 127.03,
+        "req": "f8b52b33",
+        "seq": 31,
+        "source": "drafter",
+        "t": 4959.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 125.88,
+        "req": "f8b52b33",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5084.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 125.3,
+        "req": "f8b52b33",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5210.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 125.8,
+        "req": "f8b52b33",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5336.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 126.23,
+        "req": "f8b52b33",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5462.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 123.09,
+        "req": "f8b52b33",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5585.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 123.98,
+        "req": "f8b52b33",
+        "seq": 37,
+        "source": "drafter",
+        "t": 5709.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 125.98,
+        "req": "f8b52b33",
+        "seq": 38,
+        "source": "drafter",
+        "t": 5835.3
+      }
+    ],
+    "rounds": 38,
+    "speculative_decode_tok_s": 48.817294903030806,
+    "stop_reason": null,
+    "target_forwards": 39,
+    "width_distribution": {
+      "2": 4,
+      "7": 34
+    }
+  },
+  "process_order": {
+    "elapsed_seconds": 10.302665042225271,
+    "pid": 69804,
+    "process_end_utc": "2026-09-26T08:16:19Z",
+    "process_start_utc": "2026-09-26T08:16:09Z",
+    "role": "screen",
+    "sequence": 4
+  },
+  "prompt_id": "P04",
+  "prompt_role": "screen",
+  "rendered_prompt": "<|im_start|>user\nWrite a Python function that performs binary search on a sorted list. Include type hints and explain its time complexity.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "request": {
+    "generation": {
+      "max_tokens": 512,
+      "temperature": 0,
+      "thinking": false,
+      "top_k": 0,
+      "top_p": 1
+    },
+    "plain_kv": true,
+    "prefix_cache_initialization": "enabled / T027 production Engine settings",
+    "prefix_reuse_tokens": 0
+  },
+  "runtime_configuration": {
+    "controller_final": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.945,
+      "predicted_rates": {
+        "1": 23.7,
+        "2": 32.2,
+        "3": 34.5,
+        "4": 35.8,
+        "5": 42.5,
+        "6": 49.2,
+        "7": 55.3
+      },
+      "rounds": 38
+    },
+    "controller_present": true,
+    "final_effective_cap": null,
+    "kv8": false,
+    "kv_bits": null,
+    "max_draft_tokens": null,
+    "mode": "dflash",
+    "prefix_cache_enabled": true,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 4,
+  "short_label": "Binary search",
+  "source_sha256": {
+    "prompt_panel.py": "f80ba3c06517f5faa007af3086fe651aeba4aa5a5ea58cb54da0f38df3d6b984",
+    "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+    "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "status": "TOO_SHORT",
+  "target": {
+    "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+    "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+    "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "text": "Write a Python function that performs binary search on a sorted list. Include type hints and explain its time complexity."
+}

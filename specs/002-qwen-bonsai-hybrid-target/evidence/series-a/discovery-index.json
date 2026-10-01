@@ -1,0 +1,152 @@
+{
+  "all_required_metrics_present": true,
+  "bracketing_h0": {
+    "first_run_id": "discovery-01-h0-95426c",
+    "last_run_id": "discovery-08-h0-37e145"
+  },
+  "discovery_order": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/discovery-order.json",
+    "sha256": "3fd60ec22cfe182861f0b6470b4c2e3b51e7296cef57c94e617309083272d7e0"
+  },
+  "discovery_runner_snapshot": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runner-used-for-discovery.py",
+    "sha256": "b14e980a2044cbd0d27aa45b5da8cf5064e6e6420f2b9588bcc222e75a3bd49e"
+  },
+  "fixed_controls": {
+    "controller": "ordinary production CapController, max_draft_tokens=auto",
+    "cpu_split": null,
+    "drafter_bits": 4,
+    "drafter_repo": "incoai/Qwen3.8-27B-DFlash2",
+    "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "generation": {
+      "frequency_penalty": 0.0,
+      "max_new_tokens": 128,
+      "presence_penalty": 0.0,
+      "seed": 0,
+      "stop": [],
+      "temperature": 0.0,
+      "top_k": 0,
+      "top_p": 1.0
+    },
+    "kv_bits": null,
+    "lookup_drafts": false,
+    "memory_guard": false,
+    "mode": "dflash",
+    "plain_kv": true,
+    "prefix_cache": false,
+    "sdpa_split": null,
+    "small_m": null,
+    "warmup": true,
+    "wide_gemm_min": null
+  },
+  "fixed_prompt_token_hashes": [
+    "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad",
+    "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97",
+    "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+  ],
+  "historical_45_tps_used_as_baseline": false,
+  "order": [
+    "H0",
+    "H1a",
+    "H2",
+    "H1b",
+    "H3",
+    "H1c",
+    "B0",
+    "H0"
+  ],
+  "passed": true,
+  "prompt_corpus": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/prompts.json",
+    "sha256": "0f5966cc96d28800a7240abccc68af3357a016ab7ee15998481bd556917eb4c0"
+  },
+  "runtime_revision": {
+    "git_head": "df8ff57d47b9b0a95c2d432cb0c030a2d4e64472",
+    "hardware": {
+      "architecture": "applegpu_g16s",
+      "device_name": "Apple M4 Pro",
+      "max_buffer_length": 28991029248,
+      "max_recommended_working_set_size": 38654705664,
+      "memory_size": 51539607552,
+      "resource_limit": 499000
+    },
+    "source_sha256": {
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    }
+  },
+  "schema": "qwen-bonsai-series-a-discovery-index/v1",
+  "status": "PASS",
+  "targets": [
+    {
+      "order_index": 1,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-01-h0-95426c/result.json",
+      "run_id": "discovery-01-h0-95426c",
+      "sha256": "3a7452c521bd5a2dc7b23b5779d6789b6f050df59322cefaff743e7757934acd",
+      "status": "PASS",
+      "variant": "H0"
+    },
+    {
+      "order_index": 2,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-02-h1a-983014/result.json",
+      "run_id": "discovery-02-h1a-983014",
+      "sha256": "759a78a531882a1dfdbcf1d90ef12f55622212509e5708f1f572bae5ac17afa8",
+      "status": "PASS",
+      "variant": "H1a"
+    },
+    {
+      "order_index": 3,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-03-h2-207d08/result.json",
+      "run_id": "discovery-03-h2-207d08",
+      "sha256": "7fff4af7d91fa0c28c8ca8ef444d6e5a6e2ae451c14df90c3f3df137a3fd61a4",
+      "status": "PASS",
+      "variant": "H2"
+    },
+    {
+      "order_index": 4,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-04-h1b-aaa0df/result.json",
+      "run_id": "discovery-04-h1b-aaa0df",
+      "sha256": "a2baca710cc981f48dc02253737be23a91dbc54ca503c4a2628a2049abd931d5",
+      "status": "PASS",
+      "variant": "H1b"
+    },
+    {
+      "order_index": 5,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-05-h3-84799d/result.json",
+      "run_id": "discovery-05-h3-84799d",
+      "sha256": "a068628cf4d4592a17cd5a8796a857e9fb296df68ad71665cbb2dda1e123b9a7",
+      "status": "PASS",
+      "variant": "H3"
+    },
+    {
+      "order_index": 6,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-06-h1c-0fd978/result.json",
+      "run_id": "discovery-06-h1c-0fd978",
+      "sha256": "b2ae44d03a793b78a6efa2fa6f1fd89a545f6f60e7ff9d837f72ab59687957f5",
+      "status": "PASS",
+      "variant": "H1c"
+    },
+    {
+      "order_index": 7,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-07-b0-e37d8b/result.json",
+      "run_id": "discovery-07-b0-e37d8b",
+      "sha256": "45b3480ef67ed07811463f33b90e64c857dfb152a1ecbcb263b5a9ba43233f28",
+      "status": "PASS",
+      "variant": "B0"
+    },
+    {
+      "order_index": 8,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-08-h0-37e145/result.json",
+      "run_id": "discovery-08-h0-37e145",
+      "sha256": "3f2cc0f428d11ae99544b72feccca1b159bb191d503b87f6f2cdf9cc08ccbb95",
+      "status": "PASS",
+      "variant": "H0"
+    }
+  ],
+  "tokenization_matched": true
+}

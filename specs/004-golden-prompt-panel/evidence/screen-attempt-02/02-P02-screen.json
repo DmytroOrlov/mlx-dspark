@@ -1,0 +1,10 @@
+{
+  "error": "'GenResult' object has no attribute 'tokens'",
+  "error_type": "AttributeError",
+  "pid": 69301,
+  "prompt_id": "P02",
+  "prompt_role": "screen",
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 2,
+  "status": "FAILED"
+}

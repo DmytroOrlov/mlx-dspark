@@ -1,0 +1,1180 @@
+{
+  "cache": {
+    "advanced": true,
+    "after_rollback": [
+      {
+        "class": "ArraysCache",
+        "index": 0,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 1,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 2,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 3,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 4,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 5,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 6,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 7,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 8,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 9,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 10,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 11,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 12,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 13,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 14,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 15,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 16,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 17,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 18,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 19,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 20,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 21,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 22,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 23,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 24,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 25,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 26,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 27,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 28,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 29,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 30,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 31,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 32,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 33,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 34,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 35,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 36,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 37,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 38,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 39,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 40,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 41,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 42,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 43,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 44,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 45,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 46,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 47,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 48,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 49,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 50,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 51,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 52,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 53,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 54,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 55,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 56,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 57,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 58,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 59,
+        "offset": 3
+      },
+      {
+        "class": "ArraysCache",
+        "index": 60,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 61,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 62,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 63,
+        "offset": 3
+      }
+    ],
+    "after_verify": [
+      {
+        "class": "ArraysCache",
+        "index": 0,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 1,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 2,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 3,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 4,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 5,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 6,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 7,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 8,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 9,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 10,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 11,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 12,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 13,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 14,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 15,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 16,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 17,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 18,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 19,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 20,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 21,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 22,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 23,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 24,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 25,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 26,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 27,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 28,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 29,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 30,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 31,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 32,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 33,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 34,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 35,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 36,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 37,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 38,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 39,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 40,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 41,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 42,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 43,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 44,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 45,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 46,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 47,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 48,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 49,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 50,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 51,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 52,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 53,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 54,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 55,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 56,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 57,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 58,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 59,
+        "offset": 4
+      },
+      {
+        "class": "ArraysCache",
+        "index": 60,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 61,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 62,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 63,
+        "offset": 4
+      }
+    ],
+    "before": [
+      {
+        "class": "ArraysCache",
+        "index": 0,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 1,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 2,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 3,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 4,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 5,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 6,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 7,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 8,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 9,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 10,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 11,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 12,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 13,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 14,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 15,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 16,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 17,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 18,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 19,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 20,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 21,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 22,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 23,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 24,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 25,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 26,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 27,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 28,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 29,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 30,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 31,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 32,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 33,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 34,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 35,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 36,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 37,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 38,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 39,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 40,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 41,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 42,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 43,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 44,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 45,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 46,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 47,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 48,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 49,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 50,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 51,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 52,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 53,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 54,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 55,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 56,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 57,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 58,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 59,
+        "offset": 0
+      },
+      {
+        "class": "ArraysCache",
+        "index": 60,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 61,
+        "offset": null
+      },
+      {
+        "class": "ArraysCache",
+        "index": 62,
+        "offset": null
+      },
+      {
+        "class": "KVCache",
+        "index": 63,
+        "offset": 0
+      }
+    ],
+    "plain_kv": true,
+    "rejected_suffix_rollback": true,
+    "rejected_suffix_tokens": 1
+  },
+  "checkpoint": {
+    "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+    "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "snapshot_path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "weight_files": [
+      {
+        "fingerprint_method": "SHA-256 over complete downloaded file bytes",
+        "local_path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/blobs/eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "path": "model.safetensors",
+        "sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "size_bytes": 3848817904
+      }
+    ]
+  },
+  "compatibility_adapter": "none",
+  "controls": {
+    "benchmark_method_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+    "cap_controller_instantiated_in_smoke": false,
+    "cap_controller_source_sha256": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "kv_bits": null,
+    "ordinary_production_cap_controller_implementation": "mlx_dspark.calibrate.CapController",
+    "reason_not_instantiated": "Avoid load-time cost-curve calibration; the smoke uses existing loader/target paths directly and does not exercise or retune generation policy.",
+    "speculative_policy": "not exercised; accepted Series-A Engine benchmark method fingerprint is unchanged and no speculative settings are modified",
+    "width_policy_present": false
+  },
+  "execution_history": {
+    "discarded_attempt": "An earlier smoke attempt used Engine.load(max_draft_tokens=None) and reached a later assertion. That production path can invoke static_cap cost calibration; no calibration result, timing, or throughput metric was retained. The final PASS record is from the direct-loader smoke above.",
+    "final_smoke": "direct target/drafter loaders only; no rate or timing metric collected",
+    "series_b_matrix_performance_measurement_performed": false
+  },
+  "forward": {
+    "drafter_forward_finite": true,
+    "drafter_logits_shape": [
+      1,
+      3,
+      248320
+    ],
+    "target_prefill_finite": true,
+    "target_verify_finite": true
+  },
+  "gate_b": {
+    "decision": "OPEN",
+    "validated": true
+  },
+  "loaded_dflash": {
+    "expected_hidden_width": 25600,
+    "tap_semantics": "zero-based block output; the runtime returns each selected block output in the fused tap hidden-state tensor",
+    "tap_shape": [
+      1,
+      1,
+      25600
+    ],
+    "tap_width_compatible": true,
+    "target_layer_ids": [
+      5,
+      19,
+      33,
+      47,
+      61
+    ]
+  },
+  "loaded_parameters": {
+    "all_finite": true,
+    "drafter_parameter_tensor_count": 159,
+    "target_parameter_tensor_count": 1847
+  },
+  "performance_measurement_performed": false,
+  "prompt_corpus": {
+    "path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-a/prompts.json",
+    "sha256": "0f5966cc96d28800a7240abccc68af3357a016ab7ee15998481bd556917eb4c0",
+    "tokenized_prompts": [
+      {
+        "id": "p01",
+        "input_ids": [
+          248045,
+          846,
+          198,
+          814,
+          20139,
+          1204,
+          264,
+          5010,
+          1898,
+          13081,
+          45776,
+          13,
+          23024,
+          8387,
+          71159,
+          440,
+          1724,
+          26153,
+          11,
+          321,
+          2873,
+          799,
+          14542,
+          6355,
+          1783,
+          364,
+          1754,
+          13,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+      },
+      {
+        "id": "p02",
+        "input_ids": [
+          248045,
+          846,
+          198,
+          7734,
+          264,
+          12654,
+          709,
+          421,
+          4523,
+          279,
+          2984,
+          314,
+          279,
+          21354,
+          7459,
+          1146,
+          15057,
+          13,
+          28763,
+          264,
+          2716,
+          15673,
+          314,
+          1141,
+          854,
+          22373,
+          13,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+      },
+      {
+        "id": "p03",
+        "input_ids": [
+          248045,
+          846,
+          198,
+          32,
+          2015,
+          369,
+          26805,
+          264,
+          6103,
+          3370,
+          2393,
+          13,
+          20052,
+          264,
+          61446,
+          11,
+          11128,
+          3019,
+          364,
+          28043,
+          37972,
+          11,
+          8996,
+          279,
+          84810,
+          11,
+          321,
+          66532,
+          264,
+          4884,
+          13,
+          248046,
+          198,
+          248045,
+          74455,
+          198,
+          248068,
+          271,
+          248069,
+          271
+        ],
+        "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+      }
+    ]
+  },
+  "schema": "qwen-bonsai-series-b-drafter-smoke/v1",
+  "status": "PASS"
+}

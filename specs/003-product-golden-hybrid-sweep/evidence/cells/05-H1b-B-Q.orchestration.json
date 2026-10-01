@@ -1,0 +1,19 @@
+{
+  "cell_id": "05-H1b-B-Q",
+  "child_returncode": 0,
+  "command": [
+    "/Users/do/git/mlx-dspark/.venv/bin/python",
+    "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/probes/product_sweep.py",
+    "--run-cell",
+    "--order",
+    "5",
+    "--target",
+    "H1b",
+    "--drafter",
+    "B-Q",
+    "--output",
+    "specs/003-product-golden-hybrid-sweep/evidence/cells/05-H1b-B-Q.json"
+  ],
+  "orchestrator_end_unix": 1790384393.307441,
+  "orchestrator_start_unix": 1790384335.129041
+}

@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/Users/do/git/mlx-dspark/.venv/bin/python",
+    "/Users/do/git/mlx-dspark/specs/004-golden-prompt-panel/evidence/probes/prompt_panel.py",
+    "--run-observation",
+    "--prompt-id",
+    "P06",
+    "--role",
+    "screen",
+    "--sequence",
+    "6",
+    "--output",
+    "/Users/do/git/mlx-dspark/specs/004-golden-prompt-panel/evidence/screen-attempt-03/06-P06-screen.json"
+  ],
+  "end_unix": 1790410616.69503,
+  "prompt_id": "P06",
+  "returncode": 0,
+  "role": "screen",
+  "sequence": 6,
+  "start_unix": 1790410596.999058,
+  "start_utc": "2026-09-26T08:16:36Z",
+  "stdout": "  predicted tok/s by cap (prior accept): {1: 20.1, 2: 23.5, 3: 22.0, 4: 20.2, 5: 21.5, 6: 22.5, 7: 23.1} -> starting cap 2, knee-best 2\n{\"status\": \"GOLDEN_CANDIDATE\", \"sha256\": \"5828e77584bd4c87bc9d5f0e46939fb0fb5bd9f9ceaba80e3938df1e95aac533\", \"raw_result\": \"/Users/do/git/mlx-dspark/specs/004-golden-prompt-panel/evidence/screen-attempt-03/06-P06-screen.json\"}\n"
+}

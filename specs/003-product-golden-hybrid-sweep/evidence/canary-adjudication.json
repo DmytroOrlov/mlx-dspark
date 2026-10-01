@@ -1,0 +1,29 @@
+{
+  "continuation_rows": 0,
+  "decision": "CONTINUE_SWEEP",
+  "historical_golden_a": {
+    "acceptance": 0.6482335,
+    "generated_per_forward": 5.4893617,
+    "generated_tokens": 516,
+    "mean_accepted": 5.4893617,
+    "peak_gib": 15.916,
+    "rounds": 93,
+    "serial_target_tok_s": 15.4992848,
+    "speculative_decode_tok_s": 45.7788518,
+    "speedup": 2.95361,
+    "target_forwards": 94,
+    "width_distribution": {
+      "7": 93
+    }
+  },
+  "observed": {
+    "acceptance": 0.6388467374810318,
+    "generated_per_target_forward": 5.295918367346939,
+    "speculative_decode_tok_s": 43.91790108127499,
+    "target_forwards": 98
+  },
+  "raw_result": "specs/003-product-golden-hybrid-sweep/evidence/canary/01-H0-B-Q.json",
+  "raw_sha256": "75fd2de9bdbae855f0a5d55b8a8692bf9b9693dba494f00863210006726db340",
+  "reason": "canary clearly returned to the historical product regime",
+  "schema": "product-sweep-canary-adjudication/v1"
+}

@@ -1,0 +1,120 @@
+{
+  "all_runs_passed": true,
+  "order": [
+    "H0",
+    "H1a",
+    "H2",
+    "H1b",
+    "H3",
+    "H1c",
+    "B0",
+    "H0"
+  ],
+  "prompt_corpus": {
+    "generation": {
+      "frequency_penalty": 0.0,
+      "max_new_tokens": 128,
+      "presence_penalty": 0.0,
+      "seed": 0,
+      "stop": [],
+      "temperature": 0.0,
+      "top_k": 0,
+      "top_p": 1.0
+    },
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/prompts.json",
+    "prompt_count": 3,
+    "sha256": "0f5966cc96d28800a7240abccc68af3357a016ab7ee15998481bd556917eb4c0"
+  },
+  "runs": [
+    {
+      "decode_tokens_per_sec": 35.697870194581114,
+      "order_index": 1,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-01-h0-95426c/result.json",
+      "run_id": "discovery-01-h0-95426c",
+      "serial_tps": 15.039851378383634,
+      "sha256": "3a7452c521bd5a2dc7b23b5779d6789b6f050df59322cefaff743e7757934acd",
+      "speedup": 2.3735520582263656,
+      "variant": "H0"
+    },
+    {
+      "decode_tokens_per_sec": 29.382351934820253,
+      "order_index": 2,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-02-h1a-983014/result.json",
+      "run_id": "discovery-02-h1a-983014",
+      "serial_tps": 15.078438867964774,
+      "sha256": "759a78a531882a1dfdbcf1d90ef12f55622212509e5708f1f572bae5ac17afa8",
+      "speedup": 1.9486335549793001,
+      "variant": "H1a"
+    },
+    {
+      "decode_tokens_per_sec": 32.04019289049384,
+      "order_index": 3,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-03-h2-207d08/result.json",
+      "run_id": "discovery-03-h2-207d08",
+      "serial_tps": 15.327435835141703,
+      "sha256": "7fff4af7d91fa0c28c8ca8ef444d6e5a6e2ae451c14df90c3f3df137a3fd61a4",
+      "speedup": 2.09038179869814,
+      "variant": "H2"
+    },
+    {
+      "decode_tokens_per_sec": 34.45118915394194,
+      "order_index": 4,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-04-h1b-aaa0df/result.json",
+      "run_id": "discovery-04-h1b-aaa0df",
+      "serial_tps": 15.025228498791437,
+      "sha256": "a2baca710cc981f48dc02253737be23a91dbc54ca503c4a2628a2049abd931d5",
+      "speedup": 2.292889532875526,
+      "variant": "H1b"
+    },
+    {
+      "decode_tokens_per_sec": 33.18100283662675,
+      "order_index": 5,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-05-h3-84799d/result.json",
+      "run_id": "discovery-05-h3-84799d",
+      "serial_tps": 15.697494729475759,
+      "sha256": "a068628cf4d4592a17cd5a8796a857e9fb296df68ad71665cbb2dda1e123b9a7",
+      "speedup": 2.1137769694116586,
+      "variant": "H3"
+    },
+    {
+      "decode_tokens_per_sec": 33.711848699536745,
+      "order_index": 6,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-06-h1c-0fd978/result.json",
+      "run_id": "discovery-06-h1c-0fd978",
+      "serial_tps": 15.145079669955347,
+      "sha256": "b2ae44d03a793b78a6efa2fa6f1fd89a545f6f60e7ff9d837f72ab59687957f5",
+      "speedup": 2.2259274585668876,
+      "variant": "H1c"
+    },
+    {
+      "decode_tokens_per_sec": 32.81147152841484,
+      "order_index": 7,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-07-b0-e37d8b/result.json",
+      "run_id": "discovery-07-b0-e37d8b",
+      "serial_tps": 24.837206031646044,
+      "sha256": "45b3480ef67ed07811463f33b90e64c857dfb152a1ecbcb263b5a9ba43233f28",
+      "speedup": 1.3210612935532473,
+      "variant": "B0"
+    },
+    {
+      "decode_tokens_per_sec": 35.13618396818502,
+      "order_index": 8,
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-08-h0-37e145/result.json",
+      "run_id": "discovery-08-h0-37e145",
+      "serial_tps": 14.71157575468549,
+      "sha256": "3f2cc0f428d11ae99544b72feccca1b159bb191d503b87f6f2cdf9cc08ccbb95",
+      "speedup": 2.3883358624581392,
+      "variant": "H0"
+    }
+  ],
+  "schema": "qwen-bonsai-series-a-discovery-order/v1",
+  "series_a_discovery_started": true
+}

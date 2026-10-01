@@ -1,0 +1,206 @@
+{
+  "donor_repo": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+  "donor_revision": "fcba37d2117a7077eac6b613b2668d14d9779edd",
+  "donor_snapshot": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+  "failure": null,
+  "observations": {
+    "after_pruning_release_cache_cleanup": {
+      "active_bytes": 861875848,
+      "cache_bytes": 0,
+      "label": "after_pruning_release_cache_cleanup",
+      "peak_bytes": 7618502152,
+      "timestamp_unix": 1790293925.29825
+    },
+    "before_donor_load": {
+      "active_bytes": 1032,
+      "cache_bytes": 0,
+      "label": "before_donor_load",
+      "peak_bytes": 1032,
+      "timestamp_unix": 1790293924.825771
+    },
+    "cache_cleared": true,
+    "donor_peak": {
+      "active_bytes": 7609702408,
+      "cache_bytes": 18340012,
+      "label": "donor_peak",
+      "peak_bytes": 7618502152,
+      "timestamp_unix": 1790293925.1981812
+    },
+    "full_donor_active_reclaim_fraction": 0.8867398747296715,
+    "immediately_before_qwen_load": {
+      "active_bytes": 861875848,
+      "cache_bytes": 0,
+      "label": "immediately_before_qwen_load",
+      "peak_bytes": 7618502152,
+      "timestamp_unix": 1790293925.298302
+    },
+    "load_path": "prism_pack.load",
+    "selected_donor_parameter_bytes": 862528128
+  },
+  "passed": true,
+  "provenance": {
+    "config": {
+      "architectures": null,
+      "model_type": "prism_hadamard_qwen35",
+      "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd/config.json",
+      "sha256": "238de7c512cc56a733421e3fd011d88f8260739e3d00e32c5d65b7943cc9f837",
+      "text_config": {
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "attn_output_gate": true,
+        "bos_token_id": 248044,
+        "dtype": "bfloat16",
+        "eos_token_id": 248044,
+        "full_attention_interval": 4,
+        "head_dim": 256,
+        "hidden_act": "silu",
+        "hidden_size": 5120,
+        "initializer_range": 0.02,
+        "intermediate_size": 17408,
+        "layer_types": [
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention",
+          "linear_attention",
+          "linear_attention",
+          "linear_attention",
+          "full_attention"
+        ],
+        "linear_conv_kernel_dim": 4,
+        "linear_key_head_dim": 128,
+        "linear_num_key_heads": 16,
+        "linear_num_value_heads": 48,
+        "linear_value_head_dim": 128,
+        "mamba_ssm_dtype": "float32",
+        "max_position_embeddings": 262144,
+        "model_type": "qwen3_5_text",
+        "mtp_num_hidden_layers": 0,
+        "mtp_use_dedicated_embeddings": false,
+        "num_attention_heads": 24,
+        "num_hidden_layers": 64,
+        "num_key_value_heads": 4,
+        "output_gate_type": "swish",
+        "pad_token_id": null,
+        "partial_rotary_factor": 0.25,
+        "rms_norm_eps": 1e-06,
+        "rope_parameters": {
+          "mrope_interleaved": true,
+          "mrope_section": [
+            11,
+            11,
+            10
+          ],
+          "partial_rotary_factor": 0.25,
+          "rope_theta": 10000000,
+          "rope_type": "default"
+        },
+        "tie_word_embeddings": false,
+        "use_cache": true,
+        "vocab_size": 248320
+      }
+    },
+    "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+    "resolved_path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+    "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd",
+    "tokenizer_identity": {
+      "files": [
+        {
+          "name": "tokenizer.json",
+          "sha256": "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3"
+        },
+        {
+          "name": "tokenizer_config.json",
+          "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27"
+        }
+      ],
+      "shared_with": null,
+      "vocab_size": 248320
+    },
+    "weights": [
+      {
+        "fingerprint_method": "SHA-256 over complete file bytes",
+        "name": "model.safetensors",
+        "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd/model.safetensors",
+        "sha256": "130de5925082c168b7866b2e91b52e44abbafc99017e3ca352b77b5b55a269ed",
+        "size_bytes": 8595477990
+      }
+    ]
+  },
+  "qwen_load_attempted": false,
+  "retained_donor_indices": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "schema": "qwen-bonsai-donor-memory-release/v1",
+  "selected_donor_parameter_bytes": 862528128,
+  "selective_loading_fallback_used": false,
+  "thresholds": {
+    "basis": "Eight retained suffix blocks are a minority of the 64-block donor. Require at least half of peak active MLX residency to disappear, record retained parameter bytes, and clear allocator cache before considering Qwen load.",
+    "maximum_post_prune_active_fraction_of_donor_peak": 0.5,
+    "maximum_post_prune_cache_bytes": 268435456,
+    "minimum_active_memory_reclaim_fraction": 0.5
+  }
+}

@@ -1,0 +1,1492 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "06-H1b-B-B",
+    "comparison": null,
+    "drafter": "B-B",
+    "order": 6,
+    "prompt_id": "P05",
+    "repeat": true,
+    "target": "H1b"
+  },
+  "attempt_id": "feat005-20260926-b1",
+  "configuration": {
+    "bonsai_owned_block_count": 1,
+    "drafter": "B-B",
+    "drafter_identity": {
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+    },
+    "target": "H1b",
+    "target_identity": {
+      "blocks": [
+        62
+      ],
+      "donor": {
+        "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+        "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+      },
+      "embedding": "Qwen",
+      "final_norm": "Qwen",
+      "kind": "Qwen_shell_composition",
+      "lm_head": "Qwen",
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 76033,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.8775100401606426,
+    "active_baseline_bytes": 16389242514,
+    "active_baseline_gib": 15.263671534135938,
+    "cap_distribution": {
+      "2": 4,
+      "7": 70
+    },
+    "decode_duration_seconds": 8.936171054840088,
+    "generated_tokens": 512,
+    "generated_tokens_per_target_forward": 6.826666666666667,
+    "mean_accepted_draft_tokens": 5.905405405405405,
+    "output_sha256": "40eda432d38fd5befb33258c09f75cb3378d37082ac54a420140faf6ab557789",
+    "output_text": "```python\ndef merge_sorted_lists(list1: list, list2: list) -> list:\n    \"\"\"\n    Merge two sorted lists into a single sorted list.\n    \n    Args:\n        list1: First sorted list (non-decreasing order).\n        list2: Second sorted list (non-decreasing order).\n    \n    Returns:\n        A new sorted list containing all elements from both input lists.\n    \"\"\"\n    merged = []\n    i, j = 0, 0\n    len1, len2 = len(list1), len(list2)\n    \n    while i < len1 and j < len2:\n        if list1[i] <= list2[j]:\n            merged.append(list1[i])\n            i += 1\n        else:\n            merged.append(list2[j])\n            j += 1\n    \n    # Append remaining elements\n    while i < len1:\n        merged.append(list1[i])\n        i += 1\n    \n    while j < len2:\n        merged.append(list2[j])\n        j += 1\n    \n    return merged\n\n\ndef test_merge_sorted_lists():\n    \"\"\"Test cases for merge_sorted_lists.\"\"\"\n    # Test with empty lists\n    assert merge_sorted_lists([], []) == []\n    assert merge_sorted_lists([1, 2, 3], []) == [1, 2, 3]\n    assert merge_sorted_lists([], [4, 5, 6]) == [4, 5, 6]\n    \n    # Test with single elements\n    assert merge_sorted_lists([1], [2]) == [1, 2]\n    assert merge_sorted_lists([2], [1]) == [1, 2]\n    assert merge_sorted_lists([1], [1]) == [1, 1]\n    \n    # Test with overlapping ranges\n    assert merge_sorted_lists([1, 3, 5], [2, 4, 6]) == [1, 2, 3, 4, 5, 6]\n    assert merge_sorted_lists([1, 2, 3], [3, 4, 5]) == [1, 2, 3, 3, 4, 5]\n    assert merge_sorted_lists([1, 2, 3], [1, 2, 3]) == [1, 1, 2",
+    "output_tokens_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "peak_increment_bytes": 597191052,
+    "peak_increment_gib": 0.5561775080859661,
+    "peak_runtime_bytes": 16986433566,
+    "peak_runtime_gib": 15.819849042221904,
+    "request_duration_seconds": 9.627978875301778,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 787.3,
+        "req": "10c00f37",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1692.6
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 92.07,
+        "req": "10c00f37",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1784.7
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 86.84,
+        "req": "10c00f37",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1871.5
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 86.71,
+        "req": "10c00f37",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1958.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 119.24,
+        "req": "10c00f37",
+        "seq": 5,
+        "source": "drafter",
+        "t": 2077.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 119.91,
+        "req": "10c00f37",
+        "seq": 6,
+        "source": "drafter",
+        "t": 2197.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 121.17,
+        "req": "10c00f37",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2318.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 124.69,
+        "req": "10c00f37",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2443.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 128.04,
+        "req": "10c00f37",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2571.3
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 129.18,
+        "req": "10c00f37",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2700.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 121.13,
+        "req": "10c00f37",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2821.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 119.95,
+        "req": "10c00f37",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2941.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 119.63,
+        "req": "10c00f37",
+        "seq": 13,
+        "source": "drafter",
+        "t": 3061.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 120.41,
+        "req": "10c00f37",
+        "seq": 14,
+        "source": "drafter",
+        "t": 3181.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 122.43,
+        "req": "10c00f37",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3304.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 121.24,
+        "req": "10c00f37",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3425.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 122.54,
+        "req": "10c00f37",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3547.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 127.52,
+        "req": "10c00f37",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3675.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 129.64,
+        "req": "10c00f37",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3804.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 128.52,
+        "req": "10c00f37",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3933.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 127.49,
+        "req": "10c00f37",
+        "seq": 21,
+        "source": "drafter",
+        "t": 4060.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 121.21,
+        "req": "10c00f37",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4182.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 127.28,
+        "req": "10c00f37",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4309.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 120.14,
+        "req": "10c00f37",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4429.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 120.25,
+        "req": "10c00f37",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4549.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 120.74,
+        "req": "10c00f37",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4670.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 120.88,
+        "req": "10c00f37",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4791.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 125.89,
+        "req": "10c00f37",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4917.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 124.98,
+        "req": "10c00f37",
+        "seq": 29,
+        "source": "drafter",
+        "t": 5042.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 120.7,
+        "req": "10c00f37",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5163.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 120.55,
+        "req": "10c00f37",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5283.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 122.17,
+        "req": "10c00f37",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5405.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 121.76,
+        "req": "10c00f37",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5527.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 121.14,
+        "req": "10c00f37",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5648.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 121.88,
+        "req": "10c00f37",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5770.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 123.16,
+        "req": "10c00f37",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5893.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 121.27,
+        "req": "10c00f37",
+        "seq": 37,
+        "source": "drafter",
+        "t": 6014.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 120.72,
+        "req": "10c00f37",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6135.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 122.46,
+        "req": "10c00f37",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6258.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 121.54,
+        "req": "10c00f37",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6379.7
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 120.46,
+        "req": "10c00f37",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6500.1
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 122.45,
+        "req": "10c00f37",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6622.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 123.47,
+        "req": "10c00f37",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6746.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 120.91,
+        "req": "10c00f37",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6866.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 121.67,
+        "req": "10c00f37",
+        "seq": 45,
+        "source": "drafter",
+        "t": 6988.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 122.28,
+        "req": "10c00f37",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7110.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 120.79,
+        "req": "10c00f37",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7231.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 120.94,
+        "req": "10c00f37",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7352.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 121.38,
+        "req": "10c00f37",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7474.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 122.89,
+        "req": "10c00f37",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7596.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 120.88,
+        "req": "10c00f37",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7717.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 121.43,
+        "req": "10c00f37",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7839.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 121.22,
+        "req": "10c00f37",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7960.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 121.12,
+        "req": "10c00f37",
+        "seq": 54,
+        "source": "drafter",
+        "t": 8081.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 121.05,
+        "req": "10c00f37",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8202.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 121.17,
+        "req": "10c00f37",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8323.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 125.07,
+        "req": "10c00f37",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8448.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 121.68,
+        "req": "10c00f37",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8570.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 123.52,
+        "req": "10c00f37",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8694.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 121.56,
+        "req": "10c00f37",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8815.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 122.13,
+        "req": "10c00f37",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8937.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 121.96,
+        "req": "10c00f37",
+        "seq": 62,
+        "source": "drafter",
+        "t": 9059.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 121.58,
+        "req": "10c00f37",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9181.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 122.52,
+        "req": "10c00f37",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9303.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 121.26,
+        "req": "10c00f37",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9425.0
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 121.33,
+        "req": "10c00f37",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9546.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 122.72,
+        "req": "10c00f37",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9669.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 123.33,
+        "req": "10c00f37",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9792.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 122.92,
+        "req": "10c00f37",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9915.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 122.52,
+        "req": "10c00f37",
+        "seq": 70,
+        "source": "drafter",
+        "t": 10037.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 121.49,
+        "req": "10c00f37",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10159.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 123.43,
+        "req": "10c00f37",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10282.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 123.52,
+        "req": "10c00f37",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10406.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 126.02,
+        "req": "10c00f37",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10532.3
+      }
+    ],
+    "rounds": 74,
+    "speculative_decode_tok_s": 57.29523269618771,
+    "stop_reason": null,
+    "target_forwards": 75,
+    "width_distribution": {
+      "2": 4,
+      "7": 70
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_monotonic": 2359624.606975083,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_read_monotonic": 2359634.234953958,
+    "request_end_monotonic": 2359634.234953958,
+    "request_start_monotonic": 2359624.606975083,
+    "reset_called": true,
+    "reset_monotonic": 2359624.60695225
+  },
+  "preflight": {
+    "identity": "feat005-20260926-b1:PASS",
+    "path": "preflight.json",
+    "sha256": "4764f5bd76372b2cf3fb8a29dcfb364c019b874907201b33420e0696bd1ac98d"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      12654,
+      709,
+      421,
+      78161,
+      1330,
+      10300,
+      11140,
+      1083,
+      264,
+      3074,
+      10300,
+      1103,
+      13,
+      28763,
+      6813,
+      321,
+      264,
+      2716,
+      22373,
+      6157,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "c54a5a3a09fdbbd76abfeb4cf6343fa799415d1b42a2742a7af0eb370dfd1433",
+    "input_token_count": 35,
+    "label": "Merge sorted lists",
+    "prompt_id": "P05",
+    "rendered_prompt": "<|im_start|>user\nWrite a Python function that merges two sorted lists into a single sorted list. Include tests and a short complexity analysis.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a Python function that merges two sorted lists into a single sorted list. Include tests and a short complexity analysis.",
+    "text_sha256": "5100b25d1e533dff3fe973119092029818e11e100ca8c4a9437cceed6b926b65"
+  },
+  "provenance": {
+    "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 19.164135458879173,
+    "process_started_utc": "2026-09-26T09:46:34Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+    "target_revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "runner_sha256": "0853d741c57b38b996b2ccbbbda8e50b3a80ac4001d4141c9558b833424d86dc",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.958,
+      "predicted_rates": {
+        "1": 20.7,
+        "2": 28.8,
+        "3": 31.4,
+        "4": 32.9,
+        "5": 39.1,
+        "6": 45.2,
+        "7": 51.1
+      },
+      "rounds": 74
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

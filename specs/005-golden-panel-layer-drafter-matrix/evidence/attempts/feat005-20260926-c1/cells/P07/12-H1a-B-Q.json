@@ -1,0 +1,1870 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "12-H1a-B-Q",
+    "comparison": null,
+    "drafter": "B-Q",
+    "order": 12,
+    "prompt_id": "P07",
+    "repeat": false,
+    "target": "H1a"
+  },
+  "attempt_id": "feat005-20260926-c1",
+  "configuration": {
+    "bonsai_owned_block_count": 1,
+    "drafter": "B-Q",
+    "drafter_identity": {
+      "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+    },
+    "target": "H1a",
+    "target_identity": {
+      "blocks": [
+        63
+      ],
+      "donor": {
+        "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+        "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+      },
+      "embedding": "Qwen",
+      "final_norm": "Qwen",
+      "kind": "Qwen_shell_composition",
+      "lm_head": "Qwen",
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 77648,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.5905848787446505,
+    "active_baseline_bytes": 16391501586,
+    "active_baseline_gib": 15.26577545888722,
+    "cap_distribution": {
+      "2": 4,
+      "7": 99
+    },
+    "decode_duration_seconds": 12.540832996368408,
+    "generated_tokens": 518,
+    "generated_tokens_per_target_forward": 4.980769230769231,
+    "mean_accepted_draft_tokens": 4.019417475728155,
+    "output_integrity_mode": "text_only",
+    "output_sha256": "f8cdef471cbce660a5d71cfa79a3891321162f8b25520dc9399b80bb168fe90d",
+    "output_text": "```python\nfrom typing import Optional\nfrom collections import Counter\n\n\ndef first_non_repeating_char(s: str) -> Optional[str]:\n    \"\"\"\n    Return the first non-repeating character in the string.\n    \n    If no such character exists, return None.\n    \n    Args:\n        s: The input string to search.\n        \n    Returns:\n        The first character that appears exactly once, or None if all\n        characters are repeated.\n    \"\"\"\n    if not s:\n        return None\n\n    # Count the frequency of each character\n    char_count: Counter = Counter(s)\n\n    # Iterate through the string in order and return the first\n    # character with a count of 1\n    for char in s:\n        if char_count[char] == 1:\n            return char\n\n    return None\n\n\n# Unit tests\nif __name__ == \"__main__\":\n    import unittest\n\n    class TestFirstNonRepeatingChar(unittest.TestCase):\n        def test_simple_case(self) -> None:\n            \"\"\"Test a simple string with a non-repeating character.\"\"\"\n            self.assertEqual(first_non_repeating_char(\"aabbcc\"), \"c\")\n\n        def test_all_repeated(self) -> None:\n            \"\"\"Test a string where all characters are repeated.\"\"\"\n            self.assertIsNone(first_non_repeating_char(\"aabb\"))\n\n        def test_single_char(self) -> None:\n            \"\"\"Test a string with a single character.\"\"\"\n            self.assertEqual(first_non_repeating_char(\"a\"), \"a\")\n\n        def test_empty_string(self) -> None:\n            \"\"\"Test an empty string.\"\"\"\n            self.assertIsNone(first_non_repeating_char(\"\"))\n\n        def test_first_non_repeating_is_early(self) -> None:\n            \"\"\"Test that the first non-repeating character is returned, not the last.\"\"\"\n            self.assertEqual(first_non_repeating_char(\"aabbccdd\"), \"c\")\n\n        def test_mixed_repeated_and_non_repeated(self) -> None:\n            \"\"\"Test a string with a mix of repeated and non-repeated characters.\"\"\"\n            # 'a' and 'b' are repeated, 'c' is not, 'd' is not\n            # The first non-repeating is 'c'\n            self.assertEqual(first_non_repeating_char(\"abac\"), \"c\")\n\n        def test_all_unique(self) -> None:\n            \"\"\"Test a string where all characters are unique.\"\"\"\n            self",
+    "output_tokens": null,
+    "output_tokens_sha256": null,
+    "peak_increment_bytes": 601686508,
+    "peak_increment_gib": 0.5603642277419567,
+    "peak_runtime_bytes": 16993188094,
+    "peak_runtime_gib": 15.826139686629176,
+    "request_duration_seconds": 13.202037584036589,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 751.41,
+        "req": "2be33c0c",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1729.2
+      },
+      {
+        "accepted": 0,
+        "cap": 2,
+        "committed": 1,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 87.18,
+        "req": "2be33c0c",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1816.4
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 89.97,
+        "req": "2be33c0c",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1906.3
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 87.68,
+        "req": "2be33c0c",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1994.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 119.57,
+        "req": "2be33c0c",
+        "seq": 5,
+        "source": "drafter",
+        "t": 2113.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 120.34,
+        "req": "2be33c0c",
+        "seq": 6,
+        "source": "drafter",
+        "t": 2233.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 120.22,
+        "req": "2be33c0c",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2354.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 120.24,
+        "req": "2be33c0c",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2474.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 120.27,
+        "req": "2be33c0c",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2594.7
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 122.2,
+        "req": "2be33c0c",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2716.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 122.53,
+        "req": "2be33c0c",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2839.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 120.47,
+        "req": "2be33c0c",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2959.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 120.47,
+        "req": "2be33c0c",
+        "seq": 13,
+        "source": "drafter",
+        "t": 3080.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 122.11,
+        "req": "2be33c0c",
+        "seq": 14,
+        "source": "drafter",
+        "t": 3202.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 120.39,
+        "req": "2be33c0c",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3322.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 120.49,
+        "req": "2be33c0c",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3443.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 121.99,
+        "req": "2be33c0c",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3565.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 122.51,
+        "req": "2be33c0c",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3687.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 120.38,
+        "req": "2be33c0c",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3808.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 120.47,
+        "req": "2be33c0c",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3928.7
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 121.65,
+        "req": "2be33c0c",
+        "seq": 21,
+        "source": "drafter",
+        "t": 4050.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 122.17,
+        "req": "2be33c0c",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4172.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 121.82,
+        "req": "2be33c0c",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4294.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 123.88,
+        "req": "2be33c0c",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4418.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 125.21,
+        "req": "2be33c0c",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4543.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 125.36,
+        "req": "2be33c0c",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4668.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 125.78,
+        "req": "2be33c0c",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4794.5
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 125.23,
+        "req": "2be33c0c",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4919.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 126.85,
+        "req": "2be33c0c",
+        "seq": 29,
+        "source": "drafter",
+        "t": 5046.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 126.57,
+        "req": "2be33c0c",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5173.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 121.73,
+        "req": "2be33c0c",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5294.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 121.5,
+        "req": "2be33c0c",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5416.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 121.17,
+        "req": "2be33c0c",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5537.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 120.31,
+        "req": "2be33c0c",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5657.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 123.12,
+        "req": "2be33c0c",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5781.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 122.68,
+        "req": "2be33c0c",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5903.7
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 120.65,
+        "req": "2be33c0c",
+        "seq": 37,
+        "source": "drafter",
+        "t": 6024.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 123.29,
+        "req": "2be33c0c",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6147.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 123.01,
+        "req": "2be33c0c",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6270.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 123.41,
+        "req": "2be33c0c",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6394.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 122.52,
+        "req": "2be33c0c",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6516.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 122.41,
+        "req": "2be33c0c",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6639.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 122.37,
+        "req": "2be33c0c",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6761.4
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 123.79,
+        "req": "2be33c0c",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6885.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 122.31,
+        "req": "2be33c0c",
+        "seq": 45,
+        "source": "drafter",
+        "t": 7007.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 121.45,
+        "req": "2be33c0c",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7128.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 121.35,
+        "req": "2be33c0c",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7250.3
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 123.0,
+        "req": "2be33c0c",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7373.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 122.85,
+        "req": "2be33c0c",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7496.1
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 122.29,
+        "req": "2be33c0c",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7618.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 122.33,
+        "req": "2be33c0c",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7740.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 121.91,
+        "req": "2be33c0c",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7862.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 123.05,
+        "req": "2be33c0c",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7985.7
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 124.26,
+        "req": "2be33c0c",
+        "seq": 54,
+        "source": "drafter",
+        "t": 8110.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 125.01,
+        "req": "2be33c0c",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8235.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 124.85,
+        "req": "2be33c0c",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8359.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 122.28,
+        "req": "2be33c0c",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8482.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 123.04,
+        "req": "2be33c0c",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8605.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 127.15,
+        "req": "2be33c0c",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8732.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 125.9,
+        "req": "2be33c0c",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8858.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 127.06,
+        "req": "2be33c0c",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8985.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 124.53,
+        "req": "2be33c0c",
+        "seq": 62,
+        "source": "drafter",
+        "t": 9109.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 121.45,
+        "req": "2be33c0c",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9231.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 121.33,
+        "req": "2be33c0c",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9352.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 121.07,
+        "req": "2be33c0c",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9473.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 121.77,
+        "req": "2be33c0c",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9595.4
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 122.94,
+        "req": "2be33c0c",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9718.4
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 122.88,
+        "req": "2be33c0c",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9841.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 124.36,
+        "req": "2be33c0c",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9965.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 122.76,
+        "req": "2be33c0c",
+        "seq": 70,
+        "source": "drafter",
+        "t": 10088.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 123.94,
+        "req": "2be33c0c",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10212.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 122.44,
+        "req": "2be33c0c",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10334.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 121.76,
+        "req": "2be33c0c",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10456.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 123.37,
+        "req": "2be33c0c",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10579.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 122.69,
+        "req": "2be33c0c",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10702.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 124.86,
+        "req": "2be33c0c",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10827.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 125.2,
+        "req": "2be33c0c",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10952.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 126.91,
+        "req": "2be33c0c",
+        "seq": 78,
+        "source": "drafter",
+        "t": 11079.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 126.71,
+        "req": "2be33c0c",
+        "seq": 79,
+        "source": "drafter",
+        "t": 11206.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 125.32,
+        "req": "2be33c0c",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11331.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 127.3,
+        "req": "2be33c0c",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11458.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 126.52,
+        "req": "2be33c0c",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11585.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 126.23,
+        "req": "2be33c0c",
+        "seq": 83,
+        "source": "drafter",
+        "t": 11711.6
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 122.83,
+        "req": "2be33c0c",
+        "seq": 84,
+        "source": "drafter",
+        "t": 11834.5
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 123.97,
+        "req": "2be33c0c",
+        "seq": 85,
+        "source": "drafter",
+        "t": 11958.5
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 124.7,
+        "req": "2be33c0c",
+        "seq": 86,
+        "source": "drafter",
+        "t": 12083.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 86,
+        "mode": "dflash",
+        "ms": 123.87,
+        "req": "2be33c0c",
+        "seq": 87,
+        "source": "drafter",
+        "t": 12207.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 87,
+        "mode": "dflash",
+        "ms": 123.59,
+        "req": "2be33c0c",
+        "seq": 88,
+        "source": "drafter",
+        "t": 12330.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 88,
+        "mode": "dflash",
+        "ms": 123.66,
+        "req": "2be33c0c",
+        "seq": 89,
+        "source": "drafter",
+        "t": 12454.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 89,
+        "mode": "dflash",
+        "ms": 121.87,
+        "req": "2be33c0c",
+        "seq": 90,
+        "source": "drafter",
+        "t": 12576.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 90,
+        "mode": "dflash",
+        "ms": 123.64,
+        "req": "2be33c0c",
+        "seq": 91,
+        "source": "drafter",
+        "t": 12699.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 91,
+        "mode": "dflash",
+        "ms": 123.84,
+        "req": "2be33c0c",
+        "seq": 92,
+        "source": "drafter",
+        "t": 12823.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 92,
+        "mode": "dflash",
+        "ms": 122.61,
+        "req": "2be33c0c",
+        "seq": 93,
+        "source": "drafter",
+        "t": 12946.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 93,
+        "mode": "dflash",
+        "ms": 123.5,
+        "req": "2be33c0c",
+        "seq": 94,
+        "source": "drafter",
+        "t": 13069.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 94,
+        "mode": "dflash",
+        "ms": 122.41,
+        "req": "2be33c0c",
+        "seq": 95,
+        "source": "drafter",
+        "t": 13192.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 95,
+        "mode": "dflash",
+        "ms": 122.15,
+        "req": "2be33c0c",
+        "seq": 96,
+        "source": "drafter",
+        "t": 13314.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 96,
+        "mode": "dflash",
+        "ms": 124.04,
+        "req": "2be33c0c",
+        "seq": 97,
+        "source": "drafter",
+        "t": 13438.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 97,
+        "mode": "dflash",
+        "ms": 123.95,
+        "req": "2be33c0c",
+        "seq": 98,
+        "source": "drafter",
+        "t": 13562.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 98,
+        "mode": "dflash",
+        "ms": 123.45,
+        "req": "2be33c0c",
+        "seq": 99,
+        "source": "drafter",
+        "t": 13685.7
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 99,
+        "mode": "dflash",
+        "ms": 121.91,
+        "req": "2be33c0c",
+        "seq": 100,
+        "source": "drafter",
+        "t": 13807.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 100,
+        "mode": "dflash",
+        "ms": 123.76,
+        "req": "2be33c0c",
+        "seq": 101,
+        "source": "drafter",
+        "t": 13931.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 101,
+        "mode": "dflash",
+        "ms": 123.39,
+        "req": "2be33c0c",
+        "seq": 102,
+        "source": "drafter",
+        "t": 14054.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 102,
+        "mode": "dflash",
+        "ms": 123.94,
+        "req": "2be33c0c",
+        "seq": 103,
+        "source": "drafter",
+        "t": 14178.7
+      }
+    ],
+    "rounds": 103,
+    "speculative_decode_tok_s": 41.305071214169196,
+    "stop_reason": null,
+    "target_forwards": 104,
+    "width_distribution": {
+      "2": 4,
+      "7": 99
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_captured": 2361078202580291,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_captured": 2361091404629708,
+    "request_ended": 2361091404617958,
+    "request_started": 2361078202580791,
+    "reset_called": true,
+    "reset_completed": 2361078202574166
+  },
+  "preflight": {
+    "identity": "feat005-20260926-c1:PASS",
+    "path": "preflight.json",
+    "sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      12654,
+      709,
+      421,
+      4523,
+      279,
+      1118,
+      2397,
+      5331,
+      62683,
+      3542,
+      303,
+      264,
+      886,
+      13,
+      28763,
+      913,
+      29642,
+      321,
+      4821,
+      6813,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "f0610a3c0f59bf39d7974f1e354c10c692934aa60d8aa9f126da732d816533ab",
+    "input_token_count": 35,
+    "label": "First unique character",
+    "prompt_id": "P07",
+    "rendered_prompt": "<|im_start|>user\nWrite a Python function that returns the first non-repeating character in a string. Include type hints and unit tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a Python function that returns the first non-repeating character in a string. Include type hints and unit tests.",
+    "text_sha256": "1844beef6c157201c373cb58e5d8a22fdf31a3fa74d0de5217a00a5ff908874e"
+  },
+  "provenance": {
+    "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 22.843063000123948,
+    "process_started_utc": "2026-09-26T10:10:47Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": null,
+    "target_revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.862,
+      "predicted_rates": {
+        "1": 22.0,
+        "2": 27.7,
+        "3": 28.7,
+        "4": 28.7,
+        "5": 32.6,
+        "6": 36.2,
+        "7": 40.2
+      },
+      "rounds": 103
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

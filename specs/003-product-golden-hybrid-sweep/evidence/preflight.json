@@ -1,0 +1,184 @@
+{
+  "benchmark_performed": false,
+  "checkpoints": {
+    "B-B": {
+      "files": [
+        {
+          "content_addressed_blob_name": "79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+          "name": "config.json",
+          "sha256": null,
+          "size_bytes": 1239
+        }
+      ],
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "selected_weight": {
+        "accepted_full_file_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "accepted_record": "feature-002 Series-B checkpoints.json; full downloaded-file SHA-256",
+        "name": "model.safetensors",
+        "resolved_blob_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "size_bytes": 3848817904
+      }
+    },
+    "B-Q": {
+      "files": [
+        {
+          "content_addressed_blob_name": "79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+          "name": "config.json",
+          "sha256": null,
+          "size_bytes": 1239
+        },
+        {
+          "content_addressed_blob_name": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+          "name": "model.safetensors",
+          "sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+          "size_bytes": 3848817896
+        }
+      ],
+      "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+    },
+    "Qwen": {
+      "files": [
+        {
+          "content_addressed_blob_name": "3fb03e916f494e6745aa23df751da26f79e06470",
+          "name": "config.json",
+          "sha256": null,
+          "size_bytes": 4932
+        },
+        {
+          "content_addressed_blob_name": "6cc1508e96fb5d0865dfd5753a79f4ec60651bf3e2a82844a7e8ae9c60528c0d",
+          "name": "model-00001-of-00003.safetensors",
+          "sha256": null,
+          "size_bytes": 5343268662
+        },
+        {
+          "content_addressed_blob_name": "83f2a20ca8058f486a3634a27faf99587f4cd3c156a83dee34fb99e6ac178670",
+          "name": "model-00002-of-00003.safetensors",
+          "sha256": null,
+          "size_bytes": 5354185130
+        },
+        {
+          "content_addressed_blob_name": "31b8c91ef899f79efaaa69e3d2c096f6e2ebeb2ff20e29222abbd9ebc79e560a",
+          "name": "model-00003-of-00003.safetensors",
+          "sha256": null,
+          "size_bytes": 5357087557
+        }
+      ],
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    }
+  },
+  "model_free": true,
+  "orchestration": {
+    "child_command": [
+      "/Users/do/git/mlx-dspark/.venv/bin/python",
+      "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/probes/product_sweep.py",
+      "--run-cell",
+      "--order",
+      "1",
+      "--target",
+      "H0",
+      "--drafter",
+      "B-Q",
+      "--output",
+      "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/canary.json"
+    ],
+    "fresh_process_per_cell": true,
+    "kv8": false,
+    "measured_request_state_created_in_child": true,
+    "ordinary_cap_controller": true,
+    "plain_kv": true,
+    "tuning": false,
+    "width_policy": false
+  },
+  "physical_observations": "not asserted by model-free preflight",
+  "request": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      5492,
+      21408,
+      12654,
+      436,
+      34810,
+      6297,
+      440,
+      6813,
+      321,
+      913,
+      29642,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "8bda1dedde8e022452b7dafaa3677dca47dedc350258c0885c4d1e5fde155f59",
+    "input_token_count": 26,
+    "measured_prefix_reuse_expected": 0,
+    "prefix_cache_initialization": "enabled; T027 production Engine settings",
+    "rendered_prompt": "<|im_start|>user\nWrite a production-quality Python LRU cache with tests and type hints.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "settings": {
+      "max_tokens": 512,
+      "temperature": 0,
+      "thinking": false,
+      "top_k": 0,
+      "top_p": 1
+    },
+    "workload": "Write a production-quality Python LRU cache with tests and type hints."
+  },
+  "runtime_comparison": {
+    "src/mlx_dspark/generate.py": {
+      "accepted_feature_002": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "current": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "matches": true
+    },
+    "src/mlx_dspark/hybrid_target.py": {
+      "accepted_feature_002": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "current": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "matches": true
+    },
+    "src/mlx_dspark/load.py": {
+      "accepted_feature_002": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "current": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "matches": true
+    },
+    "src/mlx_dspark/prism_pack.py": {
+      "accepted_feature_002": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "current": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "matches": true
+    },
+    "src/mlx_dspark/server.py": {
+      "accepted_feature_002": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "current": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "matches": true
+    },
+    "src/mlx_dspark/target.py": {
+      "accepted_feature_002": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b",
+      "current": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b",
+      "matches": true
+    }
+  },
+  "runtime_source_sha256": {
+    "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+    "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "schema": "product-sweep-preflight/v1",
+  "source_sha256": "f9928594d81d65e36a4af2d803d287a0aa075d208c4fcc2a7337c6dff9fb7e81",
+  "status": "PASS"
+}

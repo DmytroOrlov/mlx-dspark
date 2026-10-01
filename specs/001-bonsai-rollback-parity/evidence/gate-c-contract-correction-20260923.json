@@ -1,0 +1,227 @@
+{
+  "date": "2026-09-23",
+  "classification": "gate_c_numeric_oracle_contract_correction",
+  "reason": "Production reconciliation reconstructs accepted state from the actual S=8 verify projections/cache effects. Fresh S=1/S=2 executions use different projection execution widths and therefore cannot serve as the raw numeric cache-state oracle for S=8-originating rollback state.",
+  "correct_gate_c_numeric_oracle": {
+    "root": "independent frozen same-runtime S=8 B2 pre-verify/capture",
+    "gdn_recurrent_state": "independently replay captured S=8 q/k/v/a/b[:keep] from captured pre-round recurrent state",
+    "gdn_convolution_window": "independently slice captured S=8 conv_input to the accepted-prefix window using production keep semantics",
+    "attention_kv": "independently trim frozen S=8 attention KV to pre-live-length + keep",
+    "logical_invariants": "accepted-prefix IDs, cache type/shape/order, lengths, offsets and absolute positions remain exact",
+    "tap_and_fused_rows": "compare with corresponding independent same-runtime same-width S=8 B2 rows under their same-path controls"
+  },
+  "fresh_s1_s2_role_after_correction": "serial semantic/behavior reference and cross-width diagnostic; not the raw numeric cache-state oracle for S=8-originating post-reconcile state",
+  "oracle_results": {
+    "mlx_aligned": [
+      {
+        "round_index": 1,
+        "accepted_count": 0,
+        "keep": 1,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      },
+      {
+        "round_index": 2,
+        "accepted_count": 1,
+        "keep": 2,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      }
+    ],
+    "mlx_production": [
+      {
+        "round_index": 1,
+        "accepted_count": 1,
+        "keep": 2,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      },
+      {
+        "round_index": 2,
+        "accepted_count": 1,
+        "keep": 2,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      }
+    ],
+    "chad": [
+      {
+        "round_index": 1,
+        "accepted_count": 0,
+        "keep": 1,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      },
+      {
+        "round_index": 2,
+        "accepted_count": 1,
+        "keep": 2,
+        "accepted_prefix_exact": true,
+        "same_width_s8_fused_full_hash_equal": true,
+        "gdn_count": 48,
+        "gdn_all_exact": true,
+        "attention_count": 16,
+        "attention_all_exact": true,
+        "result": "PASS"
+      }
+    ]
+  },
+  "fresh_s2_cross_width_diagnostics": {
+    "mlx_production": [
+      {
+        "round_index": 1,
+        "verify_ids": [
+          2,
+          23288,
+          21408,
+          6297,
+          7873,
+          440,
+          3856,
+          19537
+        ],
+        "accepted_prefix_ids": [
+          2,
+          23288
+        ],
+        "common_unique_cache_tensor_views": 128,
+        "different_sha_views": 127,
+        "all_common_views_different": false,
+        "first_differences": [
+          "0.convolution_window",
+          "1.convolution_window",
+          "1.recurrent_state",
+          "10.convolution_window",
+          "10.recurrent_state",
+          "11.keys",
+          "11.values",
+          "12.convolution_window",
+          "12.recurrent_state",
+          "13.convolution_window",
+          "13.recurrent_state",
+          "14.convolution_window",
+          "14.recurrent_state",
+          "15.keys",
+          "15.values",
+          "16.convolution_window"
+        ]
+      },
+      {
+        "round_index": 2,
+        "verify_ids": [
+          27325,
+          10417,
+          12654,
+          29806,
+          18887,
+          29806,
+          271,
+          550
+        ],
+        "accepted_prefix_ids": [
+          27325,
+          10417
+        ],
+        "common_unique_cache_tensor_views": 128,
+        "different_sha_views": 128,
+        "all_common_views_different": true,
+        "first_differences": [
+          "0.convolution_window",
+          "0.recurrent_state",
+          "1.convolution_window",
+          "1.recurrent_state",
+          "10.convolution_window",
+          "10.recurrent_state",
+          "11.keys",
+          "11.values",
+          "12.convolution_window",
+          "12.recurrent_state",
+          "13.convolution_window",
+          "13.recurrent_state",
+          "14.convolution_window",
+          "14.recurrent_state",
+          "15.keys",
+          "15.values"
+        ]
+      }
+    ],
+    "chad": [
+      {
+        "round_index": 2,
+        "verify_ids": [
+          2,
+          23288,
+          21408,
+          6297,
+          7873,
+          303,
+          12654,
+          29806
+        ],
+        "accepted_prefix_ids": [
+          2,
+          23288
+        ],
+        "common_unique_cache_tensor_views": 128,
+        "different_sha_views": 128,
+        "all_common_views_different": true,
+        "first_differences": [
+          "0.convolution_window",
+          "0.recurrent_state",
+          "1.convolution_window",
+          "1.recurrent_state",
+          "10.convolution_window",
+          "10.recurrent_state",
+          "11.keys",
+          "11.values",
+          "12.convolution_window",
+          "12.recurrent_state",
+          "13.convolution_window",
+          "13.recurrent_state",
+          "14.convolution_window",
+          "14.recurrent_state",
+          "15.keys",
+          "15.values"
+        ]
+      }
+    ]
+  },
+  "formal_status": {
+    "local_gate_c_rollback_mechanics": "PASS",
+    "mlx_keep1_local_physical_branch": "PASS_from_aligned_diagnostic_root",
+    "mlx_keep2_production_branch": "PASS",
+    "chad_keep1": "PASS",
+    "chad_keep2": "PASS",
+    "overall_B2_T010": "INCONCLUSIVE: formal accepted=0 same-width five-run B2 coverage is not established for production-semantics mlx-dspark, and Chad's saved B2 branches lack the required five-run same-width controls",
+    "overall_C_T012": "INCONCLUSIVE only because prerequisite formal B2 coverage remains open; no Gate-C rollback defect is demonstrated",
+    "D": "NOT_FORMALLY_REACHED",
+    "E": "NOT_FORMALLY_REACHED",
+    "T016": "OPEN",
+    "production_patch_authorized": false
+  }
+}

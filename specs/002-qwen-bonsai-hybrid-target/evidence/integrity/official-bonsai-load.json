@@ -1,0 +1,263 @@
+{
+  "feature_001_nathansutton_repack_used_as_evidence": false,
+  "loader": "src/mlx_dspark/load.py::load_target -> src/mlx_dspark/prism_pack.py::load",
+  "mma_routing": {
+    "existing_installer": "mlx_qmm_mma.install(target.model)",
+    "install_invoked_by_load_target": true,
+    "live_verified_win_table_captured": false,
+    "shape_eligibility_inventory": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/official-bonsai-inventory.json"
+  },
+  "model_type": "prism_hadamard_qwen35",
+  "output_dtype": "mlx.core.bfloat16",
+  "output_finite": true,
+  "output_shape": [
+    1,
+    1,
+    248320
+  ],
+  "packed_inventory_evidence": {
+    "mma_shape_eligible_non_embedding_count": 369,
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/official-bonsai-inventory.json",
+    "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd",
+    "sha256": "e87a2da4f1dda628981282b3b95ddae964043a4641d3bd8fef1ea69e22a97e8e"
+  },
+  "packed_module_metadata_sample": [
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.lm_head"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.mlp.up_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.mlp.down_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.mlp.gate_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.self_attn.o_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.self_attn.v_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.self_attn.k_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.63.self_attn.q_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.mlp.up_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.mlp.down_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.mlp.gate_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.linear_attn.out_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.linear_attn.in_proj_z"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.62.linear_attn.in_proj_qkv"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.mlp.up_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.mlp.down_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.mlp.gate_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.linear_attn.out_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.linear_attn.in_proj_z"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.61.linear_attn.in_proj_qkv"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.mlp.up_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.mlp.down_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.mlp.gate_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.linear_attn.out_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.linear_attn.in_proj_z"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.60.linear_attn.in_proj_qkv"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.mlp.up_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.mlp.down_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.mlp.gate_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.self_attn.o_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.self_attn.v_proj"
+    },
+    {
+      "bits": 2,
+      "group_size": 128,
+      "mode": "affine",
+      "name": "language_model.model.layers.59.self_attn.k_proj"
+    }
+  ],
+  "packed_projection_count": 402,
+  "packed_projection_names_sample": [
+    "language_model.lm_head",
+    "language_model.model.layers.63.mlp.up_proj",
+    "language_model.model.layers.63.mlp.down_proj",
+    "language_model.model.layers.63.mlp.gate_proj",
+    "language_model.model.layers.63.self_attn.o_proj",
+    "language_model.model.layers.63.self_attn.v_proj",
+    "language_model.model.layers.63.self_attn.k_proj",
+    "language_model.model.layers.63.self_attn.q_proj",
+    "language_model.model.layers.62.mlp.up_proj",
+    "language_model.model.layers.62.mlp.down_proj",
+    "language_model.model.layers.62.mlp.gate_proj",
+    "language_model.model.layers.62.linear_attn.out_proj",
+    "language_model.model.layers.62.linear_attn.in_proj_z",
+    "language_model.model.layers.62.linear_attn.in_proj_qkv",
+    "language_model.model.layers.61.mlp.up_proj",
+    "language_model.model.layers.61.mlp.down_proj",
+    "language_model.model.layers.61.mlp.gate_proj",
+    "language_model.model.layers.61.linear_attn.out_proj",
+    "language_model.model.layers.61.linear_attn.in_proj_z",
+    "language_model.model.layers.61.linear_attn.in_proj_qkv",
+    "language_model.model.layers.60.mlp.up_proj",
+    "language_model.model.layers.60.mlp.down_proj",
+    "language_model.model.layers.60.mlp.gate_proj",
+    "language_model.model.layers.60.linear_attn.out_proj",
+    "language_model.model.layers.60.linear_attn.in_proj_z",
+    "language_model.model.layers.60.linear_attn.in_proj_qkv",
+    "language_model.model.layers.59.mlp.up_proj",
+    "language_model.model.layers.59.mlp.down_proj",
+    "language_model.model.layers.59.mlp.gate_proj",
+    "language_model.model.layers.59.self_attn.o_proj",
+    "language_model.model.layers.59.self_attn.v_proj",
+    "language_model.model.layers.59.self_attn.k_proj"
+  ],
+  "parameter_tree_finite": true,
+  "passed": true,
+  "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+  "resolved_path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+  "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd",
+  "runtime": {
+    "mlx": "0.32.2",
+    "mlx-lm": "0.31.3"
+  },
+  "schema": "official-bonsai-load/v1"
+}

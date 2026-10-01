@@ -1,0 +1,70 @@
+{
+  "candidate_repeats": [
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 52.79814774435963,
+      "prompt_id": "P05",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 5
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 40.663665769427176,
+      "prompt_id": "P06",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 6
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 45.21113858752285,
+      "prompt_id": "P07",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 7
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 48.1441456418823,
+      "prompt_id": "P08",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 8
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 47.000005093488376,
+      "prompt_id": "P09",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 9
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 44.52670279601716,
+      "prompt_id": "P10",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 11
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 51.112868976145116,
+      "prompt_id": "P14",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 15
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 42.52417956651715,
+      "prompt_id": "P15",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 16
+    },
+    {
+      "first_status": "GOLDEN_CANDIDATE",
+      "first_tps": 44.01721441924593,
+      "prompt_id": "P17",
+      "selection_reason": "screen GOLDEN_CANDIDATE",
+      "source_sequence": 18
+    }
+  ],
+  "fallback_repeats": [],
+  "fallback_used": false,
+  "new_certified_before_fallback": 9
+}

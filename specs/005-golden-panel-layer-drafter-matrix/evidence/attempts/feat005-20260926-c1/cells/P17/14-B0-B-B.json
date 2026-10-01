@@ -1,0 +1,1815 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "14-B0-B-B",
+    "comparison": null,
+    "drafter": "B-B",
+    "order": 14,
+    "prompt_id": "P17",
+    "repeat": false,
+    "target": "B0"
+  },
+  "attempt_id": "feat005-20260926-c1",
+  "configuration": {
+    "bonsai_owned_block_count": 64,
+    "drafter": "B-B",
+    "drafter_identity": {
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+    },
+    "target": "B0",
+    "target_identity": {
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "embedding": "Bonsai2",
+      "final_norm": "Bonsai2",
+      "kind": "native_full_model",
+      "lm_head": "Bonsai2",
+      "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+      "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+      "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 78774,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.6630094043887147,
+    "active_baseline_bytes": 8972175122,
+    "active_baseline_gib": 8.355989234521985,
+    "cap_distribution": {
+      "2": 4,
+      "7": 90
+    },
+    "decode_duration_seconds": 9.6545250415802,
+    "generated_tokens": 518,
+    "generated_tokens_per_target_forward": 5.4526315789473685,
+    "mean_accepted_draft_tokens": 4.5,
+    "output_integrity_mode": "text_only",
+    "output_sha256": "7513a95cfa197a40175bdf74018a7676f6c18fc4b639a40dc85e0bdc54372ef6",
+    "output_text": "```python\n\"\"\"\nTopological sorting of a directed acyclic graph (DAG) with cycle detection.\n\nThis module provides a function to perform topological sorting using\nKahn's algorithm (BFS-based), which also detects cycles in the graph.\n\"\"\"\n\nfrom collections import deque\nfrom typing import Dict, List, Set, Tuple\n\n\ndef topological_sort(graph: Dict[int, List[int]]) -> List[int]:\n    \"\"\"\n    Perform topological sorting on a directed acyclic graph using Kahn's algorithm.\n\n    Args:\n        graph: A dictionary representing the graph where keys are nodes and\n               values are lists of nodes that the key node has edges to.\n               Example: {0: [1, 2], 1: [3], 2: [3], 3: []}\n\n    Returns:\n        A list of nodes in topological order. If the graph contains a cycle,\n        raises a ValueError.\n\n    Raises:\n        ValueError: If the graph contains a cycle.\n\n    Example:\n        >>> graph = {0: [1, 2], 1: [3], 2: [3], 3: []}\n        >>> topological_sort(graph)\n        [0, 1, 2, 3]\n    \"\"\"\n    # Step 1: Calculate in-degrees for all nodes\n    in_degree: Dict[int, int] = {}\n    for node in graph:\n        if node not in in_degree:\n            in_degree[node] = 0\n        for neighbor in graph[node]:\n            if neighbor not in in_degree:\n                in_degree[neighbor] = 0\n            in_degree[neighbor] += 1\n\n    # Step 2: Initialize queue with all nodes having in-degree 0\n    queue: deque = deque()\n    for node, degree in in_degree.items():\n        if degree == 0:\n            queue.append(node)\n\n    # Step 3: Process nodes in topological order\n    result: List[int] = []\n    while queue:\n        node = queue.popleft()\n        result.append(node)\n\n        for neighbor in graph.get(node, []):\n            in_degree[neighbor] -= 1\n            if in_degree[neighbor] == 0:\n                queue.append(neighbor)\n\n    # Step 4: Check for cycles\n    if len(result) != len(in_degree):\n        raise ValueError",
+    "output_tokens": null,
+    "output_tokens_sha256": null,
+    "peak_increment_bytes": 585596592,
+    "peak_increment_gib": 0.5453793257474899,
+    "peak_runtime_bytes": 9557771714,
+    "peak_runtime_gib": 8.901368560269475,
+    "request_duration_seconds": 10.248018208891153,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 682.49,
+        "req": "e53ced67",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1085.5
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 85.76,
+        "req": "e53ced67",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1171.2
+      },
+      {
+        "accepted": 1,
+        "cap": 2,
+        "committed": 2,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 85.82,
+        "req": "e53ced67",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1257.0
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 87.52,
+        "req": "e53ced67",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1344.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 100.93,
+        "req": "e53ced67",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1445.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 101.66,
+        "req": "e53ced67",
+        "seq": 6,
+        "source": "drafter",
+        "t": 1547.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 103.27,
+        "req": "e53ced67",
+        "seq": 7,
+        "source": "drafter",
+        "t": 1650.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 103.8,
+        "req": "e53ced67",
+        "seq": 8,
+        "source": "drafter",
+        "t": 1754.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 103.66,
+        "req": "e53ced67",
+        "seq": 9,
+        "source": "drafter",
+        "t": 1857.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 102.28,
+        "req": "e53ced67",
+        "seq": 10,
+        "source": "drafter",
+        "t": 1960.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 102.32,
+        "req": "e53ced67",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2062.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 102.3,
+        "req": "e53ced67",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2164.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 102.83,
+        "req": "e53ced67",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2267.6
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 102.33,
+        "req": "e53ced67",
+        "seq": 14,
+        "source": "drafter",
+        "t": 2370.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 102.93,
+        "req": "e53ced67",
+        "seq": 15,
+        "source": "drafter",
+        "t": 2472.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 103.09,
+        "req": "e53ced67",
+        "seq": 16,
+        "source": "drafter",
+        "t": 2576.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 103.2,
+        "req": "e53ced67",
+        "seq": 17,
+        "source": "drafter",
+        "t": 2679.2
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 102.93,
+        "req": "e53ced67",
+        "seq": 18,
+        "source": "drafter",
+        "t": 2782.1
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 104.47,
+        "req": "e53ced67",
+        "seq": 19,
+        "source": "drafter",
+        "t": 2886.6
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 104.07,
+        "req": "e53ced67",
+        "seq": 20,
+        "source": "drafter",
+        "t": 2990.6
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 104.6,
+        "req": "e53ced67",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3095.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 103.39,
+        "req": "e53ced67",
+        "seq": 22,
+        "source": "drafter",
+        "t": 3198.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 103.66,
+        "req": "e53ced67",
+        "seq": 23,
+        "source": "drafter",
+        "t": 3302.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 104.16,
+        "req": "e53ced67",
+        "seq": 24,
+        "source": "drafter",
+        "t": 3406.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 102.89,
+        "req": "e53ced67",
+        "seq": 25,
+        "source": "drafter",
+        "t": 3509.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 103.07,
+        "req": "e53ced67",
+        "seq": 26,
+        "source": "drafter",
+        "t": 3612.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 101.81,
+        "req": "e53ced67",
+        "seq": 27,
+        "source": "drafter",
+        "t": 3714.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 104.44,
+        "req": "e53ced67",
+        "seq": 28,
+        "source": "drafter",
+        "t": 3818.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 101.71,
+        "req": "e53ced67",
+        "seq": 29,
+        "source": "drafter",
+        "t": 3920.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 103.88,
+        "req": "e53ced67",
+        "seq": 30,
+        "source": "drafter",
+        "t": 4024.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 101.63,
+        "req": "e53ced67",
+        "seq": 31,
+        "source": "drafter",
+        "t": 4125.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 102.84,
+        "req": "e53ced67",
+        "seq": 32,
+        "source": "drafter",
+        "t": 4228.7
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 103.14,
+        "req": "e53ced67",
+        "seq": 33,
+        "source": "drafter",
+        "t": 4331.8
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 104.22,
+        "req": "e53ced67",
+        "seq": 34,
+        "source": "drafter",
+        "t": 4436.1
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 103.44,
+        "req": "e53ced67",
+        "seq": 35,
+        "source": "drafter",
+        "t": 4539.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 104.44,
+        "req": "e53ced67",
+        "seq": 36,
+        "source": "drafter",
+        "t": 4643.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 103.47,
+        "req": "e53ced67",
+        "seq": 37,
+        "source": "drafter",
+        "t": 4747.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 103.23,
+        "req": "e53ced67",
+        "seq": 38,
+        "source": "drafter",
+        "t": 4850.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 102.23,
+        "req": "e53ced67",
+        "seq": 39,
+        "source": "drafter",
+        "t": 4952.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 101.93,
+        "req": "e53ced67",
+        "seq": 40,
+        "source": "drafter",
+        "t": 5054.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 104.33,
+        "req": "e53ced67",
+        "seq": 41,
+        "source": "drafter",
+        "t": 5159.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 104.6,
+        "req": "e53ced67",
+        "seq": 42,
+        "source": "drafter",
+        "t": 5263.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 101.99,
+        "req": "e53ced67",
+        "seq": 43,
+        "source": "drafter",
+        "t": 5365.7
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 102.44,
+        "req": "e53ced67",
+        "seq": 44,
+        "source": "drafter",
+        "t": 5468.2
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 104.68,
+        "req": "e53ced67",
+        "seq": 45,
+        "source": "drafter",
+        "t": 5572.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 104.49,
+        "req": "e53ced67",
+        "seq": 46,
+        "source": "drafter",
+        "t": 5677.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 104.47,
+        "req": "e53ced67",
+        "seq": 47,
+        "source": "drafter",
+        "t": 5781.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 103.21,
+        "req": "e53ced67",
+        "seq": 48,
+        "source": "drafter",
+        "t": 5885.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 104.57,
+        "req": "e53ced67",
+        "seq": 49,
+        "source": "drafter",
+        "t": 5989.6
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 101.98,
+        "req": "e53ced67",
+        "seq": 50,
+        "source": "drafter",
+        "t": 6091.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 104.5,
+        "req": "e53ced67",
+        "seq": 51,
+        "source": "drafter",
+        "t": 6196.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 105.26,
+        "req": "e53ced67",
+        "seq": 52,
+        "source": "drafter",
+        "t": 6301.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 102.19,
+        "req": "e53ced67",
+        "seq": 53,
+        "source": "drafter",
+        "t": 6403.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 102.15,
+        "req": "e53ced67",
+        "seq": 54,
+        "source": "drafter",
+        "t": 6505.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 101.83,
+        "req": "e53ced67",
+        "seq": 55,
+        "source": "drafter",
+        "t": 6607.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 102.52,
+        "req": "e53ced67",
+        "seq": 56,
+        "source": "drafter",
+        "t": 6710.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 102.49,
+        "req": "e53ced67",
+        "seq": 57,
+        "source": "drafter",
+        "t": 6812.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 102.38,
+        "req": "e53ced67",
+        "seq": 58,
+        "source": "drafter",
+        "t": 6914.9
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 104.26,
+        "req": "e53ced67",
+        "seq": 59,
+        "source": "drafter",
+        "t": 7019.1
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 104.65,
+        "req": "e53ced67",
+        "seq": 60,
+        "source": "drafter",
+        "t": 7123.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 104.45,
+        "req": "e53ced67",
+        "seq": 61,
+        "source": "drafter",
+        "t": 7228.2
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 101.93,
+        "req": "e53ced67",
+        "seq": 62,
+        "source": "drafter",
+        "t": 7330.2
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 104.65,
+        "req": "e53ced67",
+        "seq": 63,
+        "source": "drafter",
+        "t": 7434.8
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 105.95,
+        "req": "e53ced67",
+        "seq": 64,
+        "source": "drafter",
+        "t": 7540.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 105.81,
+        "req": "e53ced67",
+        "seq": 65,
+        "source": "drafter",
+        "t": 7646.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 105.12,
+        "req": "e53ced67",
+        "seq": 66,
+        "source": "drafter",
+        "t": 7751.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 102.74,
+        "req": "e53ced67",
+        "seq": 67,
+        "source": "drafter",
+        "t": 7854.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 102.7,
+        "req": "e53ced67",
+        "seq": 68,
+        "source": "drafter",
+        "t": 7957.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 102.56,
+        "req": "e53ced67",
+        "seq": 69,
+        "source": "drafter",
+        "t": 8059.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 102.61,
+        "req": "e53ced67",
+        "seq": 70,
+        "source": "drafter",
+        "t": 8162.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 102.48,
+        "req": "e53ced67",
+        "seq": 71,
+        "source": "drafter",
+        "t": 8264.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 102.86,
+        "req": "e53ced67",
+        "seq": 72,
+        "source": "drafter",
+        "t": 8367.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 102.88,
+        "req": "e53ced67",
+        "seq": 73,
+        "source": "drafter",
+        "t": 8470.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 105.03,
+        "req": "e53ced67",
+        "seq": 74,
+        "source": "drafter",
+        "t": 8575.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 103.09,
+        "req": "e53ced67",
+        "seq": 75,
+        "source": "drafter",
+        "t": 8678.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 104.82,
+        "req": "e53ced67",
+        "seq": 76,
+        "source": "drafter",
+        "t": 8783.5
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 104.76,
+        "req": "e53ced67",
+        "seq": 77,
+        "source": "drafter",
+        "t": 8888.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 105.31,
+        "req": "e53ced67",
+        "seq": 78,
+        "source": "drafter",
+        "t": 8993.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 104.25,
+        "req": "e53ced67",
+        "seq": 79,
+        "source": "drafter",
+        "t": 9097.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 102.93,
+        "req": "e53ced67",
+        "seq": 80,
+        "source": "drafter",
+        "t": 9200.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 103.09,
+        "req": "e53ced67",
+        "seq": 81,
+        "source": "drafter",
+        "t": 9303.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 102.34,
+        "req": "e53ced67",
+        "seq": 82,
+        "source": "drafter",
+        "t": 9406.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 104.44,
+        "req": "e53ced67",
+        "seq": 83,
+        "source": "drafter",
+        "t": 9510.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 103.43,
+        "req": "e53ced67",
+        "seq": 84,
+        "source": "drafter",
+        "t": 9614.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 103.66,
+        "req": "e53ced67",
+        "seq": 85,
+        "source": "drafter",
+        "t": 9717.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 103.59,
+        "req": "e53ced67",
+        "seq": 86,
+        "source": "drafter",
+        "t": 9821.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 86,
+        "mode": "dflash",
+        "ms": 103.75,
+        "req": "e53ced67",
+        "seq": 87,
+        "source": "drafter",
+        "t": 9925.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 87,
+        "mode": "dflash",
+        "ms": 103.45,
+        "req": "e53ced67",
+        "seq": 88,
+        "source": "drafter",
+        "t": 10028.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 88,
+        "mode": "dflash",
+        "ms": 103.98,
+        "req": "e53ced67",
+        "seq": 89,
+        "source": "drafter",
+        "t": 10132.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 89,
+        "mode": "dflash",
+        "ms": 103.33,
+        "req": "e53ced67",
+        "seq": 90,
+        "source": "drafter",
+        "t": 10235.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 90,
+        "mode": "dflash",
+        "ms": 103.5,
+        "req": "e53ced67",
+        "seq": 91,
+        "source": "drafter",
+        "t": 10339.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 91,
+        "mode": "dflash",
+        "ms": 103.64,
+        "req": "e53ced67",
+        "seq": 92,
+        "source": "drafter",
+        "t": 10442.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 92,
+        "mode": "dflash",
+        "ms": 103.73,
+        "req": "e53ced67",
+        "seq": 93,
+        "source": "drafter",
+        "t": 10546.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 93,
+        "mode": "dflash",
+        "ms": 103.72,
+        "req": "e53ced67",
+        "seq": 94,
+        "source": "drafter",
+        "t": 10650.4
+      }
+    ],
+    "rounds": 94,
+    "speculative_decode_tok_s": 53.65359743426763,
+    "stop_reason": null,
+    "target_forwards": 95,
+    "width_distribution": {
+      "2": 4,
+      "7": 90
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_captured": 2361984033895625,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_captured": 2361994281926541,
+    "request_ended": 2361994281913791,
+    "request_started": 2361984033895875,
+    "reset_called": true,
+    "reset_completed": 2361984033892250
+  },
+  "preflight": {
+    "identity": "feat005-20260926-c1:PASS",
+    "path": "preflight.json",
+    "sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      12654,
+      709,
+      421,
+      25822,
+      1844,
+      5551,
+      27355,
+      383,
+      264,
+      15083,
+      1557,
+      63098,
+      4618,
+      13,
+      28763,
+      10458,
+      17448,
+      11,
+      913,
+      29642,
+      11,
+      321,
+      6813,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "7e43ad981d42b58f21cdbac9668a148ceecedd69dd7f0ac75f6e44845408b173",
+    "input_token_count": 38,
+    "label": "Topological sort",
+    "prompt_id": "P17",
+    "rendered_prompt": "<|im_start|>user\nWrite a Python function that performs topological sorting on a directed acyclic graph. Include cycle detection, type hints, and tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a Python function that performs topological sorting on a directed acyclic graph. Include cycle detection, type hints, and tests.",
+    "text_sha256": "fb75704d427be1fea23089e3c70c17215e52bc4a9d817bff82df085b5c92a30e"
+  },
+  "provenance": {
+    "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 12.570766500197351,
+    "process_started_utc": "2026-09-26T10:26:00Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+    "target_revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+  },
+  "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 9,
+      "p": 0.984,
+      "predicted_rates": {
+        "1": 28.7,
+        "2": 33.7,
+        "3": 37.3,
+        "4": 48.2,
+        "5": 56.9,
+        "6": 65.3,
+        "7": 74.0
+      },
+      "rounds": 94
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

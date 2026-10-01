@@ -1,0 +1,11 @@
+{
+  "model": "mlx-community/Qwen3.8-27B-4bit",
+  "messages": [
+    {"role": "user", "content": "Сумма чисел от 1 до 100"}
+  ],
+  "reasoning_effort": "xhigh",
+  "temperature": 0,
+  "top_p": 1,
+  "top_k": 0,
+  "max_tokens": 512
+}

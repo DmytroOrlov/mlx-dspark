@@ -1,0 +1,72 @@
+{
+  "purpose": "Prepare safe pre-T026 disk cleanup without deleting anything",
+  "prunable_runs": [
+    "t010-t015-mlx-prod-kv0-controls-20260923T193943Z-6a657aa4",
+    "t005-r1-mlx-kv0-aligned-20260923-c791",
+    "t008-r1-chad-kv0-fastpath-20260923T190924Z-3aeb5303",
+    "gate-a-mlx-plain-a436bb1cf2",
+    "gate-a-chad-plain-a436bb1cf2-retry2",
+    "t010-t015-mlx-prod-kv0-controls-20260923T194624Z-5fab57a3"
+  ],
+  "keep_runs": [
+    "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7",
+    "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0"
+  ],
+  "records": [
+    {
+      "run_id": "t010-t015-mlx-prod-kv0-controls-20260923T193943Z-6a657aa4",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "t005-r1-mlx-kv0-aligned-20260923-c791",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "t008-r1-chad-kv0-fastpath-20260923T190924Z-3aeb5303",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "gate-a-mlx-plain-a436bb1cf2",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "gate-a-chad-plain-a436bb1cf2-retry2",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "t010-t015-mlx-prod-kv0-controls-20260923T194624Z-5fab57a3",
+      "classification": "historical_or_superseded_raw_evidence_prunable",
+      "exists": false,
+      "size_bytes": 0,
+      "compact_files_copied": []
+    },
+    {
+      "run_id": "required-gates-chad-kv0-retry2-20260923T231232Z-fda745d7",
+      "classification": "KEEP_authoritative_T016_physical_closure",
+      "exists": true,
+      "size_bytes": 2328311966
+    },
+    {
+      "run_id": "required-gates-mlx-prod-kv0-20260923T231814Z-246758b0",
+      "classification": "KEEP_authoritative_T016_physical_closure",
+      "exists": true,
+      "size_bytes": 2926376174
+    }
+  ],
+  "potential_reclaim_bytes": 0
+}

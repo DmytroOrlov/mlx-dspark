@@ -1,0 +1,27 @@
+{
+  "attempt_id": "feat005-20260926-b1",
+  "completed": false,
+  "created_utc": "2026-09-26T09:44:32Z",
+  "expected_cell_count": 70,
+  "last_cell": {
+    "drafter": "B-B",
+    "order": 11,
+    "path": "evidence/attempts/feat005-20260926-b1/cells/P05/11-H3-B-B.json",
+    "prompt_id": "P05",
+    "sha256": "d63564b1f9d50a57989fab369a48cd92cfc8e4c39da5f9345287c4f94d9142fb",
+    "status": "complete",
+    "target": "H3"
+  },
+  "observed_statused_cell_count": 11,
+  "preflight_identity": "feat005-20260926-b1:PASS",
+  "preflight_sha256": "4764f5bd76372b2cf3fb8a29dcfb364c019b874907201b33420e0696bd1ac98d",
+  "preflight_status": "PASS",
+  "reason": "physical-runner defects discovered after cell 1: first-pass observations were incorrectly marked repeat=true; output token integrity fallback and memory-boundary provenance also require runner repair",
+  "runner_sha256": "0853d741c57b38b996b2ccbbbda8e50b3a80ac4001d4141c9558b833424d86dc",
+  "schema": "panel-matrix-attempt/v1",
+  "started_utc": "2026-09-26T09:44:46Z",
+  "status": "SUPERSEDED",
+  "superseded_utc": "2026-09-26T09:50:40Z",
+  "supersession_reason": "physical-runner defects discovered after cell 1: first-pass observations were incorrectly marked repeat=true; output token integrity fallback and memory-boundary provenance also require runner repair",
+  "terminal": "SUPERSEDED"
+}

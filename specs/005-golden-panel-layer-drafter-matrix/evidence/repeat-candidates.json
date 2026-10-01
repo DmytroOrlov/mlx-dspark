@@ -1,0 +1,922 @@
+{
+  "effective_attempt_id": "feat005-20260926-c1",
+  "finalizer_sha256": "26e4b888bf7b1e115e215026d9c4c5ddc2183cc6dd790418dfce1baee17b53c1",
+  "local_target_maximum_candidates": [
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        54.67023302031756,
+        55.59396749276285
+      ],
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/05-H1b-B-Q.json",
+      "raw_sha256": "45b2205cea624914e3b5b68db89686e0eb7c0f2f933f41b616879920abf966a0",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 55.68242339306591,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1c",
+        "H3"
+      ],
+      "neighbor_tok_s": [
+        55.59396749276285,
+        56.81909075885966
+      ],
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/09-H2-B-Q.json",
+      "raw_sha256": "219ca5fd515c2c66f4c44fc33f15235539a37e5438146534cb3927db48e8095f",
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 57.43319927578494,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        53.90734126553705,
+        57.095362279053056
+      ],
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/06-H1b-B-B.json",
+      "raw_sha256": "6f53f3eacfd4f6697310af4f647398371259849508c57f59a4bbdd6092fc49a1",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 57.672817827248195,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        41.305071214169196,
+        43.160753781393765
+      ],
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/09-H1b-B-Q.json",
+      "raw_sha256": "ee9702dea7b436155655f567eb8655a04a268ad70b6ddac11c4b97b33a7f68d2",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 45.39655654296109,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        40.55422843088811,
+        41.051460138241225
+      ],
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/10-H1b-B-B.json",
+      "raw_sha256": "5402436ffba59facd7caf95378115c632596425cc83888be35aebc10f8eaedce",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 43.974294808167905,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1c",
+        "H3"
+      ],
+      "neighbor_tok_s": [
+        41.051460138241225,
+        44.04544466008083
+      ],
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/06-H2-B-B.json",
+      "raw_sha256": "4a246574910a2b6dc0c7a7a9dfe86a8a20070603891958d3a7ac5dcb0fb78e1d",
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 44.62306373130074,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1c",
+        "H3"
+      ],
+      "neighbor_tok_s": [
+        48.083861584887934,
+        45.880333419101426
+      ],
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/09-H2-B-Q.json",
+      "raw_sha256": "1c4e729a81c442c69f81d0e3ce0fd8f01248f043e0a289aa81597f3db65f3bd3",
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 49.20131640851403,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        43.60197796988351,
+        41.47332988145969
+      ],
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/06-H1b-B-B.json",
+      "raw_sha256": "29701df372fe94d3e9226fbb5611aaec06f9ec7737c4a18a5d073518dcd5f2ee",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 46.41143105717984,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1c",
+        "H3"
+      ],
+      "neighbor_tok_s": [
+        41.47332988145969,
+        44.43772193746612
+      ],
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/10-H2-B-B.json",
+      "raw_sha256": "2fbc1fa5799fb676a252a9c487dfba40a6414b8a4e610e1748baa298815eb019",
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 48.19861386003228,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        51.21991915422016,
+        51.1247039752603
+      ],
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/09-H1b-B-Q.json",
+      "raw_sha256": "43373d120c90eb03926e64b20b225d308929e484c76adedb5a7dafaae5a5722f",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 58.53351050658055,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        50.327586406503286,
+        51.55996237722513
+      ],
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/10-H1b-B-B.json",
+      "raw_sha256": "ecd16a341eb61ab87eeea88367b49b557e9520775739b5f01caedb35de1b7a4f",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 56.25469628372994,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        33.31292712102577,
+        46.679017573113015
+      ],
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/05-H1b-B-Q.json",
+      "raw_sha256": "ebd5e29e8f39e144b3c5fd3812ff3682c53b8002c427050b2b09199a956f8846",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 49.69500063687001,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-Q",
+      "neighbor_targets": [
+        "H2",
+        "B0"
+      ],
+      "neighbor_tok_s": [
+        43.650605146524214,
+        45.25114332024793
+      ],
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/12-H3-B-Q.json",
+      "raw_sha256": "87ee554976c093a7e406326d6d9bacae3ceead08777e71552ee94fc444adef5a",
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 49.82137364392857,
+      "trigger_class": "surprising-local-target-maximum-review"
+    },
+    {
+      "drafter": "B-B",
+      "neighbor_targets": [
+        "H1a",
+        "H1c"
+      ],
+      "neighbor_tok_s": [
+        35.25990211597784,
+        40.84694259615079
+      ],
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/06-H1b-B-B.json",
+      "raw_sha256": "5b5d9e2d0ed48f97954e32df3ed81af4f1e735c2a3d4dfe2c452005125ee4ab4",
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 47.791088199768815,
+      "trigger_class": "surprising-local-target-maximum-review"
+    }
+  ],
+  "policy": "review-only; no subjective threshold or selection inferred",
+  "schema": "panel-matrix-repeat-candidates/v1",
+  "subjective_candidates": [
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/04-H1a-B-Q.json",
+      "raw_sha256": "72ddbe5a9760fef4982d310bfee5751daf6cfe609ac735c36ba95b5c58265d62",
+      "retention_percent": 94.3607575253734,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 54.67023302031756,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/03-H1a-B-B.json",
+      "raw_sha256": "81faffe51e456f70b452585d4c66cc61aa99effea1d10998da7eaeac7e193079",
+      "retention_percent": 93.04400725902283,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 53.90734126553705,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/05-H1b-B-Q.json",
+      "raw_sha256": "45b2205cea624914e3b5b68db89686e0eb7c0f2f933f41b616879920abf966a0",
+      "retention_percent": 96.10779691144897,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 55.68242339306591,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/06-H1b-B-B.json",
+      "raw_sha256": "6f53f3eacfd4f6697310af4f647398371259849508c57f59a4bbdd6092fc49a1",
+      "retention_percent": 99.54321535047279,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 57.672817827248195,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/08-H1c-B-Q.json",
+      "raw_sha256": "9ec23c5ef8f725e3cf7410232a4e9348d0b42d32de8c84a2d5afb0dc97439f53",
+      "retention_percent": 95.95512213215758,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 55.59396749276285,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/07-H1c-B-B.json",
+      "raw_sha256": "da32e0d03ff1d0337a54d334d3376e3a889a733f745c64321ef096f7b7dff941",
+      "retention_percent": 98.54652775734193,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 57.095362279053056,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/09-H2-B-Q.json",
+      "raw_sha256": "219ca5fd515c2c66f4c44fc33f15235539a37e5438146534cb3927db48e8095f",
+      "retention_percent": 99.12963401408444,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 57.43319927578494,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/10-H2-B-B.json",
+      "raw_sha256": "be06885e48a6f0fd81a5374c8c0db723c7d4d22f9505aecd38b4d3bd5be7d01e",
+      "retention_percent": 90.52516816385493,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 52.44798968883435,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/12-H3-B-Q.json",
+      "raw_sha256": "d0e548c4e96929eae95ac01eb05d563f2e3c7d0862f858b0fb9660512db13241",
+      "retention_percent": 98.069683440281,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 56.81909075885966,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/11-H3-B-B.json",
+      "raw_sha256": "fa254b837598fb99296884e839fe89f855eabfcd650439cb713919ead36218c5",
+      "retention_percent": 97.6409695905349,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 56.57070481242048,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/13-B0-B-Q.json",
+      "raw_sha256": "2fe6f49605612071cb255b806e78d33ab736af636360f1edc21a6c65a7d6b691",
+      "retention_percent": 104.82718763662847,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 60.73421754184197,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/14-B0-B-B.json",
+      "raw_sha256": "24b08e3ce30a49d43d00402ecc44fd4fe7b49128414e01bfe7ad891b7d6751c0",
+      "retention_percent": 107.47235088286902,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 62.26675813224435,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/12-H1a-B-Q.json",
+      "raw_sha256": "09f89e1cfb49bbe21b4b9197d6862b44dced1f02bbc7a70360cdf86bd29c8031",
+      "retention_percent": 88.11200288826967,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 41.305071214169196,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/11-H1a-B-B.json",
+      "raw_sha256": "fe9152b224f5eb5e9c23688cc8029987ee75bc5944bde798804b12b92e47b5e3",
+      "retention_percent": 86.51030460899386,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 40.55422843088811,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/09-H1b-B-Q.json",
+      "raw_sha256": "ee9702dea7b436155655f567eb8655a04a268ad70b6ddac11c4b97b33a7f68d2",
+      "retention_percent": 96.83996186547526,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 45.39655654296109,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/10-H1b-B-B.json",
+      "raw_sha256": "5402436ffba59facd7caf95378115c632596425cc83888be35aebc10f8eaedce",
+      "retention_percent": 93.80599227287513,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 43.974294808167905,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/08-H1c-B-Q.json",
+      "raw_sha256": "4c8c6b9ec25ab44142e8dea197500003132413bc81583a274969df2048549404",
+      "retention_percent": 92.07054606267081,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 43.160753781393765,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/07-H1c-B-B.json",
+      "raw_sha256": "3a6a88d95d180235f7b102cc1315a5c802a895e709074b3f5682d56f79d414a8",
+      "retention_percent": 87.57099958775976,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 41.051460138241225,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/05-H2-B-Q.json",
+      "raw_sha256": "2802746d69210e6c235f82dc0a879611993032d63f07a572e6cecb63546380bc",
+      "retention_percent": 100.34907302654116,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 47.04155474587403,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/06-H2-B-B.json",
+      "raw_sha256": "4a246574910a2b6dc0c7a7a9dfe86a8a20070603891958d3a7ac5dcb0fb78e1d",
+      "retention_percent": 95.18994653196596,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 44.62306373130074,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/04-H3-B-Q.json",
+      "raw_sha256": "4b8b7d8eea7e602333c123af41134448127b71c9614a1eb4a020bb5c0f73b7c9",
+      "retention_percent": 100.57482792402992,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 47.14738393840237,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/03-H3-B-B.json",
+      "raw_sha256": "f977661da2d1adb84bfbf679c0af9b55c187f331aae80493380d964a29ca6606",
+      "retention_percent": 93.95776917999498,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 44.04544466008083,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/01-B0-B-Q.json",
+      "raw_sha256": "9892e4556790ef4d31d55fb4afab06a858c76ee317f7ca6a3a9b17fc5a9d19ad",
+      "retention_percent": 101.0735638179029,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 47.38118093470499,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/02-B0-B-B.json",
+      "raw_sha256": "135a596a80fd4f62f0bc2d64909af01c75b0ad9d2b9ef2429f7d20a1bbb83ab6",
+      "retention_percent": 105.25716991630303,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 49.342368311702586,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/04-H1a-B-Q.json",
+      "raw_sha256": "5f22c3f24f63c713c2b79f39525a9922b6468a80137ca1a0ce5784faa8f59770",
+      "retention_percent": 88.21832981979895,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 43.82349424809021,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/03-H1a-B-B.json",
+      "raw_sha256": "a548a2195dae65ab75838cd4fe50a49f148bb9dfb9499b243be2f92c955afe42",
+      "retention_percent": 87.77240928273122,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 43.60197796988351,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/05-H1b-B-Q.json",
+      "raw_sha256": "ef78844868a66a5eef3c0338f0e42f8df6839cfdc1a642d75830668ecca476fe",
+      "retention_percent": 87.95658489203012,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 43.6934693727613,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/06-H1b-B-B.json",
+      "raw_sha256": "29701df372fe94d3e9226fbb5611aaec06f9ec7737c4a18a5d073518dcd5f2ee",
+      "retention_percent": 93.42794322224954,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 46.41143105717984,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/08-H1c-B-Q.json",
+      "raw_sha256": "28b75cdb7f8c403f6e83ed38ff034660e2cbb156231fee3cde3d0e75f925f4fa",
+      "retention_percent": 96.79460830511162,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 48.083861584887934,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/07-H1c-B-B.json",
+      "raw_sha256": "b1b2cae0775ab2854bc1cba371975343979341d903fd8da4d6fe1aaa8aaf117e",
+      "retention_percent": 83.4873612198867,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 41.47332988145969,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/09-H2-B-Q.json",
+      "raw_sha256": "1c4e729a81c442c69f81d0e3ce0fd8f01248f043e0a289aa81597f3db65f3bd3",
+      "retention_percent": 99.04408657882706,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 49.20131640851403,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/10-H2-B-B.json",
+      "raw_sha256": "2fbc1fa5799fb676a252a9c487dfba40a6414b8a4e610e1748baa298815eb019",
+      "retention_percent": 97.02560891859414,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 48.19861386003228,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/12-H3-B-Q.json",
+      "raw_sha256": "75c1c0f24c9e15a974c49f23dc8075abbf23b58205d02a27c158e9020c89eb16",
+      "retention_percent": 92.3588238513185,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 45.880333419101426,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/11-H3-B-B.json",
+      "raw_sha256": "5f5b7fb75bf495211cdf1e7f6450d4bbe1ad278707ae54f6bfd4cff233f23198",
+      "retention_percent": 89.45479308717472,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 44.43772193746612,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/13-B0-B-Q.json",
+      "raw_sha256": "b1e0bcdc6ca920bc0df6dda58175247f3a7f0ac0b6ab319e9ce7aec6f4883b7a",
+      "retention_percent": 87.92552078073638,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 43.67803790964718,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P08",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/14-B0-B-B.json",
+      "raw_sha256": "837121e0bcad82c29960f7992f7b8b5fabb46cdd12ab8094c7668b8c46936c8f",
+      "retention_percent": 78.7401719110151,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 39.115107686629166,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/12-H1a-B-Q.json",
+      "raw_sha256": "5a5b7e585c4234778bd8e2d1203abe3f2739054c1b5d60375cec568db6f0487e",
+      "retention_percent": 91.13316321917998,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 51.21991915422016,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/11-H1a-B-B.json",
+      "raw_sha256": "f3d5907cebb1d34452376c94f61390344064a76be5f76483aa35856d820e5332",
+      "retention_percent": 89.54547805125443,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 50.327586406503286,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/09-H1b-B-Q.json",
+      "raw_sha256": "43373d120c90eb03926e64b20b225d308929e484c76adedb5a7dafaae5a5722f",
+      "retention_percent": 104.14588806215012,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 58.53351050658055,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/10-H1b-B-B.json",
+      "raw_sha256": "ecd16a341eb61ab87eeea88367b49b557e9520775739b5f01caedb35de1b7a4f",
+      "retention_percent": 100.09130242541895,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 56.25469628372994,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/08-H1c-B-Q.json",
+      "raw_sha256": "454088bc6e103e4a2fae91317f512681a6a90da4a2ad3da84548e5e338d7a86f",
+      "retention_percent": 90.96375138510494,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 51.1247039752603,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/07-H1c-B-B.json",
+      "raw_sha256": "ad32af900889eb7bf66960cc156a488e7cf2e928103286a3da1cf4fb8519d534",
+      "retention_percent": 91.73818593408085,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 51.55996237722513,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/05-H2-B-Q.json",
+      "raw_sha256": "6b2393a1f53a92661290c99ef6af4654997e16573a06bb4386554a086314dfde",
+      "retention_percent": 91.8554722074057,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 51.625881228556466,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/06-H2-B-B.json",
+      "raw_sha256": "77f95402c84e2f03da569f2f7378ee39096dbab99bbabcf1db6dde257fb9ff6e",
+      "retention_percent": 94.05016839323476,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 52.85937469279497,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/04-H3-B-Q.json",
+      "raw_sha256": "4bf7d1745e70198b1b7152a536a0233e9624193da64f931e616a35bef73fc971",
+      "retention_percent": 95.55361058373997,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 53.70436003874985,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/03-H3-B-B.json",
+      "raw_sha256": "a76989448b2148f56dd907e06e2adedf7a4c607c41261bfcf1a4ef68341bf8fe",
+      "retention_percent": 95.41695103987125,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 53.62755275431736,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/01-B0-B-Q.json",
+      "raw_sha256": "195e479765e154caecc27528c2d8cd58791afadc2f0b324a49cc2495096dace7",
+      "retention_percent": 104.5638695933697,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 58.76843026005749,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/02-B0-B-B.json",
+      "raw_sha256": "a37868c2fbf1e4275eef9170cca54a189fcfbc089175c0b573a8d775d70b7f37",
+      "retention_percent": 106.68930684806035,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 59.96299786319003,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/04-H1a-B-Q.json",
+      "raw_sha256": "9e256ee518b28f0304a9f0ad6b8b64a05c6a4669dd955ed16822662cebb859d1",
+      "retention_percent": 67.93440878467145,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 33.31292712102577,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/03-H1a-B-B.json",
+      "raw_sha256": "be538545d6e3afd00c9ea57a189f78499ab1629f62f064e48f1ee0d150e3d8ee",
+      "retention_percent": 71.90483728289627,
+      "selection": "not selected",
+      "target": "H1a",
+      "tok_s": 35.25990211597784,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/05-H1b-B-Q.json",
+      "raw_sha256": "ebd5e29e8f39e144b3c5fd3812ff3682c53b8002c427050b2b09199a956f8846",
+      "retention_percent": 101.34205485920329,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 49.69500063687001,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/06-H1b-B-B.json",
+      "raw_sha256": "5b5d9e2d0ed48f97954e32df3ed81af4f1e735c2a3d4dfe2c452005125ee4ab4",
+      "retention_percent": 97.45944300338058,
+      "selection": "not selected",
+      "target": "H1b",
+      "tok_s": 47.791088199768815,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/08-H1c-B-Q.json",
+      "raw_sha256": "a72460e1209d571848a218d77c89c177310716265ebf9227405f4fdfe59eb84c",
+      "retention_percent": 95.19161885588986,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 46.679017573113015,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/07-H1c-B-B.json",
+      "raw_sha256": "0e4891766ae49fe5d77e15afd0bfbaf8231d257a76b43cf6b0a095583d4682f1",
+      "retention_percent": 83.29838101136131,
+      "selection": "not selected",
+      "target": "H1c",
+      "tok_s": 40.84694259615079,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/09-H2-B-Q.json",
+      "raw_sha256": "5e029ad513ac8c20c93c85851af084feac5137ac12df8cf85100b162b18ec214",
+      "retention_percent": 89.01583589304684,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 43.650605146524214,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/10-H2-B-B.json",
+      "raw_sha256": "24f8c531d5837a6d42a18505cb0ac6d04a82057812bc91a66294a588f0da3e39",
+      "retention_percent": 92.45688189032867,
+      "selection": "not selected",
+      "target": "H2",
+      "tok_s": 45.337987381510445,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/12-H3-B-Q.json",
+      "raw_sha256": "87ee554976c093a7e406326d6d9bacae3ceead08777e71552ee94fc444adef5a",
+      "retention_percent": 101.59976489139815,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 49.82137364392857,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/11-H3-B-B.json",
+      "raw_sha256": "0513d6f9d301fda75bce0b05bf06cec51ea20729f93e6a6793df50c81f4ab09e",
+      "retention_percent": 98.18040026181782,
+      "selection": "not selected",
+      "target": "H3",
+      "tok_s": 48.14462327922789,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/13-B0-B-Q.json",
+      "raw_sha256": "65d77a092bb64c2667ffe9af7fe462aecd1662315998904483c91bfb8b2bbeff",
+      "retention_percent": 92.27978247372995,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 45.25114332024793,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    },
+    {
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/14-B0-B-B.json",
+      "raw_sha256": "94fed286e93c6f178e3a785858d2b8578fdf257fe87e57cc536ef498fe5b772f",
+      "retention_percent": 109.41474484141645,
+      "selection": "not selected",
+      "target": "B0",
+      "tok_s": 53.65359743426763,
+      "trigger_class": "conclusion-critical-near-drift-review"
+    }
+  ]
+}

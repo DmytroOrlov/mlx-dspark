@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-24",
+  "purpose": "Normalize task checkboxes after physical T016 correctness closure",
+  "correctness_result_changed": false,
+  "t016_outcome_changed": false,
+  "t016_outcome": "RESOLVED_NO_CHANGE",
+  "completed": {
+    "T008": "physical continuous/isolated acquisition and trace evidence exists",
+    "T009": "Gate B1 exact local S8 roots is recorded PASS",
+    "T010": "Gate B2 physical controlled evidence PASS",
+    "T011": "same-runtime S1/S2 reference family exists and is validated",
+    "T012": "Gate C PASS",
+    "T014": "Gate D PASS",
+    "T015": "Gate E PASS",
+    "T016": "RESOLVED_NO_CHANGE closure complete"
+  },
+  "intentionally_open": [
+    "T013",
+    "T017",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "note": "The previous repair correctly removed false-positive checkmarks caused by the broad regex, but restored T008/T009/T011 to their older unchecked state. Their required evidence is now present, so they are marked complete.",
+  "status": "PASS"
+}

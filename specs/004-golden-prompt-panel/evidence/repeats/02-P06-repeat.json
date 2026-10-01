@@ -1,0 +1,1723 @@
+{
+  "drafter": {
+    "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+    "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "new child process and Engine; no prior measured request state",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 70241,
+    "prefix_hits_before_request": 0,
+    "rounds_before_request": 0
+  },
+  "input_ids": [
+    248045,
+    846,
+    198,
+    7734,
+    264,
+    12654,
+    709,
+    421,
+    13325,
+    279,
+    6966,
+    1146,
+    1595,
+    2542,
+    1608,
+    71171,
+    2077,
+    579,
+    11767,
+    13,
+    79091,
+    3069,
+    279,
+    11767,
+    8213,
+    303,
+    496,
+    1393,
+    8,
+    854,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "input_sha256": "95c58abde23b98eb9c759b0ff877b244ca0d008423ef1c74d41b6e0803f1289b",
+  "input_token_count": 40,
+  "machine": {
+    "hostname": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "measurements": {
+    "acceptance": 0.6449612403100775,
+    "active_baseline_bytes": 16496123666,
+    "cap_distribution": {
+      "2": 4,
+      "7": 91
+    },
+    "decode_duration_seconds": 11.810379028320312,
+    "generated_per_forward": 5.333333333333333,
+    "generated_tokens": 512,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "mean_accepted": 4.378947368421053,
+    "natural_completion_before_410": false,
+    "output_text": "```python\ndef max_subarray_sum(arr: list[int]) -> int:\n    \"\"\"\n    Find the maximum subarray sum using Kadane's algorithm.\n    \n    Args:\n        arr: A list of integers (can include negative numbers).\n        \n    Returns:\n        The maximum sum of any contiguous subarray.\n        \n    Raises:\n        ValueError: If the input list is empty.\n    \"\"\"\n    if not arr:\n        raise ValueError(\"Input array must not be empty\")\n    \n    max_ending_here = arr[0]\n    max_so_far = arr[0]\n    \n    for i in range(1, len(arr)):\n        # Either extend the current subarray or start a new one at arr[i]\n        max_ending_here = max(arr[i], max_ending_here + arr[i])\n        # Update the global maximum if we found a better subarray\n        max_so_far = max(max_so_far, max_ending_here)\n    \n    return max_so_far\n```\n\n## Explanation of O(n) Time Complexity\n\nKadane's algorithm runs in **O(n)** time for the following reasons:\n\n1. **Single Pass**: The algorithm iterates through the input array exactly once, from index `1` to `n-1` (where `n` is the length of the array). This is a single linear scan.\n\n2. **Constant-Time Operations per Element**: For each element in the array, the algorithm performs a fixed number of operations:\n   - One addition (`max_ending_here + arr[i]`)\n   - One comparison via `max()` to decide whether to extend the current subarray or start a new one\n   - One comparison via `max()` to update the global maximum\n   \n   Each of these operations takes O(1) time.\n\n3. **No Nested Loops or Recursion**: Unlike brute-force approaches that check all O(n\u00b2) or O(n\u00b3) subarrays, Kadane's algorithm avoids nested loops entirely. It maintains only two variables (`max_ending_here` and `max_so_far`) that are updated in constant time at each step.\n\n4. **Dynamic Programming Insight**: The key insight is that the maximum subarray sum ending at position `i` depends only on the maximum subarray sum ending at position `i-1`. This optimal substructure allows us to build the solution incrementally in a single pass, rather than recomputing sums",
+    "output_text_sha256": "c101f64cc31c7e33c049b76e8a166be76474a9111589897721d6fa9d2b03a3c8",
+    "output_tokens_sha256": null,
+    "peak_bytes": 17097383410,
+    "peak_gib": 15.92317913658917,
+    "request_duration_seconds": 12.496746584307402,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 781.57,
+        "req": "ca844652",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1558.4
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 92.23,
+        "req": "ca844652",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1650.6
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 91.93,
+        "req": "ca844652",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1742.5
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 92.44,
+        "req": "ca844652",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1835.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 122.7,
+        "req": "ca844652",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1957.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 123.13,
+        "req": "ca844652",
+        "seq": 6,
+        "source": "drafter",
+        "t": 2080.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 123.61,
+        "req": "ca844652",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2204.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 123.22,
+        "req": "ca844652",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2327.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 123.34,
+        "req": "ca844652",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2451.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 124.29,
+        "req": "ca844652",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2575.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 124.15,
+        "req": "ca844652",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2699.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 122.95,
+        "req": "ca844652",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2822.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 123.81,
+        "req": "ca844652",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2946.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 123.39,
+        "req": "ca844652",
+        "seq": 14,
+        "source": "drafter",
+        "t": 3069.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 123.28,
+        "req": "ca844652",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3192.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 123.04,
+        "req": "ca844652",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3315.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 122.86,
+        "req": "ca844652",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3438.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 123.7,
+        "req": "ca844652",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3562.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 123.6,
+        "req": "ca844652",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3686.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 123.41,
+        "req": "ca844652",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3809.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 123.37,
+        "req": "ca844652",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3932.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 123.08,
+        "req": "ca844652",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4055.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 123.97,
+        "req": "ca844652",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4179.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 125.18,
+        "req": "ca844652",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4305.0
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 125.47,
+        "req": "ca844652",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4430.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 125.09,
+        "req": "ca844652",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4555.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 125.05,
+        "req": "ca844652",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4680.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 123.4,
+        "req": "ca844652",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4804.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 123.34,
+        "req": "ca844652",
+        "seq": 29,
+        "source": "drafter",
+        "t": 4927.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 123.01,
+        "req": "ca844652",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5050.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 130.48,
+        "req": "ca844652",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5180.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 129.63,
+        "req": "ca844652",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5310.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 127.07,
+        "req": "ca844652",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5437.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 127.58,
+        "req": "ca844652",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5565.1
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 127.73,
+        "req": "ca844652",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5692.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 129.71,
+        "req": "ca844652",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5822.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 124.14,
+        "req": "ca844652",
+        "seq": 37,
+        "source": "drafter",
+        "t": 5946.7
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 123.58,
+        "req": "ca844652",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6070.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 126.09,
+        "req": "ca844652",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6196.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 124.12,
+        "req": "ca844652",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6320.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 126.31,
+        "req": "ca844652",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6446.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 126.01,
+        "req": "ca844652",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6572.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 126.27,
+        "req": "ca844652",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6699.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 123.77,
+        "req": "ca844652",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6822.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 124.69,
+        "req": "ca844652",
+        "seq": 45,
+        "source": "drafter",
+        "t": 6947.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 123.93,
+        "req": "ca844652",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7071.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 125.71,
+        "req": "ca844652",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7197.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 124.29,
+        "req": "ca844652",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7321.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 125.21,
+        "req": "ca844652",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7446.7
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 125.78,
+        "req": "ca844652",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7572.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 125.93,
+        "req": "ca844652",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7698.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 124.04,
+        "req": "ca844652",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7822.4
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 124.63,
+        "req": "ca844652",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7947.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 126.1,
+        "req": "ca844652",
+        "seq": 54,
+        "source": "drafter",
+        "t": 8073.2
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 124.38,
+        "req": "ca844652",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8197.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 126.77,
+        "req": "ca844652",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8324.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 125.43,
+        "req": "ca844652",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8449.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 125.44,
+        "req": "ca844652",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8575.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 125.82,
+        "req": "ca844652",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8701.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 125.01,
+        "req": "ca844652",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8826.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 124.73,
+        "req": "ca844652",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8950.8
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 127.2,
+        "req": "ca844652",
+        "seq": 62,
+        "source": "drafter",
+        "t": 9078.0
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 130.8,
+        "req": "ca844652",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9208.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 130.24,
+        "req": "ca844652",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9339.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 129.89,
+        "req": "ca844652",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9468.9
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 131.7,
+        "req": "ca844652",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9600.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 130.68,
+        "req": "ca844652",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9731.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 129.99,
+        "req": "ca844652",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9861.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 125.68,
+        "req": "ca844652",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9986.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 128.45,
+        "req": "ca844652",
+        "seq": 70,
+        "source": "drafter",
+        "t": 10115.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 126.28,
+        "req": "ca844652",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10241.7
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 124.47,
+        "req": "ca844652",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10366.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 126.34,
+        "req": "ca844652",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10492.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 125.76,
+        "req": "ca844652",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10618.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 126.03,
+        "req": "ca844652",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10744.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 126.32,
+        "req": "ca844652",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10870.6
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 124.2,
+        "req": "ca844652",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10994.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 126.77,
+        "req": "ca844652",
+        "seq": 78,
+        "source": "drafter",
+        "t": 11121.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 126.14,
+        "req": "ca844652",
+        "seq": 79,
+        "source": "drafter",
+        "t": 11247.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 126.18,
+        "req": "ca844652",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11373.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 124.2,
+        "req": "ca844652",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11498.1
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 126.26,
+        "req": "ca844652",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11624.3
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 126.02,
+        "req": "ca844652",
+        "seq": 83,
+        "source": "drafter",
+        "t": 11750.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 126.28,
+        "req": "ca844652",
+        "seq": 84,
+        "source": "drafter",
+        "t": 11876.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 127.38,
+        "req": "ca844652",
+        "seq": 85,
+        "source": "drafter",
+        "t": 12004.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 124.73,
+        "req": "ca844652",
+        "seq": 86,
+        "source": "drafter",
+        "t": 12128.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 86,
+        "mode": "dflash",
+        "ms": 124.32,
+        "req": "ca844652",
+        "seq": 87,
+        "source": "drafter",
+        "t": 12253.1
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 87,
+        "mode": "dflash",
+        "ms": 124.86,
+        "req": "ca844652",
+        "seq": 88,
+        "source": "drafter",
+        "t": 12377.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 88,
+        "mode": "dflash",
+        "ms": 126.82,
+        "req": "ca844652",
+        "seq": 89,
+        "source": "drafter",
+        "t": 12504.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 89,
+        "mode": "dflash",
+        "ms": 126.53,
+        "req": "ca844652",
+        "seq": 90,
+        "source": "drafter",
+        "t": 12631.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 90,
+        "mode": "dflash",
+        "ms": 126.76,
+        "req": "ca844652",
+        "seq": 91,
+        "source": "drafter",
+        "t": 12758.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 91,
+        "mode": "dflash",
+        "ms": 126.68,
+        "req": "ca844652",
+        "seq": 92,
+        "source": "drafter",
+        "t": 12884.7
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 92,
+        "mode": "dflash",
+        "ms": 126.66,
+        "req": "ca844652",
+        "seq": 93,
+        "source": "drafter",
+        "t": 13011.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 93,
+        "mode": "dflash",
+        "ms": 129.26,
+        "req": "ca844652",
+        "seq": 94,
+        "source": "drafter",
+        "t": 13140.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 94,
+        "mode": "dflash",
+        "ms": 130.79,
+        "req": "ca844652",
+        "seq": 95,
+        "source": "drafter",
+        "t": 13271.4
+      }
+    ],
+    "rounds": 95,
+    "speculative_decode_tok_s": 43.351699278428434,
+    "stop_reason": null,
+    "target_forwards": 96,
+    "width_distribution": {
+      "2": 4,
+      "7": 91
+    }
+  },
+  "process_order": {
+    "elapsed_seconds": 18.20479275006801,
+    "pid": 70241,
+    "process_end_utc": "2026-09-26T08:23:00Z",
+    "process_start_utc": "2026-09-26T08:22:42Z",
+    "role": "repeat",
+    "sequence": 2
+  },
+  "prompt_id": "P06",
+  "prompt_role": "repeat",
+  "rendered_prompt": "<|im_start|>user\nWrite a Python function that finds the maximum subarray sum using Kadane's algorithm. Explain why the algorithm runs in O(n) time.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "request": {
+    "generation": {
+      "max_tokens": 512,
+      "temperature": 0,
+      "thinking": false,
+      "top_k": 0,
+      "top_p": 1
+    },
+    "plain_kv": true,
+    "prefix_cache_initialization": "enabled / T027 production Engine settings",
+    "prefix_reuse_tokens": 0
+  },
+  "runtime_configuration": {
+    "controller_final": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.788,
+      "predicted_rates": {
+        "1": 21.8,
+        "2": 27.3,
+        "3": 27.1,
+        "4": 26.2,
+        "5": 29.1,
+        "6": 31.6,
+        "7": 33.5
+      },
+      "rounds": 95
+    },
+    "controller_present": true,
+    "final_effective_cap": null,
+    "kv8": false,
+    "kv_bits": null,
+    "max_draft_tokens": null,
+    "mode": "dflash",
+    "prefix_cache_enabled": true,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 2,
+  "short_label": "Maximum subarray",
+  "source_sha256": {
+    "prompt_panel.py": "f80ba3c06517f5faa007af3086fe651aeba4aa5a5ea58cb54da0f38df3d6b984",
+    "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+    "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "status": "GOLDEN_CANDIDATE",
+  "target": {
+    "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+    "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+    "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "text": "Write a Python function that finds the maximum subarray sum using Kadane's algorithm. Explain why the algorithm runs in O(n) time."
+}

@@ -1,0 +1,28 @@
+{
+  "generation": {
+    "frequency_penalty": 0.0,
+    "max_new_tokens": 128,
+    "presence_penalty": 0.0,
+    "seed": 0,
+    "stop": [],
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "prompt_encoding": "existing encode_messages with enable_thinking=False",
+  "prompts": [
+    {
+      "id": "p01",
+      "text": "Explain how a hash table handles collisions. Compare separate chaining with open addressing, and give one practical tradeoff for each."
+    },
+    {
+      "id": "p02",
+      "text": "Write a Python function that returns the length of the longest increasing subsequence. Include a short explanation of its time complexity."
+    },
+    {
+      "id": "p03",
+      "text": "A team is debugging a slow web service. Give a concise, ordered plan for measuring latency, finding the bottleneck, and verifying a fix."
+    }
+  ],
+  "schema": "qwen-bonsai-series-a-prompts/v1"
+}

@@ -1,0 +1,1150 @@
+{
+  "schema": "h3-serial-vs-dflash-oneoff/v1",
+  "status": "PASS",
+  "prompt": {
+    "user_message": "Сумма чисел от 1 до 100",
+    "rendered_prompt": "<|im_start|>system\nReasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.<|im_end|>\n<|im_start|>user\nСумма чисел от 1 до 100<|im_end|>\n<|im_start|>assistant\n<think>\n",
+    "input_token_ids": [
+      248045,
+      8678,
+      198,
+      24342,
+      286,
+      4879,
+      369,
+      716,
+      310,
+      830,
+      11553,
+      13,
+      5044,
+      1683,
+      15060,
+      1472,
+      279,
+      3274,
+      11,
+      9307,
+      1328,
+      30800,
+      11,
+      2814,
+      47675,
+      25605,
+      11,
+      321,
+      60445,
+      55404,
+      11,
+      27224,
+      11,
+      321,
+      30246,
+      303,
+      279,
+      1534,
+      4087,
+      13,
+      248046,
+      198,
+      248045,
+      846,
+      198,
+      18727,
+      37815,
+      66050,
+      38745,
+      11777,
+      19648,
+      220,
+      16,
+      54308,
+      220,
+      16,
+      15,
+      15,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      198
+    ],
+    "input_token_ids_sha256": "8f8e98e97ab7fb16cf33db9e231a34d34b3a88def2d6260a0c34f26a9347b163",
+    "input_token_count": 65,
+    "controls": {
+      "reasoning_effort_requested": "xhigh",
+      "reasoning_effort_used": "xhigh",
+      "supports_reasoning_effort": true,
+      "accepted_efforts": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "enable_thinking": "template default",
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "top_k": 0,
+      "max_new_tokens": 512,
+      "stop": [],
+      "seed": 0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0,
+      "kv": "plain",
+      "prefix_cache": false,
+      "one_user_message": "Сумма чисел от 1 до 100"
+    }
+  },
+  "composition_manifest": {
+    "schema": "qwen-bonsai-ownership/v1",
+    "qwen": {
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    },
+    "bonsai": {
+      "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+      "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+    },
+    "donor_indices": [
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "block_owners": [
+      {
+        "index": 0,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 1,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 2,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 3,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 4,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 5,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 6,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 7,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 8,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 9,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 10,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 11,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 12,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 13,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 14,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 15,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 16,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 17,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 18,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 19,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 20,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 21,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 22,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 23,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 24,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 25,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 26,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 27,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 28,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 29,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 30,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 31,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 32,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 33,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 34,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 35,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 36,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 37,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 38,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 39,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 40,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 41,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 42,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 43,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 44,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 45,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 46,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 47,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 48,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 49,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 50,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 51,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 52,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 53,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 54,
+        "owner": "qwen",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 55,
+        "owner": "qwen",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 56,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 57,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 58,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 59,
+        "owner": "bonsai",
+        "layer_family": "full_attention"
+      },
+      {
+        "index": 60,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 61,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 62,
+        "owner": "bonsai",
+        "layer_family": "linear_attention"
+      },
+      {
+        "index": 63,
+        "owner": "bonsai",
+        "layer_family": "full_attention"
+      }
+    ],
+    "embedding_owner": "qwen",
+    "final_norm_owner": "qwen",
+    "lm_head_owner": "qwen",
+    "qwen_nonblock_identity_preserved": true
+  },
+  "composition_assertions": {
+    "donor_owned_blocks": [
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "expected_donor_owned_blocks": [
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "qwen_nonblock_owners": {
+      "embedding_owner": "qwen",
+      "final_norm_owner": "qwen",
+      "lm_head_owner": "qwen"
+    }
+  },
+  "serial": {
+    "generated_token_ids": [
+      1596,
+      1144,
+      4087,
+      303,
+      8260,
+      4222,
+      13,
+      2570,
+      25,
+      328,
+      18727,
+      37815,
+      66050,
+      38745,
+      11777,
+      19648,
+      220,
+      16,
+      54308,
+      220,
+      16,
+      15,
+      15,
+      1,
+      3254,
+      2542,
+      314,
+      4947,
+      494,
+      220,
+      16,
+      310,
+      220,
+      16,
+      15,
+      15,
+      13,
+      14235,
+      12204,
+      220,
+      20,
+      15,
+      20,
+      15,
+      13,
+      14235,
+      1534,
+      13,
+      16018,
+      2830,
+      14377,
+      13,
+      198,
+      248069,
+      271,
+      18727,
+      37815,
+      66050,
+      38745,
+      11777,
+      19648,
+      220,
+      16,
+      54308,
+      220,
+      16,
+      15,
+      15,
+      25,
+      271,
+      75370,
+      198,
+      16,
+      478,
+      220,
+      17,
+      478,
+      220,
+      18,
+      478,
+      1088,
+      65529,
+      478,
+      220,
+      16,
+      15,
+      15,
+      283,
+      1088,
+      35790,
+      90,
+      16,
+      15,
+      15,
+      1088,
+      49142,
+      220,
+      16,
+      15,
+      16,
+      14728,
+      17,
+      92,
+      283,
+      220,
+      20,
+      15,
+      20,
+      15,
+      198,
+      59,
+      60,
+      271,
+      218523,
+      25,
+      2972,
+      20,
+      15,
+      20,
+      15,
+      332,
+      248046
+    ],
+    "generated_token_count": 122,
+    "output_sha256": "45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444",
+    "decoded_text": "We need answer in Russian likely. User: \"Сумма чисел от 1 до 100\" means sum of numbers from 1 to 100. Need compute 5050. Need final. Could include formula.\n</think>\n\nСумма чисел от 1 до 100:\n\n\\[\n1 + 2 + 3 + \\dots + 100 = \\frac{100 \\cdot 101}{2} = 5050\n\\]\n\nОтвет: **5050**",
+    "finish_reason": "stop",
+    "seconds": 8.484457015991211,
+    "decode_seconds": 7.7444798946380615,
+    "decode_tokens_per_sec": 15.753156010446544,
+    "target_forwards": 122,
+    "repeated_ngram": {
+      "detected": true,
+      "criterion": "same contiguous token n-gram (3..12 tokens) occurs at least 3 times",
+      "examples": [
+        {
+          "n": 3,
+          "count": 5,
+          "token_ids": [
+            16,
+            15,
+            15
+          ]
+        },
+        {
+          "n": 3,
+          "count": 5,
+          "token_ids": [
+            220,
+            16,
+            15
+          ]
+        },
+        {
+          "n": 4,
+          "count": 4,
+          "token_ids": [
+            220,
+            16,
+            15,
+            15
+          ]
+        },
+        {
+          "n": 4,
+          "count": 3,
+          "token_ids": [
+            20,
+            15,
+            20,
+            15
+          ]
+        },
+        {
+          "n": 3,
+          "count": 3,
+          "token_ids": [
+            15,
+            20,
+            15
+          ]
+        }
+      ]
+    }
+  },
+  "dflash": {
+    "generated_token_ids": [
+      1596,
+      1144,
+      4087,
+      303,
+      8260,
+      4222,
+      13,
+      2570,
+      25,
+      328,
+      18727,
+      37815,
+      66050,
+      38745,
+      11777,
+      19648,
+      220,
+      16,
+      54308,
+      220,
+      16,
+      15,
+      15,
+      1,
+      3254,
+      2542,
+      314,
+      4947,
+      494,
+      220,
+      16,
+      310,
+      220,
+      16,
+      15,
+      15,
+      13,
+      14235,
+      12204,
+      220,
+      20,
+      15,
+      20,
+      15,
+      13,
+      14235,
+      1534,
+      13,
+      16018,
+      2830,
+      14377,
+      13,
+      198,
+      248069,
+      271,
+      18727,
+      37815,
+      66050,
+      38745,
+      11777,
+      19648,
+      220,
+      16,
+      54308,
+      220,
+      16,
+      15,
+      15,
+      25,
+      271,
+      75370,
+      198,
+      16,
+      478,
+      220,
+      17,
+      478,
+      220,
+      18,
+      478,
+      1088,
+      65529,
+      478,
+      220,
+      16,
+      15,
+      15,
+      283,
+      1088,
+      35790,
+      90,
+      16,
+      15,
+      15,
+      1088,
+      49142,
+      220,
+      16,
+      15,
+      16,
+      14728,
+      17,
+      92,
+      283,
+      220,
+      20,
+      15,
+      20,
+      15,
+      198,
+      59,
+      60,
+      271,
+      218523,
+      25,
+      2972,
+      20,
+      15,
+      20,
+      15,
+      332,
+      248046
+    ],
+    "generated_token_count": 122,
+    "output_sha256": "45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444",
+    "decoded_text": "We need answer in Russian likely. User: \"Сумма чисел от 1 до 100\" means sum of numbers from 1 to 100. Need compute 5050. Need final. Could include formula.\n</think>\n\nСумма чисел от 1 до 100:\n\n\\[\n1 + 2 + 3 + \\dots + 100 = \\frac{100 \\cdot 101}{2} = 5050\n\\]\n\nОтвет: **5050**",
+    "finish_reason": "stop",
+    "seconds": 3.0026259422302246,
+    "decode_seconds": 2.256904125213623,
+    "decode_tokens_per_sec": 54.05635030617542,
+    "acceptance": 0.85,
+    "mean_accepted_length": 6.1,
+    "target_forwards": 21,
+    "generated_tokens_per_target_forward": 5.809523809523809,
+    "rounds": 20,
+    "width_distribution": {
+      "2": 4,
+      "7": 16
+    },
+    "cap_distribution": {
+      "2": 4,
+      "7": 16
+    },
+    "round_events": [
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 0,
+        "drafted": 2,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 2,
+        "source": "drafter",
+        "ms": 854.72,
+        "seq": 1,
+        "t": 11450.9
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 1,
+        "drafted": 2,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 2,
+        "source": "drafter",
+        "ms": 88.0,
+        "seq": 2,
+        "t": 11538.9
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 2,
+        "drafted": 2,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 2,
+        "source": "drafter",
+        "ms": 85.93,
+        "seq": 3,
+        "t": 11624.8
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 3,
+        "drafted": 2,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 2,
+        "source": "drafter",
+        "ms": 86.19,
+        "seq": 4,
+        "t": 11711.0
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 4,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 116.11,
+        "seq": 5,
+        "t": 11827.1
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 5,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.53,
+        "seq": 6,
+        "t": 11944.6
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 6,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.11,
+        "seq": 7,
+        "t": 12061.8
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 7,
+        "drafted": 7,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 116.29,
+        "seq": 8,
+        "t": 12178.0
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 8,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 119.59,
+        "seq": 9,
+        "t": 12297.6
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 9,
+        "drafted": 7,
+        "accepted": 6,
+        "committed": 7,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.52,
+        "seq": 10,
+        "t": 12415.2
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 10,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 119.46,
+        "seq": 11,
+        "t": 12534.6
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 11,
+        "drafted": 7,
+        "accepted": 5,
+        "committed": 6,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.15,
+        "seq": 12,
+        "t": 12651.8
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 12,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 118.95,
+        "seq": 13,
+        "t": 12770.7
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 13,
+        "drafted": 7,
+        "accepted": 4,
+        "committed": 5,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.32,
+        "seq": 14,
+        "t": 12888.0
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 14,
+        "drafted": 7,
+        "accepted": 6,
+        "committed": 7,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 119.02,
+        "seq": 15,
+        "t": 13007.1
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 15,
+        "drafted": 7,
+        "accepted": 6,
+        "committed": 7,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 119.59,
+        "seq": 16,
+        "t": 13126.6
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 16,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 120.0,
+        "seq": 17,
+        "t": 13246.6
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 17,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.28,
+        "seq": 18,
+        "t": 13363.9
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 18,
+        "drafted": 7,
+        "accepted": 7,
+        "committed": 8,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 116.89,
+        "seq": 19,
+        "t": 13480.8
+      },
+      {
+        "req": "f1db7917",
+        "mode": "dflash",
+        "i": 19,
+        "drafted": 7,
+        "accepted": 2,
+        "committed": 3,
+        "cap": 7,
+        "source": "drafter",
+        "ms": 117.53,
+        "seq": 20,
+        "t": 13598.3
+      }
+    ],
+    "cap_controller": {
+      "cap": 7,
+      "p": 0.928,
+      "rounds": 20,
+      "knee_width": 4,
+      "predicted_rates": {
+        "1": 22.8,
+        "2": 29.6,
+        "3": 31.8,
+        "4": 32.7,
+        "5": 38.3,
+        "6": 43.7,
+        "7": 49.8
+      }
+    },
+    "repeated_ngram": {
+      "detected": true,
+      "criterion": "same contiguous token n-gram (3..12 tokens) occurs at least 3 times",
+      "examples": [
+        {
+          "n": 3,
+          "count": 5,
+          "token_ids": [
+            16,
+            15,
+            15
+          ]
+        },
+        {
+          "n": 3,
+          "count": 5,
+          "token_ids": [
+            220,
+            16,
+            15
+          ]
+        },
+        {
+          "n": 4,
+          "count": 4,
+          "token_ids": [
+            220,
+            16,
+            15,
+            15
+          ]
+        },
+        {
+          "n": 4,
+          "count": 3,
+          "token_ids": [
+            20,
+            15,
+            20,
+            15
+          ]
+        },
+        {
+          "n": 3,
+          "count": 3,
+          "token_ids": [
+            15,
+            20,
+            15
+          ]
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "serial_output_sha256": "45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444",
+    "dflash_output_sha256": "45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444",
+    "exact_token_equality": true,
+    "common_prefix_generated_tokens": 122,
+    "first_differing_generated_token_index": null,
+    "serial_token_at_first_difference": null,
+    "dflash_token_at_first_difference": null,
+    "decoded_window_around_first_difference": {
+      "start_index": null,
+      "serial_text": "",
+      "dflash_text": ""
+    }
+  }
+}

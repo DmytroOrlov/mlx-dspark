@@ -1,0 +1,1710 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "01-B0-B-Q",
+    "comparison": "P14-B0-B-Q",
+    "drafter": "B-Q",
+    "order": 1,
+    "prompt_id": "P14",
+    "repeat": true,
+    "target": "B0"
+  },
+  "attempt_id": "feat005-20260926-c1",
+  "configuration": {
+    "bonsai_owned_block_count": 64,
+    "drafter": "B-Q",
+    "drafter_identity": {
+      "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+    },
+    "target": "B0",
+    "target_identity": {
+      "blocks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "embedding": "Bonsai2",
+      "final_norm": "Bonsai2",
+      "kind": "native_full_model",
+      "lm_head": "Bonsai2",
+      "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+      "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+      "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 83930,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.7422680412371134,
+    "active_baseline_bytes": 8972175122,
+    "active_baseline_gib": 8.355989234521985,
+    "cap_distribution": {
+      "2": 4,
+      "7": 82
+    },
+    "decode_duration_seconds": 8.75746202468872,
+    "generated_tokens": 519,
+    "generated_tokens_per_target_forward": 5.9655172413793105,
+    "mean_accepted_draft_tokens": 5.023255813953488,
+    "output_integrity_mode": "text_only",
+    "output_sha256": "13dc4e8786301d79059be90d318c608ef5e4c9fb171a339cca273145740f763a",
+    "output_text": "# Edit Distance (Levenshtein Distance) Using Dynamic Programming\n\n## Implementation\n\n```python\ndef edit_distance(s1: str, s2: str) -> int:\n    \"\"\"\n    Compute the minimum number of single-character edits (insertions,\n    deletions, or substitutions) required to transform s1 into s2.\n\n    Args:\n        s1: The source string.\n        s2: The target string.\n\n    Returns:\n        The edit distance between s1 and s2.\n    \"\"\"\n    m, n = len(s1), len(s2)\n\n    # Create a (m+1) x (n+1) DP table\n    # dp[i][j] = edit distance between s1[:i] and s2[:j]\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n\n    # Base cases: transforming an empty string to s2[:j] requires j insertions\n    for j in range(n + 1):\n        dp[0][j] = j\n\n    # Base cases: transforming s1[:i] to an empty string requires i deletions\n    for i in range(m + 1):\n        dp[i][0] = i\n\n    # Fill the table using the recurrence relation\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if s1[i - 1] == s2[j - 1]:\n                # Characters match: no operation needed\n                dp[i][j] = dp[i - 1][j - 1]\n            else:\n                # Take the minimum of three operations:\n                # 1. Deletion: dp[i-1][j] + 1\n                # 2. Insertion: dp[i][j-1] + 1\n                # 3. Substitution: dp[i-1][j-1] + 1\n                dp[i][j] = 1 + min(\n                    dp[i - 1][j],      # delete s1[i-1]\n                    dp[i][j - 1],      # insert s2[j-1]\n                    dp[i - 1][j - 1]   # substitute s1[i-1] with s2[j-1]\n                )\n\n    return dp[m][n]\n",
+    "output_tokens": null,
+    "output_tokens_sha256": null,
+    "peak_increment_bytes": 602580904,
+    "peak_increment_gib": 0.5611971989274025,
+    "peak_runtime_bytes": 9574756026,
+    "peak_runtime_gib": 8.917186433449388,
+    "request_duration_seconds": 9.36880016606301,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 699.71,
+        "req": "016922db",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1097.4
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 85.47,
+        "req": "016922db",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1182.9
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 84.74,
+        "req": "016922db",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1267.6
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 84.96,
+        "req": "016922db",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1352.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 100.5,
+        "req": "016922db",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1453.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 101.79,
+        "req": "016922db",
+        "seq": 6,
+        "source": "drafter",
+        "t": 1554.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 101.71,
+        "req": "016922db",
+        "seq": 7,
+        "source": "drafter",
+        "t": 1656.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 101.35,
+        "req": "016922db",
+        "seq": 8,
+        "source": "drafter",
+        "t": 1757.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 101.64,
+        "req": "016922db",
+        "seq": 9,
+        "source": "drafter",
+        "t": 1859.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 103.06,
+        "req": "016922db",
+        "seq": 10,
+        "source": "drafter",
+        "t": 1962.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 102.99,
+        "req": "016922db",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2065.6
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 102.82,
+        "req": "016922db",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2168.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 102.97,
+        "req": "016922db",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2271.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 101.05,
+        "req": "016922db",
+        "seq": 14,
+        "source": "drafter",
+        "t": 2372.5
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 102.53,
+        "req": "016922db",
+        "seq": 15,
+        "source": "drafter",
+        "t": 2475.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 103.73,
+        "req": "016922db",
+        "seq": 16,
+        "source": "drafter",
+        "t": 2578.7
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 101.05,
+        "req": "016922db",
+        "seq": 17,
+        "source": "drafter",
+        "t": 2679.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 101.85,
+        "req": "016922db",
+        "seq": 18,
+        "source": "drafter",
+        "t": 2781.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 101.01,
+        "req": "016922db",
+        "seq": 19,
+        "source": "drafter",
+        "t": 2882.6
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 101.0,
+        "req": "016922db",
+        "seq": 20,
+        "source": "drafter",
+        "t": 2983.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 102.51,
+        "req": "016922db",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3086.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 101.32,
+        "req": "016922db",
+        "seq": 22,
+        "source": "drafter",
+        "t": 3187.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 99.88,
+        "req": "016922db",
+        "seq": 23,
+        "source": "drafter",
+        "t": 3287.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 99.96,
+        "req": "016922db",
+        "seq": 24,
+        "source": "drafter",
+        "t": 3387.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 100.69,
+        "req": "016922db",
+        "seq": 25,
+        "source": "drafter",
+        "t": 3488.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 101.31,
+        "req": "016922db",
+        "seq": 26,
+        "source": "drafter",
+        "t": 3589.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 102.03,
+        "req": "016922db",
+        "seq": 27,
+        "source": "drafter",
+        "t": 3691.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 103.62,
+        "req": "016922db",
+        "seq": 28,
+        "source": "drafter",
+        "t": 3795.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 101.32,
+        "req": "016922db",
+        "seq": 29,
+        "source": "drafter",
+        "t": 3896.3
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 102.33,
+        "req": "016922db",
+        "seq": 30,
+        "source": "drafter",
+        "t": 3998.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 104.89,
+        "req": "016922db",
+        "seq": 31,
+        "source": "drafter",
+        "t": 4103.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 102.97,
+        "req": "016922db",
+        "seq": 32,
+        "source": "drafter",
+        "t": 4206.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 103.01,
+        "req": "016922db",
+        "seq": 33,
+        "source": "drafter",
+        "t": 4309.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 101.48,
+        "req": "016922db",
+        "seq": 34,
+        "source": "drafter",
+        "t": 4411.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 100.79,
+        "req": "016922db",
+        "seq": 35,
+        "source": "drafter",
+        "t": 4511.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 101.07,
+        "req": "016922db",
+        "seq": 36,
+        "source": "drafter",
+        "t": 4612.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 101.01,
+        "req": "016922db",
+        "seq": 37,
+        "source": "drafter",
+        "t": 4713.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 103.99,
+        "req": "016922db",
+        "seq": 38,
+        "source": "drafter",
+        "t": 4817.8
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 103.32,
+        "req": "016922db",
+        "seq": 39,
+        "source": "drafter",
+        "t": 4921.1
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 102.81,
+        "req": "016922db",
+        "seq": 40,
+        "source": "drafter",
+        "t": 5024.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 104.25,
+        "req": "016922db",
+        "seq": 41,
+        "source": "drafter",
+        "t": 5128.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 104.27,
+        "req": "016922db",
+        "seq": 42,
+        "source": "drafter",
+        "t": 5232.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 101.02,
+        "req": "016922db",
+        "seq": 43,
+        "source": "drafter",
+        "t": 5333.5
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 101.67,
+        "req": "016922db",
+        "seq": 44,
+        "source": "drafter",
+        "t": 5435.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 103.2,
+        "req": "016922db",
+        "seq": 45,
+        "source": "drafter",
+        "t": 5538.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 101.97,
+        "req": "016922db",
+        "seq": 46,
+        "source": "drafter",
+        "t": 5640.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 101.76,
+        "req": "016922db",
+        "seq": 47,
+        "source": "drafter",
+        "t": 5742.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 102.01,
+        "req": "016922db",
+        "seq": 48,
+        "source": "drafter",
+        "t": 5844.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 101.94,
+        "req": "016922db",
+        "seq": 49,
+        "source": "drafter",
+        "t": 5946.0
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 101.74,
+        "req": "016922db",
+        "seq": 50,
+        "source": "drafter",
+        "t": 6047.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 104.2,
+        "req": "016922db",
+        "seq": 51,
+        "source": "drafter",
+        "t": 6152.0
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 103.39,
+        "req": "016922db",
+        "seq": 52,
+        "source": "drafter",
+        "t": 6255.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 103.29,
+        "req": "016922db",
+        "seq": 53,
+        "source": "drafter",
+        "t": 6358.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 102.88,
+        "req": "016922db",
+        "seq": 54,
+        "source": "drafter",
+        "t": 6461.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 102.0,
+        "req": "016922db",
+        "seq": 55,
+        "source": "drafter",
+        "t": 6563.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 102.61,
+        "req": "016922db",
+        "seq": 56,
+        "source": "drafter",
+        "t": 6666.2
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 101.78,
+        "req": "016922db",
+        "seq": 57,
+        "source": "drafter",
+        "t": 6767.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 104.86,
+        "req": "016922db",
+        "seq": 58,
+        "source": "drafter",
+        "t": 6872.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 102.1,
+        "req": "016922db",
+        "seq": 59,
+        "source": "drafter",
+        "t": 6974.9
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 101.27,
+        "req": "016922db",
+        "seq": 60,
+        "source": "drafter",
+        "t": 7076.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 105.76,
+        "req": "016922db",
+        "seq": 61,
+        "source": "drafter",
+        "t": 7181.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 103.4,
+        "req": "016922db",
+        "seq": 62,
+        "source": "drafter",
+        "t": 7285.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 103.17,
+        "req": "016922db",
+        "seq": 63,
+        "source": "drafter",
+        "t": 7388.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 103.32,
+        "req": "016922db",
+        "seq": 64,
+        "source": "drafter",
+        "t": 7491.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 104.24,
+        "req": "016922db",
+        "seq": 65,
+        "source": "drafter",
+        "t": 7596.0
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 105.05,
+        "req": "016922db",
+        "seq": 66,
+        "source": "drafter",
+        "t": 7701.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 105.84,
+        "req": "016922db",
+        "seq": 67,
+        "source": "drafter",
+        "t": 7806.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 102.62,
+        "req": "016922db",
+        "seq": 68,
+        "source": "drafter",
+        "t": 7909.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 102.47,
+        "req": "016922db",
+        "seq": 69,
+        "source": "drafter",
+        "t": 8012.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 102.65,
+        "req": "016922db",
+        "seq": 70,
+        "source": "drafter",
+        "t": 8114.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 102.73,
+        "req": "016922db",
+        "seq": 71,
+        "source": "drafter",
+        "t": 8217.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 102.65,
+        "req": "016922db",
+        "seq": 72,
+        "source": "drafter",
+        "t": 8320.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 102.36,
+        "req": "016922db",
+        "seq": 73,
+        "source": "drafter",
+        "t": 8422.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 102.24,
+        "req": "016922db",
+        "seq": 74,
+        "source": "drafter",
+        "t": 8524.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 103.18,
+        "req": "016922db",
+        "seq": 75,
+        "source": "drafter",
+        "t": 8627.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 102.67,
+        "req": "016922db",
+        "seq": 76,
+        "source": "drafter",
+        "t": 8730.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 102.88,
+        "req": "016922db",
+        "seq": 77,
+        "source": "drafter",
+        "t": 8833.4
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 104.06,
+        "req": "016922db",
+        "seq": 78,
+        "source": "drafter",
+        "t": 8937.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 104.76,
+        "req": "016922db",
+        "seq": 79,
+        "source": "drafter",
+        "t": 9042.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 103.33,
+        "req": "016922db",
+        "seq": 80,
+        "source": "drafter",
+        "t": 9145.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 102.35,
+        "req": "016922db",
+        "seq": 81,
+        "source": "drafter",
+        "t": 9247.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 104.18,
+        "req": "016922db",
+        "seq": 82,
+        "source": "drafter",
+        "t": 9352.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 103.31,
+        "req": "016922db",
+        "seq": 83,
+        "source": "drafter",
+        "t": 9455.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 103.59,
+        "req": "016922db",
+        "seq": 84,
+        "source": "drafter",
+        "t": 9559.0
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 102.44,
+        "req": "016922db",
+        "seq": 85,
+        "source": "drafter",
+        "t": 9661.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 104.44,
+        "req": "016922db",
+        "seq": 86,
+        "source": "drafter",
+        "t": 9765.8
+      }
+    ],
+    "rounds": 86,
+    "speculative_decode_tok_s": 59.26374542497061,
+    "stop_reason": null,
+    "target_forwards": 87,
+    "width_distribution": {
+      "2": 4,
+      "7": 82
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_captured": 2370595980533666,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_captured": 2370605349352333,
+    "request_ended": 2370605349333666,
+    "request_started": 2370595980533958,
+    "reset_called": true,
+    "reset_completed": 2370595980528541
+  },
+  "preflight": {
+    "identity": "feat005-20260926-c1:PASS",
+    "path": "preflight.json",
+    "sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      12654,
+      709,
+      421,
+      55288,
+      279,
+      4351,
+      5821,
+      1881,
+      1330,
+      8796,
+      1608,
+      8476,
+      15019,
+      13,
+      28763,
+      6813,
+      321,
+      10033,
+      279,
+      854,
+      321,
+      3433,
+      22373,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "e8e210f918a3e0e80aad9631034bd981d596d48fa194f3dc87b978b31bdf19f1",
+    "input_token_count": 38,
+    "label": "Edit distance",
+    "prompt_id": "P14",
+    "rendered_prompt": "<|im_start|>user\nWrite a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.",
+    "text_sha256": "2a754645c2c0f84897b3f0476a21b82eaf212b0cb51cc1213422220b25e5a2a8"
+  },
+  "provenance": {
+    "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 11.700527290813625,
+    "process_started_utc": "2026-09-26T12:49:32Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": null,
+    "target_revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+  },
+  "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 9,
+      "p": 0.963,
+      "predicted_rates": {
+        "1": 27.6,
+        "2": 32.2,
+        "3": 33.6,
+        "4": 43.8,
+        "5": 51.6,
+        "6": 59.1,
+        "7": 65.6
+      },
+      "rounds": 86
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

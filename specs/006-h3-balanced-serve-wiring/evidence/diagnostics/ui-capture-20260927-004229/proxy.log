@@ -1,0 +1,2 @@
+CAPTURE_PROXY=http://127.0.0.1:13885/v1
+Send exactly ONE problematic UI request now.

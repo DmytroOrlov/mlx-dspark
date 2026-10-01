@@ -1,0 +1,177 @@
+{
+  "effective_attempt_id": "feat005-20260926-c1",
+  "finalizer_sha256": "26e4b888bf7b1e115e215026d9c4c5ddc2183cc6dd790418dfce1baee17b53c1",
+  "objective_trigger_count": 14,
+  "schema": "panel-matrix-objective-trigger-preview/v1",
+  "triggers": [
+    {
+      "cell_tok_s": 57.672817827248195,
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/06-H1b-B-B.json",
+      "raw_sha256": "6f53f3eacfd4f6697310af4f647398371259849508c57f59a4bbdd6092fc49a1",
+      "same_prompt_h0_bq_tok_s": 57.93746728412694,
+      "target": "H1b",
+      "trigger_classes": [
+        "h1b-bb-retention-at-least-97-percent"
+      ]
+    },
+    {
+      "cell_tok_s": 60.73421754184197,
+      "drafter": "B-Q",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/13-B0-B-Q.json",
+      "raw_sha256": "2fe6f49605612071cb255b806e78d33ab736af636360f1edc21a6c65a7d6b691",
+      "same_prompt_h0_bq_tok_s": 57.93746728412694,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 62.26675813224435,
+      "drafter": "B-B",
+      "prompt_id": "P05",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P05/14-B0-B-B.json",
+      "raw_sha256": "24b08e3ce30a49d43d00402ecc44fd4fe7b49128414e01bfe7ad891b7d6751c0",
+      "same_prompt_h0_bq_tok_s": 57.93746728412694,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 47.04155474587403,
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/05-H2-B-Q.json",
+      "raw_sha256": "2802746d69210e6c235f82dc0a879611993032d63f07a572e6cecb63546380bc",
+      "same_prompt_h0_bq_tok_s": 46.87791658367595,
+      "target": "H2",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 47.38118093470499,
+      "drafter": "B-Q",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/01-B0-B-Q.json",
+      "raw_sha256": "9892e4556790ef4d31d55fb4afab06a858c76ee317f7ca6a3a9b17fc5a9d19ad",
+      "same_prompt_h0_bq_tok_s": 46.87791658367595,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 49.342368311702586,
+      "drafter": "B-B",
+      "prompt_id": "P07",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/02-B0-B-B.json",
+      "raw_sha256": "135a596a80fd4f62f0bc2d64909af01c75b0ad9d2b9ef2429f7d20a1bbb83ab6",
+      "same_prompt_h0_bq_tok_s": 46.87791658367595,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 58.53351050658055,
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/09-H1b-B-Q.json",
+      "raw_sha256": "43373d120c90eb03926e64b20b225d308929e484c76adedb5a7dafaae5a5722f",
+      "same_prompt_h0_bq_tok_s": 56.2033812334963,
+      "target": "H1b",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 56.25469628372994,
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/10-H1b-B-B.json",
+      "raw_sha256": "ecd16a341eb61ab87eeea88367b49b557e9520775739b5f01caedb35de1b7a4f",
+      "same_prompt_h0_bq_tok_s": 56.2033812334963,
+      "target": "H1b",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq",
+        "h1b-bb-retention-at-least-97-percent"
+      ]
+    },
+    {
+      "cell_tok_s": 58.76843026005749,
+      "drafter": "B-Q",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/01-B0-B-Q.json",
+      "raw_sha256": "195e479765e154caecc27528c2d8cd58791afadc2f0b324a49cc2495096dace7",
+      "same_prompt_h0_bq_tok_s": 56.2033812334963,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 59.96299786319003,
+      "drafter": "B-B",
+      "prompt_id": "P14",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P14/02-B0-B-B.json",
+      "raw_sha256": "a37868c2fbf1e4275eef9170cca54a189fcfbc089175c0b573a8d775d70b7f37",
+      "same_prompt_h0_bq_tok_s": 56.2033812334963,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 49.69500063687001,
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/05-H1b-B-Q.json",
+      "raw_sha256": "ebd5e29e8f39e144b3c5fd3812ff3682c53b8002c427050b2b09199a956f8846",
+      "same_prompt_h0_bq_tok_s": 49.036898556983424,
+      "target": "H1b",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 47.791088199768815,
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/06-H1b-B-B.json",
+      "raw_sha256": "5b5d9e2d0ed48f97954e32df3ed81af4f1e735c2a3d4dfe2c452005125ee4ab4",
+      "same_prompt_h0_bq_tok_s": 49.036898556983424,
+      "target": "H1b",
+      "trigger_classes": [
+        "h1b-bb-retention-at-least-97-percent"
+      ]
+    },
+    {
+      "cell_tok_s": 49.82137364392857,
+      "drafter": "B-Q",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/12-H3-B-Q.json",
+      "raw_sha256": "87ee554976c093a7e406326d6d9bacae3ceead08777e71552ee94fc444adef5a",
+      "same_prompt_h0_bq_tok_s": 49.036898556983424,
+      "target": "H3",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    },
+    {
+      "cell_tok_s": 53.65359743426763,
+      "drafter": "B-B",
+      "prompt_id": "P17",
+      "raw_path": "evidence/attempts/feat005-20260926-c1/cells/P17/14-B0-B-B.json",
+      "raw_sha256": "94fed286e93c6f178e3a785858d2b8578fdf257fe87e57cc536ef498fe5b772f",
+      "same_prompt_h0_bq_tok_s": 49.036898556983424,
+      "target": "B0",
+      "trigger_classes": [
+        "non-h0-at-or-above-same-prompt-h0-bq"
+      ]
+    }
+  ]
+}

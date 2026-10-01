@@ -1,0 +1,15 @@
+{
+  "fresh_h0_speculative_tok_s": 43.91790108127499,
+  "schema": "product-sweep-repeat-selection/v1",
+  "selected": [
+    {
+      "cell_id": "06-H1b-B-B",
+      "drafter": "B-B",
+      "target": "H1b",
+      "triggers": [
+        "hybrid reaches or exceeds fresh H0+B-Q"
+      ]
+    }
+  ],
+  "unselected_reason": "No other existing repeat trigger fired; no fresh-H0 drift evidence or declared near-noise/localization flag."
+}

@@ -1,0 +1,4766 @@
+{
+  "derived_metrics": {
+    "by_target": {
+      "B0": {
+        "decode_tokens_per_sec": {
+          "delta": -2.6055555529682266,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 32.81147152841484,
+          "percent_delta": -7.356787872062347
+        },
+        "draft_acceptance": {
+          "delta": -0.1305467341859068,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.3612565445026178,
+          "percent_delta": -26.544502617801047
+        },
+        "generated_token_count": {
+          "delta": -2,
+          "fresh_h0_mean": 393,
+          "mean": 391,
+          "percent_delta": -0.5089058524173028
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.8258064516129031,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 3.4,
+          "percent_delta": -19.541984732824424
+        },
+        "mean_accept_len": {
+          "delta": -0.8755952380952379,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 3.4910714285714284,
+          "percent_delta": -20.05179934569247
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -7517875492,
+          "fresh_h0_mean": 16902720770,
+          "mean": 9384845278,
+          "percent_delta": -44.47730986210926
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 9.961492465111482,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 24.837206031646044,
+          "percent_delta": 66.96480421296593
+        },
+        "speedup_over_target_serial": {
+          "delta": -1.059882666789005,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 1.3210612935532473,
+          "percent_delta": -44.51522944020281
+        },
+        "target_forwards": {
+          "delta": 22,
+          "fresh_h0_mean": 93,
+          "mean": 115,
+          "percent_delta": 23.655913978494624
+        }
+      },
+      "H0": {
+        "decode_tokens_per_sec": {
+          "delta": 0.0,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 35.41702708138307,
+          "percent_delta": 0.0
+        },
+        "draft_acceptance": {
+          "delta": 0.0,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.4918032786885246,
+          "percent_delta": 0.0
+        },
+        "generated_token_count": {
+          "delta": 0,
+          "fresh_h0_mean": 393,
+          "mean": 393,
+          "percent_delta": 0.0
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": 0.0,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 4.225806451612903,
+          "percent_delta": 0.0
+        },
+        "mean_accept_len": {
+          "delta": 0.0,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 4.366666666666666,
+          "percent_delta": 0.0
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": 0,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16902720770,
+          "percent_delta": 0.0
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.0,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 14.875713566534563,
+          "percent_delta": 0.0
+        },
+        "speedup_over_target_serial": {
+          "delta": 0.0,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 2.380943960342252,
+          "percent_delta": 0.0
+        },
+        "target_forwards": {
+          "delta": 0,
+          "fresh_h0_mean": 93,
+          "mean": 93,
+          "percent_delta": 0.0
+        }
+      },
+      "H1a": {
+        "decode_tokens_per_sec": {
+          "delta": -6.034675146562815,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 29.382351934820253,
+          "percent_delta": -17.038909371743788
+        },
+        "draft_acceptance": {
+          "delta": -0.09879628568153159,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.393006993006993,
+          "percent_delta": -20.08857808857809
+        },
+        "generated_token_count": {
+          "delta": -4,
+          "fresh_h0_mean": 393,
+          "mean": 389,
+          "percent_delta": -1.0178117048346056
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.6239545997610514,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 3.6018518518518516,
+          "percent_delta": -14.765337856940912
+        },
+        "mean_accept_len": {
+          "delta": -0.6619047619047613,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 3.704761904761905,
+          "percent_delta": -15.15812431842965
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -104904476,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16797816294,
+          "percent_delta": -0.6206366266559346
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.2027253014302115,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 15.078438867964774,
+          "percent_delta": 1.3627937948891164
+        },
+        "speedup_over_target_serial": {
+          "delta": -0.43231040536295207,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 1.9486335549793001,
+          "percent_delta": -18.157101240669643
+        },
+        "target_forwards": {
+          "delta": 15,
+          "fresh_h0_mean": 93,
+          "mean": 108,
+          "percent_delta": 16.129032258064516
+        }
+      },
+      "H1b": {
+        "decode_tokens_per_sec": {
+          "delta": -0.9658379274411288,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 34.45118915394194,
+          "percent_delta": -2.727044043594559
+        },
+        "draft_acceptance": {
+          "delta": -0.01692483460424582,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.47487844408427876,
+          "percent_delta": -3.44138303619665
+        },
+        "generated_token_count": {
+          "delta": -6,
+          "fresh_h0_mean": 393,
+          "mean": 387,
+          "percent_delta": -1.5267175572519085
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.10878517501715823,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 4.117021276595745,
+          "percent_delta": -2.574305668344966
+        },
+        "mean_accept_len": {
+          "delta": -0.11391941391941351,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 4.252747252747253,
+          "percent_delta": -2.608841540139241
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -105856516,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16796864254,
+          "percent_delta": -0.6262690926533007
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.1495149322568743,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 15.025228498791437,
+          "percent_delta": 1.0050941864949152
+        },
+        "speedup_over_target_serial": {
+          "delta": -0.08805442746672609,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 2.292889532875526,
+          "percent_delta": -3.698299033214901
+        },
+        "target_forwards": {
+          "delta": 1,
+          "fresh_h0_mean": 93,
+          "mean": 94,
+          "percent_delta": 1.075268817204301
+        }
+      },
+      "H1c": {
+        "decode_tokens_per_sec": {
+          "delta": -1.7051783818463235,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 33.711848699536745,
+          "percent_delta": -4.814572318359971
+        },
+        "draft_acceptance": {
+          "delta": -0.032555629785703255,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.4592476489028213,
+          "percent_delta": -6.619644723092995
+        },
+        "generated_token_count": {
+          "delta": -3,
+          "fresh_h0_mean": 393,
+          "mean": 390,
+          "percent_delta": -0.7633587786259542
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.20518789491187217,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 4.020618556701031,
+          "percent_delta": -4.855591406311479
+        },
+        "mean_accept_len": {
+          "delta": -0.21773049645390063,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 4.148936170212766,
+          "percent_delta": -4.986194575280168
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -210034740,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16692686030,
+          "percent_delta": -1.2426090619255967
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.2693661034207846,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 15.145079669955347,
+          "percent_delta": 1.8107776962496056
+        },
+        "speedup_over_target_serial": {
+          "delta": -0.15501650177536463,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 2.2259274585668876,
+          "percent_delta": -6.51071610073013
+        },
+        "target_forwards": {
+          "delta": 4,
+          "fresh_h0_mean": 93,
+          "mean": 97,
+          "percent_delta": 4.301075268817204
+        }
+      },
+      "H2": {
+        "decode_tokens_per_sec": {
+          "delta": -3.3768341908892268,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 32.04019289049384,
+          "percent_delta": -9.534493629659439
+        },
+        "draft_acceptance": {
+          "delta": -0.05049570067960929,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.4413075780089153,
+          "percent_delta": -10.267459138187222
+        },
+        "generated_token_count": {
+          "delta": 6,
+          "fresh_h0_mean": 393,
+          "mean": 399,
+          "percent_delta": 1.5267175572519085
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.3140417457305502,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 3.911764705882353,
+          "percent_delta": -7.431522227211494
+        },
+        "mean_accept_len": {
+          "delta": -0.336363636363636,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 4.03030303030303,
+          "percent_delta": -7.702984038861893
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -422900140,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16479820630,
+          "percent_delta": -2.501964895205448
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.45172226860714026,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 15.327435835141703,
+          "percent_delta": 3.0366426900244035
+        },
+        "speedup_over_target_serial": {
+          "delta": -0.2905621616441123,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 2.09038179869814,
+          "percent_delta": -12.20365394918178
+        },
+        "target_forwards": {
+          "delta": 9,
+          "fresh_h0_mean": 93,
+          "mean": 102,
+          "percent_delta": 9.67741935483871
+        }
+      },
+      "H3": {
+        "decode_tokens_per_sec": {
+          "delta": -2.2360242447563152,
+          "fresh_h0_mean": 35.41702708138307,
+          "mean": 33.18100283662675,
+          "percent_delta": -6.31341597254412
+        },
+        "draft_acceptance": {
+          "delta": -0.054866341751587666,
+          "fresh_h0_mean": 0.4918032786885246,
+          "mean": 0.4369369369369369,
+          "percent_delta": -11.156156156156158
+        },
+        "generated_token_count": {
+          "delta": -1,
+          "fresh_h0_mean": 393,
+          "mean": 392,
+          "percent_delta": -0.2544529262086514
+        },
+        "generated_tokens_per_target_forward": {
+          "delta": -0.34461833280102194,
+          "fresh_h0_mean": 4.225806451612903,
+          "mean": 3.881188118811881,
+          "percent_delta": -8.155090318192123
+        },
+        "mean_accept_len": {
+          "delta": -0.36666666666666625,
+          "fresh_h0_mean": 4.366666666666666,
+          "mean": 4.0,
+          "percent_delta": -8.396946564885488
+        },
+        "peak_steady_state_memory_bytes": {
+          "delta": -846577052,
+          "fresh_h0_mean": 16902720770,
+          "mean": 16056143718,
+          "percent_delta": -5.008525334587302
+        },
+        "serial_target_tokens_per_sec": {
+          "delta": 0.8217811629411962,
+          "fresh_h0_mean": 14.875713566534563,
+          "mean": 15.697494729475759,
+          "percent_delta": 5.524314240561422
+        },
+        "speedup_over_target_serial": {
+          "delta": -0.2671669909305936,
+          "fresh_h0_mean": 2.380943960342252,
+          "mean": 2.1137769694116586,
+          "percent_delta": -11.221053304093276
+        },
+        "target_forwards": {
+          "delta": 8,
+          "fresh_h0_mean": 93,
+          "mean": 101,
+          "percent_delta": 8.602150537634408
+        }
+      }
+    },
+    "fresh_h0_baseline": {
+      "decode_tokens_per_sec": 35.41702708138307,
+      "draft_acceptance": 0.4918032786885246,
+      "generated_token_count": 393,
+      "generated_tokens_per_target_forward": 4.225806451612903,
+      "mean_accept_len": 4.366666666666666,
+      "peak_steady_state_memory_bytes": 16902720770,
+      "serial_target_tokens_per_sec": 14.875713566534563,
+      "speedup_over_target_serial": 2.380943960342252,
+      "target_forwards": 93
+    }
+  },
+  "interpretation": {
+    "any_tested_hybrid_improves_decode_over_fresh_h0": false,
+    "confirmed_hybrid_decode_wins": [],
+    "gate_b": "not opened; decision remains at the Series-A/Gate-B boundary",
+    "h1c_interaction": {
+      "descriptive_effect_of_block62_when_block63_is_bonsai": 3.492676855852544,
+      "descriptive_effect_of_block62_when_block63_is_qwen": -0.924227768489736,
+      "descriptive_repeat_difference_of_differences": 4.41690462434228,
+      "h1a_vs_h0": "confirmed_regression",
+      "h1b_vs_h0": "confirmed_regression",
+      "h1c_vs_h1a": "confirmed_win",
+      "h1c_vs_h1a_median_paired_delta": 3.492676855852544,
+      "h1c_vs_h1b": "within_noise",
+      "h1c_vs_h1b_median_paired_delta": -0.6648839390868062,
+      "interpretation": "H1c is confirmed faster than H1a but not distinguishable from H1b after accounting for paired spread. The direction of the H1c\u2212H1a and H1b\u2212H0 contrasts indicates a material context-dependent block-62 effect; adding block 63 on top of block 62 had no confirmed effect in these repeats.",
+      "material_interaction_signal": true
+    },
+    "largest_useful_transition": "No tested hybrid produced a confirmed end-to-end decode gain over fresh H0. H3 had the highest hybrid serial target rate (5.52% vs H0), but its decode rate was -6.31% and draft acceptance was -0.0549 below H0. H1b was the closest hybrid by discovery decode rate, but its three paired confirmations classified it as a regression. Full B0 gained serial speed but also reduced acceptance and speculative decode throughput; no tested point is a useful end-to-end transition over H0.",
+    "model_quality_conclusion": "not measured; no quality equivalence or production recommendation is implied",
+    "original_qwen_drafter_effectiveness": {
+      "all_speculative_speedups_over_serial_exceed_one": true,
+      "interpretation": "The original drafter continued to accelerate every tested target over that target's serial path; its acceptance and end-to-end rate declined at some Bonsai-heavy points. This does not imply compatibility parity or quality equivalence."
+    },
+    "serial_target_acceleration": {
+      "b0_serial_delta_vs_fresh_h0_percent": 66.96480421296593,
+      "fastest_hybrid_by_discovery_serial_rate": "H3",
+      "fastest_hybrid_serial_delta_vs_fresh_h0_percent": 5.524314240561422
+    },
+    "speculative_efficiency_loss": {
+      "decode_tps_delta_by_target": {
+        "B0": -2.6055555529682266,
+        "H0": 0.0,
+        "H1a": -6.034675146562815,
+        "H1b": -0.9658379274411288,
+        "H1c": -1.7051783818463235,
+        "H2": -3.3768341908892268,
+        "H3": -2.2360242447563152
+      },
+      "draft_acceptance_delta_by_target": {
+        "B0": -0.1305467341859068,
+        "H0": 0.0,
+        "H1a": -0.09879628568153159,
+        "H1b": -0.01692483460424582,
+        "H1c": -0.032555629785703255,
+        "H2": -0.05049570067960929,
+        "H3": -0.054866341751587666
+      },
+      "mean_accept_len_delta_by_target": {
+        "B0": -0.8755952380952379,
+        "H0": 0.0,
+        "H1a": -0.6619047619047613,
+        "H1b": -0.11391941391941351,
+        "H1c": -0.21773049645390063,
+        "H2": -0.336363636363636,
+        "H3": -0.36666666666666625
+      }
+    }
+  },
+  "measured_facts": {
+    "confirmation_decisions": [
+      {
+        "adjudicated_result": "confirmed_win",
+        "candidate": "H1c",
+        "comparison_id": "H1c-vs-H1a",
+        "control": "H1a",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": 3.492676855852544,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          3.492676855852544,
+          3.2274507563160597,
+          3.593184792761697
+        ],
+        "paired_range": 0.3657340364456374,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": 3.492676855852544,
+              "draft_acceptance": 0.06624065589582834,
+              "generated_tokens_per_target_forward": 0.4187667048491792,
+              "mean_accept_len": 0.4441742654508607,
+              "peak_memory_bytes": -106553736,
+              "serial_target_tokens_per_sec": 0.13390159852736438,
+              "target_forwards": -11
+            },
+            "candidate_run": {
+              "order_index": 1,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p01-1-h1c",
+              "sha256": "0ae9d073d76602c4c8f3d1f1b810da5a5f05db34f129a2e1205aefce1e5bd383",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1a",
+            "control": "H1a",
+            "control_run": {
+              "order_index": 2,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-2-h1a/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p01-2-h1a",
+              "sha256": "3f8a0ec6ae19542069a1dda3ed6bb9bcd7a96d1e4a4f0e89f23968976b9f4421",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "pair_id": "H1c-vs-H1a-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1a-p01-1-h1c",
+              "confirm-h1c-vs-h1a-p01-2-h1a"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": 3.2274507563160597,
+              "draft_acceptance": 0.06624065589582834,
+              "generated_tokens_per_target_forward": 0.4187667048491792,
+              "mean_accept_len": 0.4441742654508607,
+              "peak_memory_bytes": -106553736,
+              "serial_target_tokens_per_sec": 0.06765373190507518,
+              "target_forwards": -11
+            },
+            "candidate_run": {
+              "order_index": 4,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-2-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p02-2-h1c",
+              "sha256": "e9beb340595ea5c64ef9a79c8f8d9135dad06fc7cfe5f6e8c78c61e5fcf162e7",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1a",
+            "control": "H1a",
+            "control_run": {
+              "order_index": 3,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-1-h1a/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p02-1-h1a",
+              "sha256": "0c476902ab17ed792b0eb329c0f41431c64330f2789ea84e3fcdd4e6b09c07de",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "pair_id": "H1c-vs-H1a-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1a-p02-1-h1a",
+              "confirm-h1c-vs-h1a-p02-2-h1c"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": 3.593184792761697,
+              "draft_acceptance": 0.06624065589582834,
+              "generated_tokens_per_target_forward": 0.4187667048491792,
+              "mean_accept_len": 0.4441742654508607,
+              "peak_memory_bytes": -106553736,
+              "serial_target_tokens_per_sec": 0.14056943739079486,
+              "target_forwards": -11
+            },
+            "candidate_run": {
+              "order_index": 5,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p03-1-h1c",
+              "sha256": "ab0d7eedaa1300252b4a967fb90af36ae2e14c39626703af0b5ef3f5e7926552",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1a",
+            "control": "H1a",
+            "control_run": {
+              "order_index": 6,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-2-h1a/result.json",
+              "run_id": "confirm-h1c-vs-h1a-p03-2-h1a",
+              "sha256": "fb8c3ee8291e8f3f21571e7d3ae54005b1b121f2b6c06256ba96fc042d4bfab2",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "pair_id": "H1c-vs-H1a-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1a-p03-1-h1c",
+              "confirm-h1c-vs-h1a-p03-2-h1a"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "within_noise",
+        "candidate": "H1c",
+        "comparison_id": "H1c-vs-H1b",
+        "control": "H1b",
+        "effective_observed_noise_envelope": 1.5108516672110994,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -0.6648839390868062,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -0.3272374659196018,
+          -0.6648839390868062,
+          -1.8380891331307012
+        ],
+        "paired_range": 1.5108516672110994,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -0.3272374659196018,
+              "draft_acceptance": -0.015630795181457435,
+              "generated_tokens_per_target_forward": -0.09640271989471394,
+              "mean_accept_len": -0.10381108253448712,
+              "peak_memory_bytes": -104178224,
+              "serial_target_tokens_per_sec": 0.2602923473493206,
+              "target_forwards": 3
+            },
+            "candidate_run": {
+              "order_index": 7,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p01-1-h1c",
+              "sha256": "55057a671b9c7cfd32b4697c9e498494ffe5d71a5613e0ce893b409fed021518",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1b",
+            "control": "H1b",
+            "control_run": {
+              "order_index": 8,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-2-h1b/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p01-2-h1b",
+              "sha256": "98fba06271e7a9c12a73d63ea7b0a9c48c3e13baf8cc01e49001d8414e7150ac",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "pair_id": "H1c-vs-H1b-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1b-p01-1-h1c",
+              "confirm-h1c-vs-h1b-p01-2-h1b"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -0.6648839390868062,
+              "draft_acceptance": -0.015630795181457435,
+              "generated_tokens_per_target_forward": -0.09640271989471394,
+              "mean_accept_len": -0.10381108253448712,
+              "peak_memory_bytes": -104210992,
+              "serial_target_tokens_per_sec": 0.14776882954666704,
+              "target_forwards": 3
+            },
+            "candidate_run": {
+              "order_index": 10,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-2-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p02-2-h1c",
+              "sha256": "6b2f991fc1ad954bada24be10a510a5aa79a47a1c8a73856e73f60f21337fd1d",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1b",
+            "control": "H1b",
+            "control_run": {
+              "order_index": 9,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-1-h1b/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p02-1-h1b",
+              "sha256": "4992a5105f4592f83ff628b6c9ae77c166748d0e72e40740ed2acb3dbdfc4a56",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "pair_id": "H1c-vs-H1b-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1b-p02-1-h1b",
+              "confirm-h1c-vs-h1b-p02-2-h1c"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -1.8380891331307012,
+              "draft_acceptance": -0.015630795181457435,
+              "generated_tokens_per_target_forward": -0.09640271989471394,
+              "mean_accept_len": -0.10381108253448712,
+              "peak_memory_bytes": -104194608,
+              "serial_target_tokens_per_sec": -0.8271916126826397,
+              "target_forwards": 3
+            },
+            "candidate_run": {
+              "order_index": 11,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p03-1-h1c",
+              "sha256": "bbb6b85b4e608cf7b4a327a38cb769bf93dd1142a1f14f460c699af0d43ca597",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H1b",
+            "control": "H1b",
+            "control_run": {
+              "order_index": 12,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-2-h1b/result.json",
+              "run_id": "confirm-h1c-vs-h1b-p03-2-h1b",
+              "sha256": "45cbcb001bf20afc9e62b1e4e04078258bcc77178d60951782db625b386e36bb",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "pair_id": "H1c-vs-H1b-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h1b-p03-1-h1c",
+              "confirm-h1c-vs-h1b-p03-2-h1b"
+            ]
+          }
+        ],
+        "reason": "Paired differences did not consistently clear the larger of observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "H1c",
+        "comparison_id": "H1c-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.6372326959596961,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -2.320553639350898,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -2.4456218121809385,
+          -1.8083891162212424,
+          -2.320553639350898
+        ],
+        "paired_range": 0.6372326959596961,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.4456218121809385,
+              "draft_acceptance": -0.032555629785703255,
+              "generated_tokens_per_target_forward": -0.20518789491187217,
+              "mean_accept_len": -0.21773049645390063,
+              "peak_memory_bytes": -210043700,
+              "serial_target_tokens_per_sec": 0.19301998542713328,
+              "target_forwards": 4
+            },
+            "candidate_run": {
+              "order_index": 13,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h0-p01-1-h1c",
+              "sha256": "9803870e5a37e2f7da628b2d1cf0b3eb61456c611cbf989ce513a9bd203a4706",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 14,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-h1c-vs-h0-p01-2-h0",
+              "sha256": "6e4a78471bdd473793ccd0aa283b0a68a0ee725d16058b5bb4b43b9e9556731c",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1c-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h0-p01-1-h1c",
+              "confirm-h1c-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -1.8083891162212424,
+              "draft_acceptance": -0.032555629785703255,
+              "generated_tokens_per_target_forward": -0.20518789491187217,
+              "mean_accept_len": -0.21773049645390063,
+              "peak_memory_bytes": -210043700,
+              "serial_target_tokens_per_sec": 0.030267777974028576,
+              "target_forwards": 4
+            },
+            "candidate_run": {
+              "order_index": 16,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-2-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h0-p02-2-h1c",
+              "sha256": "0342d87ad15f985a54f3e9bd65db821f1a171a2f526c7615d9828360e2b0efe0",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 15,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-h1c-vs-h0-p02-1-h0",
+              "sha256": "b1ae677314bbf9d0d2023a5973215d1963b802cb85f0145b7a919db2c14d6ef7",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1c-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h0-p02-1-h0",
+              "confirm-h1c-vs-h0-p02-2-h1c"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1c",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.320553639350898,
+              "draft_acceptance": -0.032555629785703255,
+              "generated_tokens_per_target_forward": -0.20518789491187217,
+              "mean_accept_len": -0.21773049645390063,
+              "peak_memory_bytes": -210043604,
+              "serial_target_tokens_per_sec": 0.039538342448967256,
+              "target_forwards": 4
+            },
+            "candidate_run": {
+              "order_index": 17,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-1-h1c/result.json",
+              "run_id": "confirm-h1c-vs-h0-p03-1-h1c",
+              "sha256": "f7341c93ada14e6b0a6d003fb958e8795905022a36c204f6c6d08cacc134fb85",
+              "status": "PASS",
+              "target": "H1c"
+            },
+            "comparison_id": "H1c-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 18,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-h1c-vs-h0-p03-2-h0",
+              "sha256": "f295ced081dfcd7cd80dc609591f3c5c34f5a8cb8e8673e9c37e490dc9faeb78",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1c-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h1c-vs-h0-p03-1-h1c",
+              "confirm-h1c-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "H2",
+        "comparison_id": "H2-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -2.657650417543998,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -2.7184433456639354,
+          -2.657650417543998,
+          -2.55295278835176
+        ],
+        "paired_range": 0.1654905573121752,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H2",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.7184433456639354,
+              "draft_acceptance": -0.05049570067960929,
+              "generated_tokens_per_target_forward": -0.3140417457305502,
+              "mean_accept_len": -0.336363636363636,
+              "peak_memory_bytes": -422910060,
+              "serial_target_tokens_per_sec": 0.4455822895107193,
+              "target_forwards": 9
+            },
+            "candidate_run": {
+              "order_index": 19,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-1-h2/result.json",
+              "run_id": "confirm-h2-vs-h0-p01-1-h2",
+              "sha256": "58e4f28bfea79f81c202df40f595ee0c1098ce954f73da7aace9222c99f328ad",
+              "status": "PASS",
+              "target": "H2"
+            },
+            "comparison_id": "H2-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 20,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-h2-vs-h0-p01-2-h0",
+              "sha256": "031c0c37905c364f3db8b99f50fafcc7b58c07a161f188f3e2711817caad7e3c",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H2-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h2-vs-h0-p01-1-h2",
+              "confirm-h2-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H2",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.657650417543998,
+              "draft_acceptance": -0.05049570067960929,
+              "generated_tokens_per_target_forward": -0.3140417457305502,
+              "mean_accept_len": -0.336363636363636,
+              "peak_memory_bytes": -422910060,
+              "serial_target_tokens_per_sec": 0.3379005342353363,
+              "target_forwards": 9
+            },
+            "candidate_run": {
+              "order_index": 22,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-2-h2/result.json",
+              "run_id": "confirm-h2-vs-h0-p02-2-h2",
+              "sha256": "bf0a08656ca45a06f0d10156d08261f1d8cee773fa22902bdac4fa2f6f30897d",
+              "status": "PASS",
+              "target": "H2"
+            },
+            "comparison_id": "H2-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 21,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-h2-vs-h0-p02-1-h0",
+              "sha256": "60cb7b2af372178b6a5f51f77dbcb22140a1ba21559ff31695e0f81d74db2466",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H2-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h2-vs-h0-p02-1-h0",
+              "confirm-h2-vs-h0-p02-2-h2"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H2",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.55295278835176,
+              "draft_acceptance": -0.05049570067960929,
+              "generated_tokens_per_target_forward": -0.3140417457305502,
+              "mean_accept_len": -0.336363636363636,
+              "peak_memory_bytes": -422910060,
+              "serial_target_tokens_per_sec": 0.37034369355544605,
+              "target_forwards": 9
+            },
+            "candidate_run": {
+              "order_index": 23,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-1-h2/result.json",
+              "run_id": "confirm-h2-vs-h0-p03-1-h2",
+              "sha256": "404e51f45b600337dae7db747c83a09eadcf20b2fae7886aafe977888a57c3f3",
+              "status": "PASS",
+              "target": "H2"
+            },
+            "comparison_id": "H2-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 24,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-h2-vs-h0-p03-2-h0",
+              "sha256": "070b572f966e70d36641739bc27ba96064ad5d174efc3417ce463dde5089eb4f",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H2-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h2-vs-h0-p03-1-h2",
+              "confirm-h2-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "H1a",
+        "comparison_id": "H1a-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -5.547387168881027,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -5.567972732532304,
+          -5.5233221760654345,
+          -5.547387168881027
+        ],
+        "paired_range": 0.04465055646686977,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1a",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -5.567972732532304,
+              "draft_acceptance": -0.09879628568153159,
+              "generated_tokens_per_target_forward": -0.6239545997610514,
+              "mean_accept_len": -0.6619047619047613,
+              "peak_memory_bytes": -103489676,
+              "serial_target_tokens_per_sec": 0.07073255700533743,
+              "target_forwards": 15
+            },
+            "candidate_run": {
+              "order_index": 25,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-1-h1a/result.json",
+              "run_id": "confirm-h1a-vs-h0-p01-1-h1a",
+              "sha256": "12af3ca0f8cbe08831b1f374c03795ab1297ccab4b79ed0efa1adcd139f8fcc2",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "comparison_id": "H1a-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 26,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-h1a-vs-h0-p01-2-h0",
+              "sha256": "b802f9f8ec4d4d9441c39a1e76a2c149bb0f02b589cbacadae05a91d1cdd81d1",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1a-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h1a-vs-h0-p01-1-h1a",
+              "confirm-h1a-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H1a",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -5.5233221760654345,
+              "draft_acceptance": -0.09879628568153159,
+              "generated_tokens_per_target_forward": -0.6239545997610514,
+              "mean_accept_len": -0.6619047619047613,
+              "peak_memory_bytes": -103490828,
+              "serial_target_tokens_per_sec": 0.09642984591525305,
+              "target_forwards": 15
+            },
+            "candidate_run": {
+              "order_index": 28,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-2-h1a/result.json",
+              "run_id": "confirm-h1a-vs-h0-p02-2-h1a",
+              "sha256": "261f80c293a4e0c0f1132ba8af06bdbc3782e2f2d63ea721a68883f7ab63a081",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "comparison_id": "H1a-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 27,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-h1a-vs-h0-p02-1-h0",
+              "sha256": "aed9c6c3fb2ded91e9fbdcee8a4dac2929648aaf27bec89f671ca81c5100e944",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1a-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h1a-vs-h0-p02-1-h0",
+              "confirm-h1a-vs-h0-p02-2-h1a"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1a",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -5.547387168881027,
+              "draft_acceptance": -0.09879628568153159,
+              "generated_tokens_per_target_forward": -0.6239545997610514,
+              "mean_accept_len": -0.6619047619047613,
+              "peak_memory_bytes": -103522732,
+              "serial_target_tokens_per_sec": 0.0763749712674393,
+              "target_forwards": 15
+            },
+            "candidate_run": {
+              "order_index": 29,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-1-h1a/result.json",
+              "run_id": "confirm-h1a-vs-h0-p03-1-h1a",
+              "sha256": "7e077752a41bf99699f5dcf109eb1c3328a2940249e235d922c17a55e6ed70ba",
+              "status": "PASS",
+              "target": "H1a"
+            },
+            "comparison_id": "H1a-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 30,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-h1a-vs-h0-p03-2-h0",
+              "sha256": "0507e8d6b69db4c4623bb31b70f31b989cfb6afe8544ae2fc646512dd89d35c2",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1a-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h1a-vs-h0-p03-1-h1a",
+              "confirm-h1a-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "H3",
+        "comparison_id": "H3-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -2.593444761698045,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -2.5976553802295186,
+          -2.593444761698045,
+          -2.540301963639479
+        ],
+        "paired_range": 0.057353416590039785,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H3",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.5976553802295186,
+              "draft_acceptance": -0.054866341751587666,
+              "generated_tokens_per_target_forward": -0.34461833280102194,
+              "mean_accept_len": -0.36666666666666625,
+              "peak_memory_bytes": -846602396,
+              "serial_target_tokens_per_sec": 0.7584248457136287,
+              "target_forwards": 8
+            },
+            "candidate_run": {
+              "order_index": 31,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-1-h3/result.json",
+              "run_id": "confirm-h3-vs-h0-p01-1-h3",
+              "sha256": "55a356f3a2aa6541a3b4471c53ec3995f6becbf19bb7fd5220e49cd283c15751",
+              "status": "PASS",
+              "target": "H3"
+            },
+            "comparison_id": "H3-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 32,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-h3-vs-h0-p01-2-h0",
+              "sha256": "7ccdabe8f1344bede90574d4623e211e358a10e9619245b025cd2b8f1123dc27",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H3-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h3-vs-h0-p01-1-h3",
+              "confirm-h3-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H3",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.593444761698045,
+              "draft_acceptance": -0.054866341751587666,
+              "generated_tokens_per_target_forward": -0.34461833280102194,
+              "mean_accept_len": -0.36666666666666625,
+              "peak_memory_bytes": -846600764,
+              "serial_target_tokens_per_sec": 0.7340303542357898,
+              "target_forwards": 8
+            },
+            "candidate_run": {
+              "order_index": 34,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-2-h3/result.json",
+              "run_id": "confirm-h3-vs-h0-p02-2-h3",
+              "sha256": "6ada2739426c6f9492018eea2b17d6a6f37f43e899d3106902241c8dbc04c37a",
+              "status": "PASS",
+              "target": "H3"
+            },
+            "comparison_id": "H3-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 33,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-h3-vs-h0-p02-1-h0",
+              "sha256": "ba9f2f4b96faec75e4084a3c0c382cf559e9c6610daab456a5977cc811ec9ead",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H3-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h3-vs-h0-p02-1-h0",
+              "confirm-h3-vs-h0-p02-2-h3"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H3",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.540301963639479,
+              "draft_acceptance": -0.054866341751587666,
+              "generated_tokens_per_target_forward": -0.34461833280102194,
+              "mean_accept_len": -0.36666666666666625,
+              "peak_memory_bytes": -846602972,
+              "serial_target_tokens_per_sec": 0.7872027257973802,
+              "target_forwards": 8
+            },
+            "candidate_run": {
+              "order_index": 35,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-1-h3/result.json",
+              "run_id": "confirm-h3-vs-h0-p03-1-h3",
+              "sha256": "f26dda6abd402ad6f98f82f67ae9c7c8c0eb3f4e2e0ac98f25182e8f4e6539e8",
+              "status": "PASS",
+              "target": "H3"
+            },
+            "comparison_id": "H3-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 36,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-h3-vs-h0-p03-2-h0",
+              "sha256": "ec311eaedb888298add2182f87f0ebc1bd374d7c7043f6f478e9193fbb105108",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H3-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h3-vs-h0-p03-1-h3",
+              "confirm-h3-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "H1b",
+        "comparison_id": "H1b-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -0.924227768489736,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -0.9581007383641094,
+          -0.924227768489736,
+          -0.883587255149628
+        ],
+        "paired_range": 0.07451348321448137,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1b",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -0.9581007383641094,
+              "draft_acceptance": -0.01692483460424582,
+              "generated_tokens_per_target_forward": -0.10878517501715823,
+              "mean_accept_len": -0.11391941391941351,
+              "peak_memory_bytes": -105848228,
+              "serial_target_tokens_per_sec": 0.12677055720826225,
+              "target_forwards": 1
+            },
+            "candidate_run": {
+              "order_index": 37,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-1-h1b/result.json",
+              "run_id": "confirm-h1b-vs-h0-p01-1-h1b",
+              "sha256": "708f1a4212f65cad8623d6bfd9cb4562d36dda2767653a364b2e699064ad446e",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "comparison_id": "H1b-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 38,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-h1b-vs-h0-p01-2-h0",
+              "sha256": "19001990c7338beccfebaa34ac2999c1674165af8aafbb04ac0624c350eb9203",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1b-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-h1b-vs-h0-p01-1-h1b",
+              "confirm-h1b-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "H1b",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -0.924227768489736,
+              "draft_acceptance": -0.01692483460424582,
+              "generated_tokens_per_target_forward": -0.10878517501715823,
+              "mean_accept_len": -0.11391941391941351,
+              "peak_memory_bytes": -105850084,
+              "serial_target_tokens_per_sec": 0.14500267134595113,
+              "target_forwards": 1
+            },
+            "candidate_run": {
+              "order_index": 40,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-2-h1b/result.json",
+              "run_id": "confirm-h1b-vs-h0-p02-2-h1b",
+              "sha256": "df83aa256ceb13917f601e68979c8f7ccb683f5fde9ac71c9ed027a20404f71e",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "comparison_id": "H1b-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 39,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-h1b-vs-h0-p02-1-h0",
+              "sha256": "d79158b0b3cff428e0182201fda27b41f3607339831aa0a74c8711d94caf0c8a",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1b-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-h1b-vs-h0-p02-1-h0",
+              "confirm-h1b-vs-h0-p02-2-h1b"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "H1b",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -0.883587255149628,
+              "draft_acceptance": -0.01692483460424582,
+              "generated_tokens_per_target_forward": -0.10878517501715823,
+              "mean_accept_len": -0.11391941391941351,
+              "peak_memory_bytes": -105866340,
+              "serial_target_tokens_per_sec": 0.048062958371229314,
+              "target_forwards": 1
+            },
+            "candidate_run": {
+              "order_index": 41,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-1-h1b/result.json",
+              "run_id": "confirm-h1b-vs-h0-p03-1-h1b",
+              "sha256": "f96728bbb0f880ff7f9210f7475ee478d5eb3227873d5fc79f60a1d045dfec59",
+              "status": "PASS",
+              "target": "H1b"
+            },
+            "comparison_id": "H1b-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 42,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-h1b-vs-h0-p03-2-h0",
+              "sha256": "aac3c68c85e58436e7673b0cde20f3c412a1fe6f3813a888186e404b6c1e908d",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "H1b-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-h1b-vs-h0-p03-1-h1b",
+              "confirm-h1b-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      },
+      {
+        "adjudicated_result": "confirmed_regression",
+        "candidate": "B0",
+        "comparison_id": "B0-vs-H0",
+        "control": "H0",
+        "effective_observed_noise_envelope": 0.5616862263960911,
+        "matched_pair_count": 3,
+        "median_paired_decode_delta": -2.458024698440269,
+        "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+        "paired_decode_deltas": [
+          -2.5406591717054425,
+          -2.4129532545661476,
+          -2.458024698440269
+        ],
+        "paired_range": 0.1277059171392949,
+        "pairs": [
+          {
+            "alternating_order": "A-B",
+            "candidate": "B0",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.5406591717054425,
+              "draft_acceptance": -0.1305467341859068,
+              "generated_tokens_per_target_forward": -0.8258064516129031,
+              "mean_accept_len": -0.8755952380952379,
+              "peak_memory_bytes": -7517916020,
+              "serial_target_tokens_per_sec": 9.919420961982384,
+              "target_forwards": 22
+            },
+            "candidate_run": {
+              "order_index": 43,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-1-b0/result.json",
+              "run_id": "confirm-b0-vs-h0-p01-1-b0",
+              "sha256": "ba12bc427e9938a9b3650db1a2ca785b4f80ee708e2c62b4df96960a82e122c0",
+              "status": "PASS",
+              "target": "B0"
+            },
+            "comparison_id": "B0-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 44,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-2-h0/result.json",
+              "run_id": "confirm-b0-vs-h0-p01-2-h0",
+              "sha256": "2fb96d1ab37926685e2c6ddc88a2925f29c3fb453915d7084e94fc80d20cc50b",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "B0-vs-H0-pair-01",
+            "run_ids_in_actual_order": [
+              "confirm-b0-vs-h0-p01-1-b0",
+              "confirm-b0-vs-h0-p01-2-h0"
+            ]
+          },
+          {
+            "alternating_order": "B-A",
+            "candidate": "B0",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.4129532545661476,
+              "draft_acceptance": -0.1305467341859068,
+              "generated_tokens_per_target_forward": -0.8258064516129031,
+              "mean_accept_len": -0.8755952380952379,
+              "peak_memory_bytes": -7517916020,
+              "serial_target_tokens_per_sec": 9.91182387042415,
+              "target_forwards": 22
+            },
+            "candidate_run": {
+              "order_index": 46,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-2-b0/result.json",
+              "run_id": "confirm-b0-vs-h0-p02-2-b0",
+              "sha256": "cec048b665d99cace6982a469381898a6c98ab5a936b41a1aeb2449b1484ebf1",
+              "status": "PASS",
+              "target": "B0"
+            },
+            "comparison_id": "B0-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 45,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-1-h0/result.json",
+              "run_id": "confirm-b0-vs-h0-p02-1-h0",
+              "sha256": "00ec887a8da1bdd880aeaaecafe45799349566541fb16cf5ea931defa80d0d93",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "B0-vs-H0-pair-02",
+            "run_ids_in_actual_order": [
+              "confirm-b0-vs-h0-p02-1-h0",
+              "confirm-b0-vs-h0-p02-2-b0"
+            ]
+          },
+          {
+            "alternating_order": "A-B",
+            "candidate": "B0",
+            "candidate_minus_control": {
+              "decode_tokens_per_sec": -2.458024698440269,
+              "draft_acceptance": -0.1305467341859068,
+              "generated_tokens_per_target_forward": -0.8258064516129031,
+              "mean_accept_len": -0.8755952380952379,
+              "peak_memory_bytes": -7517916020,
+              "serial_target_tokens_per_sec": 9.916990795417657,
+              "target_forwards": 22
+            },
+            "candidate_run": {
+              "order_index": 47,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-1-b0/result.json",
+              "run_id": "confirm-b0-vs-h0-p03-1-b0",
+              "sha256": "7285bca4b3b21664f8f52cc6e36307c1e7dec9746fecc2d2dfa68d2dc406a815",
+              "status": "PASS",
+              "target": "B0"
+            },
+            "comparison_id": "B0-vs-H0",
+            "control": "H0",
+            "control_run": {
+              "order_index": 48,
+              "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-2-h0/result.json",
+              "run_id": "confirm-b0-vs-h0-p03-2-h0",
+              "sha256": "a34de6a860832a57db89ece6e09445c8efd85cf490e58258702fa413ff2a00a0",
+              "status": "PASS",
+              "target": "H0"
+            },
+            "pair_id": "B0-vs-H0-pair-03",
+            "run_ids_in_actual_order": [
+              "confirm-b0-vs-h0-p03-1-b0",
+              "confirm-b0-vs-h0-p03-2-h0"
+            ]
+          }
+        ],
+        "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+      }
+    ],
+    "fresh_h0_discovery_runs": [
+      {
+        "decode_tokens_per_sec": 35.697870194581114,
+        "draft_acceptance": 0.4918032786885246,
+        "generated_token_count": 393,
+        "generated_tokens_per_target_forward": 4.225806451612903,
+        "mean_accept_len": 4.366666666666666,
+        "measurement_duration_seconds": 39.612650871276855,
+        "ownership": {
+          "block_owners": [
+            {
+              "index": 0,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 1,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 2,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 3,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 4,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 5,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 6,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 7,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 8,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 9,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 10,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 11,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 12,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 13,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 14,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 15,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 16,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 17,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 18,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 19,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 20,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 21,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 22,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 23,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 24,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 25,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 26,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 27,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 28,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 29,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 30,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 31,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 32,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 33,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 34,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 35,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 36,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 37,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 38,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 39,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 40,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 41,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 42,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 43,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 44,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 45,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 46,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 47,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 48,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 49,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 50,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 51,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 52,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 53,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 54,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 55,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 56,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 57,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 58,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 59,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 60,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 61,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 62,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 63,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            }
+          ],
+          "composition_manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "donor_block_indices": [],
+          "embedding_owner": "qwen",
+          "final_norm_owner": "qwen",
+          "lm_head_owner": "qwen"
+        },
+        "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-01-h0-95426c/result.json",
+        "peak_steady_state_memory_bytes": 16902712290,
+        "run_id": "discovery-01-h0-95426c",
+        "serial_target_tokens_per_sec": 15.039851378383634,
+        "sha256": "3a7452c521bd5a2dc7b23b5779d6789b6f050df59322cefaff743e7757934acd",
+        "speedup_over_target_serial": 2.3735520582263656,
+        "target_forwards": 93
+      },
+      {
+        "decode_tokens_per_sec": 35.13618396818502,
+        "draft_acceptance": 0.4918032786885246,
+        "generated_token_count": 393,
+        "generated_tokens_per_target_forward": 4.225806451612903,
+        "mean_accept_len": 4.366666666666666,
+        "measurement_duration_seconds": 40.393129110336304,
+        "ownership": {
+          "block_owners": [
+            {
+              "index": 0,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 1,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 2,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 3,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 4,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 5,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 6,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 7,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 8,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 9,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 10,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 11,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 12,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 13,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 14,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 15,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 16,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 17,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 18,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 19,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 20,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 21,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 22,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 23,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 24,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 25,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 26,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 27,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 28,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 29,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 30,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 31,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 32,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 33,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 34,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 35,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 36,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 37,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 38,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 39,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 40,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 41,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 42,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 43,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 44,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 45,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 46,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 47,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 48,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 49,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 50,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 51,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 52,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 53,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 54,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 55,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 56,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 57,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 58,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 59,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 60,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 61,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 62,
+              "layer_family": "linear_attention",
+              "owner": "qwen"
+            },
+            {
+              "index": 63,
+              "layer_family": "full_attention",
+              "owner": "qwen"
+            }
+          ],
+          "composition_manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "donor_block_indices": [],
+          "embedding_owner": "qwen",
+          "final_norm_owner": "qwen",
+          "lm_head_owner": "qwen"
+        },
+        "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-08-h0-37e145/result.json",
+        "peak_steady_state_memory_bytes": 16902729250,
+        "run_id": "discovery-08-h0-37e145",
+        "serial_target_tokens_per_sec": 14.71157575468549,
+        "sha256": "3f2cc0f428d11ae99544b72feccca1b159bb191d503b87f6f2cdf9cc08ccbb95",
+        "speedup_over_target_serial": 2.3883358624581392,
+        "target_forwards": 93
+      }
+    ],
+    "tap_semantics": {
+      "direct_bonsai_tap_counts": {
+        "B0": 5,
+        "H0": 0,
+        "H1a": 0,
+        "H1b": 0,
+        "H1c": 0,
+        "H2": 1,
+        "H3": 1
+      },
+      "semantics": "zero-based block output",
+      "target_layer_ids": [
+        5,
+        19,
+        33,
+        47,
+        61
+      ]
+    },
+    "targets": {
+      "B0": [
+        {
+          "decode_tokens_per_sec": 32.81147152841484,
+          "draft_acceptance": 0.3612565445026178,
+          "generated_token_count": 391,
+          "generated_tokens_per_target_forward": 3.4,
+          "mean_accept_len": 3.4910714285714284,
+          "measurement_duration_seconds": 30.475669145584106,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              }
+            ],
+            "composition_manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "donor_block_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63
+            ],
+            "embedding_owner": "bonsai",
+            "final_norm_owner": "bonsai",
+            "lm_head_owner": "bonsai"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-07-b0-e37d8b/result.json",
+          "peak_steady_state_memory_bytes": 9384845278,
+          "run_id": "discovery-07-b0-e37d8b",
+          "serial_target_tokens_per_sec": 24.837206031646044,
+          "sha256": "45b3480ef67ed07811463f33b90e64c857dfb152a1ecbcb263b5a9ba43233f28",
+          "speedup_over_target_serial": 1.3210612935532473,
+          "target_forwards": 115
+        }
+      ],
+      "H1a": [
+        {
+          "decode_tokens_per_sec": 29.382351934820253,
+          "draft_acceptance": 0.393006993006993,
+          "generated_token_count": 389,
+          "generated_tokens_per_target_forward": 3.6018518518518516,
+          "mean_accept_len": 3.704761904761905,
+          "measurement_duration_seconds": 41.7727324962616,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              }
+            ],
+            "composition_manifest_sha256": "a608021403b6043f8f47a486e3f0916940820e8af66bd03214828dc507c86498",
+            "donor_block_indices": [
+              63
+            ],
+            "embedding_owner": "qwen",
+            "final_norm_owner": "qwen",
+            "lm_head_owner": "qwen"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-02-h1a-983014/result.json",
+          "peak_steady_state_memory_bytes": 16797816294,
+          "run_id": "discovery-02-h1a-983014",
+          "serial_target_tokens_per_sec": 15.078438867964774,
+          "sha256": "759a78a531882a1dfdbcf1d90ef12f55622212509e5708f1f572bae5ac17afa8",
+          "speedup_over_target_serial": 1.9486335549793001,
+          "target_forwards": 108
+        }
+      ],
+      "H1b": [
+        {
+          "decode_tokens_per_sec": 34.45118915394194,
+          "draft_acceptance": 0.47487844408427876,
+          "generated_token_count": 387,
+          "generated_tokens_per_target_forward": 4.117021276595745,
+          "mean_accept_len": 4.252747252747253,
+          "measurement_duration_seconds": 39.85379886627197,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              }
+            ],
+            "composition_manifest_sha256": "503a2d7562d97095a6cf370491d8b10a7f96ff6eb54c61302e271e3bba795779",
+            "donor_block_indices": [
+              62
+            ],
+            "embedding_owner": "qwen",
+            "final_norm_owner": "qwen",
+            "lm_head_owner": "qwen"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-04-h1b-aaa0df/result.json",
+          "peak_steady_state_memory_bytes": 16796864254,
+          "run_id": "discovery-04-h1b-aaa0df",
+          "serial_target_tokens_per_sec": 15.025228498791437,
+          "sha256": "a2baca710cc981f48dc02253737be23a91dbc54ca503c4a2628a2049abd931d5",
+          "speedup_over_target_serial": 2.292889532875526,
+          "target_forwards": 94
+        }
+      ],
+      "H1c": [
+        {
+          "decode_tokens_per_sec": 33.711848699536745,
+          "draft_acceptance": 0.4592476489028213,
+          "generated_token_count": 390,
+          "generated_tokens_per_target_forward": 4.020618556701031,
+          "mean_accept_len": 4.148936170212766,
+          "measurement_duration_seconds": 39.99925994873047,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              }
+            ],
+            "composition_manifest_sha256": "9e079b5cac1aed6cdead8a2c4bbe0519126574ae620d42fe561fc25304687890",
+            "donor_block_indices": [
+              62,
+              63
+            ],
+            "embedding_owner": "qwen",
+            "final_norm_owner": "qwen",
+            "lm_head_owner": "qwen"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-06-h1c-0fd978/result.json",
+          "peak_steady_state_memory_bytes": 16692686030,
+          "run_id": "discovery-06-h1c-0fd978",
+          "serial_target_tokens_per_sec": 15.145079669955347,
+          "sha256": "b2ae44d03a793b78a6efa2fa6f1fd89a545f6f60e7ff9d837f72ab59687957f5",
+          "speedup_over_target_serial": 2.2259274585668876,
+          "target_forwards": 97
+        }
+      ],
+      "H2": [
+        {
+          "decode_tokens_per_sec": 32.04019289049384,
+          "draft_acceptance": 0.4413075780089153,
+          "generated_token_count": 399,
+          "generated_tokens_per_target_forward": 3.911764705882353,
+          "mean_accept_len": 4.03030303030303,
+          "measurement_duration_seconds": 40.58234667778015,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              }
+            ],
+            "composition_manifest_sha256": "983b720587bfe1d544001beb3bfbc84e32bc8c91c29e09b9b809aa7bff7c5081",
+            "donor_block_indices": [
+              60,
+              61,
+              62,
+              63
+            ],
+            "embedding_owner": "qwen",
+            "final_norm_owner": "qwen",
+            "lm_head_owner": "qwen"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-03-h2-207d08/result.json",
+          "peak_steady_state_memory_bytes": 16479820630,
+          "run_id": "discovery-03-h2-207d08",
+          "serial_target_tokens_per_sec": 15.327435835141703,
+          "sha256": "7fff4af7d91fa0c28c8ca8ef444d6e5a6e2ae451c14df90c3f3df137a3fd61a4",
+          "speedup_over_target_serial": 2.09038179869814,
+          "target_forwards": 102
+        }
+      ],
+      "H3": [
+        {
+          "decode_tokens_per_sec": 33.18100283662675,
+          "draft_acceptance": 0.4369369369369369,
+          "generated_token_count": 392,
+          "generated_tokens_per_target_forward": 3.881188118811881,
+          "mean_accept_len": 4.0,
+          "measurement_duration_seconds": 39.34313225746155,
+          "ownership": {
+            "block_owners": [
+              {
+                "index": 0,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 1,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 2,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 3,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 4,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 5,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 6,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 7,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 8,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 9,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 10,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 11,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 12,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 13,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 14,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 15,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 16,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 17,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 18,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 19,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 20,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 21,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 22,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 23,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 24,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 25,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 26,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 27,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 28,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 29,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 30,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 31,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 32,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 33,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 34,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 35,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 36,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 37,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 38,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 39,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 40,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 41,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 42,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 43,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 44,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 45,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 46,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 47,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 48,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 49,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 50,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 51,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 52,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 53,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 54,
+                "layer_family": "linear_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 55,
+                "layer_family": "full_attention",
+                "owner": "qwen"
+              },
+              {
+                "index": 56,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 57,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 58,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 59,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 60,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 61,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 62,
+                "layer_family": "linear_attention",
+                "owner": "bonsai"
+              },
+              {
+                "index": 63,
+                "layer_family": "full_attention",
+                "owner": "bonsai"
+              }
+            ],
+            "composition_manifest_sha256": "cde4a10400c50bfdd4210cff0305aac7d96ff2b9a8acbfc6cbca2bd1b5faa74d",
+            "donor_block_indices": [
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63
+            ],
+            "embedding_owner": "qwen",
+            "final_norm_owner": "qwen",
+            "lm_head_owner": "qwen"
+          },
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/discovery-05-h3-84799d/result.json",
+          "peak_steady_state_memory_bytes": 16056143718,
+          "run_id": "discovery-05-h3-84799d",
+          "serial_target_tokens_per_sec": 15.697494729475759,
+          "sha256": "a068628cf4d4592a17cd5a8796a857e9fb296df68ad71665cbb2dda1e123b9a7",
+          "speedup_over_target_serial": 2.1137769694116586,
+          "target_forwards": 101
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "checkpoints": {
+      "bonsai": {
+        "config": {
+          "architectures": null,
+          "model_type": "prism_hadamard_qwen35",
+          "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd/config.json",
+          "sha256": "238de7c512cc56a733421e3fd011d88f8260739e3d00e32c5d65b7943cc9f837",
+          "text_config": {
+            "attention_bias": false,
+            "attention_dropout": 0.0,
+            "attn_output_gate": true,
+            "bos_token_id": 248044,
+            "dtype": "bfloat16",
+            "eos_token_id": 248044,
+            "full_attention_interval": 4,
+            "head_dim": 256,
+            "hidden_act": "silu",
+            "hidden_size": 5120,
+            "initializer_range": 0.02,
+            "intermediate_size": 17408,
+            "layer_types": [
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention"
+            ],
+            "linear_conv_kernel_dim": 4,
+            "linear_key_head_dim": 128,
+            "linear_num_key_heads": 16,
+            "linear_num_value_heads": 48,
+            "linear_value_head_dim": 128,
+            "mamba_ssm_dtype": "float32",
+            "max_position_embeddings": 262144,
+            "model_type": "qwen3_5_text",
+            "mtp_num_hidden_layers": 0,
+            "mtp_use_dedicated_embeddings": false,
+            "num_attention_heads": 24,
+            "num_hidden_layers": 64,
+            "num_key_value_heads": 4,
+            "output_gate_type": "swish",
+            "pad_token_id": null,
+            "partial_rotary_factor": 0.25,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "mrope_interleaved": true,
+              "mrope_section": [
+                11,
+                11,
+                10
+              ],
+              "partial_rotary_factor": 0.25,
+              "rope_theta": 10000000,
+              "rope_type": "default"
+            },
+            "tie_word_embeddings": false,
+            "use_cache": true,
+            "vocab_size": 248320
+          }
+        },
+        "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+        "resolved_path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "tokenizer_identity": {
+          "files": [
+            {
+              "name": "tokenizer.json",
+              "sha256": "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3"
+            },
+            {
+              "name": "tokenizer_config.json",
+              "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27"
+            }
+          ],
+          "shared_with": null,
+          "vocab_size": 248320
+        },
+        "weights": [
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model.safetensors",
+            "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd/model.safetensors",
+            "sha256": "130de5925082c168b7866b2e91b52e44abbafc99017e3ca352b77b5b55a269ed",
+            "size_bytes": 8595477990
+          }
+        ]
+      },
+      "dflash": {
+        "config": {
+          "architectures": [
+            "DFlash2DraftModel"
+          ],
+          "model_type": "qwen3",
+          "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/blobs/79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+          "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+          "text_config": {}
+        },
+        "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+        "resolved_path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+        "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+        "tokenizer_identity": {
+          "files": [],
+          "shared_with": "qwen",
+          "vocab_size": 248320
+        },
+        "weights": [
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model.safetensors",
+            "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/blobs/67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+            "sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+            "size_bytes": 3848817896
+          }
+        ]
+      },
+      "qwen": {
+        "config": {
+          "architectures": [
+            "Qwen3_5ForConditionalGeneration"
+          ],
+          "model_type": "qwen3_5",
+          "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/blobs/3fb03e916f494e6745aa23df751da26f79e06470",
+          "sha256": "14b65a0ee06517060a6bbd979bb1a8ff54e7b304b1a1f01d54344b88b8285e85",
+          "text_config": {
+            "attention_bias": false,
+            "attention_dropout": 0.0,
+            "attn_output_gate": true,
+            "bos_token_id": 248044,
+            "dtype": "bfloat16",
+            "eos_token_id": 248044,
+            "full_attention_interval": 4,
+            "head_dim": 256,
+            "hidden_act": "silu",
+            "hidden_size": 5120,
+            "initializer_range": 0.02,
+            "intermediate_size": 17408,
+            "layer_types": [
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention",
+              "linear_attention",
+              "linear_attention",
+              "linear_attention",
+              "full_attention"
+            ],
+            "linear_conv_kernel_dim": 4,
+            "linear_key_head_dim": 128,
+            "linear_num_key_heads": 16,
+            "linear_num_value_heads": 48,
+            "linear_value_head_dim": 128,
+            "mamba_ssm_dtype": "float32",
+            "max_position_embeddings": 262144,
+            "model_type": "qwen3_5_text",
+            "mtp_num_hidden_layers": 1,
+            "mtp_use_dedicated_embeddings": false,
+            "num_attention_heads": 24,
+            "num_hidden_layers": 64,
+            "num_key_value_heads": 4,
+            "output_gate_type": "swish",
+            "pad_token_id": null,
+            "partial_rotary_factor": 0.25,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "mrope_interleaved": true,
+              "mrope_section": [
+                11,
+                11,
+                10
+              ],
+              "partial_rotary_factor": 0.25,
+              "rope_theta": 10000000,
+              "rope_type": "default"
+            },
+            "tie_word_embeddings": false,
+            "use_cache": true,
+            "vocab_size": 248320
+          }
+        },
+        "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+        "resolved_path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+        "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+        "tokenizer_identity": {
+          "files": [
+            {
+              "name": "tokenizer.json",
+              "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523"
+            },
+            {
+              "name": "tokenizer_config.json",
+              "sha256": "792fa3f0cb88b111e54ef3134c873531008c4df471d108da17903426e308aa7b"
+            },
+            {
+              "name": "vocab.json",
+              "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+            }
+          ],
+          "shared_with": null,
+          "vocab_size": 248320
+        },
+        "weights": [
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model-00001-of-00003.safetensors",
+            "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/blobs/6cc1508e96fb5d0865dfd5753a79f4ec60651bf3e2a82844a7e8ae9c60528c0d",
+            "sha256": "6cc1508e96fb5d0865dfd5753a79f4ec60651bf3e2a82844a7e8ae9c60528c0d",
+            "size_bytes": 5343268662
+          },
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model-00002-of-00003.safetensors",
+            "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/blobs/83f2a20ca8058f486a3634a27faf99587f4cd3c156a83dee34fb99e6ac178670",
+            "sha256": "83f2a20ca8058f486a3634a27faf99587f4cd3c156a83dee34fb99e6ac178670",
+            "size_bytes": 5354185130
+          },
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model-00003-of-00003.safetensors",
+            "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/blobs/31b8c91ef899f79efaaa69e3d2c096f6e2ebeb2ff20e29222abbd9ebc79e560a",
+            "sha256": "31b8c91ef899f79efaaa69e3d2c096f6e2ebeb2ff20e29222abbd9ebc79e560a",
+            "size_bytes": 5357087557
+          },
+          {
+            "fingerprint_method": "SHA-256 over complete file bytes",
+            "name": "model.safetensors.index.json",
+            "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/blobs/05a3a3a17368d54d2887783e96b3a8191e9655f0",
+            "sha256": "13b840162b4cb35c66fef7df072f7dbb4717908204364f5e5d9f9655a2758fa8",
+            "size_bytes": 218281
+          }
+        ]
+      }
+    },
+    "discovery_index": {
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/discovery-index.json",
+      "sha256": "26f73b0d03c0c7b3db1729222dbf8b9da4e11ab197e1bcc765c9563b64d90e3b"
+    },
+    "fixed_controls": {
+      "controller": "ordinary production CapController, max_draft_tokens=auto",
+      "cpu_split": null,
+      "drafter_bits": 4,
+      "drafter_repo": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "generation": {
+        "frequency_penalty": 0.0,
+        "max_new_tokens": 128,
+        "presence_penalty": 0.0,
+        "seed": 0,
+        "stop": [],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      },
+      "kv_bits": null,
+      "lookup_drafts": false,
+      "memory_guard": false,
+      "mode": "dflash",
+      "plain_kv": true,
+      "prefix_cache": false,
+      "sdpa_split": null,
+      "small_m": null,
+      "warmup": true,
+      "wide_gemm_min": null
+    },
+    "repeat_decisions": {
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/repeat-decisions.json",
+      "sha256": "30a28a2e3f8a1439e5b72fe1eee7a11514db83d1e29b7eecc2482c064387cfcb"
+    },
+    "runtime_revision": {
+      "git_head": "df8ff57d47b9b0a95c2d432cb0c030a2d4e64472",
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      }
+    }
+  },
+  "schema": "qwen-bonsai-series-a-adjudication/v1",
+  "status": "PASS"
+}

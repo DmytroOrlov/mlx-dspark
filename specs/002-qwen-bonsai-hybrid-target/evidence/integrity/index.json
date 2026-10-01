@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "repeatability": {
+    "passed": true,
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/repeatability.json",
+    "sha256": "000676c5464bacc8387ef515edd85487a22520d4dba37ac937b9c3a839b0eff9"
+  },
+  "required_targets": [
+    "H0",
+    "H1a",
+    "H1b",
+    "H1c",
+    "H2",
+    "H3",
+    "B0"
+  ],
+  "runtime_semantics": {
+    "passed": true,
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/runtime-semantics.json",
+    "sha256": "6ee52f6a20d0e2908ac91ab3d8db1bc2847f98f0352581fe4ece2bdc18b656c8"
+  },
+  "schema": "qwen-bonsai-integrity-index/v1",
+  "series_a_discovery_started": false,
+  "series_a_discovery_unblocked": true,
+  "status": "PASS",
+  "targets": {
+    "B0": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/b0.json",
+      "sha256": "897f64193b57cdc83d5034ea3246f865baf44ac76ab222e719719a05a4ea0b71"
+    },
+    "H0": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h0.json",
+      "sha256": "b94ac8b76abc7f6448b53bf730109c9793780ae758b49de1e7396cc043cf19a2"
+    },
+    "H1a": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h1a.json",
+      "sha256": "79beaeeccd68807c773af710d7d56759a80e0646d48313f356012ade3bace93f"
+    },
+    "H1b": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h1b.json",
+      "sha256": "d9e14ed1784492e1d34c8cfcdc6f5e2cc8b9e35932dea5c8dadea7badc365e1c"
+    },
+    "H1c": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h1c.json",
+      "sha256": "ca04c941634b108d9a5a0f67082c703270d23736e3e36f3752311c304fa9f54d"
+    },
+    "H2": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h2.json",
+      "sha256": "009bb6e122ffc1cee6ed545db8b4e86e17515beeb1cf5b716f2a268f5a7a3d19"
+    },
+    "H3": {
+      "passed": true,
+      "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/integrity/h3.json",
+      "sha256": "af62c609862dc0f667096152b0ffeafa5cf768c3358f23a78e00d6962a3209d5"
+    }
+  }
+}

@@ -1,0 +1,565 @@
+{
+  "attempt_id": "feat005-20260926-b1",
+  "benchmark_performed": false,
+  "checkpoint_manifest": {
+    "B-B": {
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+    },
+    "B-Q": {
+      "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+    },
+    "Qwen": {
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    },
+    "official_Bonsai2": {
+      "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+      "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+      "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+    }
+  },
+  "checkpoints": {
+    "B-B": {
+      "files": [
+        {
+          "name": "config.json",
+          "resolved_blob_name": "79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+          "sha256": null,
+          "size_bytes": 1239
+        },
+        {
+          "name": "model.safetensors",
+          "resolved_blob_name": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+          "sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+          "size_bytes": 3848817904
+        }
+      ],
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2"
+    },
+    "B-Q": {
+      "files": [
+        {
+          "name": "config.json",
+          "resolved_blob_name": "79279cc5665bced6f3cdaa2095a2ffe819497b2e",
+          "sha256": null,
+          "size_bytes": 1239
+        },
+        {
+          "name": "model.safetensors",
+          "resolved_blob_name": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+          "sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+          "size_bytes": 3848817896
+        }
+      ],
+      "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+    },
+    "Qwen": {
+      "files": [
+        {
+          "name": "config.json",
+          "resolved_blob_name": "3fb03e916f494e6745aa23df751da26f79e06470",
+          "sha256": null,
+          "size_bytes": 4932
+        },
+        {
+          "name": "model-00001-of-00003.safetensors",
+          "resolved_blob_name": "6cc1508e96fb5d0865dfd5753a79f4ec60651bf3e2a82844a7e8ae9c60528c0d",
+          "sha256": null,
+          "size_bytes": 5343268662
+        },
+        {
+          "name": "model-00002-of-00003.safetensors",
+          "resolved_blob_name": "83f2a20ca8058f486a3634a27faf99587f4cd3c156a83dee34fb99e6ac178670",
+          "sha256": null,
+          "size_bytes": 5354185130
+        },
+        {
+          "name": "model-00003-of-00003.safetensors",
+          "resolved_blob_name": "31b8c91ef899f79efaaa69e3d2c096f6e2ebeb2ff20e29222abbd9ebc79e560a",
+          "sha256": null,
+          "size_bytes": 5357087557
+        }
+      ],
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    },
+    "official_Bonsai2": {
+      "files": [
+        {
+          "name": "config.json",
+          "resolved_blob_name": "config.json",
+          "sha256": null,
+          "size_bytes": 58145
+        },
+        {
+          "name": "model.safetensors",
+          "resolved_blob_name": "model.safetensors",
+          "sha256": "130de5925082c168b7866b2e91b52e44abbafc99017e3ca352b77b5b55a269ed",
+          "size_bytes": 8595477990
+        }
+      ],
+      "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+      "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+    }
+  },
+  "child_command_interpreter": "/Users/do/git/mlx-dspark/.venv/bin/python",
+  "execution_order": {
+    "forward": [
+      [
+        "H0",
+        "B-Q"
+      ],
+      [
+        "H0",
+        "B-B"
+      ],
+      [
+        "H1a",
+        "B-B"
+      ],
+      [
+        "H1a",
+        "B-Q"
+      ],
+      [
+        "H1b",
+        "B-Q"
+      ],
+      [
+        "H1b",
+        "B-B"
+      ],
+      [
+        "H1c",
+        "B-B"
+      ],
+      [
+        "H1c",
+        "B-Q"
+      ],
+      [
+        "H2",
+        "B-Q"
+      ],
+      [
+        "H2",
+        "B-B"
+      ],
+      [
+        "H3",
+        "B-B"
+      ],
+      [
+        "H3",
+        "B-Q"
+      ],
+      [
+        "B0",
+        "B-Q"
+      ],
+      [
+        "B0",
+        "B-B"
+      ]
+    ],
+    "forward_prompts": [
+      "P05",
+      "P08",
+      "P17"
+    ],
+    "reverse": [
+      [
+        "B0",
+        "B-Q"
+      ],
+      [
+        "B0",
+        "B-B"
+      ],
+      [
+        "H3",
+        "B-B"
+      ],
+      [
+        "H3",
+        "B-Q"
+      ],
+      [
+        "H2",
+        "B-Q"
+      ],
+      [
+        "H2",
+        "B-B"
+      ],
+      [
+        "H1c",
+        "B-B"
+      ],
+      [
+        "H1c",
+        "B-Q"
+      ],
+      [
+        "H1b",
+        "B-Q"
+      ],
+      [
+        "H1b",
+        "B-B"
+      ],
+      [
+        "H1a",
+        "B-B"
+      ],
+      [
+        "H1a",
+        "B-Q"
+      ],
+      [
+        "H0",
+        "B-Q"
+      ],
+      [
+        "H0",
+        "B-B"
+      ]
+    ],
+    "reverse_prompts": [
+      "P07",
+      "P14"
+    ]
+  },
+  "expected_cell_count": 70,
+  "freshness_contract": {
+    "fresh_empty_measured_request": true,
+    "fresh_engine_per_cell": true,
+    "fresh_process_per_cell": true,
+    "prefix_cache_initialized": true,
+    "useful_prefix_reuse_tokens": 0
+  },
+  "interpreter": {
+    "cache_tag": "cpython-312",
+    "implementation": "CPython",
+    "path": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "version": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "memory_contract": {
+    "baseline": "mx.metal.get_active_memory() immediately before measured engine.generate request",
+    "increment": "peak_runtime_bytes - active_baseline_bytes",
+    "peak": "mx.metal.get_peak_memory() immediately after measured engine.generate request",
+    "reset": "mx.metal.reset_peak_memory() after model load/warmup and fresh-state assertions",
+    "serial_generation": false
+  },
+  "model_free": true,
+  "physical_config": {
+    "context_window": null,
+    "cpu_split": null,
+    "drafter_bits": 4,
+    "enable_thinking": false,
+    "kv8": false,
+    "kv_bits": null,
+    "lookup_drafts": false,
+    "max_draft_tokens": "auto",
+    "memory_guard": true,
+    "mode": "dflash",
+    "prefix_cache": true,
+    "prefix_cache_dir": null,
+    "prefix_cache_max_ram_mb": 0,
+    "prefix_cache_rungs": 8192,
+    "prefix_cache_slots": 2,
+    "sdpa_split": null,
+    "small_m": null,
+    "tuning": false,
+    "warmup": true,
+    "wide_gemm_min": null,
+    "width_policy": null
+  },
+  "physical_observations": "not performed by preflight",
+  "prompts": [
+    {
+      "input_ids": [
+        248045,
+        846,
+        198,
+        7734,
+        264,
+        12654,
+        709,
+        421,
+        78161,
+        1330,
+        10300,
+        11140,
+        1083,
+        264,
+        3074,
+        10300,
+        1103,
+        13,
+        28763,
+        6813,
+        321,
+        264,
+        2716,
+        22373,
+        6157,
+        13,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "input_ids_sha256": "c54a5a3a09fdbbd76abfeb4cf6343fa799415d1b42a2742a7af0eb370dfd1433",
+      "input_token_count": 35,
+      "label": "Merge sorted lists",
+      "prompt_id": "P05",
+      "qualification_generated_tokens_each_run_min": 410,
+      "qualification_reference_tok_s": 52.798,
+      "rendered_prompt": "<|im_start|>user\nWrite a Python function that merges two sorted lists into a single sorted list. Include tests and a short complexity analysis.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "text": "Write a Python function that merges two sorted lists into a single sorted list. Include tests and a short complexity analysis.",
+      "text_sha256": "5100b25d1e533dff3fe973119092029818e11e100ca8c4a9437cceed6b926b65"
+    },
+    {
+      "input_ids": [
+        248045,
+        846,
+        198,
+        7734,
+        264,
+        12654,
+        709,
+        421,
+        4523,
+        279,
+        1118,
+        2397,
+        5331,
+        62683,
+        3542,
+        303,
+        264,
+        886,
+        13,
+        28763,
+        913,
+        29642,
+        321,
+        4821,
+        6813,
+        13,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "input_ids_sha256": "f0610a3c0f59bf39d7974f1e354c10c692934aa60d8aa9f126da732d816533ab",
+      "input_token_count": 35,
+      "label": "First unique character",
+      "prompt_id": "P07",
+      "qualification_generated_tokens_each_run_min": 410,
+      "qualification_reference_tok_s": 45.211,
+      "rendered_prompt": "<|im_start|>user\nWrite a Python function that returns the first non-repeating character in a string. Include type hints and unit tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "text": "Write a Python function that returns the first non-repeating character in a string. Include type hints and unit tests.",
+      "text_sha256": "1844beef6c157201c373cb58e5d8a22fdf31a3fa74d0de5217a00a5ff908874e"
+    },
+    {
+      "input_ids": [
+        248045,
+        846,
+        198,
+        7734,
+        264,
+        5492,
+        21408,
+        12654,
+        7873,
+        314,
+        264,
+        5436,
+        440,
+        4336,
+        11,
+        2341,
+        11,
+        31516,
+        11,
+        321,
+        369,
+        14683,
+        5245,
+        13,
+        28763,
+        913,
+        29642,
+        321,
+        6813,
+        13,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "input_ids_sha256": "6727da7ae4dfca2c7280acb52e7892ec2fa552e63b5137bfc589ecc02111e73f",
+      "input_token_count": 39,
+      "label": "Stack",
+      "prompt_id": "P08",
+      "qualification_generated_tokens_each_run_min": 410,
+      "qualification_reference_tok_s": 47.854,
+      "rendered_prompt": "<|im_start|>user\nWrite a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "text": "Write a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests.",
+      "text_sha256": "98c2636a73988b0184d53d1bdf0e712d2fe3f478f3b384090acde5f1e662b620"
+    },
+    {
+      "input_ids": [
+        248045,
+        846,
+        198,
+        7734,
+        264,
+        12654,
+        709,
+        421,
+        55288,
+        279,
+        4351,
+        5821,
+        1881,
+        1330,
+        8796,
+        1608,
+        8476,
+        15019,
+        13,
+        28763,
+        6813,
+        321,
+        10033,
+        279,
+        854,
+        321,
+        3433,
+        22373,
+        13,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "input_ids_sha256": "e8e210f918a3e0e80aad9631034bd981d596d48fa194f3dc87b978b31bdf19f1",
+      "input_token_count": 38,
+      "label": "Edit distance",
+      "prompt_id": "P14",
+      "qualification_generated_tokens_each_run_min": 410,
+      "qualification_reference_tok_s": 51.113,
+      "rendered_prompt": "<|im_start|>user\nWrite a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "text": "Write a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.",
+      "text_sha256": "2a754645c2c0f84897b3f0476a21b82eaf212b0cb51cc1213422220b25e5a2a8"
+    },
+    {
+      "input_ids": [
+        248045,
+        846,
+        198,
+        7734,
+        264,
+        12654,
+        709,
+        421,
+        25822,
+        1844,
+        5551,
+        27355,
+        383,
+        264,
+        15083,
+        1557,
+        63098,
+        4618,
+        13,
+        28763,
+        10458,
+        17448,
+        11,
+        913,
+        29642,
+        11,
+        321,
+        6813,
+        13,
+        248046,
+        198,
+        248045,
+        74455,
+        198,
+        248068,
+        271,
+        248069,
+        271
+      ],
+      "input_ids_sha256": "7e43ad981d42b58f21cdbac9668a148ceecedd69dd7f0ac75f6e44845408b173",
+      "input_token_count": 38,
+      "label": "Topological sort",
+      "prompt_id": "P17",
+      "qualification_generated_tokens_each_run_min": 410,
+      "qualification_reference_tok_s": 44.017,
+      "rendered_prompt": "<|im_start|>user\nWrite a Python function that performs topological sorting on a directed acyclic graph. Include cycle detection, type hints, and tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "text": "Write a Python function that performs topological sorting on a directed acyclic graph. Include cycle detection, type hints, and tests.",
+      "text_sha256": "fb75704d427be1fea23089e3c70c17215e52bc4a9d817bff82df085b5c92a30e"
+    }
+  ],
+  "runner_sha256": "0853d741c57b38b996b2ccbbbda8e50b3a80ac4001d4141c9558b833424d86dc",
+  "runtime": {
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    }
+  },
+  "schema": "panel-matrix-preflight/v1",
+  "selected_BB_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "PASS"
+}
