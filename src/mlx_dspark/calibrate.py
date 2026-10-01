@@ -1187,6 +1187,17 @@ def calibrate(target, drafter, *, mode: str, target_repo: str, drafter_repo: str
 
     key = _cache_key(mode, target_repo, drafter_repo,
                      kv_bits=getattr(target, "kv_bits", None))
+
+    # Prism/Bonsai uses a separate 2-bit g128 MMA dispatcher inside Packed
+    # projections. Its verify curve is materially different from stock
+    # mx.quantized_matmul, so never share cap calibration between them.
+    try:
+        from . import mlx_qmm_mma
+        if mlx_qmm_mma.active():
+            key += "|prismmma"
+    except ImportError:
+        pass
+
     if smm_ids:
         key += "|smm"
     if sdps_cfg is not None:

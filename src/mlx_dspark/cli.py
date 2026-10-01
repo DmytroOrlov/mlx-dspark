@@ -53,6 +53,57 @@ def _parse_max_draft(value: str | None, ap) -> int | str | None:
         ap.error(f"--max-draft must be an integer or 'auto', got {value!r}")
 
 
+def _parse_donor_blocks(value: str) -> tuple[int, ...]:
+    """Parse the deliberately small donor block selector, returning sorted unique indices."""
+    selected: set[int] = set()
+    for token in value.split(","):
+        if not token:
+            raise ValueError("--donor-blocks contains an empty selection")
+        parts = token.split("-")
+        if len(parts) == 1:
+            start = end = parts[0]
+        elif len(parts) == 2:
+            start, end = parts
+        else:
+            raise ValueError(f"invalid --donor-blocks token: {token!r}")
+        if any(not part or not part.isascii() or not part.isdecimal()
+               for part in (start, end)):
+            raise ValueError(f"invalid --donor-blocks token: {token!r}")
+        first, last = int(start), int(end)
+        if first > last:
+            raise ValueError(f"--donor-blocks range must be ascending: {token!r}")
+        if first < 0 or last > 63:
+            raise ValueError("--donor-blocks indices must be between 0 and 63")
+        selected.update(range(first, last + 1))
+    if not selected:
+        raise ValueError("--donor-blocks must select at least one block")
+    return tuple(sorted(selected))
+
+
+def _format_donor_blocks(indices: tuple[int, ...]) -> str:
+    ranges: list[str] = []
+    start = previous = indices[0]
+    for index in indices[1:]:
+        if index == previous + 1:
+            previous = index
+            continue
+        ranges.append(str(start) if start == previous else f"{start}-{previous}")
+        start = previous = index
+    ranges.append(str(start) if start == previous else f"{start}-{previous}")
+    return ",".join(ranges)
+
+
+def _snapshot_revision(resolved_path: str) -> str | None:
+    """Return a commit SHA only when _resolve yielded an immutable snapshot path."""
+    path_parts = os.path.realpath(resolved_path).rstrip(os.sep).split(os.sep)
+    for index, part in enumerate(path_parts[:-1]):
+        revision = path_parts[index + 1]
+        if (part == "snapshots" and len(revision) == 40
+                and all(char in "0123456789abcdef" for char in revision)):
+            return revision
+    return None
+
+
 def cmd_generate(argv: list[str]) -> None:
     from .generate import dflash_generate, greedy_generate, speculative_generate
     from .load import apply_wired_limit, load_dflash, load_drafter, load_target, resolve_mode
@@ -330,6 +381,10 @@ def cmd_serve(argv: list[str]) -> None:
                          "POST /admin/load (model pickers still work — /doctor and "
                          "/admin/models answer model-free)")
     ap.add_argument("--drafter", default=None, help="drafter repo/path (overrides auto-resolve)")
+    ap.add_argument("--donor-model", default=None, metavar="REPO-OR-PATH",
+                    help="donor checkpoint for same-index decoder block replacement")
+    ap.add_argument("--donor-blocks", default=None, metavar="BLOCK-SELECTION",
+                    help="donor decoder blocks, e.g. 62 or 56-63; pair with --donor-model")
     ap.add_argument("--family", choices=["gemma4", "qwen3"], default=None,
                     help=argparse.SUPPRESS)          # deprecated alias for --model
     ap.add_argument("--target", default=None, help=argparse.SUPPRESS)  # deprecated alias for --model
@@ -458,6 +513,14 @@ def cmd_serve(argv: list[str]) -> None:
                     help="spill the prefix cache to --prefix-cache-dir once it exceeds this many MB "
                          "of RAM (0 = never spill; requires --prefix-cache-dir)")
     args = ap.parse_args(argv)
+    if (args.donor_model is None) != (args.donor_blocks is None):
+        ap.error("--donor-model and --donor-blocks must be supplied together")
+    donor_indices = None
+    if args.donor_blocks is not None:
+        try:
+            donor_indices = _parse_donor_blocks(args.donor_blocks)
+        except ValueError as e:
+            ap.error(str(e))
     if args.pause_on_battery and sys.platform != "darwin":
         ap.error("--pause-on-battery is macOS-only (it watches the Mac's power source)")
     # The INITIAL power source is probed synchronously BEFORE any model load: a serve
@@ -521,6 +584,32 @@ def cmd_serve(argv: list[str]) -> None:
         "kv_bits": args.kv_bits or None,
         "context_window": args.context_window,
     }
+    if args.donor_model is not None:
+        from . import load as load_module
+        from .hybrid_target import TargetCompositionRequest
+
+        try:
+            _, qwen_repo, _ = load_module.resolve_mode(
+                args.model, mode=args.mode, drafter=args.drafter,
+                family=args.family, target=args.target)
+            qwen_path = load_module._resolve(qwen_repo)
+            donor_path = load_module._resolve(args.donor_model)
+            qwen_revision = _snapshot_revision(qwen_path)
+            donor_revision = _snapshot_revision(donor_path)
+            if qwen_revision is None:
+                raise ValueError("Qwen target must resolve to an immutable snapshot path")
+            if donor_revision is None:
+                raise ValueError("donor must resolve to an immutable snapshot path")
+            target_composition = TargetCompositionRequest.create(
+                donor_path=donor_path, donor_repo=args.donor_model,
+                donor_revision=donor_revision, qwen_repo=qwen_repo,
+                qwen_revision=qwen_revision, donor_indices=donor_indices)
+        except ValueError as e:
+            ap.error(str(e))
+        load_kwargs["target_composition"] = target_composition
+        print(f"donor composition: {args.donor_model} @ {donor_revision}; "
+              f"blocks {_format_donor_blocks(donor_indices)}")
+        print("Qwen retains embedding, unselected decoder blocks, final norm, and LM head")
     start_paused = bool(args.pause_on_battery and initial_power == "battery"
                         and not args.no_model)
     if args.no_model or start_paused:

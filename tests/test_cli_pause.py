@@ -97,6 +97,128 @@ class TestParserIsolation:
         assert "macOS-only" in capsys.readouterr().err
 
 
+class TestDonorBlockSelection:
+    @pytest.mark.parametrize("raw, expected", [
+        ("62", (62,)),
+        ("56-63", (56, 57, 58, 59, 60, 61, 62, 63)),
+        ("12,28,41,55,62", (12, 28, 41, 55, 62)),
+        ("12,20-23,62", (12, 20, 21, 22, 23, 62)),
+        ("62,62,60-62", (60, 61, 62)),
+        ("63,0,63", (0, 63)),
+    ])
+    def test_parser_expands_and_normalizes(self, raw, expected):
+        assert cli._parse_donor_blocks(raw) == expected
+
+    @pytest.mark.parametrize("raw", [
+        "", " ", ",62", "62,", "62,,63", "-1", "64", "1.0", "+1", "one",
+        "1-", "-2", "1--2", "2-1", "1-64", "1-2-3", "1,foo", " 1 ",
+    ])
+    def test_parser_rejects_invalid_syntax(self, raw):
+        with pytest.raises(ValueError):
+            cli._parse_donor_blocks(raw)
+
+
+class TestDonorServeDispatch:
+    @staticmethod
+    def _stub_server(monkeypatch):
+        calls = {"loads": [], "resolver": [], "server": 0}
+
+        def fake_load(**kwargs):
+            calls["loads"].append(kwargs)
+            return _FakeEngine()
+
+        def fake_run_server(*args, **kwargs):
+            calls["server"] += 1
+
+        monkeypatch.setattr(S.Engine, "load", staticmethod(fake_load))
+        monkeypatch.setattr(S, "run_server", fake_run_server)
+        monkeypatch.setattr(S, "maybe_batch_engine", lambda engine, batch: engine)
+        return calls
+
+    @pytest.mark.parametrize("args", [
+        ["--donor-model", "org/donor"],
+        ["--donor-blocks", "62"],
+        ["--donor-model", "org/donor", "--donor-blocks", "2-1"],
+        ["--donor-model", "org/donor", "--donor-blocks", "64"],
+        ["--donor-model", "org/donor", "--donor-blocks", "62,,63"],
+    ])
+    def test_invalid_pair_or_blocks_fail_before_resolution_and_load(self, monkeypatch, args):
+        import mlx_dspark.load as load_mod
+
+        calls = self._stub_server(monkeypatch)
+
+        def forbidden_resolve(*args, **kwargs):
+            pytest.fail("model resolution must not happen for invalid donor options")
+
+        monkeypatch.setattr(load_mod, "_resolve", forbidden_resolve)
+        with pytest.raises(SystemExit) as exc:
+            cli.cmd_serve(["--mode", "lookup", "--model", "org/qwen", *args])
+        assert exc.value.code == 2
+        assert calls["loads"] == []
+
+    def test_no_donor_keeps_existing_load_kwargs_without_composition(self, monkeypatch):
+        calls = self._stub_server(monkeypatch)
+        cli.cmd_serve(["--mode", "lookup", "--model", "org/qwen", "--drafter", "org/draft"])
+        kwargs = calls["loads"][0]
+        assert kwargs == {
+            "mode": "lookup", "model": "org/qwen", "drafter": "org/draft",
+            "family": None, "target": None, "drafter_bits": 4, "max_draft_tokens": None,
+            "confidence_threshold": 0.0, "enable_thinking": None, "reasoning_effort": None,
+            "prefix_cache": True, "prefix_cache_dir": None, "prefix_cache_max_ram_mb": 0,
+            "default_max_tokens": 2048, "max_tokens_cap": 32768,
+            "default_temperature": None, "default_top_p": None, "default_top_k": None,
+            "prefix_cache_slots": 2, "prefix_cache_rungs": 8192, "lookup_drafts": None,
+            "lookup_long_draft": 32, "wired_limit": False, "wide_gemm_min": None,
+            "cpu_split": None, "small_m": None, "sdpa_split": None, "warmup": True,
+            "memory_guard": True, "batch_widths": None, "kv_bits": None,
+            "context_window": None,
+        }
+        assert calls["resolver"] == []
+        assert calls["server"] == 1
+
+    def test_donor_composition_reaches_engine_and_preserves_drafter(self, monkeypatch, capsys):
+        import mlx_dspark.load as load_mod
+        from mlx_dspark.hybrid_target import TargetCompositionRequest
+
+        calls = self._stub_server(monkeypatch)
+        target_sha, donor_sha = "1" * 40, "2" * 40
+        roots = {
+            "org/qwen": f"/cache/models--org--qwen/snapshots/{target_sha}",
+            "org/donor": f"/cache/models--org--donor/snapshots/{donor_sha}",
+        }
+
+        def fake_resolve(repo):
+            calls["resolver"].append(repo)
+            return roots[repo]
+
+        monkeypatch.setattr(load_mod, "_resolve", fake_resolve)
+        cli.cmd_serve(["--mode", "dflash", "--model", "org/qwen", "--drafter", "org/draft",
+                       "--donor-model", "org/donor", "--donor-blocks", "56-63"])
+        kwargs = calls["loads"][0]
+        request = kwargs["target_composition"]
+        assert isinstance(request, TargetCompositionRequest)
+        assert request.donor_indices == (56, 57, 58, 59, 60, 61, 62, 63)
+        assert request.donor_repo == "org/donor" and request.donor_revision == donor_sha
+        assert request.qwen_repo == "org/qwen" and request.qwen_revision == target_sha
+        assert kwargs["mode"] == "dflash" and kwargs["drafter"] == "org/draft"
+        assert calls["resolver"] == ["org/qwen", "org/donor"]
+        output = capsys.readouterr().out
+        assert "org/donor" in output and donor_sha in output and "56-63" in output
+        assert "Qwen" in output and "embedding" in output and "final norm" in output
+        assert "LM head" in output and "unselected decoder blocks" in output
+
+    def test_non_immutable_local_donor_fails_before_engine_load(self, monkeypatch):
+        import mlx_dspark.load as load_mod
+
+        calls = self._stub_server(monkeypatch)
+        monkeypatch.setattr(load_mod, "_resolve", lambda repo: "/models/ordinary-local-checkpoint")
+        with pytest.raises(SystemExit) as exc:
+            cli.cmd_serve(["--mode", "lookup", "--model", "org/qwen", "--donor-model",
+                           "/models/donor", "--donor-blocks", "62"])
+        assert exc.value.code == 2
+        assert calls["loads"] == []
+
+
 class TestStartupPowerDecision:
     """cmd_serve probes the initial power source BEFORE any load; the coordinator
     starts paused and model-less when the Mac is already on battery. All stubbed:

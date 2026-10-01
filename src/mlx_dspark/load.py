@@ -643,7 +643,6 @@ def load_drafter(
             f"target ids."
         )
 
-    # Diagnose name mismatches before loading.
     model_keys = {k for k, _ in _flatten_params(drafter)}
     ckpt_keys = set(weights.keys())
     missing = sorted(model_keys - ckpt_keys)
@@ -764,11 +763,108 @@ def load_dflash(repo_or_path: str, *, quantize: bool = True, bits: int = 4, grou
         conv_group_size=int(dfc.get("conv_group_size") or 16),
         output_multiplier=float(dfc.get("output_multiplier") or 1.0),
     )
-    drafter = DFlashDraftModel(config)
+
+    # Chad-format bundled DFlash sidecars are already quantized. Their safetensors
+    # header records the draft precision, and their DFlash2 codebooks are quantized
+    # nn.Embedding modules rather than the raw arrays used by upstream HF checkpoints.
+    sidecar_meta = None
+    sidecar_st = os.path.join(path, "model.safetensors")
+    if os.path.isfile(sidecar_st):
+        try:
+            import struct
+            with open(sidecar_st, "rb") as f:
+                header_len = struct.unpack("<Q", f.read(8))[0]
+                header = json.loads(f.read(header_len))
+            meta = header.get("__metadata__") or {}
+            if "bits" in meta:
+                sidecar_meta = meta
+        except (OSError, ValueError, struct.error, json.JSONDecodeError):
+            sidecar_meta = None
 
     weights: dict[str, mx.array] = {}
     for st in glob.glob(os.path.join(path, "*.safetensors")):
         weights.update(mx.load(st))
+
+    # Raw upstream Bonsai-specific DFlash2 checkpoints can serialize selector
+    # codebooks as ordinary Embedding weights, while Chad sidecars signal the
+    # same representation through sidecar metadata. Select the matching model
+    # structure from the checkpoint keys before validating/loading parameters.
+    raw_selector_embeddings = sidecar_meta is None and {
+        "candidate_selector.predecessor_codebook.weight",
+        "candidate_selector.successor_codebook.weight",
+    }.issubset(weights)
+    drafter = DFlashDraftModel(
+        config,
+        selector_codebook_embeddings=sidecar_meta is not None or raw_selector_embeddings,
+    )
+
+    if sidecar_meta is not None:
+        # Build the exact quantized module skeleton BEFORE comparing tensor names.
+        #
+        # Do not assume one precision for the whole sidecar: Chad may store the
+        # DFlash backbone and selector/codebook modules at different bit widths.
+        # Infer (bits, group_size) directly from each checkpoint's packed weight
+        # and scales shapes, then quantize exactly those module paths.
+        profiles: dict[tuple[int, int], set[str]] = {}
+
+        for name, module in drafter.named_modules():
+            if not isinstance(module, (nn.Linear, nn.Embedding)):
+                continue
+
+            prefix = f"{name}." if name else ""
+            w_key = prefix + "weight"
+            sc_key = prefix + "scales"
+
+            if w_key not in weights or sc_key not in weights:
+                continue
+
+            logical_k = int(module.weight.shape[-1])
+            packed_k = int(weights[w_key].shape[-1])
+            n_groups = int(weights[sc_key].shape[-1])
+
+            if logical_k <= 0 or packed_k <= 0 or n_groups <= 0:
+                raise ValueError(
+                    f"{repo_or_path}: invalid quantized sidecar shapes for {name}: "
+                    f"logical_k={logical_k}, packed_k={packed_k}, groups={n_groups}"
+                )
+
+            bits_num = packed_k * 32
+            if bits_num % logical_k:
+                raise ValueError(
+                    f"{repo_or_path}: cannot infer quant bits for {name}: "
+                    f"weight {tuple(weights[w_key].shape)} vs logical "
+                    f"{tuple(module.weight.shape)}"
+                )
+            qbits = bits_num // logical_k
+
+            if logical_k % n_groups:
+                raise ValueError(
+                    f"{repo_or_path}: cannot infer group size for {name}: "
+                    f"logical_k={logical_k}, scale groups={n_groups}"
+                )
+            qgroup = logical_k // n_groups
+
+            profiles.setdefault((qbits, qgroup), set()).add(name)
+
+        if not profiles:
+            raise ValueError(
+                f"{repo_or_path}: sidecar metadata says quantized but no quantized "
+                "Linear/Embedding modules were discovered"
+            )
+
+        for (qbits, qgroup), names in sorted(profiles.items()):
+            nn.quantize(
+                drafter,
+                group_size=qgroup,
+                bits=qbits,
+                class_predicate=lambda name, module, names=names: name in names,
+            )
+            print(
+                f"  dflash sidecar skeleton: {len(names)} modules "
+                f"at b{qbits}g{qgroup}",
+                flush=True,
+            )
+
     model_keys = {k for k, _ in _flatten_params(drafter)}
     ckpt_keys = set(weights.keys())
     if model_keys != ckpt_keys:
@@ -782,13 +878,10 @@ def load_dflash(repo_or_path: str, *, quantize: bool = True, bits: int = 4, grou
         )
     drafter.load_weights(list(weights.items()))
 
-    if quantize:
-        # quantize only the backbone Linears — embed/lm_head come from the (already
-        # quantized) target via bind(), so leave them untouched. DFlash 2's conv
-        # kernel_projections and selector hidden_projection stay bf16 like the reference
-        # (they produce multiplicative coefficients / lattice scores — semantics-sensitive
-        # and tiny, ~130 MB total on the 27B head); the [vocab, rank] codebooks are raw
-        # arrays (gather-only) that nn.quantize never touches.
+    if quantize and sidecar_meta is None:
+        # Raw upstream HF DFlash checkpoint: retain mlx-dspark's existing local
+        # quantization policy. A Chad sidecar reached this point already quantized
+        # and must never be quantized a second time.
         nn.quantize(drafter, group_size=group_size, bits=bits,
                     class_predicate=lambda p, m: isinstance(m, nn.Linear)
                     and "_conv" not in p and "candidate_selector" not in p)
@@ -929,7 +1022,9 @@ def refuse_remote_code(path: str, repo_or_path: str) -> None:
 
 
 def load_target(repo_or_path: str = DEFAULT_TARGET, *, require_tap: bool = False,
-                kv_bits: int | None = None, kv_group_size: int = 64):
+                kv_bits: int | None = None, kv_group_size: int = 64,
+                _block_replacements: dict[int, object] | None = None,
+                _block_replacement_identity: dict | None = None):
     """Return (Target, tokenizer). Routes text models to mlx-lm and multimodal/unified
     models (Gemma-4) to mlx-vlm (see :func:`_route_target`), then wraps in a family-aware
     Target (hidden-state tap). ``require_tap=True`` (any drafter mode) additionally probes
@@ -975,7 +1070,24 @@ def load_target(repo_or_path: str = DEFAULT_TARGET, *, require_tap: bool = False
         _register_nanbeige()
 
     refuse_remote_code(path, repo_or_path)
-    if _route_target(cfg) == "mlx_lm":
+    if cfg.get("model_type") == "prism_hadamard_qwen35":
+        # Bonsai 2 / Prism Hadamard Qwen3.8 target.
+        from pathlib import Path
+        from mlx_lm.utils import load_config, load_tokenizer
+        from . import prism_pack
+
+        merged_cfg = load_config(Path(path))
+
+        with prism_pack.quiet_tokenizer_load():
+            tokenizer = load_tokenizer(
+                path,
+                {"trust_remote_code": TRUST_REMOTE_CODE},
+                eos_token_ids=merged_cfg.get("eos_token_id"),
+            )
+
+        model, _ = prism_pack.load(path, cfg)
+
+    elif _route_target(cfg) == "mlx_lm":
         from mlx_lm import load as lm_load
 
         # tokenizer_config overrides mlx-lm's default {"trust_remote_code": True}: even a
@@ -1004,10 +1116,34 @@ def load_target(repo_or_path: str = DEFAULT_TARGET, *, require_tap: bool = False
                 f"https://github.com/ARahim3/mlx-dspark/issues{hint}"
             ) from e
         tokenizer = getattr(processor, "tokenizer", processor)
+    composition_manifest = None
+    if _block_replacements is not None:
+        if cfg.get("model_type") != "qwen3_5" or _block_replacement_identity is None:
+            raise ValueError("block replacement is restricted to identified Qwen3.8 composition loads")
+        if _block_replacement_identity["qwen_revision"] not in os.path.realpath(path):
+            raise ValueError("Qwen snapshot path does not identify the requested immutable revision")
+        from .hybrid_target import replace_blocks
+
+        composition_manifest = replace_blocks(
+            model, _block_replacements,
+            _block_replacement_identity["donor_indices"],
+            qwen_repo=_block_replacement_identity["qwen_repo"],
+            qwen_revision=_block_replacement_identity["qwen_revision"],
+            donor_repo=_block_replacement_identity["donor_repo"],
+            donor_revision=_block_replacement_identity["donor_revision"],
+        )
     target = Target(model, tokenizer, kv_bits=kv_bits, kv_group_size=kv_group_size)
+    target.prism_hadamard = cfg.get("model_type") == "prism_hadamard_qwen35"
     target.checkpoint_identity = checkpoint_identity(repo_or_path, path)
+    if composition_manifest is not None:
+        target.composition_manifest = composition_manifest
     if require_tap:
         target.verify_tap()
+
+    if cfg.get("model_type") == "prism_hadamard_qwen35" or composition_manifest is not None:
+        from . import mlx_qmm_mma
+        mlx_qmm_mma.install(target.model, verbose=True)
+
     return target, tokenizer
 
 

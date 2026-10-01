@@ -312,10 +312,11 @@ def test_dflash1_config_has_no_selector_or_conv():
     assert not any("_conv" in n or "candidate_selector" in n for n in names)
 
 
-def _write_dflash2_ckpt(tmp_path, cfg_dict=DFLASH2_MIN):
-    model = DFlashDraftModel(_tiny_config())
+def _write_dflash2_ckpt(tmp_path, cfg_dict=DFLASH2_MIN, *, model=None, metadata=None):
+    model = model or DFlashDraftModel(_tiny_config())
     (tmp_path / "config.json").write_text(json.dumps(cfg_dict))
-    mx.save_safetensors(str(tmp_path / "model.safetensors"), dict(_flatten_params(model)))
+    mx.save_safetensors(str(tmp_path / "model.safetensors"), dict(_flatten_params(model)),
+                        metadata=metadata)
     return str(tmp_path)
 
 
@@ -323,10 +324,60 @@ def test_load_dflash2_roundtrip_and_config_fields(tmp_path):
     path = _write_dflash2_ckpt(tmp_path)
     drafter, cfg = load_dflash(path, quantize=False)
     assert drafter.candidate_selector is not None
+    assert not isinstance(drafter.candidate_selector.predecessor_codebook, nn.Module)
+    assert not isinstance(drafter.candidate_selector.successor_codebook, nn.Module)
     assert drafter.layers[1].mlp_conv is not None
     assert (cfg.selector_rank, cfg.selector_top_k) == (8, 4)
     assert (cfg.conv_kernel_size, cfg.conv_group_size) == (2, 16)
     assert cfg.output_multiplier == 1.0 and cfg.final_logit_softcapping is None
+
+
+def test_load_dflash2_raw_embedding_selector_checkpoint(tmp_path):
+    model = DFlashDraftModel(_tiny_config(), selector_codebook_embeddings=True)
+    path = _write_dflash2_ckpt(tmp_path, model=model)
+    keys = set(mx.load(f"{path}/model.safetensors"))
+    assert {
+        "candidate_selector.predecessor_codebook.weight",
+        "candidate_selector.successor_codebook.weight",
+    } <= keys
+
+    drafter, _ = load_dflash(path, quantize=False)
+
+    assert isinstance(drafter.candidate_selector.predecessor_codebook, nn.Embedding)
+    assert isinstance(drafter.candidate_selector.successor_codebook, nn.Embedding)
+
+
+def test_load_dflash2_chad_sidecar_uses_metadata_reconstruction(tmp_path):
+    cfg = _tiny_config(selector_rank=32)
+    model = DFlashDraftModel(cfg, selector_codebook_embeddings=True)
+    nn.quantize(model, group_size=32, bits=4,
+                class_predicate=lambda _name, module: isinstance(module, nn.Linear))
+    nn.quantize(model, group_size=32, bits=8,
+                class_predicate=lambda _name, module: isinstance(module, nn.Embedding))
+    cfg_dict = json.loads(json.dumps(DFLASH2_MIN))
+    cfg_dict["dflash_config"]["selector_rank"] = 32
+    path = _write_dflash2_ckpt(
+        tmp_path, cfg_dict=cfg_dict, model=model,
+        metadata={"bits": "4", "group_size": "32"})
+
+    drafter, _ = load_dflash(path, quantize=False)
+
+    assert isinstance(drafter.candidate_selector.predecessor_codebook, nn.QuantizedEmbedding)
+    assert isinstance(drafter.candidate_selector.successor_codebook, nn.QuantizedEmbedding)
+    assert isinstance(drafter.fc, nn.QuantizedLinear)
+
+
+def test_load_dflash2_partial_embedding_selector_keys_fail_strictly(tmp_path):
+    model = DFlashDraftModel(_tiny_config())
+    weights = dict(_flatten_params(model))
+    weights["candidate_selector.predecessor_codebook.weight"] = mx.zeros((32, 8))
+    assert {key for key in weights if key.endswith("codebook.weight")} == {
+        "candidate_selector.predecessor_codebook.weight"}
+    (tmp_path / "config.json").write_text(json.dumps(DFLASH2_MIN))
+    mx.save_safetensors(str(tmp_path / "model.safetensors"), weights)
+
+    with pytest.raises(ValueError, match="tensor names don't match"):
+        load_dflash(str(tmp_path), quantize=False)
 
 
 def test_load_dflash2_reads_muse_transform_fields_nested(tmp_path):
