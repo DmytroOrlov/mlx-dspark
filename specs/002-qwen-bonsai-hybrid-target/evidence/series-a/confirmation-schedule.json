@@ -1,0 +1,696 @@
+{
+  "all_runs_passed": true,
+  "benchmark_method_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+  "discovery_runtime_source_sha256": {
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "matched_pairs": [
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H1a",
+      "comparison_id": "H1c-vs-H1a",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H1a-pair-01",
+      "runs": [
+        {
+          "order_index": 1,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p01-1-h1c",
+          "sha256": "0ae9d073d76602c4c8f3d1f1b810da5a5f05db34f129a2e1205aefce1e5bd383",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 2,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-2-h1a/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p01-2-h1a",
+          "sha256": "3f8a0ec6ae19542069a1dda3ed6bb9bcd7a96d1e4a4f0e89f23968976b9f4421",
+          "status": "PASS",
+          "target": "H1a"
+        }
+      ],
+      "second_target": "H1a"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H1c vs H1a",
+      "comparison_id": "H1c-vs-H1a",
+      "first_target": "H1a",
+      "pair_id": "H1c-vs-H1a-pair-02",
+      "runs": [
+        {
+          "order_index": 3,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-1-h1a/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p02-1-h1a",
+          "sha256": "0c476902ab17ed792b0eb329c0f41431c64330f2789ea84e3fcdd4e6b09c07de",
+          "status": "PASS",
+          "target": "H1a"
+        },
+        {
+          "order_index": 4,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-2-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p02-2-h1c",
+          "sha256": "e9beb340595ea5c64ef9a79c8f8d9135dad06fc7cfe5f6e8c78c61e5fcf162e7",
+          "status": "PASS",
+          "target": "H1c"
+        }
+      ],
+      "second_target": "H1c"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H1a",
+      "comparison_id": "H1c-vs-H1a",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H1a-pair-03",
+      "runs": [
+        {
+          "order_index": 5,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p03-1-h1c",
+          "sha256": "ab0d7eedaa1300252b4a967fb90af36ae2e14c39626703af0b5ef3f5e7926552",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 6,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-2-h1a/result.json",
+          "run_id": "confirm-h1c-vs-h1a-p03-2-h1a",
+          "sha256": "fb8c3ee8291e8f3f21571e7d3ae54005b1b121f2b6c06256ba96fc042d4bfab2",
+          "status": "PASS",
+          "target": "H1a"
+        }
+      ],
+      "second_target": "H1a"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H1b",
+      "comparison_id": "H1c-vs-H1b",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H1b-pair-01",
+      "runs": [
+        {
+          "order_index": 7,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p01-1-h1c",
+          "sha256": "55057a671b9c7cfd32b4697c9e498494ffe5d71a5613e0ce893b409fed021518",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 8,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-2-h1b/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p01-2-h1b",
+          "sha256": "98fba06271e7a9c12a73d63ea7b0a9c48c3e13baf8cc01e49001d8414e7150ac",
+          "status": "PASS",
+          "target": "H1b"
+        }
+      ],
+      "second_target": "H1b"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H1c vs H1b",
+      "comparison_id": "H1c-vs-H1b",
+      "first_target": "H1b",
+      "pair_id": "H1c-vs-H1b-pair-02",
+      "runs": [
+        {
+          "order_index": 9,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-1-h1b/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p02-1-h1b",
+          "sha256": "4992a5105f4592f83ff628b6c9ae77c166748d0e72e40740ed2acb3dbdfc4a56",
+          "status": "PASS",
+          "target": "H1b"
+        },
+        {
+          "order_index": 10,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-2-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p02-2-h1c",
+          "sha256": "6b2f991fc1ad954bada24be10a510a5aa79a47a1c8a73856e73f60f21337fd1d",
+          "status": "PASS",
+          "target": "H1c"
+        }
+      ],
+      "second_target": "H1c"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H1b",
+      "comparison_id": "H1c-vs-H1b",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H1b-pair-03",
+      "runs": [
+        {
+          "order_index": 11,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p03-1-h1c",
+          "sha256": "bbb6b85b4e608cf7b4a327a38cb769bf93dd1142a1f14f460c699af0d43ca597",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 12,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-2-h1b/result.json",
+          "run_id": "confirm-h1c-vs-h1b-p03-2-h1b",
+          "sha256": "45cbcb001bf20afc9e62b1e4e04078258bcc77178d60951782db625b386e36bb",
+          "status": "PASS",
+          "target": "H1b"
+        }
+      ],
+      "second_target": "H1b"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H0",
+      "comparison_id": "H1c-vs-H0",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 13,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h0-p01-1-h1c",
+          "sha256": "9803870e5a37e2f7da628b2d1cf0b3eb61456c611cbf989ce513a9bd203a4706",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 14,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-h1c-vs-h0-p01-2-h0",
+          "sha256": "6e4a78471bdd473793ccd0aa283b0a68a0ee725d16058b5bb4b43b9e9556731c",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H1c vs H0",
+      "comparison_id": "H1c-vs-H0",
+      "first_target": "H0",
+      "pair_id": "H1c-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 15,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-h1c-vs-h0-p02-1-h0",
+          "sha256": "b1ae677314bbf9d0d2023a5973215d1963b802cb85f0145b7a919db2c14d6ef7",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 16,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-2-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h0-p02-2-h1c",
+          "sha256": "0342d87ad15f985a54f3e9bd65db821f1a171a2f526c7615d9828360e2b0efe0",
+          "status": "PASS",
+          "target": "H1c"
+        }
+      ],
+      "second_target": "H1c"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1c vs H0",
+      "comparison_id": "H1c-vs-H0",
+      "first_target": "H1c",
+      "pair_id": "H1c-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 17,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-1-h1c/result.json",
+          "run_id": "confirm-h1c-vs-h0-p03-1-h1c",
+          "sha256": "f7341c93ada14e6b0a6d003fb958e8795905022a36c204f6c6d08cacc134fb85",
+          "status": "PASS",
+          "target": "H1c"
+        },
+        {
+          "order_index": 18,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-h1c-vs-h0-p03-2-h0",
+          "sha256": "f295ced081dfcd7cd80dc609591f3c5c34f5a8cb8e8673e9c37e490dc9faeb78",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H2 vs H0",
+      "comparison_id": "H2-vs-H0",
+      "first_target": "H2",
+      "pair_id": "H2-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 19,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-1-h2/result.json",
+          "run_id": "confirm-h2-vs-h0-p01-1-h2",
+          "sha256": "58e4f28bfea79f81c202df40f595ee0c1098ce954f73da7aace9222c99f328ad",
+          "status": "PASS",
+          "target": "H2"
+        },
+        {
+          "order_index": 20,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-h2-vs-h0-p01-2-h0",
+          "sha256": "031c0c37905c364f3db8b99f50fafcc7b58c07a161f188f3e2711817caad7e3c",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H2 vs H0",
+      "comparison_id": "H2-vs-H0",
+      "first_target": "H0",
+      "pair_id": "H2-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 21,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-h2-vs-h0-p02-1-h0",
+          "sha256": "60cb7b2af372178b6a5f51f77dbcb22140a1ba21559ff31695e0f81d74db2466",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 22,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-2-h2/result.json",
+          "run_id": "confirm-h2-vs-h0-p02-2-h2",
+          "sha256": "bf0a08656ca45a06f0d10156d08261f1d8cee773fa22902bdac4fa2f6f30897d",
+          "status": "PASS",
+          "target": "H2"
+        }
+      ],
+      "second_target": "H2"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H2 vs H0",
+      "comparison_id": "H2-vs-H0",
+      "first_target": "H2",
+      "pair_id": "H2-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 23,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-1-h2/result.json",
+          "run_id": "confirm-h2-vs-h0-p03-1-h2",
+          "sha256": "404e51f45b600337dae7db747c83a09eadcf20b2fae7886aafe977888a57c3f3",
+          "status": "PASS",
+          "target": "H2"
+        },
+        {
+          "order_index": 24,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-h2-vs-h0-p03-2-h0",
+          "sha256": "070b572f966e70d36641739bc27ba96064ad5d174efc3417ce463dde5089eb4f",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1a vs H0",
+      "comparison_id": "H1a-vs-H0",
+      "first_target": "H1a",
+      "pair_id": "H1a-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 25,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-1-h1a/result.json",
+          "run_id": "confirm-h1a-vs-h0-p01-1-h1a",
+          "sha256": "12af3ca0f8cbe08831b1f374c03795ab1297ccab4b79ed0efa1adcd139f8fcc2",
+          "status": "PASS",
+          "target": "H1a"
+        },
+        {
+          "order_index": 26,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-h1a-vs-h0-p01-2-h0",
+          "sha256": "b802f9f8ec4d4d9441c39a1e76a2c149bb0f02b589cbacadae05a91d1cdd81d1",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H1a vs H0",
+      "comparison_id": "H1a-vs-H0",
+      "first_target": "H0",
+      "pair_id": "H1a-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 27,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-h1a-vs-h0-p02-1-h0",
+          "sha256": "aed9c6c3fb2ded91e9fbdcee8a4dac2929648aaf27bec89f671ca81c5100e944",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 28,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-2-h1a/result.json",
+          "run_id": "confirm-h1a-vs-h0-p02-2-h1a",
+          "sha256": "261f80c293a4e0c0f1132ba8af06bdbc3782e2f2d63ea721a68883f7ab63a081",
+          "status": "PASS",
+          "target": "H1a"
+        }
+      ],
+      "second_target": "H1a"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1a vs H0",
+      "comparison_id": "H1a-vs-H0",
+      "first_target": "H1a",
+      "pair_id": "H1a-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 29,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-1-h1a/result.json",
+          "run_id": "confirm-h1a-vs-h0-p03-1-h1a",
+          "sha256": "7e077752a41bf99699f5dcf109eb1c3328a2940249e235d922c17a55e6ed70ba",
+          "status": "PASS",
+          "target": "H1a"
+        },
+        {
+          "order_index": 30,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-h1a-vs-h0-p03-2-h0",
+          "sha256": "0507e8d6b69db4c4623bb31b70f31b989cfb6afe8544ae2fc646512dd89d35c2",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H3 vs H0",
+      "comparison_id": "H3-vs-H0",
+      "first_target": "H3",
+      "pair_id": "H3-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 31,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-1-h3/result.json",
+          "run_id": "confirm-h3-vs-h0-p01-1-h3",
+          "sha256": "55a356f3a2aa6541a3b4471c53ec3995f6becbf19bb7fd5220e49cd283c15751",
+          "status": "PASS",
+          "target": "H3"
+        },
+        {
+          "order_index": 32,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-h3-vs-h0-p01-2-h0",
+          "sha256": "7ccdabe8f1344bede90574d4623e211e358a10e9619245b025cd2b8f1123dc27",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H3 vs H0",
+      "comparison_id": "H3-vs-H0",
+      "first_target": "H0",
+      "pair_id": "H3-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 33,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-h3-vs-h0-p02-1-h0",
+          "sha256": "ba9f2f4b96faec75e4084a3c0c382cf559e9c6610daab456a5977cc811ec9ead",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 34,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-2-h3/result.json",
+          "run_id": "confirm-h3-vs-h0-p02-2-h3",
+          "sha256": "6ada2739426c6f9492018eea2b17d6a6f37f43e899d3106902241c8dbc04c37a",
+          "status": "PASS",
+          "target": "H3"
+        }
+      ],
+      "second_target": "H3"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H3 vs H0",
+      "comparison_id": "H3-vs-H0",
+      "first_target": "H3",
+      "pair_id": "H3-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 35,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-1-h3/result.json",
+          "run_id": "confirm-h3-vs-h0-p03-1-h3",
+          "sha256": "f26dda6abd402ad6f98f82f67ae9c7c8c0eb3f4e2e0ac98f25182e8f4e6539e8",
+          "status": "PASS",
+          "target": "H3"
+        },
+        {
+          "order_index": 36,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-h3-vs-h0-p03-2-h0",
+          "sha256": "ec311eaedb888298add2182f87f0ebc1bd374d7c7043f6f478e9193fbb105108",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1b vs H0",
+      "comparison_id": "H1b-vs-H0",
+      "first_target": "H1b",
+      "pair_id": "H1b-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 37,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-1-h1b/result.json",
+          "run_id": "confirm-h1b-vs-h0-p01-1-h1b",
+          "sha256": "708f1a4212f65cad8623d6bfd9cb4562d36dda2767653a364b2e699064ad446e",
+          "status": "PASS",
+          "target": "H1b"
+        },
+        {
+          "order_index": 38,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-h1b-vs-h0-p01-2-h0",
+          "sha256": "19001990c7338beccfebaa34ac2999c1674165af8aafbb04ac0624c350eb9203",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "H1b vs H0",
+      "comparison_id": "H1b-vs-H0",
+      "first_target": "H0",
+      "pair_id": "H1b-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 39,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-h1b-vs-h0-p02-1-h0",
+          "sha256": "d79158b0b3cff428e0182201fda27b41f3607339831aa0a74c8711d94caf0c8a",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 40,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-2-h1b/result.json",
+          "run_id": "confirm-h1b-vs-h0-p02-2-h1b",
+          "sha256": "df83aa256ceb13917f601e68979c8f7ccb683f5fde9ac71c9ed027a20404f71e",
+          "status": "PASS",
+          "target": "H1b"
+        }
+      ],
+      "second_target": "H1b"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "H1b vs H0",
+      "comparison_id": "H1b-vs-H0",
+      "first_target": "H1b",
+      "pair_id": "H1b-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 41,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-1-h1b/result.json",
+          "run_id": "confirm-h1b-vs-h0-p03-1-h1b",
+          "sha256": "f96728bbb0f880ff7f9210f7475ee478d5eb3227873d5fc79f60a1d045dfec59",
+          "status": "PASS",
+          "target": "H1b"
+        },
+        {
+          "order_index": 42,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-h1b-vs-h0-p03-2-h0",
+          "sha256": "aac3c68c85e58436e7673b0cde20f3c412a1fe6f3813a888186e404b6c1e908d",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "B0 vs H0",
+      "comparison_id": "B0-vs-H0",
+      "first_target": "B0",
+      "pair_id": "B0-vs-H0-pair-01",
+      "runs": [
+        {
+          "order_index": 43,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-1-b0/result.json",
+          "run_id": "confirm-b0-vs-h0-p01-1-b0",
+          "sha256": "ba12bc427e9938a9b3650db1a2ca785b4f80ee708e2c62b4df96960a82e122c0",
+          "status": "PASS",
+          "target": "B0"
+        },
+        {
+          "order_index": 44,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-2-h0/result.json",
+          "run_id": "confirm-b0-vs-h0-p01-2-h0",
+          "sha256": "2fb96d1ab37926685e2c6ddc88a2925f29c3fb453915d7084e94fc80d20cc50b",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    },
+    {
+      "alternation": "B-A",
+      "comparison": "B0 vs H0",
+      "comparison_id": "B0-vs-H0",
+      "first_target": "H0",
+      "pair_id": "B0-vs-H0-pair-02",
+      "runs": [
+        {
+          "order_index": 45,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-1-h0/result.json",
+          "run_id": "confirm-b0-vs-h0-p02-1-h0",
+          "sha256": "00ec887a8da1bdd880aeaaecafe45799349566541fb16cf5ea931defa80d0d93",
+          "status": "PASS",
+          "target": "H0"
+        },
+        {
+          "order_index": 46,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-2-b0/result.json",
+          "run_id": "confirm-b0-vs-h0-p02-2-b0",
+          "sha256": "cec048b665d99cace6982a469381898a6c98ab5a936b41a1aeb2449b1484ebf1",
+          "status": "PASS",
+          "target": "B0"
+        }
+      ],
+      "second_target": "B0"
+    },
+    {
+      "alternation": "A-B",
+      "comparison": "B0 vs H0",
+      "comparison_id": "B0-vs-H0",
+      "first_target": "B0",
+      "pair_id": "B0-vs-H0-pair-03",
+      "runs": [
+        {
+          "order_index": 47,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-1-b0/result.json",
+          "run_id": "confirm-b0-vs-h0-p03-1-b0",
+          "sha256": "7285bca4b3b21664f8f52cc6e36307c1e7dec9746fecc2d2dfa68d2dc406a815",
+          "status": "PASS",
+          "target": "B0"
+        },
+        {
+          "order_index": 48,
+          "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-2-h0/result.json",
+          "run_id": "confirm-b0-vs-h0-p03-2-h0",
+          "sha256": "a34de6a860832a57db89ece6e09445c8efd85cf490e58258702fa413ff2a00a0",
+          "status": "PASS",
+          "target": "H0"
+        }
+      ],
+      "second_target": "H0"
+    }
+  ],
+  "order": [
+    "confirm-h1c-vs-h1a-p01-1-h1c",
+    "confirm-h1c-vs-h1a-p01-2-h1a",
+    "confirm-h1c-vs-h1a-p02-1-h1a",
+    "confirm-h1c-vs-h1a-p02-2-h1c",
+    "confirm-h1c-vs-h1a-p03-1-h1c",
+    "confirm-h1c-vs-h1a-p03-2-h1a",
+    "confirm-h1c-vs-h1b-p01-1-h1c",
+    "confirm-h1c-vs-h1b-p01-2-h1b",
+    "confirm-h1c-vs-h1b-p02-1-h1b",
+    "confirm-h1c-vs-h1b-p02-2-h1c",
+    "confirm-h1c-vs-h1b-p03-1-h1c",
+    "confirm-h1c-vs-h1b-p03-2-h1b",
+    "confirm-h1c-vs-h0-p01-1-h1c",
+    "confirm-h1c-vs-h0-p01-2-h0",
+    "confirm-h1c-vs-h0-p02-1-h0",
+    "confirm-h1c-vs-h0-p02-2-h1c",
+    "confirm-h1c-vs-h0-p03-1-h1c",
+    "confirm-h1c-vs-h0-p03-2-h0",
+    "confirm-h2-vs-h0-p01-1-h2",
+    "confirm-h2-vs-h0-p01-2-h0",
+    "confirm-h2-vs-h0-p02-1-h0",
+    "confirm-h2-vs-h0-p02-2-h2",
+    "confirm-h2-vs-h0-p03-1-h2",
+    "confirm-h2-vs-h0-p03-2-h0",
+    "confirm-h1a-vs-h0-p01-1-h1a",
+    "confirm-h1a-vs-h0-p01-2-h0",
+    "confirm-h1a-vs-h0-p02-1-h0",
+    "confirm-h1a-vs-h0-p02-2-h1a",
+    "confirm-h1a-vs-h0-p03-1-h1a",
+    "confirm-h1a-vs-h0-p03-2-h0",
+    "confirm-h3-vs-h0-p01-1-h3",
+    "confirm-h3-vs-h0-p01-2-h0",
+    "confirm-h3-vs-h0-p02-1-h0",
+    "confirm-h3-vs-h0-p02-2-h3",
+    "confirm-h3-vs-h0-p03-1-h3",
+    "confirm-h3-vs-h0-p03-2-h0",
+    "confirm-h1b-vs-h0-p01-1-h1b",
+    "confirm-h1b-vs-h0-p01-2-h0",
+    "confirm-h1b-vs-h0-p02-1-h0",
+    "confirm-h1b-vs-h0-p02-2-h1b",
+    "confirm-h1b-vs-h0-p03-1-h1b",
+    "confirm-h1b-vs-h0-p03-2-h0",
+    "confirm-b0-vs-h0-p01-1-b0",
+    "confirm-b0-vs-h0-p01-2-h0",
+    "confirm-b0-vs-h0-p02-1-h0",
+    "confirm-b0-vs-h0-p02-2-b0",
+    "confirm-b0-vs-h0-p03-1-b0",
+    "confirm-b0-vs-h0-p03-2-h0"
+  ],
+  "run_count": 48,
+  "schema": "qwen-bonsai-series-a-confirmation-schedule/v1",
+  "selection": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/repeat-selection.json",
+    "sha256": "a10d172da400507ee9566770a14a1f73d9b9ef6b437c603ac7189987d9d3d6b8"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,34 @@
+{
+  "status": "offline_prepared_unexecuted",
+  "scope": "T005 same-width root, T006 committed semantic root, T007 root-specific controls, R1 same-runtime context reference",
+  "artifacts": [
+    {
+      "path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_rollback_probe.py",
+      "size_bytes": 72543,
+      "sha256": "f516f265936a3d922fc3b61b6e128011a517550a5ad03e15dc59fb894081cec5"
+    },
+    {
+      "path": "specs/001-bonsai-rollback-parity/evidence/probes/bonsai_probe_support.py",
+      "size_bytes": 31732,
+      "sha256": "a6b6cbb69b76ab34a565859612cbcf693b8b18af37f48255cf924c1bd26a1148"
+    }
+  ],
+  "reference_roots": {
+    "T005_B1_B2_S8": "Exact independent mutable clone of production pre-verify cache, frozen before S=8 production verify and executed after the continuous trace",
+    "T006_C_S1_S2": "Independent empty cache plus committed-token replay; never used as B2 starting state",
+    "R1_context": "Independent same-runtime fresh prefill and drafter proposal from its own target and drafter caches"
+  },
+  "control_roots": {
+    "S8_vs_S8": "exact_frozen_speculative_preverify",
+    "S1_S2_width_delta": "fresh_committed_replay",
+    "R1_prefill_context": "independent_fresh_r1_prefill"
+  },
+  "storage": "Control pairs retain component distances, five samples, and per-sample hashes; their full arrays remain transient in process memory. Main gate captures use project-local content-addressed blobs.",
+  "verification": [
+    "Python AST parse and compile of both probe files",
+    "git --no-pager diff --check"
+  ],
+  "model_loads_in_this_refactor": 0,
+  "benchmarks_in_this_refactor": 0,
+  "next_run_status": "proposed_only; requires user approval before model load"
+}

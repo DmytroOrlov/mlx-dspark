@@ -1,0 +1,19 @@
+{
+  "cell_id": "07-H1c-B-B",
+  "child_returncode": 0,
+  "command": [
+    "/Users/do/git/mlx-dspark/.venv/bin/python",
+    "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/probes/product_sweep.py",
+    "--run-cell",
+    "--order",
+    "7",
+    "--target",
+    "H1c",
+    "--drafter",
+    "B-B",
+    "--output",
+    "specs/003-product-golden-hybrid-sweep/evidence/cells/07-H1c-B-B.json"
+  ],
+  "orchestrator_end_unix": 1790384509.989025,
+  "orchestrator_start_unix": 1790384451.001267
+}

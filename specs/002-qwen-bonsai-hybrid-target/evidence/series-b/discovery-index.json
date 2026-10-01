@@ -1,0 +1,1110 @@
+{
+  "discovery_only": true,
+  "discovery_table": [
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:28:58Z",
+      "drafter": "B-Q",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "drafter_weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 86
+        },
+        "draft_acceptance": 0.4918032786885246,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 86
+        },
+        "generated_token_count": 393,
+        "generated_tokens_per_target_forward": 4.225806451612903,
+        "mean_accepted_length": 4.366666666666666,
+        "peak_steady_state_memory_bytes": 16902057026,
+        "serial_target_tokens_per_sec": 13.397576999232337,
+        "speculative_decode_tokens_per_sec": 32.13365354671015,
+        "speedup_over_serial": 2.3984675399552744,
+        "target_forwards": 93
+      },
+      "order_index": 1,
+      "paired_serial_target_tokens_per_sec": 13.397576999232337,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-01-h0-bq/result.json",
+      "raw_result_sha256": "872f9e43a26deeba318e2a6fc8a7e740ed972ba1b59964a38ef143379a28fc98",
+      "run_id": "discovery-01-h0-bq",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:28:03Z",
+      "target": "H0",
+      "target_identity_sha256": "cdd389ab65d05ccee941d7267f2b765b55e6fc374721483286276de55b1ae324"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:30:31Z",
+      "drafter": "B-B",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 91
+        },
+        "draft_acceptance": 0.4573643410852713,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 91
+        },
+        "generated_token_count": 393,
+        "generated_tokens_per_target_forward": 4.010204081632653,
+        "mean_accepted_length": 4.136842105263158,
+        "peak_steady_state_memory_bytes": 16900957410,
+        "serial_target_tokens_per_sec": 13.356832437224897,
+        "speculative_decode_tokens_per_sec": 29.628596786588176,
+        "speedup_over_serial": 2.218235268416979,
+        "target_forwards": 98
+      },
+      "order_index": 2,
+      "paired_serial_target_tokens_per_sec": 13.356832437224897,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-02-h0-bb/result.json",
+      "raw_result_sha256": "2b35df11e79bf908056799027d323efb780b93593acbbbfdedfa7dde5126c0c9",
+      "run_id": "discovery-02-h0-bb",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:29:06Z",
+      "target": "H0",
+      "target_identity_sha256": "cdd389ab65d05ccee941d7267f2b765b55e6fc374721483286276de55b1ae324"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:32:01Z",
+      "drafter": "B-B",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 95
+        },
+        "draft_acceptance": 0.4338781575037147,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 95
+        },
+        "generated_token_count": 394,
+        "generated_tokens_per_target_forward": 3.8627450980392157,
+        "mean_accepted_length": 3.9797979797979797,
+        "peak_steady_state_memory_bytes": 16691341734,
+        "serial_target_tokens_per_sec": 13.522585591282638,
+        "speculative_decode_tokens_per_sec": 28.04005678339805,
+        "speedup_over_serial": 2.073572142998609,
+        "target_forwards": 102
+      },
+      "order_index": 3,
+      "paired_serial_target_tokens_per_sec": 13.522585591282638,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-03-h1c-bb/result.json",
+      "raw_result_sha256": "f2eecc4076c68b686e4eb868f84c4e1e8f5f4ab6afdb5bab2df5e827398d3d41",
+      "run_id": "discovery-03-h1c-bb",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:30:36Z",
+      "target": "H1c",
+      "target_identity_sha256": "21d19cb508c133eeed163a811986a7d45f9cb14eb91d89b732ead4e9154a2119"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:33:02Z",
+      "drafter": "B-Q",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "drafter_weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 90
+        },
+        "draft_acceptance": 0.4592476489028213,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 90
+        },
+        "generated_token_count": 390,
+        "generated_tokens_per_target_forward": 4.020618556701031,
+        "mean_accepted_length": 4.148936170212766,
+        "peak_steady_state_memory_bytes": 16692653262,
+        "serial_target_tokens_per_sec": 13.345204577526404,
+        "speculative_decode_tokens_per_sec": 30.10834618786492,
+        "speedup_over_serial": 2.256117245183936,
+        "target_forwards": 97
+      },
+      "order_index": 4,
+      "paired_serial_target_tokens_per_sec": 13.345204577526404,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-04-h1c-bq/result.json",
+      "raw_result_sha256": "d1d8b05a168c9e75d88baf5942bd2b8481450aa361fdafcfc44a79f12278307a",
+      "run_id": "discovery-04-h1c-bq",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:32:08Z",
+      "target": "H1c",
+      "target_identity_sha256": "21d19cb508c133eeed163a811986a7d45f9cb14eb91d89b732ead4e9154a2119"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:34:04Z",
+      "drafter": "B-Q",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "drafter_weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 95
+        },
+        "draft_acceptance": 0.4413075780089153,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 95
+        },
+        "generated_token_count": 399,
+        "generated_tokens_per_target_forward": 3.911764705882353,
+        "mean_accepted_length": 4.03030303030303,
+        "peak_steady_state_memory_bytes": 16479836054,
+        "serial_target_tokens_per_sec": 13.49579408151851,
+        "speculative_decode_tokens_per_sec": 28.522221686498362,
+        "speedup_over_serial": 2.1134155955711735,
+        "target_forwards": 102
+      },
+      "order_index": 5,
+      "paired_serial_target_tokens_per_sec": 13.49579408151851,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-05-h2-bq/result.json",
+      "raw_result_sha256": "9a8738505d25113371dcd4145b852feea6202a5bda3ffd0016f3be65ba6397f9",
+      "run_id": "discovery-05-h2-bq",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:33:08Z",
+      "target": "H2",
+      "target_identity_sha256": "253a703435ee3d701abeef5c468fc4a1fd411c3a49dfb2752327d616d33e11c6"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:35:07Z",
+      "drafter": "B-B",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 98
+        },
+        "draft_acceptance": 0.4207492795389049,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 98
+        },
+        "generated_token_count": 397,
+        "generated_tokens_per_target_forward": 3.780952380952381,
+        "mean_accepted_length": 3.892156862745098,
+        "peak_steady_state_memory_bytes": 16479837110,
+        "serial_target_tokens_per_sec": 13.493593237130902,
+        "speculative_decode_tokens_per_sec": 27.067350508176844,
+        "speedup_over_serial": 2.005940895987175,
+        "target_forwards": 105
+      },
+      "order_index": 6,
+      "paired_serial_target_tokens_per_sec": 13.493593237130902,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-06-h2-bb/result.json",
+      "raw_result_sha256": "eefc686ff93c770f8d729c1876326ec59f7855cc2a70b1a015ea9a9b12762e63",
+      "run_id": "discovery-06-h2-bb",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:34:10Z",
+      "target": "H2",
+      "target_identity_sha256": "253a703435ee3d701abeef5c468fc4a1fd411c3a49dfb2752327d616d33e11c6"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:36:07Z",
+      "drafter": "B-B",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 91
+        },
+        "draft_acceptance": 0.45891472868217054,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 91
+        },
+        "generated_token_count": 394,
+        "generated_tokens_per_target_forward": 4.020408163265306,
+        "mean_accepted_length": 4.147368421052631,
+        "peak_steady_state_memory_bytes": 16055434502,
+        "serial_target_tokens_per_sec": 13.80510407158465,
+        "speculative_decode_tokens_per_sec": 29.616971412477547,
+        "speedup_over_serial": 2.1453638638942834,
+        "target_forwards": 98
+      },
+      "order_index": 7,
+      "paired_serial_target_tokens_per_sec": 13.80510407158465,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-07-h3-bb/result.json",
+      "raw_result_sha256": "4c016d1b6b43c4465ba58a310444ac4e363d2bc9b370d76cabf917d877162476",
+      "run_id": "discovery-07-h3-bb",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:35:12Z",
+      "target": "H3",
+      "target_identity_sha256": "31d84590925d600bac708359f91d12078c405508c64339102b51d640a1ce43e0"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:37:09Z",
+      "drafter": "B-Q",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "drafter_weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 94
+        },
+        "draft_acceptance": 0.4369369369369369,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 94
+        },
+        "generated_token_count": 392,
+        "generated_tokens_per_target_forward": 3.881188118811881,
+        "mean_accepted_length": 4.0,
+        "peak_steady_state_memory_bytes": 16056127334,
+        "serial_target_tokens_per_sec": 13.854673861268104,
+        "speculative_decode_tokens_per_sec": 28.54458127803007,
+        "speedup_over_serial": 2.0602853278148126,
+        "target_forwards": 101
+      },
+      "order_index": 8,
+      "paired_serial_target_tokens_per_sec": 13.854673861268104,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-08-h3-bq/result.json",
+      "raw_result_sha256": "28851d149269ada1c8074ec14938730b7d956a0207209bb6d48e9069027cf7f1",
+      "run_id": "discovery-08-h3-bq",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:36:13Z",
+      "target": "H3",
+      "target_identity_sha256": "31d84590925d600bac708359f91d12078c405508c64339102b51d640a1ce43e0"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:37:47Z",
+      "drafter": "B-Q",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "incoai/Qwen3.8-27B-DFlash2",
+      "drafter_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+      "drafter_weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 108
+        },
+        "draft_acceptance": 0.3612565445026178,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 108
+        },
+        "generated_token_count": 391,
+        "generated_tokens_per_target_forward": 3.4,
+        "mean_accepted_length": 3.4910714285714284,
+        "peak_steady_state_memory_bytes": 9384797326,
+        "serial_target_tokens_per_sec": 25.40104922568023,
+        "speculative_decode_tokens_per_sec": 33.95269098678815,
+        "speedup_over_serial": 1.3366649025057709,
+        "target_forwards": 115
+      },
+      "order_index": 9,
+      "paired_serial_target_tokens_per_sec": 25.40104922568023,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-09-b0-bq/result.json",
+      "raw_result_sha256": "309ebf06996123a2b944ac60c15df12d66b2ffb6a9c07caf3cb4be0384a0f55b",
+      "run_id": "discovery-09-b0-bq",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:37:14Z",
+      "target": "B0",
+      "target_identity_sha256": "b1d26fc92e6ac9586b8a1f7db1aa3deb81775d38e5f0a516788e314d18c8ab2b"
+    },
+    {
+      "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "comparison_group": "discovery",
+      "completed_utc": "2026-09-25T15:38:47Z",
+      "drafter": "B-B",
+      "drafter_config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+      "drafter_repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+      "fresh_process": true,
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "metrics": {
+        "cap_distribution": {
+          "2": 4,
+          "7": 103
+        },
+        "draft_acceptance": 0.38545953360768176,
+        "draft_width_distribution": {
+          "2": 4,
+          "7": 103
+        },
+        "generated_token_count": 391,
+        "generated_tokens_per_target_forward": 3.5545454545454547,
+        "mean_accepted_length": 3.6542056074766354,
+        "peak_steady_state_memory_bytes": 9384813286,
+        "serial_target_tokens_per_sec": 25.446947964815614,
+        "speculative_decode_tokens_per_sec": 35.65616194113966,
+        "speedup_over_serial": 1.4011960094562177,
+        "target_forwards": 110
+      },
+      "order_index": 10,
+      "paired_serial_target_tokens_per_sec": 25.446947964815614,
+      "prompt_ids_and_hashes": [
+        {
+          "id": "p01",
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ],
+      "raw_result_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runs/discovery-10-b0-bb/result.json",
+      "raw_result_sha256": "18ef185fa710f80402f0caa4d3e470866c6ed5118e362d7f00114eaf1e9b00fe",
+      "run_id": "discovery-10-b0-bb",
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "started_utc": "2026-09-25T15:37:53Z",
+      "target": "B0",
+      "target_identity_sha256": "b1d26fc92e6ac9586b8a1f7db1aa3deb81775d38e5f0a516788e314d18c8ab2b"
+    }
+  ],
+  "frozen_comparison_context": {
+    "benchmark_method_fingerprint_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+    "common_controls": {
+      "controller": "ordinary production CapController, max_draft_tokens=auto",
+      "fixed_engine_settings": {
+        "cpu_split": null,
+        "drafter_bits": 4,
+        "lookup_drafts": false,
+        "mode": "dflash",
+        "prefix_cache": false,
+        "sdpa_split": null,
+        "small_m": null,
+        "wide_gemm_min": null
+      },
+      "generation": {
+        "frequency_penalty": 0.0,
+        "max_new_tokens": 128,
+        "presence_penalty": 0.0,
+        "seed": 0,
+        "stop": [],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      },
+      "hardware": {
+        "architecture": "applegpu_g16s",
+        "device_name": "Apple M4 Pro",
+        "max_buffer_length": 28991029248,
+        "max_recommended_working_set_size": 38654705664,
+        "memory_size": 51539607552,
+        "resource_limit": 499000
+      },
+      "kv_bits": null,
+      "measurement_method": {
+        "run_series_condition_ast_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+        "source": "byte-identical accepted Series-A function"
+      },
+      "measurement_protocol": {
+        "fresh_process_and_engine_per_run": true,
+        "memory_guard": false,
+        "no_prefix_or_kv_reuse_between_prompts": true,
+        "serial_greedy_then_speculative": true,
+        "warmup": true
+      },
+      "plain_kv": true,
+      "prompt_corpus": {
+        "path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-a/prompts.json",
+        "sha256": "0f5966cc96d28800a7240abccc68af3357a016ab7ee15998481bd556917eb4c0",
+        "tokenized_prompts": [
+          {
+            "id": "p01",
+            "input_ids": [
+              248045,
+              846,
+              198,
+              814,
+              20139,
+              1204,
+              264,
+              5010,
+              1898,
+              13081,
+              45776,
+              13,
+              23024,
+              8387,
+              71159,
+              440,
+              1724,
+              26153,
+              11,
+              321,
+              2873,
+              799,
+              14542,
+              6355,
+              1783,
+              364,
+              1754,
+              13,
+              248046,
+              198,
+              248045,
+              74455,
+              198,
+              248068,
+              271,
+              248069,
+              271
+            ],
+            "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+          },
+          {
+            "id": "p02",
+            "input_ids": [
+              248045,
+              846,
+              198,
+              7734,
+              264,
+              12654,
+              709,
+              421,
+              4523,
+              279,
+              2984,
+              314,
+              279,
+              21354,
+              7459,
+              1146,
+              15057,
+              13,
+              28763,
+              264,
+              2716,
+              15673,
+              314,
+              1141,
+              854,
+              22373,
+              13,
+              248046,
+              198,
+              248045,
+              74455,
+              198,
+              248068,
+              271,
+              248069,
+              271
+            ],
+            "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+          },
+          {
+            "id": "p03",
+            "input_ids": [
+              248045,
+              846,
+              198,
+              32,
+              2015,
+              369,
+              26805,
+              264,
+              6103,
+              3370,
+              2393,
+              13,
+              20052,
+              264,
+              61446,
+              11,
+              11128,
+              3019,
+              364,
+              28043,
+              37972,
+              11,
+              8996,
+              279,
+              84810,
+              11,
+              321,
+              66532,
+              264,
+              4884,
+              13,
+              248046,
+              198,
+              248045,
+              74455,
+              198,
+              248068,
+              271,
+              248069,
+              271
+            ],
+            "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+          }
+        ]
+      },
+      "runtime_source_sha256": {
+        "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+        "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+        "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+        "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+        "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+        "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+        "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+      },
+      "sampling": {
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "seed": 0,
+        "stop": [],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      },
+      "speculative_policy": "accepted production DFlash Engine path; no tuning",
+      "target_checkpoint_and_weights": "identical within each target pair; see matrix.target_identities",
+      "target_ownership_map": "identical complete 64-block owner map within each pair",
+      "width_policy": false
+    },
+    "control_manifest_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/control-manifest.json",
+    "control_manifest_sha256": "9283ce2ec7dc78157b2f57d0d957562426ffd27baa1cd1814cea7f725a9f0d3d",
+    "drafter_checkpoints": {
+      "B-B": {
+        "config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+        "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+        "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+        "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "weight_size_bytes": 3848817904
+      },
+      "B-Q": {
+        "config_sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980",
+        "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+        "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+        "weight_sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+        "weight_size_bytes": 3848817896
+      }
+    },
+    "matrix_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/matrix.json",
+    "matrix_sha256": "dfa18694cbfe6da98c17a89114016556adae1b7fab96120de84407e5df44bc8f",
+    "required_runtime_source_sha256": {
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "target_identity_sha256": {
+      "B0": "b1d26fc92e6ac9586b8a1f7db1aa3deb81775d38e5f0a516788e314d18c8ab2b",
+      "H0": "cdd389ab65d05ccee941d7267f2b765b55e6fc374721483286276de55b1ae324",
+      "H1c": "21d19cb508c133eeed163a811986a7d45f9cb14eb91d89b732ead4e9154a2119",
+      "H2": "253a703435ee3d701abeef5c468fc4a1fd411c3a49dfb2752327d616d33e11c6",
+      "H3": "31d84590925d600bac708359f91d12078c405508c64339102b51d640a1ce43e0"
+    }
+  },
+  "interpretation_limit": "One discovery observation per cell. Deltas and directions are descriptive only; no confirmed superiority, crossover, winning pair, or production improvement is declared.",
+  "preliminary_deltas": {
+    "B0": {
+      "B-B": {
+        "serial_target_tokens_per_sec": 25.446947964815614,
+        "speculative_decode_tokens_per_sec": 35.65616194113966
+      },
+      "B-B_minus_B-Q": {
+        "draft_acceptance": 0.024202989105063966,
+        "generated_tokens_per_target_forward": 0.15454545454545476,
+        "mean_accepted_length": 0.16313417890520698,
+        "peak_steady_state_memory_bytes": 15960,
+        "speculative_decode_tokens_per_sec": 1.7034709543515092,
+        "target_forwards": -5
+      },
+      "B-Q": {
+        "serial_target_tokens_per_sec": 25.40104922568023,
+        "speculative_decode_tokens_per_sec": 33.95269098678815
+      },
+      "paired_serial_target_outputs_identical": true
+    },
+    "H0": {
+      "B-B": {
+        "serial_target_tokens_per_sec": 13.356832437224897,
+        "speculative_decode_tokens_per_sec": 29.628596786588176
+      },
+      "B-B_minus_B-Q": {
+        "draft_acceptance": -0.03443893760325328,
+        "generated_tokens_per_target_forward": -0.21560236998024962,
+        "mean_accepted_length": -0.22982456140350838,
+        "peak_steady_state_memory_bytes": -1099616,
+        "speculative_decode_tokens_per_sec": -2.505056760121974,
+        "target_forwards": 5
+      },
+      "B-Q": {
+        "serial_target_tokens_per_sec": 13.397576999232337,
+        "speculative_decode_tokens_per_sec": 32.13365354671015
+      },
+      "paired_serial_target_outputs_identical": true
+    },
+    "H1c": {
+      "B-B": {
+        "serial_target_tokens_per_sec": 13.522585591282638,
+        "speculative_decode_tokens_per_sec": 28.04005678339805
+      },
+      "B-B_minus_B-Q": {
+        "draft_acceptance": -0.025369491399106603,
+        "generated_tokens_per_target_forward": -0.15787345866181512,
+        "mean_accepted_length": -0.16913819041478595,
+        "peak_steady_state_memory_bytes": -1311528,
+        "speculative_decode_tokens_per_sec": -2.0682894044668707,
+        "target_forwards": 5
+      },
+      "B-Q": {
+        "serial_target_tokens_per_sec": 13.345204577526404,
+        "speculative_decode_tokens_per_sec": 30.10834618786492
+      },
+      "paired_serial_target_outputs_identical": true
+    },
+    "H2": {
+      "B-B": {
+        "serial_target_tokens_per_sec": 13.493593237130902,
+        "speculative_decode_tokens_per_sec": 27.067350508176844
+      },
+      "B-B_minus_B-Q": {
+        "draft_acceptance": -0.020558298470010394,
+        "generated_tokens_per_target_forward": -0.13081232492997197,
+        "mean_accepted_length": -0.1381461675579323,
+        "peak_steady_state_memory_bytes": 1056,
+        "speculative_decode_tokens_per_sec": -1.4548711783215182,
+        "target_forwards": 3
+      },
+      "B-Q": {
+        "serial_target_tokens_per_sec": 13.49579408151851,
+        "speculative_decode_tokens_per_sec": 28.522221686498362
+      },
+      "paired_serial_target_outputs_identical": true
+    },
+    "H3": {
+      "B-B": {
+        "serial_target_tokens_per_sec": 13.80510407158465,
+        "speculative_decode_tokens_per_sec": 29.616971412477547
+      },
+      "B-B_minus_B-Q": {
+        "draft_acceptance": 0.02197779174523362,
+        "generated_tokens_per_target_forward": 0.13922004445342484,
+        "mean_accepted_length": 0.14736842105263115,
+        "peak_steady_state_memory_bytes": -692832,
+        "speculative_decode_tokens_per_sec": 1.0723901344474775,
+        "target_forwards": -3
+      },
+      "B-Q": {
+        "serial_target_tokens_per_sec": 13.854673861268104,
+        "speculative_decode_tokens_per_sec": 28.54458127803007
+      },
+      "paired_serial_target_outputs_identical": true
+    }
+  },
+  "repeat_selection_performed": false,
+  "schedule": [
+    {
+      "drafter": "B-Q",
+      "order_index": 1,
+      "target": "H0"
+    },
+    {
+      "drafter": "B-B",
+      "order_index": 2,
+      "target": "H0"
+    },
+    {
+      "drafter": "B-B",
+      "order_index": 3,
+      "target": "H1c"
+    },
+    {
+      "drafter": "B-Q",
+      "order_index": 4,
+      "target": "H1c"
+    },
+    {
+      "drafter": "B-Q",
+      "order_index": 5,
+      "target": "H2"
+    },
+    {
+      "drafter": "B-B",
+      "order_index": 6,
+      "target": "H2"
+    },
+    {
+      "drafter": "B-B",
+      "order_index": 7,
+      "target": "H3"
+    },
+    {
+      "drafter": "B-Q",
+      "order_index": 8,
+      "target": "H3"
+    },
+    {
+      "drafter": "B-Q",
+      "order_index": 9,
+      "target": "B0"
+    },
+    {
+      "drafter": "B-B",
+      "order_index": 10,
+      "target": "B0"
+    }
+  ],
+  "schema": "qwen-bonsai-series-b-discovery-index/v1",
+  "series": "B",
+  "status": "PASS",
+  "validation": {
+    "authorized_targets_each_have_both_drafters": true,
+    "cell_count": 10,
+    "checkpoint_provenance": "PASS",
+    "finite_required_metrics": "PASS",
+    "fresh_process_schedule_records": "PASS",
+    "generated_output_and_integrity_conditions": "PASS",
+    "generation_sampling_and_fixed_controls": "PASS",
+    "hardware_and_benchmark_method_fingerprint": "PASS",
+    "no_excluded_or_unknown_cells": true,
+    "order_indices_exactly_once": true,
+    "paired_serial_target_output_agreement": "PASS",
+    "pass_raw_result_count": 10,
+    "plain_kv_ordinary_controller_no_width_policy": "PASS",
+    "prompt_ids_hashes_and_corpus": "PASS",
+    "seven_runtime_hashes": "PASS",
+    "target_composition_and_ownership": "PASS",
+    "unique_run_ids": true
+  }
+}

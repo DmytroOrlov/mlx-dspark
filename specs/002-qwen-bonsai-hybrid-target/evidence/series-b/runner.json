@@ -1,0 +1,33 @@
+{
+  "experiment_runtime_hashes_match_series_a": true,
+  "experiment_runtime_source_sha256": {
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "gate_b": {
+    "decision": "OPEN",
+    "validated": true
+  },
+  "performance_run_performed": false,
+  "reused_series_a_runner": {
+    "accepted_method_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+    "current_path": "specs/002-qwen-bonsai-hybrid-target/evidence/probes/series_a.py",
+    "current_sha256": "139391f952611806b485c0cc97e5c9ddef3f7bfc85759cea29cba17b4ff30e25",
+    "identity": "The actual run_series_condition function is imported and called unchanged for each Series-B condition; the wrapper supplies a frozen target/drafter checkpoint record and redirects the accepted function's output into Series-B-local staging before moving the result into series-b/runs.",
+    "run_series_condition_ast_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+    "snapshot_path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runner-used-for-discovery.py",
+    "snapshot_sha256": "b14e980a2044cbd0d27aa45b5da8cf5064e6e6420f2b9588bcc222e75a3bd49e"
+  },
+  "schema": "qwen-bonsai-series-b-runner/v1",
+  "series_b_runner": {
+    "path": "specs/002-qwen-bonsai-hybrid-target/evidence/probes/series_b.py",
+    "sha256": "6f7ad0dc9a065739c0eec52b3034b8440431bffae193746fb94bc7d71788d464"
+  },
+  "status": "PASS",
+  "target_execution_prompt_generation_measurement_controller_metrics": "Delegated to the byte-identical accepted run_series_condition function and existing Engine APIs; the wrapper changes only target/drafter selection and Series-B-local output routing."
+}

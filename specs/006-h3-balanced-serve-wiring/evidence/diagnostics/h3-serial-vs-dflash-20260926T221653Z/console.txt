@@ -1,0 +1,9 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+  predicted tok/s by cap (prior accept): {1: 19.5, 2: 22.0, 3: 20.8, 4: 19.1, 5: 20.2, 6: 21.0, 7: 22.0} -> starting cap 2, knee-best 2
+SERIAL_SHA=45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444
+DFLASH_SHA=45949d2f7810976896a5d8d0e803ca08c97903877f4093715b5b3417f24ab444
+SAME_OUTPUT=true
+COMMON_PREFIX_TOKENS=122
+FIRST_DIFFERENCE=null
+SERIAL_FIRST_500=We need answer in Russian likely. User: "Сумма чисел от 1 до 100" means sum of numbers from 1 to 100. Need compute 5050. Need final. Could include formula.\n</think>\n\nСумма чисел от 1 до 100:\n\n\[\n1 + 2 + 3 + \dots + 100 = \frac{100 \cdot 101}{2} = 5050\n\]\n\nОтвет: **5050**
+DFLASH_FIRST_500=We need answer in Russian likely. User: "Сумма чисел от 1 до 100" means sum of numbers from 1 to 100. Need compute 5050. Need final. Could include formula.\n</think>\n\nСумма чисел от 1 до 100:\n\n\[\n1 + 2 + 3 + \dots + 100 = \frac{100 \cdot 101}{2} = 5050\n\]\n\nОтвет: **5050**

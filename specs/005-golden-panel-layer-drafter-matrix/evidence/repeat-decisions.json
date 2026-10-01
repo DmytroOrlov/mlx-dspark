@@ -1,0 +1,24 @@
+{
+  "decisions": [
+    {
+      "drafter": "B-Q",
+      "effective_attempt_id": "feat005-20260926-c1",
+      "prompt_id": "P07",
+      "reason": "This is the sole short-output first-pass observation, while its observed throughput is slightly above same-prompt H0+B-Q and H3 is a candidate balanced speed/memory configuration. Repeat to determine whether the short completion itself is reproducible and to separate observed-throughput from strict-long-form interpretation.",
+      "target": "H3",
+      "trigger_class": "conclusion-critical-near-drift-review",
+      "triggering_raw_path": "evidence/attempts/feat005-20260926-c1/cells/P07/04-H3-B-Q.json",
+      "triggering_raw_sha256": "4b8b7d8eea7e602333c123af41134448127b71c9614a1eb4a020bb5c0f73b7c9"
+    },
+    {
+      "drafter": "B-B",
+      "effective_attempt_id": "feat005-20260926-c1",
+      "prompt_id": "P08",
+      "reason": "H1b+B-B is a clean block-62 local maximum versus H1a/H1c on P08 but did not receive an objective repeat. This repeat is useful for deciding whether the bounded block-localization follow-up is warranted.",
+      "target": "H1b",
+      "trigger_class": "surprising-local-target-maximum-review",
+      "triggering_raw_path": "evidence/attempts/feat005-20260926-c1/cells/P08/06-H1b-B-B.json",
+      "triggering_raw_sha256": "29701df372fe94d3e9226fbb5611aaec06f9ec7737c4a18a5d073518dcd5f2ee"
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "allowed_pair_differences": [
+    "exact drafter checkpoint"
+  ],
+  "common_controls": {
+    "controller": "ordinary production CapController, max_draft_tokens=auto",
+    "fixed_engine_settings": {
+      "cpu_split": null,
+      "drafter_bits": 4,
+      "lookup_drafts": false,
+      "mode": "dflash",
+      "prefix_cache": false,
+      "sdpa_split": null,
+      "small_m": null,
+      "wide_gemm_min": null
+    },
+    "generation": {
+      "frequency_penalty": 0.0,
+      "max_new_tokens": 128,
+      "presence_penalty": 0.0,
+      "seed": 0,
+      "stop": [],
+      "temperature": 0.0,
+      "top_k": 0,
+      "top_p": 1.0
+    },
+    "hardware": {
+      "architecture": "applegpu_g16s",
+      "device_name": "Apple M4 Pro",
+      "max_buffer_length": 28991029248,
+      "max_recommended_working_set_size": 38654705664,
+      "memory_size": 51539607552,
+      "resource_limit": 499000
+    },
+    "kv_bits": null,
+    "measurement_method": {
+      "run_series_condition_ast_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "source": "byte-identical accepted Series-A function"
+    },
+    "measurement_protocol": {
+      "fresh_process_and_engine_per_run": true,
+      "memory_guard": false,
+      "no_prefix_or_kv_reuse_between_prompts": true,
+      "serial_greedy_then_speculative": true,
+      "warmup": true
+    },
+    "plain_kv": true,
+    "prompt_corpus": {
+      "path": "specs/002-qwen-bonsai-hybrid-target/evidence/series-a/prompts.json",
+      "sha256": "0f5966cc96d28800a7240abccc68af3357a016ab7ee15998481bd556917eb4c0",
+      "tokenized_prompts": [
+        {
+          "id": "p01",
+          "input_ids": [
+            248045,
+            846,
+            198,
+            814,
+            20139,
+            1204,
+            264,
+            5010,
+            1898,
+            13081,
+            45776,
+            13,
+            23024,
+            8387,
+            71159,
+            440,
+            1724,
+            26153,
+            11,
+            321,
+            2873,
+            799,
+            14542,
+            6355,
+            1783,
+            364,
+            1754,
+            13,
+            248046,
+            198,
+            248045,
+            74455,
+            198,
+            248068,
+            271,
+            248069,
+            271
+          ],
+          "input_ids_sha256": "3ea37b232330705a3afcec1cfadf30048064cc7d057b03c015a6d51bba7962ad"
+        },
+        {
+          "id": "p02",
+          "input_ids": [
+            248045,
+            846,
+            198,
+            7734,
+            264,
+            12654,
+            709,
+            421,
+            4523,
+            279,
+            2984,
+            314,
+            279,
+            21354,
+            7459,
+            1146,
+            15057,
+            13,
+            28763,
+            264,
+            2716,
+            15673,
+            314,
+            1141,
+            854,
+            22373,
+            13,
+            248046,
+            198,
+            248045,
+            74455,
+            198,
+            248068,
+            271,
+            248069,
+            271
+          ],
+          "input_ids_sha256": "b8a64e59879ee812dd745bebd7e32e3411a1a976838b0e37095ac636fe907d97"
+        },
+        {
+          "id": "p03",
+          "input_ids": [
+            248045,
+            846,
+            198,
+            32,
+            2015,
+            369,
+            26805,
+            264,
+            6103,
+            3370,
+            2393,
+            13,
+            20052,
+            264,
+            61446,
+            11,
+            11128,
+            3019,
+            364,
+            28043,
+            37972,
+            11,
+            8996,
+            279,
+            84810,
+            11,
+            321,
+            66532,
+            264,
+            4884,
+            13,
+            248046,
+            198,
+            248045,
+            74455,
+            198,
+            248068,
+            271,
+            248069,
+            271
+          ],
+          "input_ids_sha256": "65984727de01ed8084ad4cf40a60b46095eb4ffecc711dce0c19f23d53c24342"
+        }
+      ]
+    },
+    "runtime_source_sha256": {
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "sampling": {
+      "frequency_penalty": 0.0,
+      "presence_penalty": 0.0,
+      "seed": 0,
+      "stop": [],
+      "temperature": 0.0,
+      "top_k": 0,
+      "top_p": 1.0
+    },
+    "speculative_policy": "accepted production DFlash Engine path; no tuning",
+    "target_checkpoint_and_weights": "identical within each target pair; see matrix.target_identities",
+    "target_ownership_map": "identical complete 64-block owner map within each pair",
+    "width_policy": false
+  },
+  "compatibility_adaptation": "none",
+  "fresh_controls": {
+    "H0-B-B": "unchanged-Qwen-target drafter-control cell",
+    "H0-B-Q": "fresh Series-B production/reference baseline",
+    "series_a_throughput_substitution_allowed": false
+  },
+  "gate_b": {
+    "decision": "OPEN",
+    "validated": true
+  },
+  "matrix_cell_count": 10,
+  "paired_controls": {
+    "B0": {
+      "cells": [
+        "B0-B-Q",
+        "B0-B-B"
+      ],
+      "common_controls_sha256": "541a843f9fbc44532ac431b7903299d732cf81ea10a6d72da0d81a15674ac44e",
+      "compatibility_adaptation": "none",
+      "only_allowed_differences": [
+        "exact drafter checkpoint"
+      ],
+      "target_identity_sha256": "b1d26fc92e6ac9586b8a1f7db1aa3deb81775d38e5f0a516788e314d18c8ab2b"
+    },
+    "H0": {
+      "cells": [
+        "H0-B-Q",
+        "H0-B-B"
+      ],
+      "common_controls_sha256": "541a843f9fbc44532ac431b7903299d732cf81ea10a6d72da0d81a15674ac44e",
+      "compatibility_adaptation": "none",
+      "only_allowed_differences": [
+        "exact drafter checkpoint"
+      ],
+      "target_identity_sha256": "cdd389ab65d05ccee941d7267f2b765b55e6fc374721483286276de55b1ae324"
+    },
+    "H1c": {
+      "cells": [
+        "H1c-B-B",
+        "H1c-B-Q"
+      ],
+      "common_controls_sha256": "541a843f9fbc44532ac431b7903299d732cf81ea10a6d72da0d81a15674ac44e",
+      "compatibility_adaptation": "none",
+      "only_allowed_differences": [
+        "exact drafter checkpoint"
+      ],
+      "target_identity_sha256": "21d19cb508c133eeed163a811986a7d45f9cb14eb91d89b732ead4e9154a2119"
+    },
+    "H2": {
+      "cells": [
+        "H2-B-Q",
+        "H2-B-B"
+      ],
+      "common_controls_sha256": "541a843f9fbc44532ac431b7903299d732cf81ea10a6d72da0d81a15674ac44e",
+      "compatibility_adaptation": "none",
+      "only_allowed_differences": [
+        "exact drafter checkpoint"
+      ],
+      "target_identity_sha256": "253a703435ee3d701abeef5c468fc4a1fd411c3a49dfb2752327d616d33e11c6"
+    },
+    "H3": {
+      "cells": [
+        "H3-B-B",
+        "H3-B-Q"
+      ],
+      "common_controls_sha256": "541a843f9fbc44532ac431b7903299d732cf81ea10a6d72da0d81a15674ac44e",
+      "compatibility_adaptation": "none",
+      "only_allowed_differences": [
+        "exact drafter checkpoint"
+      ],
+      "target_identity_sha256": "31d84590925d600bac708359f91d12078c405508c64339102b51d640a1ce43e0"
+    }
+  },
+  "performance_run_performed": false,
+  "schema": "qwen-bonsai-series-b-control-manifest/v1",
+  "status": "PASS"
+}

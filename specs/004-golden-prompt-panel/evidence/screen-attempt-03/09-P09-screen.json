@@ -1,0 +1,1625 @@
+{
+  "drafter": {
+    "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+    "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "new child process and Engine; no prior measured request state",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 69906,
+    "prefix_hits_before_request": 0,
+    "rounds_before_request": 0
+  },
+  "input_ids": [
+    248045,
+    846,
+    198,
+    7734,
+    264,
+    12654,
+    709,
+    421,
+    25721,
+    3315,
+    1330,
+    8796,
+    513,
+    449,
+    66446,
+    13,
+    28763,
+    6813,
+    321,
+    10033,
+    279,
+    854,
+    22373,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "input_sha256": "11b9a43422f8956965e8d3465948202e953e11ff159b8975e5adb772a813e9ae",
+  "input_token_count": 33,
+  "machine": {
+    "hostname": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "measurements": {
+    "acceptance": 0.7181208053691275,
+    "active_baseline_bytes": 16496123666,
+    "cap_distribution": {
+      "2": 4,
+      "7": 84
+    },
+    "decode_duration_seconds": 10.999998807907104,
+    "generated_per_forward": 5.808988764044944,
+    "generated_tokens": 517,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "mean_accepted": 4.863636363636363,
+    "natural_completion_before_410": false,
+    "output_text": "```python\ndef are_anagrams(s1: str, s2: str) -> bool:\n    \"\"\"\n    Determine whether two strings are anagrams of each other.\n    \n    Two strings are anagrams if they contain the same characters with the same frequencies,\n    ignoring case and non-alphabetic characters.\n    \n    Args:\n        s1: First string\n        s2: Second string\n        \n    Returns:\n        True if s1 and s2 are anagrams, False otherwise.\n    \"\"\"\n    # Normalize: convert to lowercase and keep only alphabetic characters\n    s1_clean = ''.join(c.lower() for c in s1 if c.isalpha())\n    s2_clean = ''.join(c.lower() for c in s2 if c.isalpha())\n    \n    # Quick length check\n    if len(s1_clean) != len(s2_clean):\n        return False\n    \n    # Count character frequencies\n    from collections import Counter\n    return Counter(s1_clean) == Counter(s2_clean)\n\n\n# Tests\ndef test_are_anagrams():\n    # Basic anagrams\n    assert are_anagrams(\"listen\", \"silent\") == True\n    assert are_anagrams(\"hello\", \"world\") == False\n    \n    # Case insensitivity\n    assert are_anagrams(\"Listen\", \"Silent\") == True\n    assert are_anagrams(\"Astronomer\", \"Moon starer\") == True\n    \n    # Non-alphabetic characters are ignored\n    assert are_anagrams(\"Astronomer\", \"Moon starer\") == True\n    assert are_anagrams(\"Astronomer\", \"Moon starer!\") == True\n    assert are_anagrams(\"hello\", \"h e l l o\") == True\n    \n    # Empty strings\n    assert are_anagrams(\"\", \"\") == True\n    assert are_anagrams(\"\", \"a\") == False\n    \n    # Single characters\n    assert are_anagrams(\"a\", \"a\") == True\n    assert are_anagrams(\"a\", \"b\") == False\n    \n    # Different lengths\n    assert are_anagrams(\"abc\", \"abcd\") == False\n    \n    # Same characters, different order\n    assert are_anagrams(\"abc\", \"cba\") == True\n    \n    # Repeated characters\n    assert are_anagrams(\"aab\", \"aba\") == True\n    assert are_anagrams(\"aab\", \"abb\") == False\n    \n    print(\"All tests passed!\")\n\n\nif __name__ == \"__main__",
+    "output_text_sha256": "e2753904099cc0e1e945bea2b3acb9e5635ce4e0e99df84b391e4adc9486bf1e",
+    "output_tokens_sha256": null,
+    "peak_bytes": 17096318754,
+    "peak_gib": 15.92218759842217,
+    "request_duration_seconds": 11.411226584110409,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 504.84,
+        "req": "2b67148a",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1171.6
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 90.96,
+        "req": "2b67148a",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1262.5
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 91.76,
+        "req": "2b67148a",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1354.3
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 93.57,
+        "req": "2b67148a",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1447.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 125.84,
+        "req": "2b67148a",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1573.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 126.0,
+        "req": "2b67148a",
+        "seq": 6,
+        "source": "drafter",
+        "t": 1699.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 125.36,
+        "req": "2b67148a",
+        "seq": 7,
+        "source": "drafter",
+        "t": 1825.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 123.15,
+        "req": "2b67148a",
+        "seq": 8,
+        "source": "drafter",
+        "t": 1948.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 121.73,
+        "req": "2b67148a",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2070.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 125.54,
+        "req": "2b67148a",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2195.5
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 127.1,
+        "req": "2b67148a",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2322.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 128.26,
+        "req": "2b67148a",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2450.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 125.95,
+        "req": "2b67148a",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2576.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 125.62,
+        "req": "2b67148a",
+        "seq": 14,
+        "source": "drafter",
+        "t": 2702.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 126.07,
+        "req": "2b67148a",
+        "seq": 15,
+        "source": "drafter",
+        "t": 2828.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 124.31,
+        "req": "2b67148a",
+        "seq": 16,
+        "source": "drafter",
+        "t": 2952.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 122.77,
+        "req": "2b67148a",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3075.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 125.43,
+        "req": "2b67148a",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3201.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 127.21,
+        "req": "2b67148a",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3328.2
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 125.68,
+        "req": "2b67148a",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3453.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 128.03,
+        "req": "2b67148a",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3581.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 125.84,
+        "req": "2b67148a",
+        "seq": 22,
+        "source": "drafter",
+        "t": 3707.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 126.22,
+        "req": "2b67148a",
+        "seq": 23,
+        "source": "drafter",
+        "t": 3834.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 123.6,
+        "req": "2b67148a",
+        "seq": 24,
+        "source": "drafter",
+        "t": 3957.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 123.22,
+        "req": "2b67148a",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4080.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 125.99,
+        "req": "2b67148a",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4206.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 125.92,
+        "req": "2b67148a",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4332.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 128.94,
+        "req": "2b67148a",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4461.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 126.28,
+        "req": "2b67148a",
+        "seq": 29,
+        "source": "drafter",
+        "t": 4587.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 125.8,
+        "req": "2b67148a",
+        "seq": 30,
+        "source": "drafter",
+        "t": 4713.7
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 126.28,
+        "req": "2b67148a",
+        "seq": 31,
+        "source": "drafter",
+        "t": 4840.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 125.03,
+        "req": "2b67148a",
+        "seq": 32,
+        "source": "drafter",
+        "t": 4965.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 125.43,
+        "req": "2b67148a",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5090.5
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 125.72,
+        "req": "2b67148a",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5216.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 128.15,
+        "req": "2b67148a",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5344.3
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 128.18,
+        "req": "2b67148a",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5472.5
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 128.29,
+        "req": "2b67148a",
+        "seq": 37,
+        "source": "drafter",
+        "t": 5600.8
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 128.6,
+        "req": "2b67148a",
+        "seq": 38,
+        "source": "drafter",
+        "t": 5729.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 127.13,
+        "req": "2b67148a",
+        "seq": 39,
+        "source": "drafter",
+        "t": 5856.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 124.23,
+        "req": "2b67148a",
+        "seq": 40,
+        "source": "drafter",
+        "t": 5980.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 123.78,
+        "req": "2b67148a",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6104.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 128.37,
+        "req": "2b67148a",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6232.9
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 126.02,
+        "req": "2b67148a",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6358.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 127.82,
+        "req": "2b67148a",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6486.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 129.04,
+        "req": "2b67148a",
+        "seq": 45,
+        "source": "drafter",
+        "t": 6615.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 128.66,
+        "req": "2b67148a",
+        "seq": 46,
+        "source": "drafter",
+        "t": 6744.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 126.62,
+        "req": "2b67148a",
+        "seq": 47,
+        "source": "drafter",
+        "t": 6871.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 122.73,
+        "req": "2b67148a",
+        "seq": 48,
+        "source": "drafter",
+        "t": 6993.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 124.23,
+        "req": "2b67148a",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7118.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 126.21,
+        "req": "2b67148a",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7244.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 126.8,
+        "req": "2b67148a",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7371.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 127.18,
+        "req": "2b67148a",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7498.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 126.86,
+        "req": "2b67148a",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7625.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 126.44,
+        "req": "2b67148a",
+        "seq": 54,
+        "source": "drafter",
+        "t": 7751.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 126.5,
+        "req": "2b67148a",
+        "seq": 55,
+        "source": "drafter",
+        "t": 7878.1
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 122.61,
+        "req": "2b67148a",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8000.7
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 127.96,
+        "req": "2b67148a",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8128.6
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 128.3,
+        "req": "2b67148a",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8256.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 128.7,
+        "req": "2b67148a",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8385.6
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 127.97,
+        "req": "2b67148a",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8513.6
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 127.63,
+        "req": "2b67148a",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8641.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 128.15,
+        "req": "2b67148a",
+        "seq": 62,
+        "source": "drafter",
+        "t": 8769.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 126.45,
+        "req": "2b67148a",
+        "seq": 63,
+        "source": "drafter",
+        "t": 8895.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 122.99,
+        "req": "2b67148a",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9018.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 125.99,
+        "req": "2b67148a",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9144.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 129.32,
+        "req": "2b67148a",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9274.1
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 128.59,
+        "req": "2b67148a",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9402.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 128.43,
+        "req": "2b67148a",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9531.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 126.7,
+        "req": "2b67148a",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9657.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 127.15,
+        "req": "2b67148a",
+        "seq": 70,
+        "source": "drafter",
+        "t": 9785.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 126.09,
+        "req": "2b67148a",
+        "seq": 71,
+        "source": "drafter",
+        "t": 9911.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 123.07,
+        "req": "2b67148a",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10034.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 126.77,
+        "req": "2b67148a",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10160.9
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 128.83,
+        "req": "2b67148a",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10289.8
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 129.27,
+        "req": "2b67148a",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10419.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 128.8,
+        "req": "2b67148a",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10547.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 128.33,
+        "req": "2b67148a",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10676.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 127.47,
+        "req": "2b67148a",
+        "seq": 78,
+        "source": "drafter",
+        "t": 10803.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 126.7,
+        "req": "2b67148a",
+        "seq": 79,
+        "source": "drafter",
+        "t": 10930.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 125.38,
+        "req": "2b67148a",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11055.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 128.54,
+        "req": "2b67148a",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11184.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 127.23,
+        "req": "2b67148a",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11311.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 129.01,
+        "req": "2b67148a",
+        "seq": 83,
+        "source": "drafter",
+        "t": 11440.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 126.92,
+        "req": "2b67148a",
+        "seq": 84,
+        "source": "drafter",
+        "t": 11567.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 127.72,
+        "req": "2b67148a",
+        "seq": 85,
+        "source": "drafter",
+        "t": 11695.2
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 129.07,
+        "req": "2b67148a",
+        "seq": 86,
+        "source": "drafter",
+        "t": 11824.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 86,
+        "mode": "dflash",
+        "ms": 127.23,
+        "req": "2b67148a",
+        "seq": 87,
+        "source": "drafter",
+        "t": 11951.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 87,
+        "mode": "dflash",
+        "ms": 125.4,
+        "req": "2b67148a",
+        "seq": 88,
+        "source": "drafter",
+        "t": 12076.9
+      }
+    ],
+    "rounds": 88,
+    "speculative_decode_tok_s": 47.000005093488376,
+    "stop_reason": null,
+    "target_forwards": 89,
+    "width_distribution": {
+      "2": 4,
+      "7": 84
+    }
+  },
+  "process_order": {
+    "elapsed_seconds": 16.474721542093903,
+    "pid": 69906,
+    "process_end_utc": "2026-09-26T08:17:50Z",
+    "process_start_utc": "2026-09-26T08:17:34Z",
+    "role": "screen",
+    "sequence": 9
+  },
+  "prompt_id": "P09",
+  "prompt_role": "screen",
+  "rendered_prompt": "<|im_start|>user\nWrite a Python function that determines whether two strings are anagrams. Include tests and explain the time complexity.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "request": {
+    "generation": {
+      "max_tokens": 512,
+      "temperature": 0,
+      "thinking": false,
+      "top_k": 0,
+      "top_p": 1
+    },
+    "plain_kv": true,
+    "prefix_cache_initialization": "enabled / T027 production Engine settings",
+    "prefix_reuse_tokens": 0
+  },
+  "runtime_configuration": {
+    "controller_final": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.881,
+      "predicted_rates": {
+        "1": 22.9,
+        "2": 30.1,
+        "3": 31.3,
+        "4": 31.5,
+        "5": 36.3,
+        "6": 40.9,
+        "7": 44.7
+      },
+      "rounds": 88
+    },
+    "controller_present": true,
+    "final_effective_cap": null,
+    "kv8": false,
+    "kv_bits": null,
+    "max_draft_tokens": null,
+    "mode": "dflash",
+    "prefix_cache_enabled": true,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 9,
+  "short_label": "Anagrams",
+  "source_sha256": {
+    "prompt_panel.py": "f80ba3c06517f5faa007af3086fe651aeba4aa5a5ea58cb54da0f38df3d6b984",
+    "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+    "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "status": "GOLDEN_CANDIDATE",
+  "target": {
+    "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+    "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+    "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "text": "Write a Python function that determines whether two strings are anagrams. Include tests and explain the time complexity."
+}

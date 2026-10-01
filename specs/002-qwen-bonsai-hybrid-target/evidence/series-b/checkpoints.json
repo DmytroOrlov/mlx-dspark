@@ -1,0 +1,186 @@
+{
+  "B-B": {
+    "config": {
+      "path": "config.json",
+      "selected_config": {
+        "architectures": [
+          "DFlash2DraftModel"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": null,
+        "dflash_config": {
+          "block_size": 8,
+          "conv_group_size": 16,
+          "conv_kernel_size": 2,
+          "mask_token_id": 248070,
+          "selector_rank": 256,
+          "selector_top_k": 16,
+          "target_layer_ids": [
+            5,
+            19,
+            33,
+            47,
+            61
+          ]
+        },
+        "dtype": "bfloat16",
+        "eos_token_id": 248044,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 5120,
+        "initializer_range": 0.02,
+        "intermediate_size": 17408,
+        "is_causal": false,
+        "layer_types": [
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention"
+        ],
+        "max_position_embeddings": 262144,
+        "max_window_layers": 5,
+        "model_type": "qwen3",
+        "num_attention_heads": 32,
+        "num_hidden_layers": 5,
+        "num_key_value_heads": 8,
+        "num_target_layers": 64,
+        "pad_token_id": 248044,
+        "rms_norm_eps": 1e-06,
+        "rope_parameters": {
+          "rope_theta": 10000000,
+          "rope_type": "default"
+        },
+        "sliding_window": 2048,
+        "tie_word_embeddings": false,
+        "transformers_version": "5.15.0",
+        "use_cache": true,
+        "use_sliding_window": true,
+        "vocab_size": 248320
+      },
+      "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980"
+    },
+    "indexes": [],
+    "provenance_leads": {
+      "revision": {
+        "comparison": "DID NOT MATCH",
+        "lead": "3fc0d6ef43e933a20f1e9ee53fac6f56402c0f83"
+      },
+      "weights_sha256": {
+        "comparison": "MATCHED",
+        "comparison_method": "lead compared with each selected file SHA-256 and deterministic inventory SHA-256",
+        "lead": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+      }
+    },
+    "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+    "resolved_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "revision_source": "Hub repository default revision resolved once to immutable commit SHA; all subsequent file access pinned to that SHA",
+    "selected_weight_files": [
+      {
+        "fingerprint_method": "Hub LFS SHA-256 for this selected file at the immutable commit; file size from the same revision-bound file metadata",
+        "hub_lfs_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "path": "model.safetensors",
+        "sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "size_bytes": 3848817904
+      }
+    ],
+    "snapshot_path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "verified_downloaded_weight_files": [
+      {
+        "fingerprint_method": "SHA-256 over complete downloaded file bytes",
+        "local_path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/blobs/eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "path": "model.safetensors",
+        "sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+        "size_bytes": 3848817904
+      }
+    ],
+    "weight_inventory_sha256": "cc4eb73d575ee28f69767850a0dba8122295ffa38e1f5fbebaeffc052756e249"
+  },
+  "B-Q": {
+    "config": {
+      "path": "config.json",
+      "selected_config": {
+        "architectures": [
+          "DFlash2DraftModel"
+        ],
+        "attention_bias": false,
+        "attention_dropout": 0.0,
+        "bos_token_id": null,
+        "dflash_config": {
+          "block_size": 8,
+          "conv_group_size": 16,
+          "conv_kernel_size": 2,
+          "mask_token_id": 248070,
+          "selector_rank": 256,
+          "selector_top_k": 16,
+          "target_layer_ids": [
+            5,
+            19,
+            33,
+            47,
+            61
+          ]
+        },
+        "dtype": "bfloat16",
+        "eos_token_id": 248044,
+        "head_dim": 128,
+        "hidden_act": "silu",
+        "hidden_size": 5120,
+        "initializer_range": 0.02,
+        "intermediate_size": 17408,
+        "is_causal": false,
+        "layer_types": [
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention",
+          "sliding_attention"
+        ],
+        "max_position_embeddings": 262144,
+        "max_window_layers": 5,
+        "model_type": "qwen3",
+        "num_attention_heads": 32,
+        "num_hidden_layers": 5,
+        "num_key_value_heads": 8,
+        "num_target_layers": 64,
+        "pad_token_id": 248044,
+        "rms_norm_eps": 1e-06,
+        "rope_parameters": {
+          "rope_theta": 10000000,
+          "rope_type": "default"
+        },
+        "sliding_window": 2048,
+        "tie_word_embeddings": false,
+        "transformers_version": "5.15.0",
+        "use_cache": true,
+        "use_sliding_window": true,
+        "vocab_size": 248320
+      },
+      "sha256": "873e3556509b0da06e29654ba00d4944888d4b5e8a33afde25f7eb27d321e980"
+    },
+    "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+    "resolved_revision": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "revision_source": "accepted immutable Series-A checkpoint revision",
+    "selected_weight_files": [
+      {
+        "fingerprint_method": "SHA-256 over complete file bytes",
+        "path": "model.safetensors",
+        "sha256": "67fc76d68dc5a9415511a4f394ef744d67510cd20e93b37cc2cc7d28e4bab65c",
+        "size_bytes": 3848817896,
+        "source": "immutable Series-A checkpoints.json accepted provenance"
+      }
+    ],
+    "snapshot_path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "weight_inventory_source": "immutable Series-A checkpoints.json, cross-checked against exact B-Q revision and config SHA-256"
+  },
+  "checkpoint_resolution_performed": true,
+  "gate_b": {
+    "decision": "OPEN",
+    "validated": true
+  },
+  "performance_run_performed": false,
+  "schema": "qwen-bonsai-series-b-checkpoints/v1",
+  "status": "PASS",
+  "weights_downloaded_and_verified": true
+}

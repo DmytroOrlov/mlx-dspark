@@ -1,0 +1,15 @@
+python=/Users/do/git/mlx-dspark/.venv/bin/python
+root=/Users/do/git/mlx-dspark
+qwen=/private/tmp/mlx-dspark-feat006-local-view/models/mlx-community/Qwen3.8-27B-4bit
+bonsai=/private/tmp/mlx-dspark-feat006-local-view/models/prism-ml/Ternary-Bonsai-2-27B-mlx-2bit
+dflash=/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5
+qwen_revision=10c35caafbb80f7dc6a7a432cdd11af10a6d4818
+bonsai_revision=fcba37d2117a7077eac6b613b2668d14d9779edd
+dflash_revision=015e795645c74b1a0eeef3b570031fb62e769bc5
+HF_HUB_OFFLINE=1
+MLX_DSPARK_MODEL_DIRS=/private/tmp/mlx-dspark-feat006-local-view/models
+repo_head=df8ff57d47b9b0a95c2d432cb0c030a2d4e64472
+packages=mlx=0.32.2 mlx-lm=0.31.3 safetensors=0.8.0 huggingface-hub=1.32.0
+
+diagnostic_rc=0
+unexpected_fetch=0

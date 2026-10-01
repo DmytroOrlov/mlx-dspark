@@ -1,0 +1,19 @@
+{
+  "cell_id": "13-B0-B-Q",
+  "child_returncode": 0,
+  "command": [
+    "/Users/do/git/mlx-dspark/.venv/bin/python",
+    "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/probes/product_sweep.py",
+    "--run-cell",
+    "--order",
+    "13",
+    "--target",
+    "B0",
+    "--drafter",
+    "B-Q",
+    "--output",
+    "specs/003-product-golden-hybrid-sweep/evidence/cells/13-B0-B-Q.json"
+  ],
+  "orchestrator_end_unix": 1790384842.239158,
+  "orchestrator_start_unix": 1790384801.4796832
+}

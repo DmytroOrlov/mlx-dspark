@@ -1,0 +1,1040 @@
+{
+  "all_selected_comparisons_resolved": true,
+  "comparisons": [
+    {
+      "adjudicated_result": "confirmed_win",
+      "candidate": "H1c",
+      "comparison_id": "H1c-vs-H1a",
+      "control": "H1a",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": 3.492676855852544,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        3.492676855852544,
+        3.2274507563160597,
+        3.593184792761697
+      ],
+      "paired_range": 0.3657340364456374,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": 3.492676855852544,
+            "draft_acceptance": 0.06624065589582834,
+            "generated_tokens_per_target_forward": 0.4187667048491792,
+            "mean_accept_len": 0.4441742654508607,
+            "peak_memory_bytes": -106553736,
+            "serial_target_tokens_per_sec": 0.13390159852736438,
+            "target_forwards": -11
+          },
+          "candidate_run": {
+            "order_index": 1,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p01-1-h1c",
+            "sha256": "0ae9d073d76602c4c8f3d1f1b810da5a5f05db34f129a2e1205aefce1e5bd383",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1a",
+          "control": "H1a",
+          "control_run": {
+            "order_index": 2,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p01-2-h1a/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p01-2-h1a",
+            "sha256": "3f8a0ec6ae19542069a1dda3ed6bb9bcd7a96d1e4a4f0e89f23968976b9f4421",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "pair_id": "H1c-vs-H1a-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1a-p01-1-h1c",
+            "confirm-h1c-vs-h1a-p01-2-h1a"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": 3.2274507563160597,
+            "draft_acceptance": 0.06624065589582834,
+            "generated_tokens_per_target_forward": 0.4187667048491792,
+            "mean_accept_len": 0.4441742654508607,
+            "peak_memory_bytes": -106553736,
+            "serial_target_tokens_per_sec": 0.06765373190507518,
+            "target_forwards": -11
+          },
+          "candidate_run": {
+            "order_index": 4,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-2-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p02-2-h1c",
+            "sha256": "e9beb340595ea5c64ef9a79c8f8d9135dad06fc7cfe5f6e8c78c61e5fcf162e7",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1a",
+          "control": "H1a",
+          "control_run": {
+            "order_index": 3,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p02-1-h1a/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p02-1-h1a",
+            "sha256": "0c476902ab17ed792b0eb329c0f41431c64330f2789ea84e3fcdd4e6b09c07de",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "pair_id": "H1c-vs-H1a-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1a-p02-1-h1a",
+            "confirm-h1c-vs-h1a-p02-2-h1c"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": 3.593184792761697,
+            "draft_acceptance": 0.06624065589582834,
+            "generated_tokens_per_target_forward": 0.4187667048491792,
+            "mean_accept_len": 0.4441742654508607,
+            "peak_memory_bytes": -106553736,
+            "serial_target_tokens_per_sec": 0.14056943739079486,
+            "target_forwards": -11
+          },
+          "candidate_run": {
+            "order_index": 5,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p03-1-h1c",
+            "sha256": "ab0d7eedaa1300252b4a967fb90af36ae2e14c39626703af0b5ef3f5e7926552",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1a",
+          "control": "H1a",
+          "control_run": {
+            "order_index": 6,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1a-p03-2-h1a/result.json",
+            "run_id": "confirm-h1c-vs-h1a-p03-2-h1a",
+            "sha256": "fb8c3ee8291e8f3f21571e7d3ae54005b1b121f2b6c06256ba96fc042d4bfab2",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "pair_id": "H1c-vs-H1a-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1a-p03-1-h1c",
+            "confirm-h1c-vs-h1a-p03-2-h1a"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "within_noise",
+      "candidate": "H1c",
+      "comparison_id": "H1c-vs-H1b",
+      "control": "H1b",
+      "effective_observed_noise_envelope": 1.5108516672110994,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -0.6648839390868062,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -0.3272374659196018,
+        -0.6648839390868062,
+        -1.8380891331307012
+      ],
+      "paired_range": 1.5108516672110994,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -0.3272374659196018,
+            "draft_acceptance": -0.015630795181457435,
+            "generated_tokens_per_target_forward": -0.09640271989471394,
+            "mean_accept_len": -0.10381108253448712,
+            "peak_memory_bytes": -104178224,
+            "serial_target_tokens_per_sec": 0.2602923473493206,
+            "target_forwards": 3
+          },
+          "candidate_run": {
+            "order_index": 7,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p01-1-h1c",
+            "sha256": "55057a671b9c7cfd32b4697c9e498494ffe5d71a5613e0ce893b409fed021518",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1b",
+          "control": "H1b",
+          "control_run": {
+            "order_index": 8,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p01-2-h1b/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p01-2-h1b",
+            "sha256": "98fba06271e7a9c12a73d63ea7b0a9c48c3e13baf8cc01e49001d8414e7150ac",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "pair_id": "H1c-vs-H1b-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1b-p01-1-h1c",
+            "confirm-h1c-vs-h1b-p01-2-h1b"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -0.6648839390868062,
+            "draft_acceptance": -0.015630795181457435,
+            "generated_tokens_per_target_forward": -0.09640271989471394,
+            "mean_accept_len": -0.10381108253448712,
+            "peak_memory_bytes": -104210992,
+            "serial_target_tokens_per_sec": 0.14776882954666704,
+            "target_forwards": 3
+          },
+          "candidate_run": {
+            "order_index": 10,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-2-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p02-2-h1c",
+            "sha256": "6b2f991fc1ad954bada24be10a510a5aa79a47a1c8a73856e73f60f21337fd1d",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1b",
+          "control": "H1b",
+          "control_run": {
+            "order_index": 9,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p02-1-h1b/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p02-1-h1b",
+            "sha256": "4992a5105f4592f83ff628b6c9ae77c166748d0e72e40740ed2acb3dbdfc4a56",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "pair_id": "H1c-vs-H1b-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1b-p02-1-h1b",
+            "confirm-h1c-vs-h1b-p02-2-h1c"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -1.8380891331307012,
+            "draft_acceptance": -0.015630795181457435,
+            "generated_tokens_per_target_forward": -0.09640271989471394,
+            "mean_accept_len": -0.10381108253448712,
+            "peak_memory_bytes": -104194608,
+            "serial_target_tokens_per_sec": -0.8271916126826397,
+            "target_forwards": 3
+          },
+          "candidate_run": {
+            "order_index": 11,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p03-1-h1c",
+            "sha256": "bbb6b85b4e608cf7b4a327a38cb769bf93dd1142a1f14f460c699af0d43ca597",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H1b",
+          "control": "H1b",
+          "control_run": {
+            "order_index": 12,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h1b-p03-2-h1b/result.json",
+            "run_id": "confirm-h1c-vs-h1b-p03-2-h1b",
+            "sha256": "45cbcb001bf20afc9e62b1e4e04078258bcc77178d60951782db625b386e36bb",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "pair_id": "H1c-vs-H1b-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h1b-p03-1-h1c",
+            "confirm-h1c-vs-h1b-p03-2-h1b"
+          ]
+        }
+      ],
+      "reason": "Paired differences did not consistently clear the larger of observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "H1c",
+      "comparison_id": "H1c-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.6372326959596961,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -2.320553639350898,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -2.4456218121809385,
+        -1.8083891162212424,
+        -2.320553639350898
+      ],
+      "paired_range": 0.6372326959596961,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.4456218121809385,
+            "draft_acceptance": -0.032555629785703255,
+            "generated_tokens_per_target_forward": -0.20518789491187217,
+            "mean_accept_len": -0.21773049645390063,
+            "peak_memory_bytes": -210043700,
+            "serial_target_tokens_per_sec": 0.19301998542713328,
+            "target_forwards": 4
+          },
+          "candidate_run": {
+            "order_index": 13,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h0-p01-1-h1c",
+            "sha256": "9803870e5a37e2f7da628b2d1cf0b3eb61456c611cbf989ce513a9bd203a4706",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 14,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-h1c-vs-h0-p01-2-h0",
+            "sha256": "6e4a78471bdd473793ccd0aa283b0a68a0ee725d16058b5bb4b43b9e9556731c",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1c-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h0-p01-1-h1c",
+            "confirm-h1c-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -1.8083891162212424,
+            "draft_acceptance": -0.032555629785703255,
+            "generated_tokens_per_target_forward": -0.20518789491187217,
+            "mean_accept_len": -0.21773049645390063,
+            "peak_memory_bytes": -210043700,
+            "serial_target_tokens_per_sec": 0.030267777974028576,
+            "target_forwards": 4
+          },
+          "candidate_run": {
+            "order_index": 16,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-2-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h0-p02-2-h1c",
+            "sha256": "0342d87ad15f985a54f3e9bd65db821f1a171a2f526c7615d9828360e2b0efe0",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 15,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-h1c-vs-h0-p02-1-h0",
+            "sha256": "b1ae677314bbf9d0d2023a5973215d1963b802cb85f0145b7a919db2c14d6ef7",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1c-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h0-p02-1-h0",
+            "confirm-h1c-vs-h0-p02-2-h1c"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1c",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.320553639350898,
+            "draft_acceptance": -0.032555629785703255,
+            "generated_tokens_per_target_forward": -0.20518789491187217,
+            "mean_accept_len": -0.21773049645390063,
+            "peak_memory_bytes": -210043604,
+            "serial_target_tokens_per_sec": 0.039538342448967256,
+            "target_forwards": 4
+          },
+          "candidate_run": {
+            "order_index": 17,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-1-h1c/result.json",
+            "run_id": "confirm-h1c-vs-h0-p03-1-h1c",
+            "sha256": "f7341c93ada14e6b0a6d003fb958e8795905022a36c204f6c6d08cacc134fb85",
+            "status": "PASS",
+            "target": "H1c"
+          },
+          "comparison_id": "H1c-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 18,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1c-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-h1c-vs-h0-p03-2-h0",
+            "sha256": "f295ced081dfcd7cd80dc609591f3c5c34f5a8cb8e8673e9c37e490dc9faeb78",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1c-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h1c-vs-h0-p03-1-h1c",
+            "confirm-h1c-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "H2",
+      "comparison_id": "H2-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -2.657650417543998,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -2.7184433456639354,
+        -2.657650417543998,
+        -2.55295278835176
+      ],
+      "paired_range": 0.1654905573121752,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H2",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.7184433456639354,
+            "draft_acceptance": -0.05049570067960929,
+            "generated_tokens_per_target_forward": -0.3140417457305502,
+            "mean_accept_len": -0.336363636363636,
+            "peak_memory_bytes": -422910060,
+            "serial_target_tokens_per_sec": 0.4455822895107193,
+            "target_forwards": 9
+          },
+          "candidate_run": {
+            "order_index": 19,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-1-h2/result.json",
+            "run_id": "confirm-h2-vs-h0-p01-1-h2",
+            "sha256": "58e4f28bfea79f81c202df40f595ee0c1098ce954f73da7aace9222c99f328ad",
+            "status": "PASS",
+            "target": "H2"
+          },
+          "comparison_id": "H2-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 20,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-h2-vs-h0-p01-2-h0",
+            "sha256": "031c0c37905c364f3db8b99f50fafcc7b58c07a161f188f3e2711817caad7e3c",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H2-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h2-vs-h0-p01-1-h2",
+            "confirm-h2-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H2",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.657650417543998,
+            "draft_acceptance": -0.05049570067960929,
+            "generated_tokens_per_target_forward": -0.3140417457305502,
+            "mean_accept_len": -0.336363636363636,
+            "peak_memory_bytes": -422910060,
+            "serial_target_tokens_per_sec": 0.3379005342353363,
+            "target_forwards": 9
+          },
+          "candidate_run": {
+            "order_index": 22,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-2-h2/result.json",
+            "run_id": "confirm-h2-vs-h0-p02-2-h2",
+            "sha256": "bf0a08656ca45a06f0d10156d08261f1d8cee773fa22902bdac4fa2f6f30897d",
+            "status": "PASS",
+            "target": "H2"
+          },
+          "comparison_id": "H2-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 21,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-h2-vs-h0-p02-1-h0",
+            "sha256": "60cb7b2af372178b6a5f51f77dbcb22140a1ba21559ff31695e0f81d74db2466",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H2-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h2-vs-h0-p02-1-h0",
+            "confirm-h2-vs-h0-p02-2-h2"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H2",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.55295278835176,
+            "draft_acceptance": -0.05049570067960929,
+            "generated_tokens_per_target_forward": -0.3140417457305502,
+            "mean_accept_len": -0.336363636363636,
+            "peak_memory_bytes": -422910060,
+            "serial_target_tokens_per_sec": 0.37034369355544605,
+            "target_forwards": 9
+          },
+          "candidate_run": {
+            "order_index": 23,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-1-h2/result.json",
+            "run_id": "confirm-h2-vs-h0-p03-1-h2",
+            "sha256": "404e51f45b600337dae7db747c83a09eadcf20b2fae7886aafe977888a57c3f3",
+            "status": "PASS",
+            "target": "H2"
+          },
+          "comparison_id": "H2-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 24,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h2-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-h2-vs-h0-p03-2-h0",
+            "sha256": "070b572f966e70d36641739bc27ba96064ad5d174efc3417ce463dde5089eb4f",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H2-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h2-vs-h0-p03-1-h2",
+            "confirm-h2-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "H1a",
+      "comparison_id": "H1a-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -5.547387168881027,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -5.567972732532304,
+        -5.5233221760654345,
+        -5.547387168881027
+      ],
+      "paired_range": 0.04465055646686977,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1a",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -5.567972732532304,
+            "draft_acceptance": -0.09879628568153159,
+            "generated_tokens_per_target_forward": -0.6239545997610514,
+            "mean_accept_len": -0.6619047619047613,
+            "peak_memory_bytes": -103489676,
+            "serial_target_tokens_per_sec": 0.07073255700533743,
+            "target_forwards": 15
+          },
+          "candidate_run": {
+            "order_index": 25,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-1-h1a/result.json",
+            "run_id": "confirm-h1a-vs-h0-p01-1-h1a",
+            "sha256": "12af3ca0f8cbe08831b1f374c03795ab1297ccab4b79ed0efa1adcd139f8fcc2",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "comparison_id": "H1a-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 26,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-h1a-vs-h0-p01-2-h0",
+            "sha256": "b802f9f8ec4d4d9441c39a1e76a2c149bb0f02b589cbacadae05a91d1cdd81d1",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1a-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h1a-vs-h0-p01-1-h1a",
+            "confirm-h1a-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H1a",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -5.5233221760654345,
+            "draft_acceptance": -0.09879628568153159,
+            "generated_tokens_per_target_forward": -0.6239545997610514,
+            "mean_accept_len": -0.6619047619047613,
+            "peak_memory_bytes": -103490828,
+            "serial_target_tokens_per_sec": 0.09642984591525305,
+            "target_forwards": 15
+          },
+          "candidate_run": {
+            "order_index": 28,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-2-h1a/result.json",
+            "run_id": "confirm-h1a-vs-h0-p02-2-h1a",
+            "sha256": "261f80c293a4e0c0f1132ba8af06bdbc3782e2f2d63ea721a68883f7ab63a081",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "comparison_id": "H1a-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 27,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-h1a-vs-h0-p02-1-h0",
+            "sha256": "aed9c6c3fb2ded91e9fbdcee8a4dac2929648aaf27bec89f671ca81c5100e944",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1a-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h1a-vs-h0-p02-1-h0",
+            "confirm-h1a-vs-h0-p02-2-h1a"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1a",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -5.547387168881027,
+            "draft_acceptance": -0.09879628568153159,
+            "generated_tokens_per_target_forward": -0.6239545997610514,
+            "mean_accept_len": -0.6619047619047613,
+            "peak_memory_bytes": -103522732,
+            "serial_target_tokens_per_sec": 0.0763749712674393,
+            "target_forwards": 15
+          },
+          "candidate_run": {
+            "order_index": 29,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-1-h1a/result.json",
+            "run_id": "confirm-h1a-vs-h0-p03-1-h1a",
+            "sha256": "7e077752a41bf99699f5dcf109eb1c3328a2940249e235d922c17a55e6ed70ba",
+            "status": "PASS",
+            "target": "H1a"
+          },
+          "comparison_id": "H1a-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 30,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1a-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-h1a-vs-h0-p03-2-h0",
+            "sha256": "0507e8d6b69db4c4623bb31b70f31b989cfb6afe8544ae2fc646512dd89d35c2",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1a-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h1a-vs-h0-p03-1-h1a",
+            "confirm-h1a-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "H3",
+      "comparison_id": "H3-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -2.593444761698045,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -2.5976553802295186,
+        -2.593444761698045,
+        -2.540301963639479
+      ],
+      "paired_range": 0.057353416590039785,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H3",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.5976553802295186,
+            "draft_acceptance": -0.054866341751587666,
+            "generated_tokens_per_target_forward": -0.34461833280102194,
+            "mean_accept_len": -0.36666666666666625,
+            "peak_memory_bytes": -846602396,
+            "serial_target_tokens_per_sec": 0.7584248457136287,
+            "target_forwards": 8
+          },
+          "candidate_run": {
+            "order_index": 31,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-1-h3/result.json",
+            "run_id": "confirm-h3-vs-h0-p01-1-h3",
+            "sha256": "55a356f3a2aa6541a3b4471c53ec3995f6becbf19bb7fd5220e49cd283c15751",
+            "status": "PASS",
+            "target": "H3"
+          },
+          "comparison_id": "H3-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 32,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-h3-vs-h0-p01-2-h0",
+            "sha256": "7ccdabe8f1344bede90574d4623e211e358a10e9619245b025cd2b8f1123dc27",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H3-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h3-vs-h0-p01-1-h3",
+            "confirm-h3-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H3",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.593444761698045,
+            "draft_acceptance": -0.054866341751587666,
+            "generated_tokens_per_target_forward": -0.34461833280102194,
+            "mean_accept_len": -0.36666666666666625,
+            "peak_memory_bytes": -846600764,
+            "serial_target_tokens_per_sec": 0.7340303542357898,
+            "target_forwards": 8
+          },
+          "candidate_run": {
+            "order_index": 34,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-2-h3/result.json",
+            "run_id": "confirm-h3-vs-h0-p02-2-h3",
+            "sha256": "6ada2739426c6f9492018eea2b17d6a6f37f43e899d3106902241c8dbc04c37a",
+            "status": "PASS",
+            "target": "H3"
+          },
+          "comparison_id": "H3-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 33,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-h3-vs-h0-p02-1-h0",
+            "sha256": "ba9f2f4b96faec75e4084a3c0c382cf559e9c6610daab456a5977cc811ec9ead",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H3-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h3-vs-h0-p02-1-h0",
+            "confirm-h3-vs-h0-p02-2-h3"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H3",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.540301963639479,
+            "draft_acceptance": -0.054866341751587666,
+            "generated_tokens_per_target_forward": -0.34461833280102194,
+            "mean_accept_len": -0.36666666666666625,
+            "peak_memory_bytes": -846602972,
+            "serial_target_tokens_per_sec": 0.7872027257973802,
+            "target_forwards": 8
+          },
+          "candidate_run": {
+            "order_index": 35,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-1-h3/result.json",
+            "run_id": "confirm-h3-vs-h0-p03-1-h3",
+            "sha256": "f26dda6abd402ad6f98f82f67ae9c7c8c0eb3f4e2e0ac98f25182e8f4e6539e8",
+            "status": "PASS",
+            "target": "H3"
+          },
+          "comparison_id": "H3-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 36,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h3-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-h3-vs-h0-p03-2-h0",
+            "sha256": "ec311eaedb888298add2182f87f0ebc1bd374d7c7043f6f478e9193fbb105108",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H3-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h3-vs-h0-p03-1-h3",
+            "confirm-h3-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "H1b",
+      "comparison_id": "H1b-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -0.924227768489736,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -0.9581007383641094,
+        -0.924227768489736,
+        -0.883587255149628
+      ],
+      "paired_range": 0.07451348321448137,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1b",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -0.9581007383641094,
+            "draft_acceptance": -0.01692483460424582,
+            "generated_tokens_per_target_forward": -0.10878517501715823,
+            "mean_accept_len": -0.11391941391941351,
+            "peak_memory_bytes": -105848228,
+            "serial_target_tokens_per_sec": 0.12677055720826225,
+            "target_forwards": 1
+          },
+          "candidate_run": {
+            "order_index": 37,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-1-h1b/result.json",
+            "run_id": "confirm-h1b-vs-h0-p01-1-h1b",
+            "sha256": "708f1a4212f65cad8623d6bfd9cb4562d36dda2767653a364b2e699064ad446e",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "comparison_id": "H1b-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 38,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-h1b-vs-h0-p01-2-h0",
+            "sha256": "19001990c7338beccfebaa34ac2999c1674165af8aafbb04ac0624c350eb9203",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1b-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-h1b-vs-h0-p01-1-h1b",
+            "confirm-h1b-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "H1b",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -0.924227768489736,
+            "draft_acceptance": -0.01692483460424582,
+            "generated_tokens_per_target_forward": -0.10878517501715823,
+            "mean_accept_len": -0.11391941391941351,
+            "peak_memory_bytes": -105850084,
+            "serial_target_tokens_per_sec": 0.14500267134595113,
+            "target_forwards": 1
+          },
+          "candidate_run": {
+            "order_index": 40,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-2-h1b/result.json",
+            "run_id": "confirm-h1b-vs-h0-p02-2-h1b",
+            "sha256": "df83aa256ceb13917f601e68979c8f7ccb683f5fde9ac71c9ed027a20404f71e",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "comparison_id": "H1b-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 39,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-h1b-vs-h0-p02-1-h0",
+            "sha256": "d79158b0b3cff428e0182201fda27b41f3607339831aa0a74c8711d94caf0c8a",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1b-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-h1b-vs-h0-p02-1-h0",
+            "confirm-h1b-vs-h0-p02-2-h1b"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "H1b",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -0.883587255149628,
+            "draft_acceptance": -0.01692483460424582,
+            "generated_tokens_per_target_forward": -0.10878517501715823,
+            "mean_accept_len": -0.11391941391941351,
+            "peak_memory_bytes": -105866340,
+            "serial_target_tokens_per_sec": 0.048062958371229314,
+            "target_forwards": 1
+          },
+          "candidate_run": {
+            "order_index": 41,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-1-h1b/result.json",
+            "run_id": "confirm-h1b-vs-h0-p03-1-h1b",
+            "sha256": "f96728bbb0f880ff7f9210f7475ee478d5eb3227873d5fc79f60a1d045dfec59",
+            "status": "PASS",
+            "target": "H1b"
+          },
+          "comparison_id": "H1b-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 42,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-h1b-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-h1b-vs-h0-p03-2-h0",
+            "sha256": "aac3c68c85e58436e7673b0cde20f3c412a1fe6f3813a888186e404b6c1e908d",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "H1b-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-h1b-vs-h0-p03-1-h1b",
+            "confirm-h1b-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    },
+    {
+      "adjudicated_result": "confirmed_regression",
+      "candidate": "B0",
+      "comparison_id": "B0-vs-H0",
+      "control": "H0",
+      "effective_observed_noise_envelope": 0.5616862263960911,
+      "matched_pair_count": 3,
+      "median_paired_decode_delta": -2.458024698440269,
+      "observed_h0_bracket_noise_abs_range": 0.5616862263960911,
+      "paired_decode_deltas": [
+        -2.5406591717054425,
+        -2.4129532545661476,
+        -2.458024698440269
+      ],
+      "paired_range": 0.1277059171392949,
+      "pairs": [
+        {
+          "alternating_order": "A-B",
+          "candidate": "B0",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.5406591717054425,
+            "draft_acceptance": -0.1305467341859068,
+            "generated_tokens_per_target_forward": -0.8258064516129031,
+            "mean_accept_len": -0.8755952380952379,
+            "peak_memory_bytes": -7517916020,
+            "serial_target_tokens_per_sec": 9.919420961982384,
+            "target_forwards": 22
+          },
+          "candidate_run": {
+            "order_index": 43,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-1-b0/result.json",
+            "run_id": "confirm-b0-vs-h0-p01-1-b0",
+            "sha256": "ba12bc427e9938a9b3650db1a2ca785b4f80ee708e2c62b4df96960a82e122c0",
+            "status": "PASS",
+            "target": "B0"
+          },
+          "comparison_id": "B0-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 44,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p01-2-h0/result.json",
+            "run_id": "confirm-b0-vs-h0-p01-2-h0",
+            "sha256": "2fb96d1ab37926685e2c6ddc88a2925f29c3fb453915d7084e94fc80d20cc50b",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "B0-vs-H0-pair-01",
+          "run_ids_in_actual_order": [
+            "confirm-b0-vs-h0-p01-1-b0",
+            "confirm-b0-vs-h0-p01-2-h0"
+          ]
+        },
+        {
+          "alternating_order": "B-A",
+          "candidate": "B0",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.4129532545661476,
+            "draft_acceptance": -0.1305467341859068,
+            "generated_tokens_per_target_forward": -0.8258064516129031,
+            "mean_accept_len": -0.8755952380952379,
+            "peak_memory_bytes": -7517916020,
+            "serial_target_tokens_per_sec": 9.91182387042415,
+            "target_forwards": 22
+          },
+          "candidate_run": {
+            "order_index": 46,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-2-b0/result.json",
+            "run_id": "confirm-b0-vs-h0-p02-2-b0",
+            "sha256": "cec048b665d99cace6982a469381898a6c98ab5a936b41a1aeb2449b1484ebf1",
+            "status": "PASS",
+            "target": "B0"
+          },
+          "comparison_id": "B0-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 45,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p02-1-h0/result.json",
+            "run_id": "confirm-b0-vs-h0-p02-1-h0",
+            "sha256": "00ec887a8da1bdd880aeaaecafe45799349566541fb16cf5ea931defa80d0d93",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "B0-vs-H0-pair-02",
+          "run_ids_in_actual_order": [
+            "confirm-b0-vs-h0-p02-1-h0",
+            "confirm-b0-vs-h0-p02-2-b0"
+          ]
+        },
+        {
+          "alternating_order": "A-B",
+          "candidate": "B0",
+          "candidate_minus_control": {
+            "decode_tokens_per_sec": -2.458024698440269,
+            "draft_acceptance": -0.1305467341859068,
+            "generated_tokens_per_target_forward": -0.8258064516129031,
+            "mean_accept_len": -0.8755952380952379,
+            "peak_memory_bytes": -7517916020,
+            "serial_target_tokens_per_sec": 9.916990795417657,
+            "target_forwards": 22
+          },
+          "candidate_run": {
+            "order_index": 47,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-1-b0/result.json",
+            "run_id": "confirm-b0-vs-h0-p03-1-b0",
+            "sha256": "7285bca4b3b21664f8f52cc6e36307c1e7dec9746fecc2d2dfa68d2dc406a815",
+            "status": "PASS",
+            "target": "B0"
+          },
+          "comparison_id": "B0-vs-H0",
+          "control": "H0",
+          "control_run": {
+            "order_index": 48,
+            "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/runs/confirm-b0-vs-h0-p03-2-h0/result.json",
+            "run_id": "confirm-b0-vs-h0-p03-2-h0",
+            "sha256": "a34de6a860832a57db89ece6e09445c8efd85cf490e58258702fa413ff2a00a0",
+            "status": "PASS",
+            "target": "H0"
+          },
+          "pair_id": "B0-vs-H0-pair-03",
+          "run_ids_in_actual_order": [
+            "confirm-b0-vs-h0-p03-1-b0",
+            "confirm-b0-vs-h0-p03-2-h0"
+          ]
+        }
+      ],
+      "reason": "Three paired runs agreed in direction and the median separation exceeded both observed H0 bracket drift and paired-difference spread."
+    }
+  ],
+  "confirmation_schedule": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/confirmation-schedule.json",
+    "sha256": "cecb87247fea30d6250e070f8e2545a4d12814f3584e56747b610676f36224f7"
+  },
+  "noise_basis": {
+    "absolute_bracket_range": 0.5616862263960911,
+    "h0_decode_tokens_per_sec": [
+      35.697870194581114,
+      35.13618396818502
+    ],
+    "rule": "confirmed only when all three paired decode deltas agree in direction and their median magnitude exceeds both the observed H0 bracket range and the spread of paired differences; no fixed percentage cutoff",
+    "source": "two fresh H0 discovery brackets"
+  },
+  "schema": "qwen-bonsai-series-a-repeat-decisions/v1",
+  "selection": {
+    "path": "/Users/do/git/mlx-dspark/specs/002-qwen-bonsai-hybrid-target/evidence/series-a/repeat-selection.json",
+    "sha256": "a10d172da400507ee9566770a14a1f73d9b9ef6b437c603ac7189987d9d3d6b8"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,25 @@
+{
+  "reason": "The first T016 closure updater matched task IDs anywhere in long task descriptions instead of matching only the leading task ID.",
+  "correctness_adjudication_changed": false,
+  "t016_outcome_changed": false,
+  "intentionally_checked": [
+    "T010",
+    "T012",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "restored_to_pre_closure_unchecked_state": [
+    "T008",
+    "T013",
+    "T017",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T024",
+    "T025",
+    "T028"
+  ],
+  "status": "PASS"
+}

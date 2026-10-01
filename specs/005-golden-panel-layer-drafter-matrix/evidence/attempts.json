@@ -1,0 +1,42 @@
+{
+  "attempts": [
+    {
+      "attempt_id": "feat005-20260926-a1",
+      "cell_artifact_count": 0,
+      "observed_statused_cell_count": 1,
+      "path": "evidence/attempts/feat005-20260926-a1",
+      "preflight_sha256": "307e3882482956ebdeb684b10a3ff2afb220778c9251ba6e7dad98cb8a06cd80",
+      "reason": "cell execution failed at P05/01-H0-B-Q; preserve and investigate",
+      "repeat_artifact_count": 0,
+      "runner_sha256": "f42b9f3a161c3c9bc2c7e0f4963772733247dd4c367f28209d1f287ae07d5f8d",
+      "status": "INCOMPLETE",
+      "terminal": "INCOMPLETE"
+    },
+    {
+      "attempt_id": "feat005-20260926-b1",
+      "cell_artifact_count": 11,
+      "observed_statused_cell_count": 11,
+      "path": "evidence/attempts/feat005-20260926-b1",
+      "preflight_sha256": "4764f5bd76372b2cf3fb8a29dcfb364c019b874907201b33420e0696bd1ac98d",
+      "reason": "physical-runner defects discovered after cell 1: first-pass observations were incorrectly marked repeat=true; output token integrity fallback and memory-boundary provenance also require runner repair",
+      "repeat_artifact_count": 0,
+      "runner_sha256": "0853d741c57b38b996b2ccbbbda8e50b3a80ac4001d4141c9558b833424d86dc",
+      "status": "SUPERSEDED",
+      "terminal": "SUPERSEDED"
+    },
+    {
+      "attempt_id": "feat005-20260926-c1",
+      "cell_artifact_count": 70,
+      "observed_statused_cell_count": 70,
+      "path": "evidence/attempts/feat005-20260926-c1",
+      "preflight_sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814",
+      "reason": "one or more statused cells failed acceptance requirements",
+      "repeat_artifact_count": 0,
+      "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+      "status": "INCOMPLETE",
+      "terminal": "INCOMPLETE"
+    }
+  ],
+  "effective_attempt_id": "feat005-20260926-c1",
+  "schema": "panel-matrix-attempt-ledger/v1"
+}

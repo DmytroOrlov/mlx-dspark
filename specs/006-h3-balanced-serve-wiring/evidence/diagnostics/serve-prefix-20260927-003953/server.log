@@ -1,0 +1,21 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+loading dflash engine — first run downloads weights…
+donor composition: /private/tmp/mlx-dspark-feat006-local-view/hub/models--prism-ml--Ternary-Bonsai-2-27B-mlx-2bit/snapshots/fcba37d2117a7077eac6b613b2668d14d9779edd @ fcba37d2117a7077eac6b613b2668d14d9779edd; blocks 56-63
+Qwen retains embedding, unselected decoder blocks, final norm, and LM head
+================================================================
+  mlx-dspark server  ·  mode=dflash  ·  model=10c35caafbb80f7dc6a7a432cdd11af10a6d4818
+  target : /Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818
+  drafter: /Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5
+  prefix cache: on
+  memory guard: on (sheds caches under macOS memory pressure)
+  small-M verify kernel: on (probe-verified shapes)
+  sdpa split (long-ctx verify): on (cliff measured)
+  prefill CPU co-prefill: on from M=1024 (CPU row fraction 1024:0.25, 2048:0.25)
+  sampling defaults (model generation_config; requests override): {'temperature': 1.0, 'top_p': 0.95, 'top_k': 20}
+  listening on http://127.0.0.1:13888   (OpenAI base_url: http://127.0.0.1:13888/v1)
+  claude code : ANTHROPIC_BASE_URL=http://127.0.0.1:13888   (or run `mlx-dspark claude`)
+  auth   : Bearer <api-key> required
+================================================================
+  curl http://127.0.0.1:13888/v1/chat/completions -H 'Content-Type: application/json' \
+    -d '{"model":"10c35caafbb80f7dc6a7a432cdd11af10a6d4818","messages":[{"role":"user","content":"Hi"}],"stream":true}'
+================================================================

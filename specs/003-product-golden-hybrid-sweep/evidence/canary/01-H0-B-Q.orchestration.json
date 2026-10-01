@@ -1,0 +1,19 @@
+{
+  "cell_id": "01-H0-B-Q",
+  "child_returncode": 0,
+  "command": [
+    "/Users/do/git/mlx-dspark/.venv/bin/python",
+    "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/probes/product_sweep.py",
+    "--run-cell",
+    "--order",
+    "1",
+    "--target",
+    "H0",
+    "--drafter",
+    "B-Q",
+    "--output",
+    "/Users/do/git/mlx-dspark/specs/003-product-golden-hybrid-sweep/evidence/canary/01-H0-B-Q.json"
+  ],
+  "orchestrator_end_unix": 1790383526.552992,
+  "orchestrator_start_unix": 1790383471.194449
+}

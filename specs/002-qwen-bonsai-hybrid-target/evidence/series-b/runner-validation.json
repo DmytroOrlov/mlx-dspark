@@ -1,0 +1,124 @@
+{
+  "authorization_fingerprint_set": {
+    "artifacts": {
+      "specs/002-qwen-bonsai-hybrid-target/evidence/probes/series_b.py": "6f7ad0dc9a065739c0eec52b3034b8440431bffae193746fb94bc7d71788d464",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/checkpoints.json": "4672bf80b1bb769b2f5a0b88673b763f601326baef9477b29eeace1f152a934c",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/control-manifest.json": "9283ce2ec7dc78157b2f57d0d957562426ffd27baa1cd1814cea7f725a9f0d3d",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/drafter-smoke.json": "77f045a06cf5d8932671c21bcb9309f6adf321293f66525becd084feee9b4d58",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/matrix-decision.json": "3bc3525700a752036f8b5eef6f84fd68a8de6665ac9f210a4767672d5342fd96",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/matrix.json": "dfa18694cbfe6da98c17a89114016556adae1b7fab96120de84407e5df44bc8f",
+      "specs/002-qwen-bonsai-hybrid-target/evidence/series-b/runner.json": "c3092b8ecfd9e0b8023ee03cc0ca4d52064e0a26a53a2930fe4c90734595e084",
+      "tests/test_series_b.py": "a47bcc0efcf944e3f5d70b4579f6396d301262bf13f5476bc585c63c9a647968"
+    },
+    "experiment_runtime_source_sha256": {
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/mlx_qmm_mma.py": "b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "series_a_benchmark_method_sha256": "688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4"
+  },
+  "authorization_for_t038": true,
+  "checks": {
+    "authorization_fingerprint_set": {
+      "detail": "exact hashes persisted for the eight pre-T038 artifacts, accepted Series-A benchmark method, and all seven experiment runtime files",
+      "passed": true
+    },
+    "exact_frozen_ten_cell_matrix": {
+      "detail": "cells=10; targets=['B0', 'H0', 'H1c', 'H2', 'H3']; no H1a/H1b",
+      "passed": true
+    },
+    "gate_first_invariant": {
+      "detail": "each resolver/download/smoke/runner path guards before external imports or runtime loading; model-free guard-bypass tests PASS",
+      "passed": true
+    },
+    "live_gate_b_open_pass": {
+      "detail": "existing Gate-B Series-B entry guard returned PASS/OPEN",
+      "passed": true
+    },
+    "matrix_control_manifest_consistent": {
+      "detail": "paired target identity, immutable common controls, exact controls, baseline labels, and adjacent alternating schedule checked",
+      "passed": true
+    },
+    "matrix_decision_recomputed_and_bound": {
+      "detail": "PASS; current Series-A adjudication/repeat hashes and exact ten matrix cells agree",
+      "passed": true
+    },
+    "model_free_tests_pass": {
+      "detail": "{\"command\": [\"/Users/do/git/mlx-dspark/.venv/bin/python\", \"-m\", \"pytest\", \"tests/test_series_b.py\", \"-q\"], \"exit_code\": 0, \"pass_count\": 35, \"stderr\": \"\", \"stdout\": \"...................................                                      [100%]\\n35 passed in 0.49s\\n\", \"summary\": \"35 passed in 0.49s\", \"test_file_sha256\": \"a47bcc0efcf944e3f5d70b4579f6396d301262bf13f5476bc585c63c9a647968\"}",
+      "passed": true
+    },
+    "no_series_b_performance_discovery": {
+      "detail": "no Series-B run records exist; no performance discovery matrix has run",
+      "passed": true
+    },
+    "runner_fingerprint_and_benchmark_identity": {
+      "detail": "Series-B source sha256=6f7ad0dc9a065739c0eec52b3034b8440431bffae193746fb94bc7d71788d464; method=688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4; accepted=688901863e6660ecef749c310d9f69ff8cfc7cf37db0137716ae1058bc1ff6d4",
+      "passed": true
+    },
+    "series_a_evidence_untouched": {
+      "detail": "live Gate-B immutable referenced-artifact hashes and accepted runtime source hashes remain PASS",
+      "passed": true
+    },
+    "series_b_prerequisites_present": {
+      "detail": "all T031-T035 evidence artifacts parse",
+      "passed": true
+    },
+    "seven_experiment_runtime_hashes": {
+      "detail": "{\"src/mlx_dspark/generate.py\": {\"current\": \"d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc\", \"expected\": \"d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc\"}, \"src/mlx_dspark/hybrid_target.py\": {\"current\": \"3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841\", \"expected\": \"3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841\"}, \"src/mlx_dspark/load.py\": {\"current\": \"eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91\", \"expected\": \"eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91\"}, \"src/mlx_dspark/mlx_qmm_mma.py\": {\"current\": \"b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8\", \"expected\": \"b14cb645a801e93cec87648976029fb64e35bf6241b98194e61cda3c465742a8\"}, \"src/mlx_dspark/prism_pack.py\": {\"current\": \"44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4\", \"expected\": \"44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4\"}, \"src/mlx_dspark/server.py\": {\"current\": \"c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d\", \"expected\": \"c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d\"}, \"src/mlx_dspark/target.py\": {\"current\": \"39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b\", \"expected\": \"39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b\"}}",
+      "passed": true
+    },
+    "t032_exact_checkpoint_provenance": {
+      "detail": "B-B exact immutable revision/config/selected weights and byte hashes verified; B-Q matches accepted identity; revision and weight leads separately recorded",
+      "passed": true
+    },
+    "t033_compatibility_smoke": {
+      "detail": "status=PASS; loaded taps=[5, 19, 33, 47, 61]; no compatibility adapter",
+      "passed": true
+    }
+  },
+  "experiment_runtime_hashes_match": true,
+  "loaded_b_b_tap_ids": [
+    5,
+    19,
+    33,
+    47,
+    61
+  ],
+  "matrix_cell_count": 10,
+  "matrix_drafters": [
+    "B-B",
+    "B-Q"
+  ],
+  "matrix_targets": [
+    "B0",
+    "H0",
+    "H1c",
+    "H2",
+    "H3"
+  ],
+  "model_free_test_evidence": {
+    "command": [
+      "/Users/do/git/mlx-dspark/.venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/test_series_b.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "pass_count": 35,
+    "stderr": "",
+    "stdout": "...................................                                      [100%]\n35 passed in 0.49s\n",
+    "summary": "35 passed in 0.49s",
+    "test_file_sha256": "a47bcc0efcf944e3f5d70b4579f6396d301262bf13f5476bc585c63c9a647968"
+  },
+  "no_series_b_matrix_performance_measurement": true,
+  "preliminary_smoke_execution_note": "An earlier smoke attempt used Engine.load(max_draft_tokens=None) and reached a later assertion. That production path can invoke static_cap cost calibration; no calibration result, timing, or throughput metric was retained. The final PASS record is from the direct-loader smoke above.",
+  "schema": "qwen-bonsai-series-b-runner-validation/v1",
+  "series_a_checkpoint_artifact_modified": false,
+  "series_a_raw_artifacts_modified": false,
+  "status": "PASS"
+}

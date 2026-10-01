@@ -1,0 +1,1605 @@
+{
+  "drafter": {
+    "path": "/Users/do/.cache/huggingface/hub/models--incoai--Qwen3.8-27B-DFlash2/snapshots/015e795645c74b1a0eeef3b570031fb62e769bc5",
+    "repo_id": "incoai/Qwen3.8-27B-DFlash2",
+    "revision": "015e795645c74b1a0eeef3b570031fb62e769bc5"
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "new child process and Engine; no prior measured request state",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 70280,
+    "prefix_hits_before_request": 0,
+    "rounds_before_request": 0
+  },
+  "input_ids": [
+    248045,
+    846,
+    198,
+    7734,
+    264,
+    5492,
+    21408,
+    12654,
+    7873,
+    314,
+    264,
+    5436,
+    440,
+    4336,
+    11,
+    2341,
+    11,
+    31516,
+    11,
+    321,
+    369,
+    14683,
+    5245,
+    13,
+    28763,
+    913,
+    29642,
+    321,
+    6813,
+    13,
+    248046,
+    198,
+    248045,
+    74455,
+    198,
+    248068,
+    271,
+    248069,
+    271
+  ],
+  "input_sha256": "6727da7ae4dfca2c7280acb52e7892ec2fa552e63b5137bfc589ecc02111e73f",
+  "input_token_count": 39,
+  "machine": {
+    "hostname": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]"
+  },
+  "measurements": {
+    "acceptance": 0.738831615120275,
+    "active_baseline_bytes": 16496123666,
+    "cap_distribution": {
+      "2": 4,
+      "7": 82
+    },
+    "decode_duration_seconds": 10.803674221038818,
+    "generated_per_forward": 5.942528735632184,
+    "generated_tokens": 517,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "mean_accepted": 5.0,
+    "natural_completion_before_410": false,
+    "output_text": "```python\n\"\"\"\nA production-quality generic stack implementation in Python.\n\nThis module provides a type-safe, generic Stack class with standard\nstack operations: push, pop, peek, and is_empty.\n\"\"\"\n\nfrom __future__ import annotations\n\nfrom typing import Generic, TypeVar, Optional\n\nT = TypeVar(\"T\")\n\n\nclass Stack(Generic[T]):\n    \"\"\"\n    A generic LIFO (Last-In, First-Out) stack.\n\n    This implementation uses a Python list as the underlying data structure,\n    which provides O(1) amortized time complexity for push and pop operations.\n\n    Type Parameters:\n        T: The type of elements stored in the stack.\n\n    Example:\n        >>> s = Stack[int]()\n        >>> s.push(1)\n        >>> s.push(2)\n        >>> s.peek()\n        2\n        >>> s.pop()\n        2\n        >>> s.pop()\n        1\n        >>> s.is_empty()\n        True\n    \"\"\"\n\n    def __init__(self) -> None:\n        \"\"\"Initialize an empty stack.\"\"\"\n        self._items: list[T] = []\n\n    def push(self, item: T) -> None:\n        \"\"\"\n        Push an item onto the top of the stack.\n\n        Args:\n            item: The item to push onto the stack.\n\n        Time Complexity: O(1) amortized\n        \"\"\"\n        self._items.append(item)\n\n    def pop(self) -> T:\n        \"\"\"\n        Remove and return the top item from the stack.\n\n        Returns:\n            The item that was on top of the stack.\n\n        Raises:\n            IndexError: If the stack is empty.\n\n        Time Complexity: O(1)\n        \"\"\"\n        if self.is_empty():\n            raise IndexError(\"pop from empty stack\")\n        return self._items.pop()\n\n    def peek(self) -> T:\n        \"\"\"\n        Return the top item from the stack without removing it.\n\n        Returns:\n            The item on top of the stack.\n\n        Raises:\n            IndexError: If the stack is empty.\n\n        Time Complexity: O(1)\n        \"\"\"\n        if self.is_empty():\n            raise IndexError(\"peek from empty stack\")\n        return self._items[-1]\n\n    def is_empty(self) -> bool:\n        \"\"\"\n        Check if the stack is empty.\n\n        Returns",
+    "output_text_sha256": "b8e6390d97716ce29bb7db11eaa0749846f106bb9dff4fc7170fa106519a7796",
+    "output_tokens_sha256": null,
+    "peak_bytes": 17092909342,
+    "peak_gib": 15.919012336060405,
+    "request_duration_seconds": 11.447472375351936,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 736.68,
+        "req": "5325426f",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1413.9
+      },
+      {
+        "accepted": 1,
+        "cap": 2,
+        "committed": 2,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 89.33,
+        "req": "5325426f",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1503.2
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 91.5,
+        "req": "5325426f",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1594.7
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 89.64,
+        "req": "5325426f",
+        "seq": 4,
+        "source": "drafter",
+        "t": 1684.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 122.95,
+        "req": "5325426f",
+        "seq": 5,
+        "source": "drafter",
+        "t": 1807.3
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 123.77,
+        "req": "5325426f",
+        "seq": 6,
+        "source": "drafter",
+        "t": 1931.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 126.12,
+        "req": "5325426f",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2057.2
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 126.53,
+        "req": "5325426f",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2183.8
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 129.1,
+        "req": "5325426f",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2312.9
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 127.99,
+        "req": "5325426f",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2440.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 130.99,
+        "req": "5325426f",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2571.8
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 128.45,
+        "req": "5325426f",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2700.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 130.35,
+        "req": "5325426f",
+        "seq": 13,
+        "source": "drafter",
+        "t": 2830.6
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 129.75,
+        "req": "5325426f",
+        "seq": 14,
+        "source": "drafter",
+        "t": 2960.4
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 133.16,
+        "req": "5325426f",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3093.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 132.46,
+        "req": "5325426f",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3226.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 157.53,
+        "req": "5325426f",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3383.5
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 128.68,
+        "req": "5325426f",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3512.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 130.14,
+        "req": "5325426f",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3642.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 132.99,
+        "req": "5325426f",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3775.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 125.56,
+        "req": "5325426f",
+        "seq": 21,
+        "source": "drafter",
+        "t": 3900.9
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 129.42,
+        "req": "5325426f",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4030.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 124.63,
+        "req": "5325426f",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4155.0
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 125.06,
+        "req": "5325426f",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4280.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 126.04,
+        "req": "5325426f",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4406.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 124.82,
+        "req": "5325426f",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4530.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 124.47,
+        "req": "5325426f",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4655.3
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 123.12,
+        "req": "5325426f",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4778.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 126.51,
+        "req": "5325426f",
+        "seq": 29,
+        "source": "drafter",
+        "t": 4905.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 124.4,
+        "req": "5325426f",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5029.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 124.12,
+        "req": "5325426f",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5153.5
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 124.82,
+        "req": "5325426f",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5278.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 126.12,
+        "req": "5325426f",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5404.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 124.06,
+        "req": "5325426f",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5528.5
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 122.75,
+        "req": "5325426f",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5651.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 125.92,
+        "req": "5325426f",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5777.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 125.0,
+        "req": "5325426f",
+        "seq": 37,
+        "source": "drafter",
+        "t": 5902.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 123.78,
+        "req": "5325426f",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6025.9
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 123.66,
+        "req": "5325426f",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6149.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 130.68,
+        "req": "5325426f",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6280.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 128.25,
+        "req": "5325426f",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6408.5
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 129.8,
+        "req": "5325426f",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6538.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 129.78,
+        "req": "5325426f",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6668.1
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 127.49,
+        "req": "5325426f",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6795.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 130.33,
+        "req": "5325426f",
+        "seq": 45,
+        "source": "drafter",
+        "t": 6925.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 129.53,
+        "req": "5325426f",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7055.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 125.93,
+        "req": "5325426f",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7181.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 124.09,
+        "req": "5325426f",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7305.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 124.0,
+        "req": "5325426f",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7429.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 123.84,
+        "req": "5325426f",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7553.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 123.77,
+        "req": "5325426f",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7677.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 124.07,
+        "req": "5325426f",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7801.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 124.77,
+        "req": "5325426f",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7925.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 125.07,
+        "req": "5325426f",
+        "seq": 54,
+        "source": "drafter",
+        "t": 8051.0
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 124.51,
+        "req": "5325426f",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8175.5
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 125.67,
+        "req": "5325426f",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8301.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 126.64,
+        "req": "5325426f",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8427.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 124.22,
+        "req": "5325426f",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8552.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 124.98,
+        "req": "5325426f",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8677.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 125.29,
+        "req": "5325426f",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8802.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 124.8,
+        "req": "5325426f",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8927.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 125.27,
+        "req": "5325426f",
+        "seq": 62,
+        "source": "drafter",
+        "t": 9052.4
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 126.0,
+        "req": "5325426f",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9178.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 126.1,
+        "req": "5325426f",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9304.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 125.2,
+        "req": "5325426f",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9429.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 125.22,
+        "req": "5325426f",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9554.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 125.18,
+        "req": "5325426f",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9680.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 125.27,
+        "req": "5325426f",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9805.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 126.15,
+        "req": "5325426f",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9931.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 126.29,
+        "req": "5325426f",
+        "seq": 70,
+        "source": "drafter",
+        "t": 10057.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 127.93,
+        "req": "5325426f",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10185.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 130.46,
+        "req": "5325426f",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10316.2
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 130.81,
+        "req": "5325426f",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10447.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 131.31,
+        "req": "5325426f",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10578.3
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 130.22,
+        "req": "5325426f",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10708.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 133.37,
+        "req": "5325426f",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10841.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 131.02,
+        "req": "5325426f",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10972.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 129.61,
+        "req": "5325426f",
+        "seq": 78,
+        "source": "drafter",
+        "t": 11102.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 127.94,
+        "req": "5325426f",
+        "seq": 79,
+        "source": "drafter",
+        "t": 11230.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 127.23,
+        "req": "5325426f",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11357.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 127.37,
+        "req": "5325426f",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11485.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 127.05,
+        "req": "5325426f",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11612.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 82,
+        "mode": "dflash",
+        "ms": 127.28,
+        "req": "5325426f",
+        "seq": 83,
+        "source": "drafter",
+        "t": 11739.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 83,
+        "mode": "dflash",
+        "ms": 128.09,
+        "req": "5325426f",
+        "seq": 84,
+        "source": "drafter",
+        "t": 11867.5
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 84,
+        "mode": "dflash",
+        "ms": 127.78,
+        "req": "5325426f",
+        "seq": 85,
+        "source": "drafter",
+        "t": 11995.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 85,
+        "mode": "dflash",
+        "ms": 128.48,
+        "req": "5325426f",
+        "seq": 86,
+        "source": "drafter",
+        "t": 12123.7
+      }
+    ],
+    "rounds": 86,
+    "speculative_decode_tok_s": 47.85409013844628,
+    "stop_reason": null,
+    "target_forwards": 87,
+    "width_distribution": {
+      "2": 4,
+      "7": 82
+    }
+  },
+  "process_order": {
+    "elapsed_seconds": 17.009064042009413,
+    "pid": 70280,
+    "process_end_utc": "2026-09-26T08:23:38Z",
+    "process_start_utc": "2026-09-26T08:23:21Z",
+    "role": "repeat",
+    "sequence": 4
+  },
+  "prompt_id": "P08",
+  "prompt_role": "repeat",
+  "rendered_prompt": "<|im_start|>user\nWrite a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "request": {
+    "generation": {
+      "max_tokens": 512,
+      "temperature": 0,
+      "thinking": false,
+      "top_k": 0,
+      "top_p": 1
+    },
+    "plain_kv": true,
+    "prefix_cache_initialization": "enabled / T027 production Engine settings",
+    "prefix_reuse_tokens": 0
+  },
+  "runtime_configuration": {
+    "controller_final": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.971,
+      "predicted_rates": {
+        "1": 24.0,
+        "2": 33.0,
+        "3": 35.9,
+        "4": 37.7,
+        "5": 45.4,
+        "6": 53.1,
+        "7": 60.4
+      },
+      "rounds": 86
+    },
+    "controller_present": true,
+    "final_effective_cap": null,
+    "kv8": false,
+    "kv_bits": null,
+    "max_draft_tokens": null,
+    "mode": "dflash",
+    "prefix_cache_enabled": true,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 4,
+  "short_label": "Stack",
+  "source_sha256": {
+    "prompt_panel.py": "f80ba3c06517f5faa007af3086fe651aeba4aa5a5ea58cb54da0f38df3d6b984",
+    "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+    "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+    "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+    "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+    "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+    "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+    "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+    "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+  },
+  "status": "GOLDEN_CANDIDATE",
+  "target": {
+    "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+    "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+    "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "text": "Write a production-quality Python implementation of a stack with push, pop, peek, and is_empty methods. Include type hints and tests."
+}

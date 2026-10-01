@@ -1,0 +1,7 @@
+{
+  "complete": true,
+  "errors": [],
+  "expected_rows": 14,
+  "observed_rows": 14,
+  "schema": "product-sweep-completeness/v1"
+}

@@ -1,0 +1,1608 @@
+{
+  "attempt_cell_identity": {
+    "cell_id": "03-H3-B-B",
+    "comparison": null,
+    "drafter": "B-B",
+    "order": 3,
+    "prompt_id": "P14",
+    "repeat": false,
+    "target": "H3"
+  },
+  "attempt_id": "feat005-20260926-c1",
+  "configuration": {
+    "bonsai_owned_block_count": 8,
+    "drafter": "B-B",
+    "drafter_identity": {
+      "path": "/private/tmp/mlx-dspark-series-b-hf-cache-http/hub/models--naklitechie--Qwen3.8-27B-DFlash2-ternary-bonsai2/snapshots/0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "repo_id": "naklitechie/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+      "revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+      "weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1"
+    },
+    "target": "H3",
+    "target_identity": {
+      "blocks": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "donor": {
+        "path": "/private/tmp/prism-bonsai2-fcba37d2117a7077eac6b613b2668d14d9779edd",
+        "repo_id": "prism-ml/Ternary-Bonsai-2-27B-mlx-2bit",
+        "revision": "fcba37d2117a7077eac6b613b2668d14d9779edd"
+      },
+      "embedding": "Qwen",
+      "final_norm": "Qwen",
+      "kind": "Qwen_shell_composition",
+      "lm_head": "Qwen",
+      "path": "/Users/do/.cache/huggingface/hub/models--mlx-community--Qwen3.8-27B-4bit/snapshots/10c35caafbb80f7dc6a7a432cdd11af10a6d4818",
+      "repo_id": "mlx-community/Qwen3.8-27B-4bit",
+      "revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+    }
+  },
+  "freshness": {
+    "acquire_reused_tokens": 0,
+    "assertion": "fresh child process, Engine, and measured request; zero useful prior prefix reuse",
+    "new_engine": true,
+    "new_process": true,
+    "physical_asserted": true,
+    "pid": 78109,
+    "prefix_cache_initialized": true,
+    "prefix_hits_before_request": 0,
+    "prefix_reused_tokens": 0,
+    "rounds_before_request": 0
+  },
+  "measurements": {
+    "acceptance": 0.7870036101083032,
+    "active_baseline_bytes": 15645029394,
+    "active_baseline_gib": 14.57056905515492,
+    "cap_distribution": {
+      "2": 4,
+      "7": 78
+    },
+    "decode_duration_seconds": 9.677860975265503,
+    "generated_tokens": 519,
+    "generated_tokens_per_target_forward": 6.253012048192771,
+    "mean_accepted_draft_tokens": 5.317073170731708,
+    "output_integrity_mode": "text_only",
+    "output_sha256": "1f41aed3f0e96ec85b6aea87996bb0f22d13c859ffa12536df000141ba661bc2",
+    "output_text": "```python\ndef edit_distance(s: str, t: str) -> int:\n    \"\"\"\n    Compute the edit distance (Levenshtein distance) between two strings\n    using dynamic programming.\n\n    The edit distance is the minimum number of operations (insert, delete, replace)\n    required to transform string s into string t.\n\n    Args:\n        s: The source string.\n        t: The target string.\n\n    Returns:\n        The edit distance between s and t.\n\n    Time Complexity: O(m * n), where m = len(s) and n = len(t).\n    Space Complexity: O(m * n) for the DP table.\n    \"\"\"\n    m = len(s)\n    n = len(t)\n\n    # Create a (m+1) x (n+1) table\n    # dp[i][j] = edit distance between s[:i] and t[:j]\n    dp = [[0] * (n + 1) for _ in range(m + 1)]\n\n    # Base cases:\n    # Converting s[:i] to empty string requires i deletions\n    for i in range(m + 1):\n        dp[i][0] = i\n    # Converting empty string to t[:j] requires j insertions\n    for j in range(n + 1):\n        dp[0][j] = j\n\n    # Fill the table\n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if s[i - 1] == t[j - 1]:\n                # No operation needed\n                dp[i][j] = dp[i - 1][j - 1]\n            else:\n                # Take the minimum of:\n                # 1. Delete: dp[i-1][j] + 1\n                # 2. Insert: dp[i][j-1] + 1\n                # 3. Replace: dp[i-1][j-1] + 1\n                dp[i][j] = 1 + min(\n                    dp[i - 1][j],      # delete\n                    dp[i][j - 1],      # insert\n                    dp[i - 1][j - 1]   # replace\n                )\n\n    return dp[m][n]\n\n\ndef edit_distance_optimized(s: str, t",
+    "output_tokens": null,
+    "output_tokens_sha256": null,
+    "peak_increment_bytes": 609097296,
+    "peak_increment_gib": 0.5672660619020462,
+    "peak_runtime_bytes": 16254126690,
+    "peak_runtime_gib": 15.137835117056966,
+    "request_duration_seconds": 10.345804915763438,
+    "round_events": [
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 0,
+        "mode": "dflash",
+        "ms": 757.25,
+        "req": "ad34e7ee",
+        "seq": 1,
+        "source": "drafter",
+        "t": 1773.3
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 1,
+        "mode": "dflash",
+        "ms": 86.18,
+        "req": "ad34e7ee",
+        "seq": 2,
+        "source": "drafter",
+        "t": 1859.5
+      },
+      {
+        "accepted": 0,
+        "cap": 2,
+        "committed": 1,
+        "drafted": 2,
+        "i": 2,
+        "mode": "dflash",
+        "ms": 86.33,
+        "req": "ad34e7ee",
+        "seq": 3,
+        "source": "drafter",
+        "t": 1945.8
+      },
+      {
+        "accepted": 2,
+        "cap": 2,
+        "committed": 3,
+        "drafted": 2,
+        "i": 3,
+        "mode": "dflash",
+        "ms": 88.32,
+        "req": "ad34e7ee",
+        "seq": 4,
+        "source": "drafter",
+        "t": 2034.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 4,
+        "mode": "dflash",
+        "ms": 117.21,
+        "req": "ad34e7ee",
+        "seq": 5,
+        "source": "drafter",
+        "t": 2151.3
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 5,
+        "mode": "dflash",
+        "ms": 118.03,
+        "req": "ad34e7ee",
+        "seq": 6,
+        "source": "drafter",
+        "t": 2269.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 6,
+        "mode": "dflash",
+        "ms": 120.43,
+        "req": "ad34e7ee",
+        "seq": 7,
+        "source": "drafter",
+        "t": 2389.8
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 7,
+        "mode": "dflash",
+        "ms": 118.02,
+        "req": "ad34e7ee",
+        "seq": 8,
+        "source": "drafter",
+        "t": 2507.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 8,
+        "mode": "dflash",
+        "ms": 119.89,
+        "req": "ad34e7ee",
+        "seq": 9,
+        "source": "drafter",
+        "t": 2627.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 9,
+        "mode": "dflash",
+        "ms": 120.03,
+        "req": "ad34e7ee",
+        "seq": 10,
+        "source": "drafter",
+        "t": 2747.7
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 10,
+        "mode": "dflash",
+        "ms": 117.45,
+        "req": "ad34e7ee",
+        "seq": 11,
+        "source": "drafter",
+        "t": 2865.2
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 11,
+        "mode": "dflash",
+        "ms": 119.69,
+        "req": "ad34e7ee",
+        "seq": 12,
+        "source": "drafter",
+        "t": 2984.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 12,
+        "mode": "dflash",
+        "ms": 119.18,
+        "req": "ad34e7ee",
+        "seq": 13,
+        "source": "drafter",
+        "t": 3104.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 13,
+        "mode": "dflash",
+        "ms": 118.18,
+        "req": "ad34e7ee",
+        "seq": 14,
+        "source": "drafter",
+        "t": 3222.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 14,
+        "mode": "dflash",
+        "ms": 119.6,
+        "req": "ad34e7ee",
+        "seq": 15,
+        "source": "drafter",
+        "t": 3341.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 15,
+        "mode": "dflash",
+        "ms": 117.99,
+        "req": "ad34e7ee",
+        "seq": 16,
+        "source": "drafter",
+        "t": 3459.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 16,
+        "mode": "dflash",
+        "ms": 120.47,
+        "req": "ad34e7ee",
+        "seq": 17,
+        "source": "drafter",
+        "t": 3580.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 17,
+        "mode": "dflash",
+        "ms": 118.4,
+        "req": "ad34e7ee",
+        "seq": 18,
+        "source": "drafter",
+        "t": 3698.7
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 18,
+        "mode": "dflash",
+        "ms": 117.98,
+        "req": "ad34e7ee",
+        "seq": 19,
+        "source": "drafter",
+        "t": 3816.7
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 19,
+        "mode": "dflash",
+        "ms": 119.27,
+        "req": "ad34e7ee",
+        "seq": 20,
+        "source": "drafter",
+        "t": 3935.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 20,
+        "mode": "dflash",
+        "ms": 120.1,
+        "req": "ad34e7ee",
+        "seq": 21,
+        "source": "drafter",
+        "t": 4056.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 21,
+        "mode": "dflash",
+        "ms": 119.62,
+        "req": "ad34e7ee",
+        "seq": 22,
+        "source": "drafter",
+        "t": 4175.6
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 22,
+        "mode": "dflash",
+        "ms": 120.19,
+        "req": "ad34e7ee",
+        "seq": 23,
+        "source": "drafter",
+        "t": 4295.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 23,
+        "mode": "dflash",
+        "ms": 119.45,
+        "req": "ad34e7ee",
+        "seq": 24,
+        "source": "drafter",
+        "t": 4415.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 24,
+        "mode": "dflash",
+        "ms": 118.32,
+        "req": "ad34e7ee",
+        "seq": 25,
+        "source": "drafter",
+        "t": 4533.6
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 25,
+        "mode": "dflash",
+        "ms": 118.44,
+        "req": "ad34e7ee",
+        "seq": 26,
+        "source": "drafter",
+        "t": 4652.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 26,
+        "mode": "dflash",
+        "ms": 120.79,
+        "req": "ad34e7ee",
+        "seq": 27,
+        "source": "drafter",
+        "t": 4772.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 27,
+        "mode": "dflash",
+        "ms": 117.99,
+        "req": "ad34e7ee",
+        "seq": 28,
+        "source": "drafter",
+        "t": 4890.8
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 28,
+        "mode": "dflash",
+        "ms": 118.57,
+        "req": "ad34e7ee",
+        "seq": 29,
+        "source": "drafter",
+        "t": 5009.4
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 29,
+        "mode": "dflash",
+        "ms": 120.71,
+        "req": "ad34e7ee",
+        "seq": 30,
+        "source": "drafter",
+        "t": 5130.1
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 30,
+        "mode": "dflash",
+        "ms": 120.41,
+        "req": "ad34e7ee",
+        "seq": 31,
+        "source": "drafter",
+        "t": 5250.5
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 31,
+        "mode": "dflash",
+        "ms": 120.89,
+        "req": "ad34e7ee",
+        "seq": 32,
+        "source": "drafter",
+        "t": 5371.4
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 32,
+        "mode": "dflash",
+        "ms": 120.58,
+        "req": "ad34e7ee",
+        "seq": 33,
+        "source": "drafter",
+        "t": 5492.0
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 33,
+        "mode": "dflash",
+        "ms": 119.82,
+        "req": "ad34e7ee",
+        "seq": 34,
+        "source": "drafter",
+        "t": 5611.8
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 34,
+        "mode": "dflash",
+        "ms": 119.67,
+        "req": "ad34e7ee",
+        "seq": 35,
+        "source": "drafter",
+        "t": 5731.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 35,
+        "mode": "dflash",
+        "ms": 120.57,
+        "req": "ad34e7ee",
+        "seq": 36,
+        "source": "drafter",
+        "t": 5852.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 36,
+        "mode": "dflash",
+        "ms": 118.49,
+        "req": "ad34e7ee",
+        "seq": 37,
+        "source": "drafter",
+        "t": 5970.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 37,
+        "mode": "dflash",
+        "ms": 118.48,
+        "req": "ad34e7ee",
+        "seq": 38,
+        "source": "drafter",
+        "t": 6089.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 38,
+        "mode": "dflash",
+        "ms": 118.51,
+        "req": "ad34e7ee",
+        "seq": 39,
+        "source": "drafter",
+        "t": 6207.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 39,
+        "mode": "dflash",
+        "ms": 118.82,
+        "req": "ad34e7ee",
+        "seq": 40,
+        "source": "drafter",
+        "t": 6326.3
+      },
+      {
+        "accepted": 1,
+        "cap": 7,
+        "committed": 2,
+        "drafted": 7,
+        "i": 40,
+        "mode": "dflash",
+        "ms": 119.07,
+        "req": "ad34e7ee",
+        "seq": 41,
+        "source": "drafter",
+        "t": 6445.4
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 41,
+        "mode": "dflash",
+        "ms": 120.52,
+        "req": "ad34e7ee",
+        "seq": 42,
+        "source": "drafter",
+        "t": 6565.9
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 42,
+        "mode": "dflash",
+        "ms": 120.29,
+        "req": "ad34e7ee",
+        "seq": 43,
+        "source": "drafter",
+        "t": 6686.2
+      },
+      {
+        "accepted": 3,
+        "cap": 7,
+        "committed": 4,
+        "drafted": 7,
+        "i": 43,
+        "mode": "dflash",
+        "ms": 121.43,
+        "req": "ad34e7ee",
+        "seq": 44,
+        "source": "drafter",
+        "t": 6807.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 44,
+        "mode": "dflash",
+        "ms": 120.61,
+        "req": "ad34e7ee",
+        "seq": 45,
+        "source": "drafter",
+        "t": 6928.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 45,
+        "mode": "dflash",
+        "ms": 119.03,
+        "req": "ad34e7ee",
+        "seq": 46,
+        "source": "drafter",
+        "t": 7047.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 46,
+        "mode": "dflash",
+        "ms": 118.9,
+        "req": "ad34e7ee",
+        "seq": 47,
+        "source": "drafter",
+        "t": 7166.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 47,
+        "mode": "dflash",
+        "ms": 118.66,
+        "req": "ad34e7ee",
+        "seq": 48,
+        "source": "drafter",
+        "t": 7284.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 48,
+        "mode": "dflash",
+        "ms": 119.12,
+        "req": "ad34e7ee",
+        "seq": 49,
+        "source": "drafter",
+        "t": 7404.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 49,
+        "mode": "dflash",
+        "ms": 118.8,
+        "req": "ad34e7ee",
+        "seq": 50,
+        "source": "drafter",
+        "t": 7522.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 50,
+        "mode": "dflash",
+        "ms": 119.54,
+        "req": "ad34e7ee",
+        "seq": 51,
+        "source": "drafter",
+        "t": 7642.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 51,
+        "mode": "dflash",
+        "ms": 119.05,
+        "req": "ad34e7ee",
+        "seq": 52,
+        "source": "drafter",
+        "t": 7761.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 52,
+        "mode": "dflash",
+        "ms": 119.17,
+        "req": "ad34e7ee",
+        "seq": 53,
+        "source": "drafter",
+        "t": 7880.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 53,
+        "mode": "dflash",
+        "ms": 119.27,
+        "req": "ad34e7ee",
+        "seq": 54,
+        "source": "drafter",
+        "t": 7999.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 54,
+        "mode": "dflash",
+        "ms": 119.01,
+        "req": "ad34e7ee",
+        "seq": 55,
+        "source": "drafter",
+        "t": 8118.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 55,
+        "mode": "dflash",
+        "ms": 118.89,
+        "req": "ad34e7ee",
+        "seq": 56,
+        "source": "drafter",
+        "t": 8237.7
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 56,
+        "mode": "dflash",
+        "ms": 119.3,
+        "req": "ad34e7ee",
+        "seq": 57,
+        "source": "drafter",
+        "t": 8357.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 57,
+        "mode": "dflash",
+        "ms": 119.24,
+        "req": "ad34e7ee",
+        "seq": 58,
+        "source": "drafter",
+        "t": 8476.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 58,
+        "mode": "dflash",
+        "ms": 119.35,
+        "req": "ad34e7ee",
+        "seq": 59,
+        "source": "drafter",
+        "t": 8595.6
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 59,
+        "mode": "dflash",
+        "ms": 119.18,
+        "req": "ad34e7ee",
+        "seq": 60,
+        "source": "drafter",
+        "t": 8714.8
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 60,
+        "mode": "dflash",
+        "ms": 119.54,
+        "req": "ad34e7ee",
+        "seq": 61,
+        "source": "drafter",
+        "t": 8834.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 61,
+        "mode": "dflash",
+        "ms": 119.61,
+        "req": "ad34e7ee",
+        "seq": 62,
+        "source": "drafter",
+        "t": 8953.9
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 62,
+        "mode": "dflash",
+        "ms": 119.5,
+        "req": "ad34e7ee",
+        "seq": 63,
+        "source": "drafter",
+        "t": 9073.4
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 63,
+        "mode": "dflash",
+        "ms": 120.63,
+        "req": "ad34e7ee",
+        "seq": 64,
+        "source": "drafter",
+        "t": 9194.1
+      },
+      {
+        "accepted": 0,
+        "cap": 7,
+        "committed": 1,
+        "drafted": 7,
+        "i": 64,
+        "mode": "dflash",
+        "ms": 121.55,
+        "req": "ad34e7ee",
+        "seq": 65,
+        "source": "drafter",
+        "t": 9315.6
+      },
+      {
+        "accepted": 6,
+        "cap": 7,
+        "committed": 7,
+        "drafted": 7,
+        "i": 65,
+        "mode": "dflash",
+        "ms": 120.89,
+        "req": "ad34e7ee",
+        "seq": 66,
+        "source": "drafter",
+        "t": 9436.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 66,
+        "mode": "dflash",
+        "ms": 121.71,
+        "req": "ad34e7ee",
+        "seq": 67,
+        "source": "drafter",
+        "t": 9558.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 67,
+        "mode": "dflash",
+        "ms": 119.82,
+        "req": "ad34e7ee",
+        "seq": 68,
+        "source": "drafter",
+        "t": 9678.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 68,
+        "mode": "dflash",
+        "ms": 119.37,
+        "req": "ad34e7ee",
+        "seq": 69,
+        "source": "drafter",
+        "t": 9797.4
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 69,
+        "mode": "dflash",
+        "ms": 119.73,
+        "req": "ad34e7ee",
+        "seq": 70,
+        "source": "drafter",
+        "t": 9917.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 70,
+        "mode": "dflash",
+        "ms": 120.13,
+        "req": "ad34e7ee",
+        "seq": 71,
+        "source": "drafter",
+        "t": 10037.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 71,
+        "mode": "dflash",
+        "ms": 119.77,
+        "req": "ad34e7ee",
+        "seq": 72,
+        "source": "drafter",
+        "t": 10157.0
+      },
+      {
+        "accepted": 5,
+        "cap": 7,
+        "committed": 6,
+        "drafted": 7,
+        "i": 72,
+        "mode": "dflash",
+        "ms": 119.49,
+        "req": "ad34e7ee",
+        "seq": 73,
+        "source": "drafter",
+        "t": 10276.5
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 73,
+        "mode": "dflash",
+        "ms": 121.8,
+        "req": "ad34e7ee",
+        "seq": 74,
+        "source": "drafter",
+        "t": 10398.3
+      },
+      {
+        "accepted": 4,
+        "cap": 7,
+        "committed": 5,
+        "drafted": 7,
+        "i": 74,
+        "mode": "dflash",
+        "ms": 119.57,
+        "req": "ad34e7ee",
+        "seq": 75,
+        "source": "drafter",
+        "t": 10517.9
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 75,
+        "mode": "dflash",
+        "ms": 122.37,
+        "req": "ad34e7ee",
+        "seq": 76,
+        "source": "drafter",
+        "t": 10640.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 76,
+        "mode": "dflash",
+        "ms": 119.94,
+        "req": "ad34e7ee",
+        "seq": 77,
+        "source": "drafter",
+        "t": 10760.2
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 77,
+        "mode": "dflash",
+        "ms": 119.92,
+        "req": "ad34e7ee",
+        "seq": 78,
+        "source": "drafter",
+        "t": 10880.1
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 78,
+        "mode": "dflash",
+        "ms": 120.17,
+        "req": "ad34e7ee",
+        "seq": 79,
+        "source": "drafter",
+        "t": 11000.3
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 79,
+        "mode": "dflash",
+        "ms": 119.85,
+        "req": "ad34e7ee",
+        "seq": 80,
+        "source": "drafter",
+        "t": 11120.1
+      },
+      {
+        "accepted": 2,
+        "cap": 7,
+        "committed": 3,
+        "drafted": 7,
+        "i": 80,
+        "mode": "dflash",
+        "ms": 119.84,
+        "req": "ad34e7ee",
+        "seq": 81,
+        "source": "drafter",
+        "t": 11240.0
+      },
+      {
+        "accepted": 7,
+        "cap": 7,
+        "committed": 8,
+        "drafted": 7,
+        "i": 81,
+        "mode": "dflash",
+        "ms": 120.99,
+        "req": "ad34e7ee",
+        "seq": 82,
+        "source": "drafter",
+        "t": 11361.0
+      }
+    ],
+    "rounds": 82,
+    "speculative_decode_tok_s": 53.62755275431736,
+    "stop_reason": null,
+    "target_forwards": 83,
+    "width_distribution": {
+      "2": 4,
+      "7": 78
+    }
+  },
+  "memory_boundary": {
+    "assertion": "peak interval begins at measured request boundary; no serial generation",
+    "baseline_captured": 2361460161780416,
+    "order": [
+      "load_and_warmup_complete",
+      "fresh_request_state_asserted",
+      "reset_peak_memory",
+      "capture_active_baseline",
+      "measured_speculative_request_only",
+      "capture_peak_immediately"
+    ],
+    "peak_captured": 2361470507597000,
+    "request_ended": 2361470507585250,
+    "request_started": 2361460161780708,
+    "reset_called": true,
+    "reset_completed": 2361460161777375
+  },
+  "preflight": {
+    "identity": "feat005-20260926-c1:PASS",
+    "path": "preflight.json",
+    "sha256": "211f2439fcfbdbcef0a20804dd7741e0ac52df060a198e16046c89f14c883814"
+  },
+  "prompt": {
+    "input_ids": [
+      248045,
+      846,
+      198,
+      7734,
+      264,
+      12654,
+      709,
+      421,
+      55288,
+      279,
+      4351,
+      5821,
+      1881,
+      1330,
+      8796,
+      1608,
+      8476,
+      15019,
+      13,
+      28763,
+      6813,
+      321,
+      10033,
+      279,
+      854,
+      321,
+      3433,
+      22373,
+      13,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271
+    ],
+    "input_ids_sha256": "e8e210f918a3e0e80aad9631034bd981d596d48fa194f3dc87b978b31bdf19f1",
+    "input_token_count": 38,
+    "label": "Edit distance",
+    "prompt_id": "P14",
+    "rendered_prompt": "<|im_start|>user\nWrite a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "text": "Write a Python function that computes the edit distance between two strings using dynamic programming. Include tests and explain the time and space complexity.",
+    "text_sha256": "2a754645c2c0f84897b3f0476a21b82eaf212b0cb51cc1213422220b25e5a2a8"
+  },
+  "provenance": {
+    "drafter_revision": "0059b38aa255698b1a87305eb3fbb5a3cfd616e2",
+    "interpreter": "/opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "machine": "K45X6KL443",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "process_elapsed_seconds": 18.40517708286643,
+    "process_started_utc": "2026-09-26T10:17:11Z",
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "runtime_source_sha256": {
+      "specs/001-bonsai-rollback-parity/evidence/probes/t027_product_ab.py": "3f15bbc9a034d20d1a0f6c2e0c721640b479a10d808639202379f695157ea6bf",
+      "src/mlx_dspark/calibrate.py": "093eeba1cae5859e173c57a4949b5d55c2f7d8f7fc8dcd7e63e492016083b02a",
+      "src/mlx_dspark/generate.py": "d9b54698ff12190a30e70fc8704227ae678a10c9e786afa5c39cb02d980f6acc",
+      "src/mlx_dspark/hybrid_target.py": "3298015d4b008249a836de0f1a2cb4a24fddf4d988bddaa81557c804271ec841",
+      "src/mlx_dspark/load.py": "eb8c8b6c96bbdef2e036e9a76eea674c2b4082f74a8647e638ed2135dd710a91",
+      "src/mlx_dspark/prism_pack.py": "44988208ef1204012d9a26c52260ce091920366f977a276907e2ae386bb5b4e4",
+      "src/mlx_dspark/server.py": "c74d0df501a56e6bd0679a5ead318461985da4f4b87657895a0192f4020c1b4d",
+      "src/mlx_dspark/target.py": "39c7d914862271b1e75b468f84beaee02c035485f960776449afb3dabcf3e93b"
+    },
+    "selected_drafter_weight_sha256": "eb141d0fb8621cf7a7c81047b83810fa19b8093543bd05529e9478d9555cb8f1",
+    "target_revision": "10c35caafbb80f7dc6a7a432cdd11af10a6d4818"
+  },
+  "runner_sha256": "eef85356dd60c6be8f7622c304e2f6fae41202e4f2e811310dabe44081c1b072",
+  "runtime": {
+    "controller_info": {
+      "cap": 7,
+      "knee_width": 4,
+      "p": 0.959,
+      "predicted_rates": {
+        "1": 20.7,
+        "2": 28.9,
+        "3": 31.4,
+        "4": 33.0,
+        "5": 39.2,
+        "6": 45.3,
+        "7": 51.2
+      },
+      "rounds": 82
+    },
+    "controller_present": true,
+    "effective_cap": null,
+    "engine_mode": "dflash",
+    "kv8": false,
+    "kv_bits": null,
+    "kv_cache_types": [
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": false,
+        "bits": null,
+        "class": "ArraysCache"
+      },
+      {
+        "attention_cache": true,
+        "bits": null,
+        "class": "KVCache"
+      }
+    ],
+    "max_draft_tokens": null,
+    "prefix_cache_mode": "checkpoint",
+    "tuning": false,
+    "width_policy": null
+  },
+  "schema": "panel-matrix-cell/v1",
+  "settings": {
+    "max_tokens": 512,
+    "temperature": 0,
+    "thinking": false,
+    "top_k": 0,
+    "top_p": 1
+  },
+  "status": "complete"
+}

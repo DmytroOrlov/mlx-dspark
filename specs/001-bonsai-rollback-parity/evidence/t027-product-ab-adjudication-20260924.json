@@ -1,0 +1,166 @@
+{
+  "schema": "t027-product-ab-adjudication/v1",
+  "date": "2026-09-24",
+  "status": "FINAL_COMPLETE",
+  "stop_condition_met": true,
+  "additional_physical_runs_required": false,
+  "physical_inference_count_for_t027": 3,
+  "product_question": "Explain why Qwen3.8-27B-4bit + plain KV is faster or slower than Bonsai2 + plain KV under the production Engine path.",
+  "controls": {
+    "same_prompt_ids": true,
+    "prompt_tokens": 26,
+    "fresh_prefix": true,
+    "plain_target_kv_both": true,
+    "context_window_both": 262144,
+    "temperature": 0,
+    "max_tokens_requested": 512,
+    "production_engine_path_both": true
+  },
+  "qwen": {
+    "decode_tok_s": 45.778851763650366,
+    "serial_target_tok_s": 15.499284787816194,
+    "speculative_speedup_over_serial": 2.9536105949634903,
+    "target_forwards": 94,
+    "generated_tokens": 516,
+    "generated_tokens_per_target_forward": 5.48936170212766,
+    "accepted_over_proposed": 0.6482334869431644,
+    "round_count": 93,
+    "width_distribution": {
+      "7": 93
+    },
+    "source_distribution": {
+      "drafter": 93
+    },
+    "width_stats": {
+      "7": {
+        "rounds": 93,
+        "drafted": 651,
+        "accepted": 422,
+        "committed": 515,
+        "acceptance": 0.6482334869431644,
+        "committed_per_round": 5.537634408602151
+      }
+    },
+    "decode_seconds_per_reported_target_forward": 0.11991042786456169,
+    "peak_memory_bytes": 17089735446
+  },
+  "bonsai": {
+    "decode_tok_s": 30.388622994745326,
+    "serial_target_tok_s": 25.177589289891635,
+    "speculative_speedup_over_serial": 1.206971114067137,
+    "target_forwards": 191,
+    "generated_tokens": 516,
+    "generated_tokens_per_target_forward": 2.701570680628272,
+    "accepted_over_proposed": 0.3615127919911012,
+    "round_count": 190,
+    "width_distribution": {
+      "7": 70,
+      "1": 19,
+      "0": 36,
+      "6": 65
+    },
+    "source_distribution": {
+      "drafter": 154,
+      "plain": 36
+    },
+    "width_stats": {
+      "0": {
+        "rounds": 36,
+        "drafted": 0,
+        "accepted": 0,
+        "committed": 36,
+        "acceptance": null,
+        "committed_per_round": 1.0
+      },
+      "1": {
+        "rounds": 19,
+        "drafted": 19,
+        "accepted": 10,
+        "committed": 29,
+        "acceptance": 0.5263157894736842,
+        "committed_per_round": 1.5263157894736843
+      },
+      "6": {
+        "rounds": 65,
+        "drafted": 390,
+        "accepted": 149,
+        "committed": 214,
+        "acceptance": 0.382051282051282,
+        "committed_per_round": 3.292307692307692
+      },
+      "7": {
+        "rounds": 70,
+        "drafted": 490,
+        "accepted": 166,
+        "committed": 236,
+        "acceptance": 0.33877551020408164,
+        "committed_per_round": 3.3714285714285714
+      }
+    },
+    "decode_seconds_per_reported_target_forward": 0.08890072712723497,
+    "peak_memory_bytes": 9396069925
+  },
+  "derived": {
+    "qwen_decode_advantage_percent": 50.64470598607331,
+    "bonsai_serial_target_advantage_percent": 62.44355552253251,
+    "bonsai_target_forward_count_multiple": 2.0319148936170213,
+    "bonsai_generated_per_forward_fraction_of_qwen": 0.4921465968586387,
+    "bonsai_aggregate_decode_seconds_per_forward_fraction_of_qwen": 0.7413927938581619,
+    "bonsai_peak_memory_reduction_percent": 45.01921955029894
+  },
+  "causal_interpretation": [
+    "Bonsai's target is not the throughput bottleneck by itself: its serial target decode is substantially faster than Qwen's.",
+    "Qwen turns its slower target into much higher end-to-end throughput because speculative decoding is far more efficient: it commits far more generated tokens per target forward and needs roughly half as many target forwards for the same generated-token count.",
+    "Qwen stays at draft width 7 for every recorded round with much higher draft acceptance. Bonsai includes width-0 and width-1 rounds and has much lower acceptance even in its width-7 rounds, so scheduler width collapse alone does not explain the loss.",
+    "The original generic-drafter A/B localized the loss to proposal agreement and speculative efficiency. The one target-specific Bonsai drafter control modestly improved acceptance and reduced target forwards, but did not approach Qwen product throughput. The plain-KV Bonsai product point is not rescued; T027 is final."
+  ],
+  "bonsai_specific_drafter": {
+    "result_file": "evidence/t027-results/bonsai-specific-drafter-lru.json",
+    "target": "/Users/do/.cache/huggingface/hub/models--nathansutton--Qwen3.8-27B-Ternary-Bonsai-2-DFlash2-MLX/snapshots/234cc925d77cd94683e47b1493bd964917aaf43b",
+    "drafter": "/Users/do/models/Qwen3.8-27B-DFlash2-ternary-bonsai2",
+    "physical_status": "COMPLETE; one successful physical inference; initial loader attempt failed before inference and was fixed by detecting raw Embedding codebook weights",
+    "controls": {
+      "same_26_token_lru_prompt_ids": true,
+      "fresh_prefix": true,
+      "plain_target_kv": true,
+      "production_engine_path": true,
+      "adaptive_dflash": true,
+      "thinking_disabled": true,
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 0,
+      "max_tokens_requested": 512,
+      "context_window": 262144
+    },
+    "speculative_decode_tok_s": 33.156969472740954,
+    "serial_target_tok_s": 25.12096851268824,
+    "speculative_speedup_over_serial": 1.3198921632338279,
+    "target_forwards": 151,
+    "generated_tokens": 514,
+    "generated_tokens_per_target_forward": 3.403973509933775,
+    "target_forwards_per_generated_token": 0.29377431906614787,
+    "proposed_drafts": 924,
+    "accepted_drafts": 363,
+    "accepted_over_proposed": 0.39285714285714285,
+    "round_count": 150,
+    "width_distribution": {"7": 121, "1": 17, "6": 10, "0": 2},
+    "source_distribution": {"drafter": 148, "plain": 2},
+    "speculative_peak_memory_bytes": 9610051093,
+    "speculative_peak_memory_gib": 8.95,
+    "actual_attention_kv_classes": ["KVCache"],
+    "plain_target_kv_assertion_passed": true,
+    "preflight": {
+      "compile": "passed",
+      "help": "passed",
+      "model_free_preflight": "passed: exact target/drafter/prompt IDs, plain KV, empty prefix, zero weight loads, zero inference, zero benchmark",
+      "git_diff_check": "passed"
+    },
+    "decision": "Does not rescue Bonsai plain-KV product throughput; modest improvement over generic Bonsai but remains below Qwen regime. Stop T027."
+  },
+  "not_run_by_stop_rule": {
+    "resolver_confirmation": true,
+    "prefix_reuse": true,
+    "same_drafter_control": true,
+    "kv8": true
+  }
+}

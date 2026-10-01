@@ -1,0 +1,154 @@
+{
+  "schema": "bonsai-required-gate-provenance-example/v2",
+  "continuous_natural_rounds": [
+    {
+      "branch_id": "chad:r1:natural:keep2",
+      "accepted_count": 1,
+      "keep": 2,
+      "branch_kind": "natural",
+      "acceptance_source": "scheduler",
+      "provenance": {
+        "schema": "bonsai-required-gate-branch/v1",
+        "runtime": "chad",
+        "branch_id": "chad:r1:natural:keep2",
+        "branch_kind": "natural",
+        "acceptance_source": "scheduler",
+        "frozen_root_state_id": "chad-root",
+        "frozen_root_observation_id": "chad:r1:frozen",
+        "logical_position": 9,
+        "verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+        "verify_width": 8,
+        "draft_width": 7,
+        "verify_ids": [
+          101,
+          202,
+          303,
+          404,
+          505,
+          606,
+          707,
+          808
+        ],
+        "accepted_count": 1,
+        "keep": 2,
+        "b2_control_set_id": "chad-controls",
+        "b2_control_root_state_id": "chad-root",
+        "b2_control_root_observation_id": "chad:r1:frozen",
+        "b2_control_logical_position": 9,
+        "b2_control_verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+        "b2_control_shared_across_keep_branches": false
+      },
+      "c": {},
+      "d": {},
+      "e": {}
+    }
+  ],
+  "required_gate_acquisition": {
+    "mode": "isolated_forced",
+    "source_continuous_round": "mlx:r1",
+    "b2": {
+      "root_state_id": "root-content-aaa"
+    },
+    "branches": [
+      {
+        "branch_id": "mlx:keep1",
+        "accepted_count": 0,
+        "keep": 1,
+        "branch_kind": "isolated_forced",
+        "acceptance_source": "forced_state_transition_test_input",
+        "provenance": {
+          "schema": "bonsai-required-gate-branch/v1",
+          "runtime": "mlx-dspark",
+          "branch_id": "mlx:keep1",
+          "branch_kind": "isolated_forced",
+          "acceptance_source": "forced_state_transition_test_input",
+          "frozen_root_state_id": "root-content-aaa",
+          "frozen_root_observation_id": "runtime:r1:frozen",
+          "logical_position": 9,
+          "verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+          "verify_width": 8,
+          "draft_width": 7,
+          "verify_ids": [
+            101,
+            202,
+            303,
+            404,
+            505,
+            606,
+            707,
+            808
+          ],
+          "accepted_count": 0,
+          "keep": 1,
+          "b2_control_set_id": "controls-aaa",
+          "b2_control_root_state_id": "root-content-aaa",
+          "b2_control_root_observation_id": "runtime:r1:frozen",
+          "b2_control_logical_position": 9,
+          "b2_control_verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+          "b2_control_shared_across_keep_branches": true
+        },
+        "c": {},
+        "d": {},
+        "e": {},
+        "b2_control_shared_across_keep_branches": true,
+        "shared_b2_branch_ids": [
+          "mlx:keep1",
+          "mlx:keep2"
+        ]
+      },
+      {
+        "branch_id": "mlx:keep2",
+        "accepted_count": 1,
+        "keep": 2,
+        "branch_kind": "isolated_forced",
+        "acceptance_source": "forced_state_transition_test_input",
+        "provenance": {
+          "schema": "bonsai-required-gate-branch/v1",
+          "runtime": "mlx-dspark",
+          "branch_id": "mlx:keep2",
+          "branch_kind": "isolated_forced",
+          "acceptance_source": "forced_state_transition_test_input",
+          "frozen_root_state_id": "root-content-aaa",
+          "frozen_root_observation_id": "runtime:r1:frozen",
+          "logical_position": 9,
+          "verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+          "verify_width": 8,
+          "draft_width": 7,
+          "verify_ids": [
+            101,
+            202,
+            303,
+            404,
+            505,
+            606,
+            707,
+            808
+          ],
+          "accepted_count": 1,
+          "keep": 2,
+          "b2_control_set_id": "controls-aaa",
+          "b2_control_root_state_id": "root-content-aaa",
+          "b2_control_root_observation_id": "runtime:r1:frozen",
+          "b2_control_logical_position": 9,
+          "b2_control_verify_ids_sha256": "931e20a39c7d4e303eebbd784619c1255d4328a5ab6e9c0ba14f9fa356ed12f0",
+          "b2_control_shared_across_keep_branches": true
+        },
+        "c": {},
+        "d": {},
+        "e": {},
+        "b2_control_shared_across_keep_branches": true,
+        "shared_b2_branch_ids": [
+          "mlx:keep1",
+          "mlx:keep2"
+        ]
+      }
+    ]
+  },
+  "linkage_rejections": [
+    "different frozen state",
+    "different observation",
+    "different position",
+    "different verify IDs",
+    "different control set"
+  ]
+}

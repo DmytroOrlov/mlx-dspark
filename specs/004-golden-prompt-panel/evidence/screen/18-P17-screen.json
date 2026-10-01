@@ -1,0 +1,10 @@
+{
+  "error": "[metal::load_device] No Metal device available. This typically occurs in headless, sandboxed, or virtualized macOS sessions where the GPU is not accessible.",
+  "error_type": "ImportError",
+  "pid": 68972,
+  "prompt_id": "P17",
+  "prompt_role": "screen",
+  "schema": "golden-prompt-observation/v1",
+  "sequence": 18,
+  "status": "FAILED"
+}

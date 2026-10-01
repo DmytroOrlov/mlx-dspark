@@ -1,0 +1,22 @@
+{
+  "completed": [
+    {
+      "cell_id": "06-H1b-B-B",
+      "raw_result": "specs/003-product-golden-hybrid-sweep/evidence/repeats/repeat-01-H1b-B-B-c930064d.json",
+      "speculative_decode_tok_s": 45.079911236162665,
+      "status": "complete"
+    }
+  ],
+  "schema": "product-sweep-repeat-decisions/v1",
+  "selected": [
+    {
+      "cell_id": "06-H1b-B-B",
+      "drafter": "B-B",
+      "target": "H1b",
+      "triggers": [
+        "hybrid reaches or exceeds fresh H0+B-Q"
+      ]
+    }
+  ],
+  "unselected_count": 0
+}

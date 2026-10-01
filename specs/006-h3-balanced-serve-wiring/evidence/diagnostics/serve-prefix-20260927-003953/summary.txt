@@ -1,0 +1,7 @@
+HTTP1=200
+HTTP2=200
+RESP1_SHA=5cca85b2be76c1008459dc6eaaa16fb96ccafabf4bffd13d45e83d462027b6e1
+RESP2_SHA=5cca85b2be76c1008459dc6eaaa16fb96ccafabf4bffd13d45e83d462027b6e1
+SAME_RESPONSE=true
+RESP1_FIRST_800='Сумма чисел от 1 до 100:\n\n\\[\n1 + 2 + 3 + \\dots + 100 = \\frac{100 \\cdot 101}{2} = 5050\n\\]\n\nОтвет: **5050**'
+RESP2_FIRST_800='Сумма чисел от 1 до 100:\n\n\\[\n1 + 2 + 3 + \\dots + 100 = \\frac{100 \\cdot 101}{2} = 5050\n\\]\n\nОтвет: **5050**'

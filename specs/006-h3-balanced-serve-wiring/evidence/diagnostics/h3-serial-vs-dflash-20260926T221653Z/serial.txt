@@ -1,0 +1,10 @@
+We need answer in Russian likely. User: "Сумма чисел от 1 до 100" means sum of numbers from 1 to 100. Need compute 5050. Need final. Could include formula.
+</think>
+
+Сумма чисел от 1 до 100:
+
+\[
+1 + 2 + 3 + \dots + 100 = \frac{100 \cdot 101}{2} = 5050
+\]
+
+Ответ: **5050**
