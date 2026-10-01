@@ -661,6 +661,7 @@ class Engine:
         mode: str = "dspark",
         model: str | None = None,
         drafter: str | None = None,
+        target_composition=None,      # feature-local opt-in; absent preserves ordinary load path
         family: str | None = None,     # deprecated alias for `model`
         target: str | None = None,     # deprecated alias for `model`
         drafter_bits: int = 4,
@@ -725,8 +726,32 @@ class Engine:
         executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="mlx-gen")
 
         def _load_models():
-            tgt, tok = load_target(target_repo, require_tap=mode in ("dspark", "dflash"),
-                                   kv_bits=kv_bits)
+            if target_composition is None:
+                tgt, tok = load_target(target_repo, require_tap=mode in ("dspark", "dflash"),
+                                       kv_bits=kv_bits)
+            else:
+                from .hybrid_target import (
+                    TargetCompositionRequest, load_donor_blocks, require_safe_before_qwen,
+                )
+
+                if not isinstance(target_composition, TargetCompositionRequest):
+                    raise TypeError("target_composition must be a TargetCompositionRequest")
+                donor = load_donor_blocks(target_composition)
+                pre_qwen = require_safe_before_qwen(donor)
+                memory = dict(donor.memory)
+                memory["immediately_before_qwen_load"] = pre_qwen
+                identity = {
+                    "donor_indices": list(target_composition.donor_indices),
+                    "qwen_repo": target_composition.qwen_repo,
+                    "qwen_revision": target_composition.qwen_revision,
+                    "donor_repo": target_composition.donor_repo,
+                    "donor_revision": target_composition.donor_revision,
+                }
+                tgt, tok = load_target(
+                    target_repo, require_tap=mode in ("dspark", "dflash"), kv_bits=kv_bits,
+                    _block_replacements=dict(donor.blocks),
+                    _block_replacement_identity=identity)
+                tgt.donor_memory_evidence = memory
             draft = None
             if mode == "dspark":
                 draft, _ = load_drafter(drafter_repo, quantize=drafter_bits > 0,

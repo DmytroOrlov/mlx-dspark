@@ -661,6 +661,7 @@ def dflash_generate(
     kdraft = bs - 1
     cap_ceiling = kdraft if max_draft_tokens is None else max(1, min(max_draft_tokens, kdraft))
     cap = cap_ceiling
+
     eos_ids = eos_token_ids(tokenizer)
 
     ids = prompt_ids if prompt_ids is not None else encode_prompt(
@@ -695,6 +696,7 @@ def dflash_generate(
     # ending there, older rows from the restored window) BEFORE on_prefill, so a checkpoint
     # snapshot sees the drafter state a later restore needs. ---
     suffix = ids[reuse_len:] if reuse_len else ids
+
     # An all-sliding head can only ever attend the last (window - 1) ctx rows, so the
     # prefill accumulator keeps a bounded tail instead of the whole prompt's fused states
     # (~30 KB/token on Qwen3.8-27B — ~1 GB per 32k prompt tokens held at peak-prefill RAM
@@ -745,7 +747,7 @@ def dflash_generate(
         marks=prefill_marks, on_mark=_mark if on_prefill is not None else None,
         on_chunk=on_prefill_chunk)
     if on_prefill is not None:
-        _mark(len(ids))                # caches hold exactly `ids` (stable == n templates)
+        _mark(len(ids))
     mx.eval(logits)                    # settle prompt-eval so the prefill/decode timing split is honest
     t_prefill = time.time()
     pending_ctx = _fused_all()         # the first draft call appends the suffix's ctx
@@ -759,8 +761,9 @@ def dflash_generate(
             skip_ctx(c, trimmed["dropped"])
     pending = _pick(logits[0, -1], temperature, top_p, top_k)
     out_ids: list[int] = [pending]
-    accept_lengths: list[int] = []
     target_forwards = 1
+
+    accept_lengths: list[int] = []
 
     index = None
     lookup_rounds = 0
@@ -832,12 +835,15 @@ def dflash_generate(
         # ---- draft full-width block; feeding pending_ctx appends exactly the just-
         # committed positions to the draft KV cache (DFlash caches only ctx KV, never
         # block KV) -> correct absolute RoPE offsets, no trim needed.
+        controller_cap = cap_ceiling
+        live_depth = len(ids) + len(out_ids)
+
         if cap_controller is not None:
-            # live context depth -> the controller's verify pricing (the measured
-            # width-x-depth KV term; without it the model ranks wide caps as ~free at
-            # any depth and ratchets up — measured 1.04x vs cap 3's 1.48x at 32k)
-            cap_controller.set_depth(len(ids) + len(out_ids))
-            cap = max(1, min(cap_controller.cap, cap_ceiling))
+            cap_controller.set_depth(live_depth)
+            controller_cap = max(1, min(cap_controller.cap, cap_ceiling))
+
+        cap = controller_cap
+
         block = mx.array([[pending] + [mask_id] * (bs - 1)])
         sel = getattr(drafter, "candidate_selector", None)   # DFlash 2 path when present
         if temperature > 0.0:

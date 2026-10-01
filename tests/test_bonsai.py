@@ -9,6 +9,7 @@ import math
 import struct
 
 import mlx.core as mx
+import numpy as np
 import pytest
 
 from mlx_dspark.calibrate import CapController
@@ -375,6 +376,115 @@ def test_hybrid_rollback_state_matches_committed_forward():
     for c, c2 in zip(lin, lin2):
         assert bool(mx.allclose(c[0], c2[0], atol=1e-5, rtol=1e-5).item())   # conv window
         assert bool(mx.allclose(c[1], c2[1], atol=1e-4, rtol=1e-4).item())   # delta state
+
+
+def _portable_state(cache):
+    """Copy only live state; KVCache's allocated tail is not committed state."""
+    exact, arrays = [], {}
+    for layer, c in enumerate(cache):
+        if hasattr(c, "offset"):
+            exact.append((layer, type(c).__name__, c.offset))
+            for slot, a in (("key", c.keys), ("value", c.values)):
+                live = a[..., :c.offset, :]
+                mx.eval(live)
+                key = (layer, slot, str(a.dtype))
+                arrays[key] = np.asarray(live.astype(mx.float32)).copy()
+        else:
+            exact.append((layer, type(c).__name__, tuple(None if a is None else a.shape
+                                                         for a in c)))
+            for slot, a in enumerate(c):
+                if a is not None:
+                    mx.eval(a)
+                    key = (layer, slot, str(a.dtype))
+                    arrays[key] = np.asarray(a.astype(mx.float32)).copy()
+    return exact, arrays
+
+
+def _portable_distance(left, right):
+    assert left[0] == right[0]
+    assert left[1].keys() == right[1].keys()
+    out = {}
+    for key in left[1]:
+        a, b = left[1][key], right[1][key]
+        assert a.shape == b.shape, key
+        out[key] = float(np.max(np.abs(a - b)))
+    return out
+
+
+def _portable_bound(pairs):
+    """Exactly five predeclared controls: three calibrate, two validate."""
+    assert len(pairs) == 5
+    distances = [_portable_distance(a, b) for a, b in pairs]
+    keys = distances[0]
+    bounds = {key: max(row[key] for row in distances[:3]) for key in keys}
+    assert all(row[key] <= bounds[key] for row in distances[3:] for key in keys), distances
+    return bounds
+
+
+@pytest.mark.parametrize("accepted", [0, 1])
+def test_hybrid_width8_rollback_generic_state_controls(accepted):
+    """Check S=8 repeatability and post-rollback behavior on a tiny Qwen3.5 fixture."""
+    model = _tiny_hybrid()
+    prompt, verify_ids, taps = [1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12, 13], [0, 1]
+    prefix = verify_ids[:accepted + 1]
+
+    def branch(kind):
+        t = Target(model, tokenizer=None)
+        cache = t.make_cache()
+        t.reset_spec()
+        t.run(mx.array([prompt]), cache, taps)
+        pre = _portable_state(cache)
+        if kind == "s8_spec":
+            logits, fused = t.verify(mx.array([verify_ids]), cache, taps)
+            before = _portable_state(cache)
+            rows = np.asarray(fused[:, :len(prefix)].astype(mx.float32)).copy()
+            logits_copy = np.asarray(logits.astype(mx.float32)).copy()
+            t.rollback(cache, 7 - accepted, verify_ids[1:len(prefix)])
+            return pre, before, rows, logits_copy, _portable_state(cache), t, cache
+        if kind == "s8_ref":
+            logits, fused = t.run(mx.array([verify_ids]), cache, taps)
+            return pre, _portable_state(cache), np.asarray(
+                fused[:, :len(prefix)].astype(mx.float32)).copy(), np.asarray(
+                logits.astype(mx.float32)).copy()
+        if kind == "s1":
+            for token in prefix:
+                t.run(mx.array([[token]]), cache, taps)
+        else:
+            raise AssertionError(kind)
+        return _portable_state(cache), t, cache
+
+    # Establish stable width-specific bounds before examining the speculative sample.
+    s8_pairs = [(branch("s8_ref"), branch("s8_ref")) for _ in range(5)]
+    s8_state_bound = _portable_bound([(a[1], b[1]) for a, b in s8_pairs])
+    s8_row_samples = [float(np.max(np.abs(a[2] - b[2]))) for a, b in s8_pairs]
+    s8_row_bound = max(s8_row_samples[:3])
+    assert all(x <= s8_row_bound for x in s8_row_samples[3:])
+    s8_logit_samples = [float(np.max(np.abs(a[3] - b[3]))) for a, b in s8_pairs]
+    s8_logit_bound = max(s8_logit_samples[:3])
+    assert all(x <= s8_logit_bound for x in s8_logit_samples[3:])
+    spec = branch("s8_spec")
+    ref = branch("s8_ref")
+    assert _portable_distance(spec[0], ref[0]) == {k: 0.0 for k in spec[0][1]}
+    assert all(value <= s8_state_bound[key]
+               for key, value in _portable_distance(spec[1], ref[1]).items())
+    assert float(np.max(np.abs(spec[2] - ref[2]))) <= s8_row_bound
+    assert float(np.max(np.abs(spec[3] - ref[3]))) <= s8_logit_bound
+
+    serial = branch("s1")
+    # Cross-width state values are not an oracle for an S=8-origin cache. Check
+    # only that rollback leaves the expected cache layout for the committed prefix.
+    assert spec[4][0] == serial[0][0]
+    _portable_distance(spec[4], serial[0])  # validates matching component shapes
+
+    # Gate D's next ordinary committed evaluation is a separate check.
+    next_token = 14
+    next_spec, _ = spec[5].run(mx.array([[next_token]]), spec[6], taps)
+    next_serial, _ = serial[1].run(mx.array([[next_token]]), serial[2], taps)
+    assert int(mx.argmax(next_spec[0, -1]).item()) == int(mx.argmax(next_serial[0, -1]).item())
+    next_spec_state = _portable_state(spec[6])
+    next_serial_state = _portable_state(serial[2])
+    assert next_spec_state[0] == next_serial_state[0]
+    _portable_distance(next_spec_state, next_serial_state)  # structural shape check only
 
 
 def test_hybrid_reset_spec_clears_capture():
