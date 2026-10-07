@@ -102,6 +102,12 @@ _ATEM_PARAM = re.compile(r'<atem:parameter\b[^>]*?\bname="([^"]+)"[^>]*?>(.*?)</
 _MINICPM = re.compile(r'<function\s+name="([^"]+)"\s*>(.*?)(?:</function>|\Z)', re.DOTALL)
 _MINICPM_PARAM = re.compile(r'<param\s+name="([^"]+)"\s*>(.*?)</param>', re.DOTALL)
 _CDATA = re.compile(r"\A\s*<!\[CDATA\[(.*?)\]\]>\s*\Z", re.DOTALL)
+# K2 default XML: function name is plain text at the start of a complete tool_call, followed
+# by complete arg_key/arg_value pairs. Values are raw text and can span lines.
+_K2_WRAPPER = re.compile(r"<ifm\|tool_calls>(.*?)</ifm\|tool_calls>", re.DOTALL)
+_K2_CALL = re.compile(r"<ifm\|tool_call>(.*?)</ifm\|tool_call>", re.DOTALL)
+_K2_PAIR = re.compile(r"<ifm\|arg_key>(.*?)</ifm\|arg_key>\s*"
+                      r"<ifm\|arg_value>(.*?)</ifm\|arg_value>", re.DOTALL)
 # LFM2 (LiquidAI): <|tool_call_start|>[func_name(key="v", n=3)]<|tool_call_end|>. The body is a
 # Python-style call list, so it's parsed with `ast` (below), not a regex. `<|tool_call_start|>`
 # is emitted as a NON-special token (it survives detokenization), which is what makes it
@@ -204,6 +210,23 @@ def _parse_minicpm_args(body: str, types: dict[str, str] | None) -> dict:
     return args
 
 
+def _parse_k2_calls(body: str, schemas: dict[str, dict[str, str]] | None
+                    ) -> list[tuple[str, dict]]:
+    calls: list[tuple[str, dict]] = []
+    for match in _K2_CALL.finditer(body):
+        content = match.group(1)
+        first_arg = content.find("<ifm|arg_key>")
+        name = (content if first_arg == -1 else content[:first_arg]).strip()
+        if not name:
+            continue
+        args = {
+            key.strip(): _coerce_typed(value, (schemas or {}).get(name, {}).get(key.strip()))
+            for key, value in _K2_PAIR.findall(content)
+        }
+        calls.append((name, args))
+    return calls
+
+
 def _atem_value(raw: str):
     """A muse ATEM parameter value -> its type, per the model's own ``value_parser`` (JSON with
     an allow-non-json fallback): parse as JSON (numbers/booleans/null/objects/arrays get their
@@ -294,6 +317,10 @@ def parse_tool_calls(text: str, schemas: dict[str, dict[str, str]] | None = None
     """
     calls: list[tuple[str, object]] = []
     cleaned = text
+    if "<ifm|tool_calls>" in text:
+        for match in _K2_WRAPPER.finditer(text):
+            calls.extend(_parse_k2_calls(match.group(1), schemas))
+        cleaned = _K2_WRAPPER.sub("", cleaned)
     # XML first: its body can contain '{', and Hermes requires a '{' immediately after the
     # opening tag, so the two can't be confused — but parse the stricter shape first anyway.
     if "<function=" in text:
@@ -332,7 +359,7 @@ def parse_tool_calls(text: str, schemas: dict[str, dict[str, str]] | None = None
     # A generation cut off at max_tokens mid-call leaves an unclosed opener; everything from
     # it onward is an aborted call, not prose, so drop it rather than render raw markup.
     for opener in ("<tool_call>", "<atem:invoke", "<atem:function_calls>", "<|tool_call_start|>",
-                   "<function name="):
+                   "<function name=", "<ifm|"):
         dangling = cleaned.find(opener)
         if dangling != -1:
             cleaned = cleaned[:dangling]

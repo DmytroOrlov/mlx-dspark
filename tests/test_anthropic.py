@@ -355,6 +355,20 @@ def test_gate_recognises_the_gemma_marker():
     assert g.sent_text == "sure "
 
 
+def test_gate_recognises_split_k2_tool_opener():
+    g = A._ToolGate()
+    prefix = "ordinary text released before marker "
+    emitted = g.feed(prefix)
+    assert emitted
+    emitted += g.feed("<ifm|tool_")
+    assert "<ifm|" not in emitted
+    assert not g.tripped
+    emitted += g.feed("calls>")
+    assert g.tripped
+    assert "<ifm|" not in emitted
+    assert g.sent_text == "ordinary text released before marker "
+
+
 # --------------------------------------------------------------------------- stream builder
 
 
@@ -502,6 +516,32 @@ def test_split_thinking_prefilled_opener_truncated_is_all_reasoning():
     assert A.split_thinking("cut off mid-thought") == ("", "cut off mid-thought")
     # a closer present still splits normally under the flag
     assert A.split_thinking("reasoning</think>\n\nanswer", in_thinking=True) == ("reasoning", "answer")
+
+
+@pytest.mark.parametrize(("opener", "closer"), [
+    ("<ifm|think>", "</ifm|think>"),
+    ("<ifm|think_fast>", "</ifm|think_fast>"),
+    ("<ifm|think_faster>", "</ifm|think_faster>"),
+])
+def test_split_thinking_k2_pairs_self_opened_prefilled_and_truncated(opener, closer):
+    assert A.split_thinking(f"{opener}trace{closer}answer") == ("trace", "answer")
+    assert A.split_thinking(f"trace{closer}answer") == ("trace", "answer")
+    assert A.split_thinking(f"trace{closer}answer", in_thinking=True) == ("trace", "answer")
+    assert A.split_thinking("truncated trace", in_thinking=True) == ("truncated trace", "")
+    assert A.prompt_opens_thinking(f"prompt {opener}") == closer
+
+
+@pytest.mark.parametrize(("opener", "closer"), [
+    ("<ifm|think>", "</ifm|think>"),
+    ("<ifm|think_fast>", "</ifm|think_fast>"),
+    ("<ifm|think_faster>", "</ifm|think_faster>"),
+])
+def test_stream_splitter_k2_matches_whole_text_for_split_markers(opener, closer):
+    raw = f"{opener}reasoning{closer}  answer"
+    expected = A.split_thinking(raw)
+    pieces = [opener[:4], opener[4:], "reasoning", closer[:-3], closer[-3:], "  answer"]
+    assert _split_stream(pieces) == expected
+    assert _split_stream(list(raw)) == expected
     # and a self-opened block is untouched by it
     assert A.split_thinking("<think>r</think>\n\na", in_thinking=True) == ("r", "a")
 
@@ -729,6 +769,27 @@ def test_messages_non_streaming(api):
     assert r["stop_reason"] == "end_turn"
     assert r["model"] == "claude-sonnet-4-6"      # echoed back, as a gateway would
     assert r["usage"]["output_tokens"] == 3
+
+
+def test_messages_k2_reasoning_and_xml_tool_call(api):
+    eng, base = api
+    eng.response_text = ("<ifm|think>check the path</ifm|think>Reading it."
+                         "<ifm|tool_calls>"
+                         "<ifm|tool_call>Read"
+                         "<ifm|arg_key>path</ifm|arg_key>"
+                         "<ifm|arg_value>/tmp/a</ifm|arg_value>"
+                         "</ifm|tool_call></ifm|tool_calls>")
+    r = _post(base, "/v1/messages", {
+        "max_tokens": 100,
+        "messages": USER,
+        "tools": [{"name": "Read", "input_schema": {
+            "type": "object", "properties": {"path": {"type": "string"}}}}],
+    })
+    assert [block["type"] for block in r["content"]] == ["thinking", "text", "tool_use"]
+    assert r["content"][0]["thinking"] == "check the path"
+    assert r["content"][1]["text"] == "Reading it."
+    assert r["content"][2]["name"] == "Read"
+    assert r["content"][2]["input"] == {"path": "/tmp/a"}
 
 
 def test_messages_accepts_the_beta_query_claude_code_sends(api):

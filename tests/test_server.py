@@ -217,6 +217,28 @@ def test_tool_calls_non_stream(server):
     assert json.loads(msg["tool_calls"][0]["function"]["arguments"]) == {"x": 1}
 
 
+def test_chat_k2_reasoning_and_xml_tool_call(server):
+    eng, base = server
+    eng.response_text = ("<ifm|think>check the path</ifm|think>Reading it."
+                         "<ifm|tool_calls>"
+                         "<ifm|tool_call>Read"
+                         "<ifm|arg_key>path</ifm|arg_key>"
+                         "<ifm|arg_value>/tmp/a</ifm|arg_value>"
+                         "</ifm|tool_call></ifm|tool_calls>")
+    tools = [{"type": "function", "function": {
+        "name": "Read", "parameters": {"type": "object", "properties": {
+            "path": {"type": "string"}}}}}]
+    c = _post(base, "/v1/chat/completions", {
+        "messages": [{"role": "user", "content": "read /tmp/a"}], "tools": tools,
+    })
+    msg = c["choices"][0]["message"]
+    assert msg["content"] == "Reading it."
+    assert msg["reasoning_content"] == "check the path"
+    assert "<ifm|" not in msg["content"] + msg["reasoning_content"]
+    assert msg["tool_calls"][0]["function"]["name"] == "Read"
+    assert json.loads(msg["tool_calls"][0]["function"]["arguments"]) == {"path": "/tmp/a"}
+
+
 def test_tool_calls_stream(server):
     eng, base = server
     eng.response_text = '<tool_call>{"name": "f", "arguments": {}}</tool_call>'

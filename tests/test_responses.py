@@ -443,14 +443,20 @@ def test_responses_tool_call_round_trip_reaches_the_model(api):
 
 def test_responses_model_emitting_a_tool_call_is_reported_as_a_function_call(api):
     eng, base = api
-    eng.response_text = '<tool_call>{"name": "get_weather", "arguments": {"city": "NYC"}}</tool_call>'
+    eng.response_text = ("<ifm|think>checking the weather</ifm|think>"
+                         "<ifm|tool_calls><ifm|tool_call>get_weather"
+                         "<ifm|arg_key>city</ifm|arg_key>"
+                         "<ifm|arg_value>NYC</ifm|arg_value>"
+                         "</ifm|tool_call></ifm|tool_calls>")
     tools = [{"type": "function", "name": "get_weather",
              "parameters": {"type": "object", "properties": {"city": {"type": "string"}}}}]
     r = _post(base, "/v1/responses", {"input": "weather?", "tools": tools,
                                       "max_output_tokens": 100})
-    assert r["output"][0]["type"] == "function_call"
-    assert r["output"][0]["name"] == "get_weather"
-    assert json.loads(r["output"][0]["arguments"]) == {"city": "NYC"}
+    assert any(item["type"] == "reasoning" for item in r["output"])
+    (call,) = [item for item in r["output"] if item["type"] == "function_call"]
+    assert call["name"] == "get_weather"
+    assert json.loads(call["arguments"]) == {"city": "NYC"}
+    assert "<ifm|" not in json.dumps(r)
 
 
 def test_responses_streaming_tool_call_never_leaks_native_syntax_as_text(api):

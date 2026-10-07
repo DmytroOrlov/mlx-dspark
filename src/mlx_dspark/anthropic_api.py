@@ -59,7 +59,7 @@ from .tools import parse_tool_calls
 # so a call is caught whichever the round boundary lands on. `<|tool_call_start|>` is LFM2's;
 # `<function name=` is MiniCPM5's (no wrapper tag — the function element itself is the opener).
 _TOOL_MARKERS = ("<tool_call>", "<|tool_call>", "<atem:function_calls>", "<atem:invoke",
-                 "<|tool_call_start|>", "<function name=")
+                 "<|tool_call_start|>", "<function name=", "<ifm|tool_calls>")
 _MAX_MARKER = max(len(m) for m in _TOOL_MARKERS)
 
 # Reasoning models wrap their chain of thought in these. Anthropic carries reasoning as
@@ -70,6 +70,9 @@ _MAX_MARKER = max(len(m) for m in _TOOL_MARKERS)
 _THINK_PAIRS = (
     ("<think>", "</think>"),                    # Qwen3 family
     ("<|channel>thought\n", "<channel|>"),      # Gemma-4
+    ("<ifm|think>", "</ifm|think>"),
+    ("<ifm|think_fast>", "</ifm|think_fast>"),
+    ("<ifm|think_faster>", "</ifm|think_faster>"),
 )
 _THINK_OPEN, _THINK_CLOSE = _THINK_PAIRS[0]
 

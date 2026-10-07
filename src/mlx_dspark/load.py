@@ -895,9 +895,10 @@ def _route_target(cfg: dict) -> str:
     """Decide which loader owns a target config: ``"mlx_lm"`` or ``"mlx_vlm"``.
 
     Multimodal markers (``vision_config``/``audio_config`` — e.g. gemma4_unified) go to
-    mlx-vlm. Otherwise any model_type mlx-lm ships a module for (qwen3, llama, glm_moe_dsa,
-    deepseek_v3, …) goes to mlx-lm — mirroring mlx-lm's own model_type→module lookup incl.
-    its remap table — so new text families route correctly without a code change here.
+    mlx-vlm. Otherwise, checkpoints with a top-level ``model_file`` use mlx-lm, which
+    supports custom text model modules. Then any model_type mlx-lm ships a module for
+    (qwen3, llama, glm_moe_dsa, deepseek_v3, …) goes to mlx-lm — mirroring mlx-lm's own
+    model_type→module lookup incl. its remap table.
     Anything else falls back to mlx-vlm (the pre-existing behavior).
 
     Exception: families where mlx-lm ships a *text-only* module that digests the full
@@ -911,6 +912,8 @@ def _route_target(cfg: dict) -> str:
             return "mlx_lm"
     if "vision_config" in cfg or "audio_config" in cfg:
         return "mlx_vlm"
+    if cfg.get("model_file"):
+        return "mlx_lm"
     model_type = cfg.get("model_type", "")
     try:
         from mlx_lm.utils import MODEL_REMAPPING
@@ -1091,9 +1094,19 @@ def load_target(repo_or_path: str = DEFAULT_TARGET, *, require_tap: bool = False
         from mlx_lm import load as lm_load
 
         # tokenizer_config overrides mlx-lm's default {"trust_remote_code": True}: even a
-        # checkpoint that slipped past the marker check gets no custom tokenizer code
+        # checkpoint that slipped past the marker check gets no custom tokenizer code. Newer
+        # mlx-lm loaders may also expose a direct model trust flag; use it only when named by
+        # this callable's signature so older versions retain their compatible call shape.
+        import inspect
+
+        lm_kwargs = {}
+        try:
+            if "trust_remote_code" in inspect.signature(lm_load).parameters:
+                lm_kwargs["trust_remote_code"] = TRUST_REMOTE_CODE
+        except (TypeError, ValueError):
+            pass
         model, tokenizer = lm_load(
-            path, tokenizer_config={"trust_remote_code": TRUST_REMOTE_CODE})
+            path, tokenizer_config={"trust_remote_code": TRUST_REMOTE_CODE}, **lm_kwargs)
     else:
         from mlx_vlm import load as vlm_load
 

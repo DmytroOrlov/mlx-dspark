@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from mlx_dspark.tools import normalize_tool_messages, parse_tool_calls
 
 
@@ -143,6 +145,48 @@ def test_minicpm5_does_not_shadow_ornith_xml_form():
     text = '<tool_call>\n<function=f>\n<parameter=k>\nv\n</parameter>\n</function>\n</tool_call>'
     tcs, _ = parse_tool_calls(text)
     assert len(tcs) == 1 and json.loads(tcs[0]["function"]["arguments"]) == {"k": "v"}
+
+
+def _k2_call(name, *pairs):
+    args = "".join(f"<ifm|arg_key>{key}</ifm|arg_key>"
+                   f"<ifm|arg_value>{value}</ifm|arg_value>" for key, value in pairs)
+    return f"<ifm|tool_call>{name}{args}</ifm|tool_call>"
+
+
+def test_k2_xml_calls_keep_order_type_arguments_and_declared_strings():
+    code = 'if a < b:\n    print("x & y")\n'
+    text = ("Thinking. <ifm|tool_calls>"
+            + _k2_call("first", ("flag", "true"), ("count", "7"),
+                       ("ratio", "2.5"), ("items", '[1, "two"]'),
+                       ("config", '{"enabled": true}'), ("message", "hello, raw"),
+                       ("content", code))
+            + _k2_call("second")
+            + "</ifm|tool_calls> done")
+    schemas = {
+        "first": {"flag": "boolean", "count": "integer", "ratio": "number",
+                  "items": "array", "config": "object", "message": "string",
+                  "content": "string"},
+    }
+    tcs, cleaned = parse_tool_calls(text, schemas)
+    assert [tc["function"]["name"] for tc in tcs] == ["first", "second"]
+    args = json.loads(tcs[0]["function"]["arguments"])
+    assert args == {"flag": True, "count": 7, "ratio": 2.5, "items": [1, "two"],
+                    "config": {"enabled": True}, "message": "hello, raw", "content": code}
+    assert json.loads(tcs[1]["function"]["arguments"]) == {}
+    assert cleaned == "Thinking.  done"
+
+
+@pytest.mark.parametrize("tail", [
+    "<ifm|tool_calls>",
+    "<ifm|tool_calls><ifm|tool_call>f",
+    "<ifm|tool_calls><ifm|tool_call>f<ifm|arg_key>name",
+    "<ifm|tool_calls><ifm|tool_call>f<ifm|arg_key>name</ifm|arg_key><ifm|arg_value>v",
+])
+def test_k2_truncated_xml_is_suppressed_without_partial_calls(tail):
+    tcs, cleaned = parse_tool_calls("safe text" + tail)
+    assert tcs == []
+    assert "safe text" in cleaned
+    assert "<ifm|" not in cleaned
 
 
 def test_normalize_arguments_string_to_dict():

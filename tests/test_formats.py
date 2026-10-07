@@ -613,6 +613,35 @@ def test_missing_required_field_refused(tmp_path):
 
 # ---------------------------------------------------------------- target routing
 
+def test_route_custom_text_model_file_to_mlxlm():
+    # K2 Horizon declares a custom model_file while using an otherwise unknown model_type.
+    assert _route_target({"model_type": "k2_custom_text", "model_file": "modeling_k2.py"}) == "mlx_lm"
+
+
+def test_route_model_file_preserves_explicit_multimodal_markers():
+    assert _route_target({"model_type": "k2_custom_text", "model_file": "modeling_k2.py",
+                          "vision_config": {}}) == "mlx_vlm"
+    assert _route_target({"model_type": "k2_custom_text", "model_file": "modeling_k2.py",
+                          "audio_config": {}}) == "mlx_vlm"
+
+
+@pytest.mark.parametrize("model_type", ["qwen3_5", "qwen3_5_moe"])
+def test_route_installed_qwen35_text_capable_multimodal_exceptions_first(
+        monkeypatch, model_type):
+    import importlib.util
+
+    original_find_spec = importlib.util.find_spec
+
+    def find_spec(name, *args, **kwargs):
+        if name == f"mlx_lm.models.{model_type}":
+            return object()
+        return original_find_spec(name, *args, **kwargs)
+
+    monkeypatch.setattr(importlib.util, "find_spec", find_spec)
+    assert _route_target({"model_type": model_type, "vision_config": {},
+                          "model_file": "custom.py"}) == "mlx_lm"
+
+
 def test_route_multimodal_markers_to_vlm():
     assert _route_target({"model_type": "gemma4_unified", "vision_config": {}}) == "mlx_vlm"
     assert _route_target({"model_type": "whatever", "audio_config": {}}) == "mlx_vlm"
